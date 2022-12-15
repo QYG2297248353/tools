@@ -9,14 +9,17 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.network.interfaces;
+package com.ms.network;
 
-import okhttp3.Callback;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 回调函数
- *
  * @author ms2297248353
  */
-public interface RequestCallBack extends Callback {
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }

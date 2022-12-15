@@ -1,0 +1,133 @@
+{
+  "groups": [
+    {
+      "name": "ms.okhttp",
+      "type": "com.ms.network.config.OkHttpConfig",
+      "sourceType": "com.ms.network.config.OkHttpConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "ms.okhttp.cache-directory",
+      "type": "java.lang.String",
+      "description": "缓存配置-缓存目录 默认关闭缓存",
+      "sourceType": "com.ms.network.config.OkHttpConfig"
+    },
+    {
+      "name": "ms.okhttp.cache-enable",
+      "type": "java.lang.Boolean",
+      "description": "缓存配置-是否开启缓存",
+      "sourceType": "com.ms.network.config.OkHttpConfig",
+      "defaultValue": false
+    },
+    {
+      "name": "ms.okhttp.cache-size",
+      "type": "java.lang.Long",
+      "description": "缓存配置-缓存大小",
+      "sourceType": "com.ms.network.config.OkHttpConfig"
+    },
+    {
+      "name": "ms.okhttp.call-timeout",
+      "type": "java.lang.Integer",
+      "description": "超时配置-完整流程时长 默认值 30s",
+      "sourceType": "com.ms.network.config.OkHttpConfig",
+      "defaultValue": 30
+    },
+    {
+      "name": "ms.okhttp.connect-timeout",
+      "type": "java.lang.Integer",
+      "description": "超时配置-连接时长 默认值 15s",
+      "sourceType": "com.ms.network.config.OkHttpConfig",
+      "defaultValue": 15
+    },
+    {
+      "name": "ms.okhttp.proxy-enable",
+      "type": "java.lang.Boolean",
+      "description": "代理配置-是否开启代理",
+      "sourceType": "com.ms.network.config.OkHttpConfig",
+      "defaultValue": false
+    },
+    {
+      "name": "ms.okhttp.proxy-host",
+      "type": "java.lang.String",
+      "description": "代理配置-ip 本机",
+      "sourceType": "com.ms.network.config.OkHttpConfig"
+    },
+    {
+      "name": "ms.okhttp.proxy-password",
+      "type": "java.lang.String",
+      "description": "代理配置-鉴权密码",
+      "sourceType": "com.ms.network.config.OkHttpConfig"
+    },
+    {
+      "name": "ms.okhttp.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "代理配置-ip 本机",
+      "sourceType": "com.ms.network.config.OkHttpConfig"
+    },
+    {
+      "name": "ms.okhttp.proxy-type",
+      "type": "java.lang.String",
+      "description": "代理配置-类型 HTTP 默认 SOCKS DIRECT 直连",
+      "sourceType": "com.ms.network.config.OkHttpConfig"
+    },
+    {
+      "name": "ms.okhttp.proxy-username",
+      "type": "java.lang.String",
+      "description": "代理配置-用户名",
+      "sourceType": "com.ms.network.config.OkHttpConfig"
+    },
+    {
+      "name": "ms.okhttp.read-timeout",
+      "type": "java.lang.Integer",
+      "description": "超时配置-读取时长 默认值 20s",
+      "sourceType": "com.ms.network.config.OkHttpConfig",
+      "defaultValue": 20
+    },
+    {
+      "name": "ms.okhttp.write-timeout",
+      "type": "java.lang.Integer",
+      "description": "超时配置-写入时长 默认值 20s",
+      "sourceType": "com.ms.network.config.OkHttpConfig",
+      "defaultValue": 20
+    }
+  ],
+  "hints": [
+    {
+      "name": "ms.okhttp.cache-enable",
+      "values": [
+        {
+          "value": false
+        },
+        {
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "ms.okhttp.proxy-enable",
+      "values": [
+        {
+          "value": false
+        },
+        {
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "ms.okhttp.proxy-type",
+      "values": [
+        {
+          "value": "http"
+        },
+        {
+          "value": "socks"
+        },
+        {
+          "value": "direct"
+        }
+      ]
+    }
+  ]
+}

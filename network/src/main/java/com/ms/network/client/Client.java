@@ -31,21 +31,21 @@ public class Client {
     private final BuildFactory buildFactory;
 
     private Client() {
-        buildFactory = new BuildFactory();
+        this.buildFactory = new BuildFactory();
         OkHttp3Factory factory = new OkHttp3Factory();
-        okClient = factory.getClient();
+        okClient = factory.getClient().getOkHttpClient();
     }
 
     private Client(String host, Integer port, Proxy.Type proxyType) {
-        buildFactory = new BuildFactory();
+        this.buildFactory = new BuildFactory();
         OkHttp3Factory factory = new OkHttp3Factory(host, port, proxyType);
-        okClient = factory.getClient();
+        okClient = factory.getClient().getOkHttpClient();
     }
 
     private Client(String host, Integer port, Proxy.Type proxyType, String username, String password) {
-        buildFactory = new BuildFactory();
+        this.buildFactory = new BuildFactory();
         OkHttp3Factory factory = new OkHttp3Factory(host, port, proxyType, username, password);
-        okClient = factory.getClient();
+        okClient = factory.getClient().getOkHttpClient();
     }
 
     /**
@@ -119,7 +119,7 @@ public class Client {
     }
 
     protected BuildFactory getBuildFactory() {
-        return buildFactory;
+        return this.buildFactory;
     }
 
     /**
@@ -129,7 +129,7 @@ public class Client {
      * @return 构建
      */
     public BodyClient uri(String url) {
-        buildFactory.setUrl(url);
+        this.buildFactory.setUrl(url);
         return new BodyClient(this);
     }
 
@@ -141,7 +141,7 @@ public class Client {
      * @return 构建
      */
     public Client addHeader(String key, String value) {
-        buildFactory.addHeader(key, value);
+        this.buildFactory.addHeader(key, value);
         return this;
     }
 
@@ -152,7 +152,7 @@ public class Client {
      * @return 构建
      */
     public Client addHeaders(Map<String, String> headers) {
-        buildFactory.addHeaders(headers);
+        this.buildFactory.addHeaders(headers);
         return this;
     }
 }

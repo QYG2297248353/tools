@@ -98,7 +98,7 @@ public enum MediaTypeEnum {
     /**
      * 参数为键值对形式
      * 在发送前编码所有字符（默认）
-     * 浏览器的原生 <form encType=”” ></form> 表单提交类型
+     * 浏览器的原生表单
      * 如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据
      */
     MULTIPART_FORM_DATA("multipart/form-data", "大量二进制数据");

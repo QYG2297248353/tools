@@ -44,6 +44,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <!-- 版本信息 -->
+        <spring.boot.version>2.7.6</spring.boot.version>
+        <lombok.version>1.18.24</lombok.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
+        <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
     </properties>
 
     <!-- 远程仓库 -->
@@ -116,12 +122,25 @@
             </activation>
             <build>
                 <plugins>
-                    <!-- jdk版本管理插件 -->
+                    <!-- maven-surefire-plugin 插件，用于运行单元测试。 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven.surefire.plugin.version}</version>
+                        <configuration>
+                            <!-- 跳过测试类运行 -->
+                            <skip>${maven.deploy.skip}</skip>
+                        </configuration>
+                    </plugin>
+
+                    <!-- maven-compiler-plugin 插件，解决 Lombok + MapStruct 组合 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.1</version>
+                        <version>${maven.compiler.plugin.version}</version>
                         <configuration>
+                            <!-- 源数据生成 -->
+                            <proc>none</proc>
                             <!-- 源代码使用的JDK版本 -->
                             <source>${maven.compiler.source}</source>
                             <!-- 需要生成的目标class文件的编译版本 -->
@@ -132,32 +151,39 @@
                             <verbose>${maven.deploy.verbose}</verbose>
                             <!-- 跳过测试编译 -->
                             <skip>${maven.deploy.skip}</skip>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                    <version>${lombok.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>org.springframework.boot</groupId>
+                                    <artifactId>spring-boot-configuration-processor</artifactId>
+                                    <version>${spring.boot.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
                         </configuration>
                     </plugin>
-                    <!-- 测试运行器插件 -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.5</version>
-                        <configuration>
-                            <!-- 跳过测试类运行 -->
-                            <skip>${maven.deploy.skip}</skip>
-                        </configuration>
-                    </plugin>
-                    <!-- 源码发布插件 -->
+
+                    <!--提供source-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
+                        <version>${maven.source.plugin.version}</version>
+                        <configuration>
+                            <attach>true</attach>
+                        </configuration>
                         <executions>
                             <execution>
-                                <phase>package</phase>
+                                <phase>compile</phase>
                                 <goals>
-                                    <goal>jar-no-fork</goal>
+                                    <goal>jar</goal>
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
+
                     <!-- 文档检查插件 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -172,6 +198,7 @@
                             </execution>
                         </executions>
                     </plugin>
+
                     <!-- gpg加密插件 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -187,6 +214,7 @@
                             </execution>
                         </executions>
                     </plugin>
+
                     <!-- 中央仓库插件 -->
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
@@ -203,20 +231,5 @@
             </build>
         </profile>
     </profiles>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <compilerArgument>-Xlint:unchecked</compilerArgument>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

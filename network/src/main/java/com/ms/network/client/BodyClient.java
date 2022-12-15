@@ -11,6 +11,9 @@
 
 package com.ms.network.client;
 
+import com.ms.network.factory.BuildFactory;
+import okhttp3.OkHttpClient;
+
 import java.io.File;
 import java.util.Map;
 
@@ -19,8 +22,8 @@ import java.util.Map;
  */
 public class BodyClient extends SendClient {
 
-    public BodyClient(OkHttp3Client okHttp3Client) {
-        super(okHttp3Client, okHttp3Client.getBuildFactory());
+    public BodyClient(OkHttpClient client, BuildFactory buildFactory) {
+        super(client, buildFactory);
     }
 
     public BodyClient(Client client) {
@@ -37,8 +40,8 @@ public class BodyClient extends SendClient {
      * @return 构建
      */
     public JsonClient addJsonBody(String key, Object value) {
-        buildFactory.addJsonBody(key, value);
-        return new JsonClient(client, buildFactory);
+        this.buildFactory.addJsonBody(key, value);
+        return new JsonClient(this.client, this.buildFactory);
     }
 
     /**
@@ -50,8 +53,8 @@ public class BodyClient extends SendClient {
      * @return 构建
      */
     public JsonClient addJsonBody(Map<String, Object> value) {
-        buildFactory.addJsonBody(value);
-        return new JsonClient(client, buildFactory);
+        this.buildFactory.addJsonBody(value);
+        return new JsonClient(this.client, this.buildFactory);
     }
 
     /**
@@ -63,8 +66,8 @@ public class BodyClient extends SendClient {
      * @return 构建
      */
     public JsonClient addJsonBody(Object value) {
-        buildFactory.addJsonBody(value);
-        return new JsonClient(client, buildFactory);
+        this.buildFactory.addJsonBody(value);
+        return new JsonClient(this.client, this.buildFactory);
     }
 
     /**
@@ -77,8 +80,8 @@ public class BodyClient extends SendClient {
      * @return 构建
      */
     public FromBodyClient addFromBody(String key, String value) {
-        buildFactory.addFromBody(key, value);
-        return new FromBodyClient(client, buildFactory);
+        this.buildFactory.addFromBody(key, value);
+        return new FromBodyClient(this.client, this.buildFactory);
     }
 
     /**
@@ -91,8 +94,8 @@ public class BodyClient extends SendClient {
      * @return 构建
      */
     public MultipartClient addMultipart(String key, String value) {
-        buildFactory.addMultipart(key, value);
-        return new MultipartClient(client, buildFactory);
+        this.buildFactory.addMultipart(key, value);
+        return new MultipartClient(this.client, this.buildFactory);
     }
 
     /**
@@ -106,8 +109,8 @@ public class BodyClient extends SendClient {
      * @return 构建
      */
     public MultipartClient addMultipartFile(String mediaType, String key, File file) {
-        buildFactory.addMultipart(mediaType, key, file);
-        return new MultipartClient(client, buildFactory);
+        this.buildFactory.addMultipart(mediaType, key, file);
+        return new MultipartClient(this.client, this.buildFactory);
     }
 
     /**
@@ -122,8 +125,8 @@ public class BodyClient extends SendClient {
      * @return 构建
      */
     public MultipartClient addMultipartFile(String mediaType, String key, String fileName, File file) {
-        buildFactory.addMultipart(mediaType, key, fileName, file);
-        return new MultipartClient(client, buildFactory);
+        this.buildFactory.addMultipart(mediaType, key, fileName, file);
+        return new MultipartClient(this.client, this.buildFactory);
     }
 
 

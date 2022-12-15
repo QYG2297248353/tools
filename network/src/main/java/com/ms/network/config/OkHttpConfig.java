@@ -15,7 +15,11 @@ package com.ms.network.config;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -27,7 +31,10 @@ import java.net.Proxy;
  */
 @Getter
 @Setter
-@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
+@Configuration
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "ms.okhttp")
 public class OkHttpConfig {
     /**
      * 超时配置-连接时长
@@ -56,37 +63,37 @@ public class OkHttpConfig {
     /**
      * 缓存配置-是否开启缓存
      */
-    @Value("${ms.okhttp.timeout.cache.enable:false}")
+    @Value("${ms.okhttp.cache.enable:false}")
     private Boolean cacheEnable;
     /**
      * 缓存配置-缓存大小
      */
-    @Value("${ms.okhttp.timeout.cache.size:10 * 1024 * 1024}")
-    private Integer cacheSize;
+    @Value("${ms.okhttp.cache.size:10485760L}")
+    private Long cacheSize;
     /**
      * 缓存配置-缓存目录
-     * 默认根目录 /cache
+     * 默认关闭缓存
      */
-    @Value("${ms.okhttp.timeout.cache.directory:/cache")
+    @Value("${ms.okhttp.cache.directory:null")
     private String cacheDirectory;
 
     /**
      * 代理配置-是否开启代理
      */
-    @Value("${ms.okhttp.timeout.proxy.enable:false}")
+    @Value("${ms.okhttp.proxy.enable:false}")
     private Boolean proxyEnable;
     /**
      * 代理配置-ip
      * 本机
      */
-    @Value("${ms.okhttp.timeout.proxy.host:127.0.0.1")
+    @Value("${ms.okhttp.proxy.host:127.0.0.1}")
     private String proxyHost;
 
     /**
      * 代理配置-ip
      * 本机
      */
-    @Value("${ms.okhttp.timeout.proxy.port:7890")
+    @Value("${ms.okhttp.proxy.port:7890}")
     private Integer proxyPort;
 
     /**
@@ -95,21 +102,25 @@ public class OkHttpConfig {
      * SOCKS
      * DIRECT 直连
      */
-    @Value("${ms.okhttp.timeout.proxy.type:http")
+    @Value("${ms.okhttp.proxy.type:http}")
     private String proxyType;
 
     /**
      * 代理配置-用户名
      */
-    @Value("${ms.okhttp.timeout.proxy.username")
+    @Value("${ms.okhttp.proxy.username:null}")
     private String proxyUsername;
 
     /**
      * 代理配置-鉴权密码
      */
-    @Value("${ms.okhttp.timeout.proxy.password")
+    @Value("${ms.okhttp.proxy.password:null}")
     private String proxyPassword;
 
+
+    public OkHttpConfig() {
+        this.init();
+    }
 
     /**
      * 非注入式-配置初始化
@@ -117,31 +128,30 @@ public class OkHttpConfig {
      * @return
      */
     public OkHttpConfig init() {
-        connectTimeout = 15;
-        writeTimeout = 20;
-        readTimeout = 20;
-        callTimeout = 20;
-        cacheEnable = false;
-        cacheSize = 10 * 1024 * 1024;
-        cacheDirectory = "/cache";
-        proxyEnable = false;
-        proxyHost = "127.0.0.1";
-        proxyPort = 7890;
-        proxyType = "http";
+        this.connectTimeout = 15;
+        this.writeTimeout = 20;
+        this.readTimeout = 20;
+        this.callTimeout = 20;
+        this.cacheEnable = false;
+        this.cacheSize = 10L * 1024 * 1024;
+        this.proxyEnable = false;
+        this.proxyHost = "127.0.0.1";
+        this.proxyPort = 7890;
+        this.proxyType = "http";
         return this;
     }
 
     public void update(String host, Integer port, Proxy.Type type, String username, String password) {
         if (host != null && port != null && type != null) {
-            proxyHost = host;
-            proxyPort = port;
-            proxyType = type.name();
+            this.proxyHost = host;
+            this.proxyPort = port;
+            this.proxyType = type.name();
         }
     }
 
     public Proxy.Type getProxyType() {
-        proxyType = proxyType.toUpperCase();
-        switch (proxyType) {
+        this.proxyType = this.proxyType.toUpperCase();
+        switch (this.proxyType) {
             case "SOCKS":
                 return Proxy.Type.SOCKS;
             case "DIRECT":
@@ -154,6 +164,6 @@ public class OkHttpConfig {
 
     public InetSocketAddress getProxyHostPort() {
         // todo: 常用类型效验确实 IP以及端口效验
-        return new InetSocketAddress(proxyHost, proxyPort);
+        return new InetSocketAddress(this.proxyHost, this.proxyPort);
     }
 }

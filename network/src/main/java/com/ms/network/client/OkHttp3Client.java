@@ -21,17 +21,21 @@ import java.util.Map;
  *
  * @author ms2297248353
  */
-public class OkHttp3Client extends OkHttpClient {
+public class OkHttp3Client {
     private final BuildFactory buildFactory;
     private final OkHttpClient okHttpClient;
 
     public OkHttp3Client(OkHttpClient okHttpClient) {
-        buildFactory = new BuildFactory();
+        this.buildFactory = new BuildFactory();
         this.okHttpClient = okHttpClient;
     }
 
+    public OkHttpClient getOkHttpClient() {
+        return this.okHttpClient;
+    }
+
     protected BuildFactory getBuildFactory() {
-        return buildFactory;
+        return this.buildFactory;
     }
 
     /**
@@ -41,8 +45,8 @@ public class OkHttp3Client extends OkHttpClient {
      * @return 构建
      */
     public BodyClient uri(String url) {
-        buildFactory.setUrl(url);
-        return new BodyClient(this);
+        this.buildFactory.setUrl(url);
+        return new BodyClient(this.okHttpClient, this.buildFactory);
     }
 
     /**
@@ -53,7 +57,7 @@ public class OkHttp3Client extends OkHttpClient {
      * @return 构建
      */
     public OkHttp3Client addHeader(String key, String value) {
-        buildFactory.addHeader(key, value);
+        this.buildFactory.addHeader(key, value);
         return this;
     }
 
@@ -64,7 +68,7 @@ public class OkHttp3Client extends OkHttpClient {
      * @return 构建
      */
     public OkHttp3Client addHeaders(Map<String, String> headers) {
-        buildFactory.addHeaders(headers);
+        this.buildFactory.addHeaders(headers);
         return this;
     }
 }
