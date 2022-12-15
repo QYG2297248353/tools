@@ -12,10 +12,58 @@
 package com.ms.base.basic;
 
 /**
+ * 布尔(字节版本)
+ *
  * @author ms2297248353
  */
-public class Booleans {
+public interface Booleans {
+    byte TRUE = 1;
+    byte FALSE = 0;
 
-    private Byte bool;
+    /**
+     * 是否为true，当val为null，返回false
+     *
+     * @param val 值
+     * @return 返回true/false
+     */
+    static boolean isTrue(Byte val) {
+        return isTrue(val, false);
+    }
 
+    /**
+     * 是否为true
+     *
+     * @param val      值
+     * @param whenNull 当val为null时，返回whenNull指定的值
+     * @return 返回true/false
+     */
+    static boolean isTrue(Byte val, boolean whenNull) {
+        if (val == null) {
+            return whenNull;
+        }
+        return val == TRUE;
+    }
+
+    /**
+     * 是否为true
+     *
+     * @param b 字节
+     * @return 布尔值
+     */
+    static boolean isTrue(Long b) {
+        return b != null && b == TRUE;
+    }
+
+    /**
+     * 布尔转字节
+     *
+     * @param b 布尔值
+     * @return 返回字节信息
+     */
+    static byte toValue(Boolean b) {
+        if (b == null) {
+            return FALSE;
+        }
+        return b ? TRUE : FALSE;
+    }
 }
