@@ -18,4 +18,24 @@ package com.ms.exception.base;
  */
 public class MsToolsRuntimeException extends RuntimeException {
     private static final long serialVersionUID = 7405029172865911924L;
+
+    public MsToolsRuntimeException() {
+        super();
+    }
+
+    public MsToolsRuntimeException(String message) {
+        super(message);
+    }
+
+    public MsToolsRuntimeException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public MsToolsRuntimeException(Throwable cause) {
+        super(cause);
+    }
+
+    protected MsToolsRuntimeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }
