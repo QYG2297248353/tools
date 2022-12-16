@@ -20,18 +20,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>network</artifactId>
-    <description>网络服务</description>
-    <packaging>jar</packaging>
+    <artifactId>spring-bean</artifactId>
 
     <dependencies>
-        <!-- okHttp3 -->
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>4.10.0</version>
-        </dependency>
-
         <dependency>
             <groupId>com.ms</groupId>
             <artifactId>core-all</artifactId>

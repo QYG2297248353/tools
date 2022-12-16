@@ -22,6 +22,7 @@
         <!-- Http 网络服务 -->
         <module>network</module>
         <module>service</module>
+        <module>spring-bean</module>
     </modules>
 
     <!-- 项目基本信息 -->
