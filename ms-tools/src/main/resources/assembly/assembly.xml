@@ -1,0 +1,186 @@
+<!--
+  ~ @MS 2022-12-13
+  ~ Copyright (c) 2001-2023 萌森
+  ~ 保留所有权利
+  ~ 本软件为萌森工作室所有及包含机密信息，须遵守其相关许可证条款进行使用。
+  ~ Copyright (c) 2001-2023 Meng Sen
+  ~ All rights reserved
+  ~ This software is owned by Mengsen Studio and contains confidential information, and must be used in accordance with its relevant license terms.
+  ~ Website：https://qyg2297248353.top
+  -->
+
+<assembly>
+    <id>bin</id>
+    <!--最终打包成一个用于发布的zip文件-->
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <fileSets>
+        <!--模块jar包-->
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-core/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-bean/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-canvas/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-id/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-math/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-resources/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-security/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-network/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-api/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-push/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+
+        <!--模块资源resources-->
+        <fileSet>
+            <directory>${project.parent.basedir}/../config</directory>
+            <outputDirectory>config</outputDirectory>
+            <includes>
+                <include>*.xml</include>
+                <include>*.conf</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.parent.basedir}/../src/main/resources</directory>
+            <outputDirectory>config</outputDirectory>
+            <includes>
+                <include>*.xml</include>
+                <include>*.properties</include>
+            </includes>
+        </fileSet>
+
+        <!--执行脚本-->
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-tools/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+        </fileSet>
+
+        <!--logs-->
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-tools/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <!--不使用项目的artifact，第三方jar不要解压，打包进tar.gz文件的lib目录-->
+            <!--配置项目第三方provided、system、runtime不同方式的jar打包进lib目录-->
+            <unpack>false</unpack>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <scope>provided</scope>
+            <excludes>
+                <!--排除assembly模块的jar包-->
+                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+            </excludes>
+        </dependencySet>
+        <dependencySet>
+            <unpack>false</unpack>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <scope>system</scope>
+            <excludes>
+                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+            </excludes>
+        </dependencySet>
+        <dependencySet>
+            <unpack>false</unpack>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <scope>runtime</scope>
+            <excludes>
+                <!--<exclude>com.swordfall:aiplatform-api</exclude>-->
+                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+
+    <moduleSets>
+        <moduleSet>
+            <useAllReactorProjects>true</useAllReactorProjects>
+            <includes>
+                <!--配置子模块，按groupId:artifactId配置，然后根据各子模块依赖的顺序排列-->
+                <include>io.github.qyg2297248353:ms-core</include>
+                <include>io.github.qyg2297248353:ms-bean</include>
+                <include>io.github.qyg2297248353:ms-canvas</include>
+                <include>io.github.qyg2297248353:ms-id</include>
+                <include>io.github.qyg2297248353:ms-math</include>
+                <include>io.github.qyg2297248353:ms-resources</include>
+                <include>io.github.qyg2297248353:ms-security</include>
+                <include>io.github.qyg2297248353:ms-network</include>
+                <include>io.github.qyg2297248353:ms-api</include>
+                <include>io.github.qyg2297248353:ms-push</include>
+            </includes>
+            <binaries>
+                <outputDirectory>lib</outputDirectory>
+                <unpack>false</unpack>
+            </binaries>
+        </moduleSet>
+    </moduleSets>
+
+</assembly>

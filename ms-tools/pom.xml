@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @MS 2022-12-13
+  ~ Copyright (c) 2001-2023 萌森
+  ~ 保留所有权利
+  ~ 本软件为萌森工作室所有及包含机密信息，须遵守其相关许可证条款进行使用。
+  ~ Copyright (c) 2001-2023 Meng Sen
+  ~ All rights reserved
+  ~ This software is owned by Mengsen Studio and contains confidential information, and must be used in accordance with its relevant license terms.
+  ~ Website：https://qyg2297248353.top
+  -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>tools</artifactId>
+        <groupId>io.github.qyg2297248353</groupId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ms-tools</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-id</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-math</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-resources</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-security</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-bean</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-canvas</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-network</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-push</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven Assembly Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <!-- get all project dependencies -->
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- bind to the packaging phase -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
