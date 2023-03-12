@@ -19,7 +19,6 @@
         <module>ms-core</module>
         <module>ms-id</module>
         <module>ms-math</module>
-        <module>ms-bean</module>
         <module>ms-canvas</module>
         <module>ms-resources</module>
         <module>ms-security</module>
@@ -57,12 +56,20 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- 版本信息 -->
-        <spring.boot.version>2.7.6</spring.boot.version>
         <lombok.version>1.18.14</lombok.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
         <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
+        <maven.javadoc.plugin.version>2.9.1</maven.javadoc.plugin.version>
+        <nexus.staging.maven.plugin.version>1.6.7</nexus.staging.maven.plugin.version>
+        <maven.gpg.plugin.version>1.5</maven.gpg.plugin.version>
+        <okhttp.version>4.10.0-RC1</okhttp.version>
+        <fastjson.version>2.0.24</fastjson.version>
         <apache.commons.io>2.11.0</apache.commons.io>
+        <!-- SpringBoot 版本信息 -->
+        <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
+        <spring-boot.version>2.2.3.RELEASE</spring-boot.version>
     </properties>
 
     <!-- 远程仓库 -->
@@ -144,11 +151,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -202,7 +207,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
+                <version>${maven.javadoc.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -217,7 +222,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
+                <version>${maven.gpg.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -233,7 +238,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
+                <version>${nexus.staging.maven.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>oss</serverId>
