@@ -201,15 +201,6 @@ public enum ZoneIdEnum {
     }
 
     /**
-     * 获取时区
-     *
-     * @return 时区
-     */
-    public String getZoneId() {
-        return zoneId;
-    }
-
-    /**
      * 获取时区枚举
      *
      * @param zone 时区
@@ -225,6 +216,19 @@ public enum ZoneIdEnum {
     }
 
     /**
+     * 获取时区
+     *
+     * @return 时区
+     */
+    public String getZoneId() {
+        return zoneId;
+    }
+
+    void setZoneId(String zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    /**
      * 转为时区
      *
      * @return 时区
@@ -235,6 +239,7 @@ public enum ZoneIdEnum {
 
     /**
      * 转为时区
+     *
      * @return 时区
      */
     public TimeZone toTimeZone() {

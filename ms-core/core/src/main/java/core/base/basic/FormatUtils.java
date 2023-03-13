@@ -12,11 +12,14 @@
 package core.base.basic;
 
 
+import core.base.basic.enums.DatePatternEnum;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -86,5 +89,59 @@ public class FormatUtils {
         return parser.parseExpression(str, parserContext).getValue(data, String.class);
     }
 
-    // TODO: 日期的格式化功能
+    /**
+     * 日期格式化
+     *
+     * @param date 日期
+     * @return 格式化结果
+     */
+    public static String format(Date date) {
+        return new SimpleDateFormat(DatePatternEnum.DEFAULT.getPattern()).format(date);
+    }
+
+    /**
+     * 日期格式化
+     *
+     * @param date    日期
+     * @param pattern 格式
+     * @return 格式化结果
+     */
+    public static String format(Date date, String pattern) {
+        return new SimpleDateFormat(pattern).format(date);
+    }
+
+    /**
+     * 日期格式化
+     *
+     * @param date    日期
+     * @param pattern 格式
+     * @return 格式化结果
+     */
+    public static String format(long date, String pattern) {
+        return new SimpleDateFormat(pattern).format(new Date(date));
+    }
+
+    /**
+     * 日期格式化
+     *
+     * @param date    日期
+     * @param pattern 格式
+     * @return 格式化结果
+     */
+    public static String format(Date date, DatePatternEnum pattern) {
+        return new SimpleDateFormat(pattern.getPattern()).format(date);
+    }
+
+    /**
+     * 日期格式化
+     *
+     * @param date    日期
+     * @param pattern 格式
+     * @return 格式化结果
+     */
+    public static String format(long date, DatePatternEnum pattern) {
+        return new SimpleDateFormat(pattern.getPattern()).format(new Date(date));
+    }
+
+
 }

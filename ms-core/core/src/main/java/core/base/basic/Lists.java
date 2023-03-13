@@ -11,20 +11,20 @@ public interface Lists {
     }
 
     static <T> List<T> of(T t1) {
-        List<T> list = new ArrayList<>();
+        List<T> list = of();
         list.add(t1);
         return list;
     }
 
     static <T> List<T> of(T t1, T t2) {
-        List<T> list = new ArrayList<>();
+        List<T> list = of();
         list.add(t1);
         list.add(t2);
         return list;
     }
 
     static <T> List<T> of(T t1, T t2, T t3) {
-        List<T> list = new ArrayList<>();
+        List<T> list = of();
         list.add(t1);
         list.add(t2);
         list.add(t3);
@@ -32,7 +32,7 @@ public interface Lists {
     }
 
     static <T> List<T> of(T t1, T t2, T t3, T t4) {
-        List<T> list = new ArrayList<>();
+        List<T> list = of();
         list.add(t1);
         list.add(t2);
         list.add(t3);
@@ -41,7 +41,7 @@ public interface Lists {
     }
 
     static <T> List<T> of(T t1, T t2, T t3, T t4, T t5) {
-        List<T> list = new ArrayList<>();
+        List<T> list = of();
         list.add(t1);
         list.add(t2);
         list.add(t3);
@@ -51,7 +51,7 @@ public interface Lists {
     }
 
     static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6) {
-        List<T> list = new ArrayList<>();
+        List<T> list = of();
         list.add(t1);
         list.add(t2);
         list.add(t3);
@@ -62,7 +62,7 @@ public interface Lists {
     }
 
     static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7) {
-        List<T> list = new ArrayList<>();
+        List<T> list = of();
         list.add(t1);
         list.add(t2);
         list.add(t3);
@@ -74,7 +74,7 @@ public interface Lists {
     }
 
     static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8) {
-        List<T> list = new ArrayList<>();
+        List<T> list = of();
         list.add(t1);
         list.add(t2);
         list.add(t3);
@@ -85,4 +85,6 @@ public interface Lists {
         list.add(t8);
         return list;
     }
+
+
 }

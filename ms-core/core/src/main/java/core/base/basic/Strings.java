@@ -65,5 +65,8 @@ public interface Strings {
     String GBK = "GBK";
     String UTF_8 = "UTF-8";
     String UTF_16 = "UTF-16";
+    String LF = "\n";
+    String CR = "\r";
+    String CRLF = "\r\n";
 
 }
