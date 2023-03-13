@@ -22,8 +22,8 @@ import java.util.regex.Pattern;
  *
  * @author 萌森 Ms
  */
-public class IpRegexpUtils {
-    private IpRegexpUtils() {
+public class IpUtils {
+    private IpUtils() {
     }
 
     /**

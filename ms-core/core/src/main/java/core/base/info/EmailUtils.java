@@ -12,8 +12,9 @@
 package core.base.info;
 
 import core.base.basic.StringUtils;
+import core.base.basic.Strings;
 import core.base.enums.regular.RegexpEnum;
-import core.base.unit.Symbol;
+import core.base.info.enums.EmailManufacturerEnum;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +24,8 @@ import java.util.regex.Pattern;
  *
  * @author 萌森 Ms
  */
-public class EmailRegexpUtils {
+public class EmailUtils {
+
     /**
      * 正则表达式：验证邮箱
      *
@@ -33,11 +35,29 @@ public class EmailRegexpUtils {
     public static boolean isEmail(String str) {
         str = StringUtils.replaceBlank(str);
         // 判断字符串是否存在字符@
-        if (!str.contains(Symbol.RATIO)) {
+        if (!str.contains(Strings.AT)) {
             return false;
         }
         Pattern r = Pattern.compile(RegexpEnum.REGEX_EMAIL.regex());
         Matcher m = r.matcher(str);
         return m.matches();
+    }
+
+    /**
+     * 根据邮箱获取邮箱信息
+     *
+     * @param email 邮箱
+     * @return 邮箱信息
+     */
+    public static EmailManufacturerEnum getEmailManufacturer(String email) {
+        if (StringUtils.isBlank(email)) {
+            return null;
+        }
+        String[] split = email.split(Strings.AT);
+        if (split.length != 2) {
+            return null;
+        }
+        String emailSuffix = split[1];
+        return EmailManufacturerEnum.getEmailManufacturer(emailSuffix);
     }
 }

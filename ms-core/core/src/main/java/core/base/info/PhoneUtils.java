@@ -13,8 +13,8 @@ package core.base.info;
 
 
 import core.base.basic.StringUtils;
+import core.base.basic.Strings;
 import core.base.enums.regular.RegexpEnum;
-import core.base.unit.Symbol;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
  *
  * @author 萌森 Ms
  */
-public class TelRegexpUtils {
+public class PhoneUtils {
 
     public static final Integer PHONE_NUMBER_UNIT_SIZE = 11;
 
@@ -36,7 +36,7 @@ public class TelRegexpUtils {
      */
     public static boolean isChinaPhone(String str) {
         str = StringUtils.replaceBlank(str);
-        if (str.startsWith(Symbol.PLUS)) {
+        if (str.startsWith(Strings.PLUS)) {
             str = str.substring(str.length() - PHONE_NUMBER_UNIT_SIZE);
         }
         if (str.length() < PHONE_NUMBER_UNIT_SIZE) {

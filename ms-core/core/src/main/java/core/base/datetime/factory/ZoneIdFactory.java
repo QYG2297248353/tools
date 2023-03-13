@@ -4,7 +4,7 @@ import core.base.datetime.enums.ZoneIdEnum;
 
 import java.time.ZoneId;
 
-public class ZoneFactory {
+public class ZoneIdFactory {
 
     /**
      * 创建时区
