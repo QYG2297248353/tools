@@ -14,15 +14,43 @@
     <dependencies>
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>spring-expression</artifactId>
+            <artifactId>lombok</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>lombok</artifactId>
+            <artifactId>fastjson</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <!-- 扫描项目下所有的文件 -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
 </project>
