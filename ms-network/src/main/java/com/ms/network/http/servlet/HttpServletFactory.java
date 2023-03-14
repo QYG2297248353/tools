@@ -9,13 +9,13 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.network.factory;
+package com.ms.network.http.servlet;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class ResponseFactory {
+public class HttpServletFactory {
     public static void write(HttpServletResponse response, String content) {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = null;

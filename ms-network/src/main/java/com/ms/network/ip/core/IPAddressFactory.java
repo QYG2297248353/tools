@@ -11,7 +11,7 @@
 
 package com.ms.network.ip.core;
 
-import com.ms.core.base.basic.StringFormatUtils;
+import com.ms.core.base.basic.FormatUtils;
 import com.ms.network.client.Client;
 import okhttp3.Response;
 
@@ -105,7 +105,7 @@ public class IPAddressFactory {
             try {
                 ipFile = new RandomAccessFile(filePath, "r");
             } catch (FileNotFoundException e) {
-                String msg = StringFormatUtils.format("IP地址信息文件没有找到，IP显示功能将无法使用" + e.getMessage(), e);
+                String msg = FormatUtils.format("IP地址信息文件没有找到，IP显示功能将无法使用" + e.getMessage(), e);
                 log.warning(msg);
                 // 加载在线文件
                 ipFile = loadOnlineFile();
@@ -120,7 +120,7 @@ public class IPAddressFactory {
                         ipFile = null;
                     }
                 } catch (IOException e) {
-                    String msg = StringFormatUtils.format("IP地址信息文件格式有错误，IP显示功能将无法使用" + e.getMessage(), e);
+                    String msg = FormatUtils.format("IP地址信息文件格式有错误，IP显示功能将无法使用" + e.getMessage(), e);
                     log.warning(msg);
                     ipFile = null;
                 }
@@ -639,12 +639,12 @@ public class IPAddressFactory {
     public String getCity(String ipAddress) {
         try {
             if (ipAddress.startsWith("192.168.")) {
-                log.warning(StringFormatUtils.format("此IP[{}]段不进行处理！", ipAddress));
+                log.warning(FormatUtils.format("此IP[{}]段不进行处理！", ipAddress));
                 return null;
             }
             return getIPLocation(ipAddress).getCity();
         } catch (Exception e) {
-            log.warning(StringFormatUtils.format("根据IP[{}]获取省份失败:{}", ipAddress, e.getMessage()));
+            log.warning(FormatUtils.format("根据IP[{}]获取省份失败:{}", ipAddress, e.getMessage()));
             return null;
         }
     }

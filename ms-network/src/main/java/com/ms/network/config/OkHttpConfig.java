@@ -14,12 +14,6 @@ package com.ms.network.config;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -31,69 +25,55 @@ import java.net.Proxy;
  */
 @Getter
 @Setter
-@Order(Ordered.HIGHEST_PRECEDENCE)
-@Configuration
-@EnableConfigurationProperties
-@ConfigurationProperties(prefix = "ms.okhttp")
 public class OkHttpConfig {
     /**
      * 超时配置-连接时长
      * 默认值 15s
      */
-    @Value("${ms.okhttp.timeout.connect:30}")
     private Integer connectTimeout;
     /**
      * 超时配置-写入时长
      * 默认值 20s
      */
-    @Value("${ms.okhttp.timeout.write:60}")
     private Integer writeTimeout;
     /**
      * 超时配置-读取时长
      * 默认值 20s
      */
-    @Value("${ms.okhttp.timeout.read:60}")
     private Integer readTimeout;
     /**
      * 超时配置-完整流程时长
      * 默认值 30s
      */
-    @Value("${ms.okhttp.timeout.call:120}")
     private Integer callTimeout;
     /**
      * 缓存配置-是否开启缓存
      */
-    @Value("${ms.okhttp.cache.enable:false}")
     private Boolean cacheEnable;
     /**
      * 缓存配置-缓存大小
      */
-    @Value("${ms.okhttp.cache.size:10485760}")
     private Long cacheSize;
     /**
      * 缓存配置-缓存目录
      * 默认关闭缓存
      */
-    @Value("${ms.okhttp.cache.directory:null")
     private String cacheDirectory;
 
     /**
      * 代理配置-是否开启代理
      */
-    @Value("${ms.okhttp.proxy.enable:false}")
     private Boolean proxyEnable;
     /**
      * 代理配置-ip
      * 本机
      */
-    @Value("${ms.okhttp.proxy.host:127.0.0.1}")
     private String proxyHost;
 
     /**
      * 代理配置-ip
      * 本机
      */
-    @Value("${ms.okhttp.proxy.port:7890}")
     private Integer proxyPort;
 
     /**
@@ -102,19 +82,16 @@ public class OkHttpConfig {
      * SOCKS
      * DIRECT 直连
      */
-    @Value("${ms.okhttp.proxy.type:http}")
     private String proxyType;
 
     /**
      * 代理配置-用户名
      */
-    @Value("${ms.okhttp.proxy.username:null}")
     private String proxyUsername;
 
     /**
      * 代理配置-鉴权密码
      */
-    @Value("${ms.okhttp.proxy.password:null}")
     private String proxyPassword;
 
 

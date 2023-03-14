@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>commons</artifactId>
@@ -13,7 +13,14 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>javax-servlet-api</module>
+        <module>spring-core</module>
+        <module>spring-beans</module>
         <module>spring-expression</module>
+        <module>spring-context</module>
+        <module>spring-context-support</module>
+        <module>spring-boot-configuration-processor</module>
+        <module>spring-boot</module>
     </modules>
 
     <dependencyManagement>

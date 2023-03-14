@@ -25,51 +25,26 @@
     <dependencies>
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-core</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <artifactId>core</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- okHttp3 -->
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-resources</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
             <artifactId>okhttp</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-
-        <!-- apache 插件 -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${apache.commons.io}</version>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>javax-servlet-api</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

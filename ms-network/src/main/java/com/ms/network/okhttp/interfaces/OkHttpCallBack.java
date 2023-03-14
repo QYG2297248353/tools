@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.network.interfaces;
+package com.ms.network.okhttp.interfaces;
 
 import okhttp3.Callback;
 
@@ -18,5 +18,5 @@ import okhttp3.Callback;
  *
  * @author ms2297248353
  */
-public interface RequestCallBack extends Callback {
+public interface OkHttpCallBack extends Callback {
 }

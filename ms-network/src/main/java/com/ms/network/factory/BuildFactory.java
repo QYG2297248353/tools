@@ -13,11 +13,8 @@ package com.ms.network.factory;
 
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.base.basic.Strings;
-import com.ms.core.base.enums.request.AgreementRequest;
 import com.ms.core.base.enums.request.MediaTypeEnum;
 import com.ms.core.base.enums.request.RequestBodyTypeEnum;
-import com.ms.core.base.unit.Coding;
-import com.ms.core.base.unit.Symbol;
 import okhttp3.*;
 import okio.BufferedSink;
 import okio.Okio;
@@ -210,10 +207,10 @@ public class BuildFactory {
     private void urlParams() {
         StringBuilder urlBuilder = new StringBuilder(url);
         if (!urlParams.isEmpty()) {
-            urlBuilder.append(Symbol.QUESTION);
+            urlBuilder.append(Strings.QUESTION_MARK);
             try {
                 for (Map.Entry<String, String> entry : urlParams.entrySet()) {
-                    urlBuilder.append(URLEncoder.encode(entry.getKey(), Coding.UTF_8)).append(Symbol.EQUAL).append(URLEncoder.encode(entry.getValue(), Coding.UTF_8)).append(Symbol.WITH);
+                    urlBuilder.append(URLEncoder.encode(entry.getKey(), Strings.UTF_8)).append(Strings.EQUALS).append(URLEncoder.encode(entry.getValue(), Strings.UTF_8)).append(Strings.AND);
                 }
             } catch (Exception e) {
                 LOGGER.warning(e.getMessage());
@@ -238,8 +235,8 @@ public class BuildFactory {
 
     public void setUrl(String url) {
         this.url = url.trim();
-        if (!url.toLowerCase().startsWith(AgreementRequest.HTTP)) {
-            this.url = AgreementRequest.HTTP_HEAD + url;
+        if (!url.toLowerCase().startsWith(Strings.HTTP)) {
+            this.url = Strings.HTTP_HEAD + url;
         }
     }
 

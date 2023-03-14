@@ -26,8 +26,6 @@
         <module>ms-push</module>
         <module>ms-api</module>
         <module>ms-tools</module>
-        <module>ms-core/commons/zxing</module>
-        <module>ms-core/commons/jjwt</module>
     </modules>
 
     <!-- 项目基本信息 -->
@@ -77,6 +75,7 @@
         <spring-boot.version>2.2.3.RELEASE</spring-boot.version>
         <!-- Apache Commons 组件 -->
         <apache.commons.codec.version>1.15</apache.commons.codec.version>
+        <apache.commons.io.version>2.11.0</apache.commons.io.version>
     </properties>
 
     <!-- 远程仓库 -->
@@ -154,7 +153,7 @@
         </repository>
     </repositories>
 
-    <!-- SpringBoot -->
+    <!-- 全局 -->
     <dependencyManagement>
         <dependencies>
             <dependency>

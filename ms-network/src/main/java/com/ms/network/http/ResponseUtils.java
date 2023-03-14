@@ -9,19 +9,47 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.network.core;
+package com.ms.network.http;
 
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.response.ResponseResult;
-import com.ms.network.factory.ResponseFactory;
-import org.springframework.http.MediaType;
+import com.ms.network.http.enums.MediaTypeEnum;
+import com.ms.network.http.servlet.CacheHttpServletResponse;
+import com.ms.network.http.servlet.HttpServletFactory;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author ms2297248353
  */
 public class ResponseUtils {
+
+    /**
+     * 复制响应
+     *
+     * @param response 请求
+     * @return 以复制的流
+     * @throws IOException 读写异常
+     */
+    public static ServletOutputStream copyStream(HttpServletResponse response) throws IOException {
+        CacheHttpServletResponse cacheHttpServletResponse = new CacheHttpServletResponse(response);
+        return cacheHttpServletResponse.getOutputStream();
+    }
+
+    /**
+     * 复制响应
+     *
+     * @param response 请求
+     * @return 以复制的流
+     * @throws IOException 读写异常
+     */
+    public static HttpServletResponse copy(HttpServletResponse response) throws IOException {
+        return new CacheHttpServletResponse(response);
+    }
+
+
     /**
      * 写入响应-纯文本
      *
@@ -29,8 +57,8 @@ public class ResponseUtils {
      * @param content  内容
      */
     public static void writeText(HttpServletResponse response, String content) {
-        response.setContentType(MediaType.TEXT_PLAIN_VALUE);
-        ResponseFactory.write(response, content);
+        response.setContentType(MediaTypeEnum.TEXT_PLAIN.getValue());
+        HttpServletFactory.write(response, content);
     }
 
     /**
@@ -40,8 +68,8 @@ public class ResponseUtils {
      * @param content  内容
      */
     public static void writeHtml(HttpServletResponse response, String content) {
-        response.setContentType(MediaType.TEXT_HTML_VALUE);
-        ResponseFactory.write(response, content);
+        response.setContentType(MediaTypeEnum.TEXT_HTML.getValue());
+        HttpServletFactory.write(response, content);
     }
 
     /**
@@ -51,8 +79,8 @@ public class ResponseUtils {
      * @param content  内容
      */
     public static void writeJson(HttpServletResponse response, String content) {
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        ResponseFactory.write(response, content);
+        response.setContentType(MediaTypeEnum.APPLICATION_JSON.getValue());
+        HttpServletFactory.write(response, content);
     }
 
     /**
@@ -63,8 +91,8 @@ public class ResponseUtils {
      */
     public static void writeJsonObject(HttpServletResponse response, Object content) {
         String json = JSON.toJSONString(content);
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        ResponseFactory.write(response, json);
+        response.setContentType(MediaTypeEnum.APPLICATION_JSON.getValue());
+        HttpServletFactory.write(response, json);
     }
 
     /**
@@ -75,8 +103,8 @@ public class ResponseUtils {
      */
     public static void writeJsonObject(HttpServletResponse response, ResponseResult result) {
         String json = JSON.toJSONString(result);
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        ResponseFactory.write(response, json);
+        response.setContentType(MediaTypeEnum.APPLICATION_JSON.getValue());
+        HttpServletFactory.write(response, json);
     }
 
 

@@ -14,7 +14,6 @@ package com.ms.network.factory;
 import com.ms.network.client.OkHttp3Client;
 import com.ms.network.config.OkHttpConfig;
 import okhttp3.*;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.net.ssl.SSLContext;
@@ -34,7 +33,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Ms
  */
-@Component
 public class OkHttp3Factory {
     private OkHttp3Client client;
 

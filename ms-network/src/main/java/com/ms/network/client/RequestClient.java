@@ -13,7 +13,7 @@ package com.ms.network.client;
 
 import com.ms.core.exception.web.MsSendRequestException;
 import com.ms.network.factory.BuildFactory;
-import com.ms.network.interfaces.RequestCallBack;
+import com.ms.network.okhttp.interfaces.OkHttpCallBack;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
@@ -59,7 +59,7 @@ public class RequestClient {
      * 忽略响应结果
      */
     public void async() {
-        client.newCall(buildFactory.build()).enqueue(new RequestCallBack() {
+        client.newCall(buildFactory.build()).enqueue(new OkHttpCallBack() {
             @Override
             public void onFailure(Call call, IOException e) {
                 RequestClient.LOGGER.warning("Failed to execute request, 忽略执行响应");
@@ -77,7 +77,7 @@ public class RequestClient {
      *
      * @param callback 回调函数
      */
-    public void async(RequestCallBack callback) {
+    public void async(OkHttpCallBack callback) {
         client.newCall(buildFactory.build()).enqueue(callback);
     }
 }
