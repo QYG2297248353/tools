@@ -1,6 +1,7 @@
 package com.ms.core.base.info;
 
 import com.ms.core.base.info.enums.PasswordRandomEnum;
+import com.sun.istack.internal.NotNull;
 
 import java.security.SecureRandom;
 
@@ -8,6 +9,55 @@ import java.security.SecureRandom;
  * @author ms
  */
 public class RandomUtils {
+
+    /**
+     * 随机生成验证码
+     * 0-9
+     *
+     * @param length 长度
+     * @return 随机验证码
+     */
+    public static String randomCode(int length) {
+        String character = PasswordRandomEnum.Grade.CHARACTER_NUMBER;
+        return getSecureRandom(length, character);
+    }
+
+    /**
+     * 随机生验证码
+     * 字母
+     *
+     * @param length 长度
+     * @return 随机验证码
+     */
+    public static String randomCodeLetter(int length) {
+        String character = PasswordRandomEnum.Grade.CHARACTER_LOW;
+        return getSecureRandom(length, character);
+    }
+
+    /**
+     * 随机生验证码
+     * 大写字母
+     *
+     * @param length 长度
+     * @return 随机验证码
+     */
+    public static String randomCodeLetterUpper(int length) {
+        String character = PasswordRandomEnum.Grade.CHARACTER_HIGH;
+        return getSecureRandom(length, character);
+    }
+
+
+    @NotNull
+    private static String getSecureRandom(int length, String character) {
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(character.length());
+            sb.append(character.charAt(index));
+        }
+        return sb.toString();
+    }
+
     /**
      * 随机生成
      *
@@ -60,13 +110,7 @@ public class RandomUtils {
      */
     public static String randomString(int length) {
         String character = PasswordRandomEnum.Grade.HIGH_CHARACTER;
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(character.length());
-            sb.append(character.charAt(index));
-        }
-        return sb.toString();
+        return getSecureRandom(length, character);
     }
 
     /**
@@ -87,7 +131,7 @@ public class RandomUtils {
         return sb.toString();
     }
 
-    public static void randomStr(StringBuilder str){
+    public static void randomStr(StringBuilder str) {
         SecureRandom random = new SecureRandom();
         // Shuffle the password characters
         for (int i = str.length() - 1; i > 0; i--) {

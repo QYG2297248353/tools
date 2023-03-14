@@ -25,20 +25,15 @@
     <dependencies>
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-core</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <artifactId>core</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <!-- 二维码工具 -->
         <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>3.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>javase</artifactId>
-            <version>3.5.0</version>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>zxing</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

@@ -25,53 +25,34 @@
     <dependencies>
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-core</artifactId>
+            <artifactId>core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- Apache Commons 编解码器 -->
         <dependency>
-            <groupId>org.apache.directory.studio</groupId>
-            <artifactId>org.apache.commons.codec</artifactId>
-            <version>1.8</version>
-        </dependency>
-
-        <!-- JJWT -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- 如果您使用的是JDK 10或更早版本，并且还想使用 RSASSA-PSS（PS256、PS384、PS512）算法。JDK 11或更高版本不要求这些算法使用它-->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.70</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
-            <scope>compile</scope>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>codec</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
+
+
+        <!-- <dependency> -->
+        <!--     <groupId>commons-io</groupId> -->
+        <!--     <artifactId>commons-io</artifactId> -->
+        <!--     <version>2.11.0</version> -->
+        <!--     <scope>compile</scope> -->
+        <!-- </dependency> -->
+
+        <!-- <dependency> -->
+        <!--     <groupId>org.springframework</groupId> -->
+        <!--     <artifactId>spring-webmvc</artifactId> -->
+        <!-- </dependency> -->
     </dependencies>
 
     <build>

@@ -13,7 +13,7 @@ package com.ms.security.encryption.dsa.factory;
 
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.core.exception.base.MsToolsRuntimeException;
-import com.ms.security.binary.base64.Base64;
+import com.ms.security.codec.Base64;
 import com.ms.security.encryption.key.GenerateKeyPair;
 
 import java.nio.charset.StandardCharsets;

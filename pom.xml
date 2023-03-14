@@ -26,6 +26,8 @@
         <module>ms-push</module>
         <module>ms-api</module>
         <module>ms-tools</module>
+        <module>ms-core/commons/zxing</module>
+        <module>ms-core/commons/jjwt</module>
     </modules>
 
     <!-- 项目基本信息 -->
@@ -66,10 +68,15 @@
         <okhttp.version>4.10.0-RC1</okhttp.version>
         <fastjson.version>2.0.24</fastjson.version>
         <apache.commons.io>2.11.0</apache.commons.io>
+        <com.google.zxing.version>3.5.0</com.google.zxing.version>
+        <io.jsonwebtoken.jjwt.version>0.11.5</io.jsonwebtoken.jjwt.version>
+        <io.jsonwebtoken.jjwt.extension.version>1.70</io.jsonwebtoken.jjwt.extension.version>
         <!-- SpringBoot 版本信息 -->
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
         <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
         <spring-boot.version>2.2.3.RELEASE</spring-boot.version>
+        <!-- Apache Commons 组件 -->
+        <apache.commons.codec.version>1.15</apache.commons.codec.version>
     </properties>
 
     <!-- 远程仓库 -->

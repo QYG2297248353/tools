@@ -15,7 +15,7 @@ import com.ms.core.exception.base.MsToolsRuntimeException;
 import com.ms.core.exception.security.jwt.MsJwtExpiredException;
 import com.ms.core.exception.security.jwt.MsJwtRequireException;
 import com.ms.core.exception.security.jwt.MsJwtRequireNullException;
-import com.ms.security.binary.base64.Base64;
+import com.ms.security.codec.Base64;
 import com.ms.security.encryption.key.GenerateKeyPair;
 import com.ms.security.encryption.key.JJWTKey;
 import io.jsonwebtoken.*;

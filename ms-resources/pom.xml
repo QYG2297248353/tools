@@ -25,16 +25,11 @@
     <dependencies>
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-core</artifactId>
+            <artifactId>core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- apache 插件 -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${apache.commons.io}</version>
-        </dependency>
+
     </dependencies>
 
     <build>

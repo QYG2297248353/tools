@@ -17,7 +17,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.ms.core.base.unit.Coding;
+import com.ms.core.base.basic.Strings;
 import com.ms.core.exception.base.MsToolsException;
 
 import javax.imageio.ImageIO;
@@ -87,7 +87,7 @@ public class QrCodeFactory {
         // 排错率  L<M<Q<H
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         // 编码
-        hints.put(EncodeHintType.CHARACTER_SET, Coding.UTF_8);
+        hints.put(EncodeHintType.CHARACTER_SET, Strings.UTF_8);
         // 外边距：margin
         hints.put(EncodeHintType.MARGIN, 1);
         /*

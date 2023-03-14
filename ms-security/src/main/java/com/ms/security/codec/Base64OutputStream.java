@@ -9,7 +9,9 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.security.binary.base64;
+package com.ms.security.codec;
+
+import org.apache.commons.codec.CodecPolicy;
 
 import java.io.OutputStream;
 
@@ -29,5 +31,9 @@ public class Base64OutputStream extends org.apache.commons.codec.binary.Base64Ou
 
     public Base64OutputStream(OutputStream out, boolean doEncode, int lineLength, byte[] lineSeparator) {
         super(out, doEncode, lineLength, lineSeparator);
+    }
+
+    public Base64OutputStream(OutputStream out, boolean doEncode, int lineLength, byte[] lineSeparator, CodecPolicy decodingPolicy) {
+        super(out, doEncode, lineLength, lineSeparator, decodingPolicy);
     }
 }

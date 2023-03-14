@@ -11,14 +11,12 @@
 
 package com.ms.resources.io;
 
-import org.apache.commons.io.IOUtils;
-
 import java.io.*;
 
 /**
  * @author qyg2297248353
  */
-public class IoUtils extends IOUtils {
+public class IoUtils {
     public static String inputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder buffer = new StringBuilder();

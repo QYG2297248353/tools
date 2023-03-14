@@ -9,7 +9,9 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.security.binary.base64;
+package com.ms.security.codec;
+
+import org.apache.commons.codec.CodecPolicy;
 
 import java.io.InputStream;
 
@@ -19,7 +21,6 @@ import java.io.InputStream;
  * @author qyg2297248353
  */
 public class Base64InputStream extends org.apache.commons.codec.binary.Base64InputStream {
-
     public Base64InputStream(InputStream in) {
         super(in);
     }
@@ -30,5 +31,9 @@ public class Base64InputStream extends org.apache.commons.codec.binary.Base64Inp
 
     public Base64InputStream(InputStream in, boolean doEncode, int lineLength, byte[] lineSeparator) {
         super(in, doEncode, lineLength, lineSeparator);
+    }
+
+    public Base64InputStream(InputStream in, boolean doEncode, int lineLength, byte[] lineSeparator, CodecPolicy decodingPolicy) {
+        super(in, doEncode, lineLength, lineSeparator, decodingPolicy);
     }
 }

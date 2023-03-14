@@ -11,10 +11,8 @@
 
 package com.ms.security.google.authenticator.factory;
 
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 
 /**
@@ -137,26 +135,23 @@ public final class GoogleAuthenticatorQRGenerator {
     public static String getOtpAuthTotpURL(String issuer,
                                            String accountName,
                                            GoogleAuthenticatorKey credentials) {
-        UriComponentsBuilder builder = UriComponentsBuilder.newInstance()
-                .scheme("otpauth")
-                .host("totp")
-                .path("/" + formatLabel(issuer, accountName))
-                .queryParam("secret", credentials.getKey());
+        URI builder = URI.create("otpauth://totp/")
+                .resolve(formatLabel(issuer, accountName));
+        builder = builder.resolve("?secret=" + credentials.getKey());
 
 
         if (issuer != null) {
             if (issuer.contains(":")) {
                 throw new IllegalArgumentException("Issuer cannot contain the \':\' character.");
             }
-            builder.queryParam("issuer", issuer);
+            builder = builder.resolve("&issuer=" + internalURLEncode(issuer));
         }
 
-        final GoogleAuthenticatorConfig config = credentials.getConfig();
-        builder.queryParam("algorithm", getAlgorithmName(config.getHmacHashFunction()));
-        builder.queryParam("digits", String.valueOf(config.getCodeDigits()));
-        builder.queryParam("period", String.valueOf((int) (config.getTimeStepSizeInMillis() / 1000)));
-        UriComponents uri = builder.build();
-        return uri.toString();
+        GoogleAuthenticatorConfig config = credentials.getConfig();
+        builder = builder.resolve("&algorithm=" + getAlgorithmName(config.getHmacHashFunction()));
+        builder = builder.resolve("&digits=" + config.getCodeDigits());
+        builder = builder.resolve("&period=" + config.getTimeStepSizeInMillis() / 1000);
+        return builder.toString();
     }
 
     private static String getAlgorithmName(HmacHashFunction hashFunction) {

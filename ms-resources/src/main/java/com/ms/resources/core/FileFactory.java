@@ -12,7 +12,6 @@
 package com.ms.resources.core;
 
 import com.ms.core.exception.base.MsToolsException;
-import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -38,13 +37,31 @@ public class FileFactory {
             if (inputStream != null) {
                 try {
                     File temp = File.createTempFile("temp", "temp");
-                    FileUtils.copyInputStreamToFile(inputStream, temp);
+                    copyInputStreamToFile(inputStream, temp);
                     return temp;
                 } catch (IOException e) {
                     throw new MsToolsException(e);
                 }
             }
             throw new MsToolsException("文件不存在");
+        }
+    }
+
+    /**
+     * 复制输入流到文件
+     *
+     * @param inputStream 输入流
+     * @param file        文件
+     */
+    public static void copyInputStreamToFile(InputStream inputStream, File file) {
+        try (OutputStream outputStream = new FileOutputStream(file)) {
+            int read;
+            byte[] bytes = new byte[1024];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -203,8 +220,20 @@ public class FileFactory {
     }
 
     public static void writeToFile(File file, String content, Charset charset, boolean append) throws MsToolsException {
-        try {
-            FileUtils.writeStringToFile(file, content, charset, append);
+        writeStringToFile(file, content, charset, append);
+    }
+
+    /**
+     * 写入字符串到文件
+     *
+     * @param file    文件
+     * @param content 内容
+     * @param charset 编码
+     * @param append  是否追加
+     */
+    public static void writeStringToFile(File file, String content, Charset charset, boolean append) throws MsToolsException {
+        try (FileOutputStream outputStream = new FileOutputStream(file, append)) {
+            outputStream.write(content.getBytes(charset));
         } catch (IOException e) {
             throw new MsToolsException(e);
         }
@@ -225,8 +254,19 @@ public class FileFactory {
     }
 
     public static void writeToFile(File file, byte[] content, boolean append) throws MsToolsException {
-        try {
-            FileUtils.writeByteArrayToFile(file, content, append);
+        writeByteArrayToFile(file, content, append);
+    }
+
+    /**
+     * 写入字节数组到文件
+     *
+     * @param file    文件
+     * @param content 字节数组
+     * @param append  是否追加
+     */
+    public static void writeByteArrayToFile(File file, byte[] content, boolean append) throws MsToolsException {
+        try (FileOutputStream outputStream = new FileOutputStream(file, append)) {
+            outputStream.write(content);
         } catch (IOException e) {
             throw new MsToolsException(e);
         }
@@ -237,12 +277,8 @@ public class FileFactory {
         writeToFile(file, inputStream);
     }
 
-    public static void writeToFile(File file, InputStream inputStream) throws MsToolsException {
-        try {
-            FileUtils.copyInputStreamToFile(inputStream, file);
-        } catch (IOException e) {
-            throw new MsToolsException(e);
-        }
+    public static void writeToFile(File file, InputStream inputStream) {
+        copyInputStreamToFile(inputStream, file);
     }
 
 

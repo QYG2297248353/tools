@@ -26,12 +26,6 @@
     <dependencies>
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-core</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-id</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -57,17 +51,11 @@
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-bean</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-canvas</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
+        <!-- 网络工具 -->
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-network</artifactId>
@@ -85,8 +73,6 @@
             <artifactId>ms-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-
-
     </dependencies>
 
     <build>

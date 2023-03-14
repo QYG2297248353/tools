@@ -16,7 +16,6 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import com.ms.canvas.qr.factory.QrCodeFactory;
 import com.ms.core.base.basic.Strings;
-import com.ms.core.base.unit.Coding;
 import com.ms.core.exception.base.MsToolsException;
 
 import javax.imageio.ImageIO;
@@ -183,7 +182,7 @@ public class QrCodeUtils {
             Binarizer binarizer = new HybridBinarizer(source);
             BinaryBitmap binaryBitmap = new BinaryBitmap(binarizer);
             Map map = new HashMap(1);
-            map.put(EncodeHintType.CHARACTER_SET, Coding.UTF_8);
+            map.put(EncodeHintType.CHARACTER_SET, Strings.UTF_8);
             Result result = formatReader.decode(binaryBitmap, map);
             return result.toString();
         } catch (IOException | NotFoundException e) {

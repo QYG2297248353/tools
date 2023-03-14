@@ -11,6 +11,9 @@
 
 package com.ms.core.base.basic;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 /**
  * @author ms2297248353
  */
@@ -68,5 +71,173 @@ public interface Strings {
     String LF = "\n";
     String CR = "\r";
     String CRLF = "\r\n";
+
+    static boolean isBlank(String str) {
+        return str == null || str.trim().length() == 0;
+    }
+
+    static boolean isNotBlank(String str) {
+        return !isBlank(str);
+    }
+
+    static boolean isEmpty(String str) {
+        return str == null || str.length() == 0;
+    }
+
+    static boolean isNotEmpty(String str) {
+        return !isEmpty(str);
+    }
+
+    static boolean isAnyBlank(String... strs) {
+        if (strs == null || strs.length == 0) {
+            return true;
+        }
+        for (String str : strs) {
+            if (isBlank(str)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static boolean isNoneBlank(String... strs) {
+        return !isAnyBlank(strs);
+    }
+
+    static boolean isAnyEmpty(String... strs) {
+        if (strs == null || strs.length == 0) {
+            return true;
+        }
+        for (String str : strs) {
+            if (isEmpty(str)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static boolean isNoneEmpty(String... strs) {
+        return !isAnyEmpty(strs);
+    }
+
+    /**
+     * 数组转字符串
+     *
+     * @param elements 数组
+     * @param <T>      泛型
+     * @return 字符串
+     */
+    static <T> String join(T... elements) {
+        return join(elements, null);
+    }
+
+    /**
+     * 数组转字符串
+     *
+     * @param elements  数组
+     * @param separator 分隔符
+     * @param <T>       泛型
+     * @return 字符串
+     */
+    static <T> String join(T[] elements, String separator) {
+        if (elements == null) {
+            return null;
+        }
+        if (separator == null) {
+            separator = EMPTY;
+        }
+        int len = elements.length;
+        if (len == 0) {
+            return EMPTY;
+        }
+        StringBuilder sb = new StringBuilder(len * 16);
+        for (int i = 0; i < len; i++) {
+            if (i > 0) {
+                sb.append(separator);
+            }
+            sb.append(elements[i]);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 字符串分割
+     *
+     * @param str       字符串
+     * @param separator 分隔符
+     * @param <T>       泛型
+     * @return 字符串数组
+     */
+    static <T> String[] split(String str, String separator) {
+        if (str == null) {
+            return null;
+        }
+        if (separator == null) {
+            separator = EMPTY;
+        }
+        return str.split(separator);
+    }
+
+    /**
+     * 字符串分割
+     *
+     * @param str       字符串
+     * @param separator 分隔符
+     * @param <T>       泛型
+     * @return 字符串数组
+     */
+    static <T> String[] split(String str, char separator) {
+        if (str == null) {
+            return null;
+        }
+        return str.split(String.valueOf(separator));
+    }
+
+    /**
+     * 字符串分割
+     *
+     * @param str       字符串
+     * @param separator 分隔符
+     * @param limit     限制
+     * @param <T>       泛型
+     * @return 字符串数组
+     */
+    static <T> String[] split(String str, String separator, int limit) {
+        if (str == null) {
+            return null;
+        }
+        if (separator == null) {
+            separator = EMPTY;
+        }
+        return str.split(separator, limit);
+    }
+
+    /**
+     * 转为数组
+     *
+     * @param list 集合
+     * @param <T>  泛型
+     * @return 字符串数组
+     */
+    static <T> String[] toArray(T list) {
+        if (list == null) {
+            return null;
+        }
+        if (list instanceof String[]) {
+            return (String[]) list;
+        }
+        if (list instanceof String) {
+            return new String[]{(String) list};
+        }
+        if (list instanceof Collection) {
+            Collection<?> collection = (Collection<?>) list;
+            return collection.toArray(new String[collection.size()]);
+        }
+        if (list instanceof Object[]) {
+            Object[] objects = (Object[]) list;
+            return Arrays.stream(objects).map(String::valueOf).toArray(String[]::new);
+        }
+        return new String[]{String.valueOf(list)};
+    }
 
 }

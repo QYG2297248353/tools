@@ -148,10 +148,8 @@ public enum PasswordRandomEnum {
         public static final String CUSTOM_CHARACTER = null;
         public static Integer LOW_LENGTH_MIN = 8;
         public static Integer LOW_LENGTH_MAX = 16;
-
         public static Integer MEDIUM_LENGTH_MIN = 8;
         public static Integer MEDIUM_LENGTH_MAX = 22;
-
         public static Integer HIGH_LENGTH_MIN = 8;
         public static Integer HIGH_LENGTH_MAX = 32;
         public static String CHARACTER_NUMBER = "0123456789";

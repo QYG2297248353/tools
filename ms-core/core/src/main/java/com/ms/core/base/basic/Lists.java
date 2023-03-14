@@ -1,6 +1,7 @@
 package com.ms.core.base.basic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public interface Lists {
@@ -86,5 +87,50 @@ public interface Lists {
         return list;
     }
 
+    /**
+     * 数组转List
+     *
+     * @param array 数组
+     * @param <T>   泛型
+     * @return List
+     */
+    static <T> List<T> toList(T[] array) {
+        List<T> list = of();
+        Collections.addAll(list, array);
+        return list;
+    }
+
+
+    /**
+     * 数组转List
+     *
+     * @param array 数组
+     * @param <T>   泛型
+     * @return List
+     */
+    static <T> List<T> toList(T[][] array) {
+        List<T> list = of();
+        for (T[] ts : array) {
+            Collections.addAll(list, ts);
+        }
+        return list;
+    }
+
+    /**
+     * 数组转List
+     *
+     * @param array 数组
+     * @param <T>   泛型
+     * @return List
+     */
+    static <T> List<T> toList(T[][][] array) {
+        List<T> list = of();
+        for (T[][] ts : array) {
+            for (T[] t : ts) {
+                Collections.addAll(list, t);
+            }
+        }
+        return list;
+    }
 
 }

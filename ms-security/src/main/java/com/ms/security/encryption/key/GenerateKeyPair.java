@@ -11,7 +11,7 @@
 
 package com.ms.security.encryption.key;
 
-import com.ms.security.binary.base64.Base64;
+import com.ms.security.codec.Base64;
 
 import java.security.KeyPair;
 import java.security.PrivateKey;

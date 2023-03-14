@@ -17,7 +17,6 @@ import com.ms.security.encryption.key.GenerateKeyPair;
 import com.ms.security.encryption.key.RsaKey;
 import com.ms.security.encryption.rsa.factory.RsaFactory;
 
-import java.io.File;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
@@ -307,28 +306,6 @@ public class RSA {
      */
     public PublicKey loadPublicKey(String publicKey) throws MsToolsException {
         return RsaFactory.loadPublicKeyFromString(publicKey);
-    }
-
-    /**
-     * 加载密钥信息
-     *
-     * @param privateKey 私钥文件
-     * @return 密钥-私钥
-     * @throws MsToolsException 读取异常
-     */
-    public PrivateKey loadPrivateKey(File privateKey) throws MsToolsException {
-        return RsaFactory.loadPrivateKeyFromFile(privateKey);
-    }
-
-    /**
-     * 加载密钥信息
-     *
-     * @param publicKey 公钥文件
-     * @return 密钥-公钥
-     * @throws MsToolsException 读取异常
-     */
-    public PublicKey loadPublicKey(File publicKey) throws MsToolsException {
-        return RsaFactory.loadPublicKeyFromFile(publicKey);
     }
 
     /**

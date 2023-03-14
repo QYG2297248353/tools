@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.security.message.md5;
+package com.ms.security.effect;
 
 import com.ms.core.exception.base.MsToolsException;
 import org.apache.commons.codec.digest.DigestUtils;

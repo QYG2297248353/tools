@@ -11,22 +11,18 @@
 
 package com.ms.security.encryption.rsa.factory;
 
-import com.ms.core.base.basic.StringUtils;
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.core.exception.base.MsToolsRuntimeException;
 import com.ms.security.encryption.key.GenerateKeyPair;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.FileUtils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -198,48 +194,6 @@ public class RsaFactory {
         throw new MsToolsException("Invalid key size " + keySize + " for generating key pair");
     }
 
-
-    /**
-     * 生成密钥对并保存在本地文件中
-     *
-     * @param pubPath : 公钥保存路径  null 不保存
-     * @param priPath : 私钥保存路径 null 不保存
-     * @throws MsToolsException 文件读取异常
-     */
-    public static void generateKeyToFile(String pubPath, String priPath) throws MsToolsException {
-        // 获取密钥对
-        GenerateKeyPair generateKeyPair = generateKey();
-        try {
-            // 保存文件
-            if (!StringUtils.isBlank(pubPath)) {
-                FileUtils.writeStringToFile(new File(pubPath), generateKeyPair.getPublicKey(), StandardCharsets.UTF_8);
-            }
-            if (!StringUtils.isBlank(priPath)) {
-                FileUtils.writeStringToFile(new File(priPath), generateKeyPair.getPrivateKey(), StandardCharsets.UTF_8);
-            }
-        } catch (IOException e) {
-            throw new MsToolsException(e);
-        }
-    }
-
-
-    /**
-     * 从文件中加载公钥
-     *
-     * @param filePub : 公钥文件
-     * @return : 公钥
-     * @throws MsToolsException 文件读取异常
-     */
-    public static PublicKey loadPublicKeyFromFile(File filePub) throws MsToolsException {
-        try {
-            // 将文件内容转为字符串
-            String keyString = FileUtils.readFileToString(filePub, StandardCharsets.UTF_8);
-            return loadPublicKeyFromString(keyString);
-        } catch (IOException e) {
-            throw new MsToolsException(e);
-        }
-    }
-
     /**
      * 从字符串中加载公钥
      *
@@ -260,24 +214,6 @@ public class RsaFactory {
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new MsToolsException(e);
         }
-    }
-
-    /**
-     * 从文件中加载私钥
-     *
-     * @param file : 文件路径
-     * @return : 私钥
-     * @throws MsToolsException 文件读取异常
-     */
-    public static PrivateKey loadPrivateKeyFromFile(File file) throws MsToolsException {
-        try {
-            // 将文件内容转为字符串
-            String keyString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-            return loadPrivateKeyFromString(keyString);
-        } catch (IOException e) {
-            throw new MsToolsException(e);
-        }
-
     }
 
     /**
