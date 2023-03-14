@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ @MS 2022-12-13
-  ~ Copyright (c) 2001-2023 萌森
-  ~ 保留所有权利
-  ~ 本软件为萌森工作室所有及包含机密信息，须遵守其相关许可证条款进行使用。
-  ~ Copyright (c) 2001-2023 Meng Sen
-  ~ All rights reserved
-  ~ This software is owned by Mengsen Studio and contains confidential information, and must be used in accordance with its relevant license terms.
-  ~ Website：https://qyg2297248353.top
-  -->
-
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>tools</artifactId>
@@ -20,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ms-security</artifactId>
+    <artifactId>ms-spring</artifactId>
 
     <dependencies>
         <dependency>
@@ -31,13 +20,7 @@
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>codec</artifactId>
+            <artifactId>spring-boot</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

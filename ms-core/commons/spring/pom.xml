@@ -21,6 +21,8 @@
         <module>spring-context-support</module>
         <module>spring-boot-configuration-processor</module>
         <module>spring-boot</module>
+        <module>spring-web</module>
+        <module>spring-boot-autoconfigure</module>
     </modules>
 
     <dependencyManagement>
