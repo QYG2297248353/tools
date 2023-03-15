@@ -12,10 +12,10 @@
 package com.ms.network.ip.core;
 
 import com.ms.core.base.basic.FormatUtils;
-import com.ms.network.client.Client;
-import okhttp3.Response;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -108,7 +108,7 @@ public class IPAddressFactory {
                 String msg = FormatUtils.format("IP地址信息文件没有找到，IP显示功能将无法使用" + e.getMessage(), e);
                 log.warning(msg);
                 // 加载在线文件
-                ipFile = loadOnlineFile();
+                // ipFile = loadOnlineFile();
             }
             // 如果打开文件成功，读取文件头信息
             if (ipFile != null) {
@@ -129,31 +129,6 @@ public class IPAddressFactory {
         } catch (Exception e) {
             log.warning("IP地址服务初始化异常:" + e.getMessage());
         }
-    }
-
-    private RandomAccessFile loadOnlineFile() {
-        Client client = Client.getClient();
-        try {
-            // final String uri = "https://github.com/QYG2297248353/dataBase/raw/main/chunzhen/qqwry.dat";
-            // final String uri = "https://github.com/QYG2297248353/dataBase/raw/main/chunzhen/qqwry.dat";
-            final String uri = "https://gitee.com/qyg2297248353/dataBase/raw/main/chunzhen/qqwry.dat";
-            Response response = client.uri(uri)
-                    .get()
-                    .sync();
-            assert response.body() != null;
-            byte[] bytes = response.body().bytes();
-            File file = File.createTempFile("qqwry", ".dat");
-            System.err.println(file.getAbsolutePath());
-            try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
-                fileOutputStream.write(bytes);
-                fileOutputStream.flush();
-            }
-            return new RandomAccessFile(file, "r");
-        } catch (Exception e) {
-            log.warning(e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**

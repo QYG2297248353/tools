@@ -133,4 +133,7 @@ public interface Lists {
         return list;
     }
 
+    static boolean isEmpty(String[] array) {
+        return array == null || array.length == 0;
+    }
 }
