@@ -137,6 +137,26 @@ public class OkHttpProperties {
      */
     private String logLevel = "BASIC";
 
+    public OkHttpProperties() {
+    }
+
+    /**
+     * 初始化
+     *
+     * @param connectTimeout           连接超时时间 s秒
+     * @param readTimeout              读取超时时间 s秒
+     * @param writeTimeout             写入超时时间 s秒
+     * @param followRedirects          是否自动重定向
+     * @param retryOnConnectionFailure 是否开启重试
+     */
+    public OkHttpProperties(Integer connectTimeout, Integer readTimeout, Integer writeTimeout, Boolean followRedirects, Boolean retryOnConnectionFailure) {
+        this.connectTimeout = connectTimeout;
+        this.readTimeout = readTimeout;
+        this.writeTimeout = writeTimeout;
+        this.followRedirects = followRedirects;
+        this.retryOnConnectionFailure = retryOnConnectionFailure;
+    }
+
     public Proxy getProxy() {
         if (proxyHost == null || proxyPort == null) {
             throw new IllegalArgumentException("proxyHost or proxyPort is null");
@@ -167,5 +187,91 @@ public class OkHttpProperties {
             }
             return inetAddresses;
         };
+    }
+
+    public OkHttpProperties setProxy(String host, int port) {
+        proxyHost = host;
+        proxyPort = port;
+        return this;
+    }
+
+    public Integer getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public Integer getReadTimeout() {
+        return readTimeout;
+    }
+
+    public Integer getWriteTimeout() {
+        return writeTimeout;
+    }
+
+    public Boolean getFollowRedirects() {
+        return followRedirects;
+    }
+
+    public Boolean getRetryOnConnectionFailure() {
+        return retryOnConnectionFailure;
+    }
+
+    public Boolean getConnectionPoolEnable() {
+        return connectionPoolEnable;
+    }
+
+    public Integer getMaxIdleConnections() {
+        return maxIdleConnections;
+    }
+
+    public Long getKeepAliveDuration() {
+        return keepAliveDuration;
+    }
+
+    public Boolean getCacheEnable() {
+        return cacheEnable;
+    }
+
+    public Long getCacheSize() {
+        return cacheSize;
+    }
+
+    public String getCachePath() {
+        return cachePath;
+    }
+
+    public Boolean getProxyEnable() {
+        return proxyEnable;
+    }
+
+    public String getProxyType() {
+        return proxyType;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public String getProxyUsername() {
+        return proxyUsername;
+    }
+
+    public String getProxyPassword() {
+        return proxyPassword;
+    }
+
+    public Boolean getDnsEnable() {
+        return dnsEnable;
+    }
+
+    public Boolean getLogEnable() {
+        return logEnable;
+    }
+
+    public String getLogLevel() {
+        return logLevel;
     }
 }
