@@ -1,4 +1,4 @@
-package com.ms.network.okhttp;
+package com.ms.network.okhttp.response;
 
 import okhttp3.Response;
 

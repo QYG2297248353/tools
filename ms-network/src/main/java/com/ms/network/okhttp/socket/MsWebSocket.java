@@ -1,4 +1,4 @@
-package com.ms.network.okhttp;
+package com.ms.network.okhttp.socket;
 
 import okhttp3.Request;
 import okhttp3.WebSocket;

@@ -8,6 +8,8 @@ import com.ms.network.okhttp.enums.RequestMethodEnum;
 import com.ms.network.okhttp.factory.OkHttpFactory;
 import com.ms.network.okhttp.interfaces.MsWebSocketListener;
 import com.ms.network.okhttp.properties.OkHttpProperties;
+import com.ms.network.okhttp.response.MsResponse;
+import com.ms.network.okhttp.socket.MsWebSocket;
 import okhttp3.*;
 import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +39,6 @@ import java.util.logging.Logger;
 public class OkClient {
     @Resource
     private OkHttpProperties okHttpProperties;
-
 
     private OkClient(OkHttpProperties properties) {
         if (okHttpProperties == null && properties == null) {

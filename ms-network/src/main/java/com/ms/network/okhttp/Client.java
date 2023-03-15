@@ -8,6 +8,8 @@ import com.ms.network.okhttp.enums.RequestMethodEnum;
 import com.ms.network.okhttp.factory.OkHttpFactory;
 import com.ms.network.okhttp.interfaces.MsWebSocketListener;
 import com.ms.network.okhttp.properties.OkHttpProperties;
+import com.ms.network.okhttp.response.MsResponse;
+import com.ms.network.okhttp.socket.MsWebSocket;
 import okhttp3.*;
 import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +28,7 @@ import java.util.logging.Logger;
 /**
  * 请求客户端
  * 单例模式
+ * @author ms
  */
 public class Client {
     private static volatile Client client;
