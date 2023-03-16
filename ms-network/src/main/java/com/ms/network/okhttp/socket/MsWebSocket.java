@@ -59,7 +59,7 @@ public class MsWebSocket {
     /**
      * 获取原始请求
      *
-     * @retuen 请求
+     * @return 请求
      */
     public Request getRequest() {
         return webSocket.request();

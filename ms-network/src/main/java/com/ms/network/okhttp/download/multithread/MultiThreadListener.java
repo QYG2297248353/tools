@@ -27,6 +27,9 @@ public interface MultiThreadListener {
 
     /**
      * 下载失败
+     *
+     * @param <T> 异常类型
+     * @param e   异常
      */
     <T extends Exception> void onFailure(T e);
 }

@@ -961,6 +961,8 @@ public class Client {
 
         /**
          * 异步执行
+         *
+         * @param callback 回调
          */
         public void enqueue(Callback callback) {
             base.okHttpClient.newCall(request).enqueue(callback);

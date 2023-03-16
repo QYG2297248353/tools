@@ -437,6 +437,7 @@ public class OkClient {
          *
          * @param body 数据
          * @return 对象
+         * @throws IOException 异常
          */
         public PutRequest body(InputStream body) throws IOException {
             this.body = new String(IOUtils.toByteArray(body));
@@ -518,6 +519,8 @@ public class OkClient {
 
         /**
          * 二进制请求
+         *
+         * @return 对象
          */
         public BinaryRequest binary() {
             contentType = ContentTypeEnum.APPLICATION_OCTET_STREAM;
@@ -608,6 +611,7 @@ public class OkClient {
          *
          * @param body 数据
          * @return 对象
+         * @throws IOException 异常
          */
         public PostRequest body(InputStream body) throws IOException {
             this.body = new String(IOUtils.toByteArray(body));
@@ -689,6 +693,8 @@ public class OkClient {
 
         /**
          * 二进制请求
+         *
+         * @return 对象
          */
         public BinaryRequest binary() {
             contentType = ContentTypeEnum.APPLICATION_OCTET_STREAM;
@@ -951,6 +957,8 @@ public class OkClient {
 
         /**
          * 同步执行
+         *
+         * @return 响应
          */
         public Response execute() {
             try {
@@ -962,6 +970,8 @@ public class OkClient {
 
         /**
          * 同步执行
+         *
+         * @return 响应
          */
         public MsResponse executeMs() {
             try {
@@ -974,6 +984,8 @@ public class OkClient {
 
         /**
          * 异步执行
+         *
+         * @param callback 回调
          */
         public void enqueue(Callback callback) {
             base.okHttpClient.newCall(request).enqueue(callback);

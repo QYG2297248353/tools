@@ -23,6 +23,8 @@ public interface DownloadListener {
 
     /**
      * 下载失败时回调
+     *
+     * @param e 异常
      */
     void onFailure(Exception e);
 }
