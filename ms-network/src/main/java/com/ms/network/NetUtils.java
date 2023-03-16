@@ -1,10 +1,14 @@
 package com.ms.network;
 
-import com.ms.network.okhttp.download.multithread.MultiThreadDownloadUtils;
-
 import java.net.InetAddress;
 
+/**
+ * 网络工具类
+ *
+ * @author ms2297248353
+ */
 public class NetUtils {
+
 
     /**
      * 判断网络是否连接
@@ -20,11 +24,15 @@ public class NetUtils {
         }
     }
 
-    public static void main(String[] args) {
-        final String uri = "https://releases.ubuntu.com/22.04.2/ubuntu-22.04.2-desktop-amd64.iso";
-        final String path = "D:\\download\\ubuntu-22.04.2-desktop-amd64.iso";
-
-        new MultiThreadDownloadUtils(uri, path, 10)
-                .download();
+    /**
+     * 获取本机网卡IP
+     */
+    public static String getLocalIp() {
+        try {
+            InetAddress address = InetAddress.getLocalHost();
+            return address.getHostAddress();
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

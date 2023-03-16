@@ -414,6 +414,7 @@ public class Client {
          *
          * @param body 数据
          * @return 对象
+         * @throws IOException 异常
          */
         public Client.PutRequest body(InputStream body) throws IOException {
             this.body = new String(IOUtils.toByteArray(body));
@@ -495,6 +496,8 @@ public class Client {
 
         /**
          * 二进制请求
+         *
+         * @return 对象
          */
         public Client.BinaryRequest binary() {
             contentType = ContentTypeEnum.APPLICATION_OCTET_STREAM;
@@ -585,6 +588,7 @@ public class Client {
          *
          * @param body 数据
          * @return 对象
+         * @throws IOException 异常
          */
         public Client.PostRequest body(InputStream body) throws IOException {
             this.body = new String(IOUtils.toByteArray(body));
@@ -666,6 +670,8 @@ public class Client {
 
         /**
          * 二进制请求
+         *
+         * @return 对象
          */
         public Client.BinaryRequest binary() {
             contentType = ContentTypeEnum.APPLICATION_OCTET_STREAM;
@@ -921,13 +927,14 @@ public class Client {
         private final Client.BaseBuilder base;
         private final Request request;
 
-        public SendRequest(Request builder, Client.BaseBuilder base) {
+        private SendRequest(Request builder, Client.BaseBuilder base) {
             request = builder;
             this.base = base;
         }
 
         /**
          * 同步执行
+         * @return 响应
          */
         public Response execute() {
             try {
@@ -939,6 +946,7 @@ public class Client {
 
         /**
          * 同步执行
+         * @return 响应
          */
         public MsResponse executeMs() {
             try {
@@ -990,7 +998,7 @@ public class Client {
          */
         private Map<String, Object> data = new HashMap<>();
 
-        public MultipartFormDataRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
+        private MultipartFormDataRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
             super(okHttpClient, uri, headers);
             this.method = method;
         }
@@ -1097,7 +1105,7 @@ public class Client {
         private Map<String, String> data = new HashMap<>();
 
 
-        public XWWWFormUrlencodedRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
+        private XWWWFormUrlencodedRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
             super(okHttpClient, uri, headers);
             this.method = method;
         }
@@ -1180,7 +1188,7 @@ public class Client {
          */
         private Object data;
 
-        public BinaryRequest(RequestMethodEnum put, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
+        private BinaryRequest(RequestMethodEnum put, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
             super(okHttpClient, uri, headers);
             method = put;
         }

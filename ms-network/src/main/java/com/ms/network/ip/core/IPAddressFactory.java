@@ -83,6 +83,8 @@ public class IPAddressFactory {
 
     /**
      * 构造函数
+     *
+     * @param filePath IP地址库文件路径
      */
     public IPAddressFactory(String filePath) {
         init(filePath);
@@ -134,8 +136,8 @@ public class IPAddressFactory {
     /**
      * 查询IP地址位置 - synchronized的作用是避免多线程时获取区域信息为空
      *
-     * @param ip
-     * @return
+     * @param ip IP地址
+     * @return IPLocation
      */
     public synchronized IPLocation getIPLocation(String ip) {
         IPLocation location = new IPLocation();

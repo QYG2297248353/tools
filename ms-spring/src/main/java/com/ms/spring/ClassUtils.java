@@ -13,7 +13,7 @@ public class ClassUtils {
      *
      * @param basePackage 包名
      * @param annotations 注解
-     * @return Set<Class < ?>>
+     * @return Set 指定集合
      */
     public static Set<Class<?>> scanClassesAnnotatedWith(String basePackage, Class... annotations) {
         Set<Class<?>> classes = new HashSet<>();
