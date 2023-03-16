@@ -26,6 +26,8 @@ public class NetUtils {
 
     /**
      * 获取本机网卡IP
+     *
+     * @return 本机网卡IP
      */
     public static String getLocalIp() {
         try {
