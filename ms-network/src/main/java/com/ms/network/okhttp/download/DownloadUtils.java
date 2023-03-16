@@ -15,12 +15,46 @@ import java.util.logging.Logger;
 
 /**
  * 下载工具类
+ * 单线程下载
  *
  * @author ms
  */
 public class DownloadUtils {
     private static Logger logger = Logger.getLogger("DownloadUtils");
 
+    private String uri;
+
+    private String savePath;
+
+    private OkHttpClient client;
+
+    private DownloadListener listener;
+
+    public DownloadUtils(String uri, String path) {
+        this.uri = uri;
+        savePath = path;
+        client = new OkHttpFactory().create();
+    }
+
+    public DownloadUtils(String uri, String path, OkHttpClient client) {
+        this.uri = uri;
+        savePath = path;
+        this.client = client;
+    }
+
+    public DownloadUtils(String uri, String path, DownloadListener listener) {
+        this.uri = uri;
+        savePath = path;
+        this.listener = listener;
+        client = new OkHttpFactory().create();
+    }
+
+    public DownloadUtils(String uri, String path, OkHttpClient client, DownloadListener listener) {
+        this.uri = uri;
+        savePath = path;
+        this.listener = listener;
+        this.client = client;
+    }
 
     /**
      * 下载文件，支持断点续传
@@ -29,9 +63,21 @@ public class DownloadUtils {
      * @param savePath 文件的保存路径
      * @param listener 下载监听器
      */
-    public static void download(final String url, final String savePath, final DownloadListener listener) {
+    public static void download(String url, String savePath, DownloadListener listener) {
+        OkHttpClient client = new OkHttpFactory().create();
+        download(url, savePath, client, listener);
+    }
+
+    /**
+     * 下载文件，支持断点续传
+     *
+     * @param url      文件的下载地址
+     * @param savePath 文件的保存路径
+     * @param client   下载客户端
+     * @param listener 下载监听器
+     */
+    public static void download(String url, String savePath, OkHttpClient client, DownloadListener listener) {
         try {
-            OkHttpClient client = new OkHttpFactory().create();
             Request request = new Request.Builder().url(url).build();
             Response response = client.newCall(request).execute();
             if (!response.isSuccessful()) {
@@ -84,29 +130,9 @@ public class DownloadUtils {
     }
 
     /**
-     * 存储文件下载进度到本地
-     * <p>
-     *     创建与下载文件同名的文件，以.ms为文件扩展名，文件内容为下载进度和文件总长度，单位为字节，此文件用于断点续传
-     *     例如：下载文件为：/Users/ms/Downloads/1.txt
-     *     则创建的文件为：/Users/ms/Downloads/1.txt.ms
-     *     此方法会在下载完成后删除此文件
-     * @Param file 文件
-     * @Param progress 下载进度
-     * @Param total 文件总长度
+     * 下载文件，支持断点续传
      */
-    private void saveProgress(File cache, long progress, long total){
-        try {
-            if (progress == total && cache.exists()) {
-                cache.delete();
-            }
-            cache.createNewFile();
-            BufferedSink sink = Okio.buffer(Okio.sink(cache));
-            sink.writeUtf8(progress + "/" + total);
-            sink.flush();
-            sink.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void download() {
+        DownloadUtils.download(uri, savePath, client, listener);
     }
-
 }
