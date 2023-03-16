@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 /**
  * 请求客户端
  * 单例模式
+ *
  * @author ms
  */
 public class Client {

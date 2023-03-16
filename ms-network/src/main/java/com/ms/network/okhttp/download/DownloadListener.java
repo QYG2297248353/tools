@@ -3,6 +3,7 @@ package com.ms.network.okhttp.download;
 public interface DownloadListener {
     /**
      * 下载开始时回调
+     *
      * @param contentLength 文件总字节数
      */
     void onStart(long contentLength);
