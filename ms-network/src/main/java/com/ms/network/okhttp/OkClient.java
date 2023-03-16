@@ -78,6 +78,18 @@ public class OkClient {
         return new OkClient(new OkHttpProperties().setProxy(host, port)).builder();
     }
 
+    /**
+     * 自动注入构建对象
+     *
+     * @return 对象
+     */
+    public Builder builds() {
+        if (okHttpProperties != null) {
+            return new Builder(okHttpProperties);
+        }
+        return OkClient.build();
+    }
+
     private Builder builder() {
         return new Builder(okHttpProperties);
     }
