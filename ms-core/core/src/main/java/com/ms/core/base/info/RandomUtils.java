@@ -1,7 +1,6 @@
 package com.ms.core.base.info;
 
 import com.ms.core.base.info.enums.PasswordRandomEnum;
-import com.sun.istack.internal.NotNull;
 
 import java.security.SecureRandom;
 
@@ -47,7 +46,6 @@ public class RandomUtils {
     }
 
 
-    @NotNull
     private static String getSecureRandom(int length, String character) {
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);

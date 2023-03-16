@@ -13,10 +13,10 @@ package com.ms.push.webhook.dingtalk.factory;
 
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.base.basic.StringUtils;
-import com.ms.core.base.unit.Coding;
+import com.ms.core.base.basic.Strings;
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.core.exception.web.MsSendRequestException;
-import com.ms.network.client.Client;
+import com.ms.network.okhttp.OkClient;
 import com.ms.push.webhook.dingtalk.response.DingTalkWebhookResponse;
 import com.ms.push.webhook.dingtalk.to.*;
 import okhttp3.Response;
@@ -55,7 +55,7 @@ public class DingTalkWebhookBuild {
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
             byte[] signData = mac.doFinal(stringToSign.getBytes(StandardCharsets.UTF_8));
-            return URLEncoder.encode(new String(Base64.getEncoder().encode(signData)), Coding.UTF_8);
+            return URLEncoder.encode(new String(Base64.getEncoder().encode(signData)), Strings.UTF_8);
         } catch (NoSuchAlgorithmException | InvalidKeyException | UnsupportedEncodingException e) {
             throw new MsToolsException(e);
         }
@@ -99,7 +99,7 @@ public class DingTalkWebhookBuild {
 
     private static <T extends AbstractConfig> DingTalkWebhookResponse send(String uri, T obj) {
         String json = JSON.toJSONString(obj);
-        try (Response sync = Client.getClient().uri(uri).addJsonBody(json).post().sync()) {
+        try (Response sync = OkClient.build().uri(uri).post().body(json).execute()) {
             try {
                 assert sync.body() != null;
                 String body = sync.body().string();

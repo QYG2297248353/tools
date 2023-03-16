@@ -15,11 +15,8 @@ import com.ms.api.tencent.factory.ApiSignV3;
 import com.ms.api.tencent.factory.TencentCloudApiConfig;
 import com.ms.api.tencent.sms.vo.BasicSmsTencentVo;
 import com.ms.core.exception.base.MsToolsException;
-import com.ms.core.exception.web.MsSendRequestException;
-import com.ms.network.client.Client;
+import com.ms.network.okhttp.OkClient;
 import okhttp3.Response;
-
-import java.io.IOException;
 
 public class TencentSmsUtils {
     /**
@@ -35,7 +32,7 @@ public class TencentSmsUtils {
         String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
         String authorization = ApiSignV3.signV3(secretId, secretKey, timestamp, bodyJson);
 
-        try (Response sync = Client.getClient()
+        try (Response sync = OkClient.build()
                 .addHeader(TencentCloudApiConfig.SmsApi.Authorization, authorization)
                 .addHeader(TencentCloudApiConfig.SmsApi.Timestamp, timestamp)
                 .addHeader(TencentCloudApiConfig.SmsApi.Action, basic.getAction())
@@ -43,11 +40,10 @@ public class TencentSmsUtils {
                 .addHeader(TencentCloudApiConfig.SmsApi.Region, basic.getRegion())
                 .addHeader(TencentCloudApiConfig.SmsApi.Language, TencentCloudApiConfig.Language.ZH_CH.getLanguage())
                 .uri(TencentCloudApiConfig.Host.MAIN_SMS.getWebsite())
-                .addJsonBody(bodyJson)
-                .post().sync()) {
+                .post().body(bodyJson).execute()) {
             assert sync.body() != null;
             return sync.body().string();
-        } catch (MsSendRequestException | IOException e) {
+        } catch (Exception e) {
             throw new MsToolsException(e);
         }
     }

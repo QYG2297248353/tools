@@ -32,7 +32,7 @@
     <!-- 项目基本信息 -->
     <groupId>io.github.qyg2297248353</groupId>
     <artifactId>tools</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Java tools 工具箱</name>
     <description>commons迭代版本</description>
@@ -200,6 +200,10 @@
                     <verbose>${maven.deploy.verbose}</verbose>
                     <!-- 跳过测试编译 -->
                     <skip>${maven.deploy.skip}</skip>
+                    <compilerArgs>
+                        <!-- 过期方法警告 -->
+                        <arg>-Xlint:deprecation</arg>
+                    </compilerArgs>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -212,6 +216,11 @@
                             <version>${spring-boot.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                    <compilerArguments>
+                        <!-- 解决maven命令编译报错，因为rt.jar 和jce.jar在jre的lib下面，不在jdk的lib下面，
+                        导致maven找不到（java7以后会出现这个问题）-->
+                        <bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath>
+                    </compilerArguments>
                 </configuration>
             </plugin>
 

@@ -16,7 +16,7 @@
     <parent>
         <artifactId>tools</artifactId>
         <groupId>io.github.qyg2297248353</groupId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.1.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -38,10 +38,15 @@
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-resources</artifactId>
+            <artifactId>ms-canvas</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-resources</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
@@ -51,11 +56,11 @@
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-canvas</artifactId>
+            <artifactId>ms-spring</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- 网络工具 -->
+
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-network</artifactId>

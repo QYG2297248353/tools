@@ -54,7 +54,7 @@ public class Client {
     }
 
 
-    private Client.Builder builder() {
+    public Client.Builder builder() {
         return new Client.Builder(okHttpProperties);
     }
 

@@ -16,7 +16,7 @@
     <parent>
         <artifactId>tools</artifactId>
         <groupId>io.github.qyg2297248353</groupId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.1.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -28,26 +28,5 @@
         <!-- 核心模块 -->
         <module>core</module>
     </modules>
-
-    <build>
-        <!-- 扫描项目下所有的文件 -->
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
-    </build>
 
 </project>

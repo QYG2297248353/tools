@@ -12,8 +12,8 @@
 package com.ms.push.mail.factory;
 
 import com.ms.core.base.basic.StringUtils;
-import com.ms.core.base.info.EmailRegexpUtils;
-import com.ms.core.base.unit.Coding;
+import com.ms.core.base.basic.Strings;
+import com.ms.core.base.info.EmailUtils;
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.core.exception.base.MsToolsRuntimeException;
 import com.ms.push.mail.enums.MailConfig;
@@ -172,7 +172,7 @@ public class MailBuild {
      */
     private void addRecipientsTo(MimeMessage msg, String... recipients) throws MessagingException {
         for (String recipient : recipients) {
-            if (!StringUtils.isBlank(recipient) && EmailRegexpUtils.isEmail(recipient)) {
+            if (!StringUtils.isBlank(recipient) && EmailUtils.isEmail(recipient)) {
                 msg.addRecipients(Message.RecipientType.TO, recipient);
             }
         }
@@ -187,7 +187,7 @@ public class MailBuild {
      */
     private void addRecipientsCc(MimeMessage msg, String... recipients) throws MessagingException {
         for (String recipient : recipients) {
-            if (!StringUtils.isBlank(recipient) && EmailRegexpUtils.isEmail(recipient)) {
+            if (!StringUtils.isBlank(recipient) && EmailUtils.isEmail(recipient)) {
                 msg.addRecipients(Message.RecipientType.CC, recipient);
             }
         }
@@ -202,7 +202,7 @@ public class MailBuild {
      */
     private void addRecipientsBcc(MimeMessage msg, String... recipients) throws MessagingException {
         for (String recipient : recipients) {
-            if (!StringUtils.isBlank(recipient) && EmailRegexpUtils.isEmail(recipient)) {
+            if (!StringUtils.isBlank(recipient) && EmailUtils.isEmail(recipient)) {
                 msg.addRecipients(Message.RecipientType.BCC, recipient);
             }
         }
@@ -216,7 +216,7 @@ public class MailBuild {
      * @throws MessagingException 异常
      */
     private void setSubject(MimeMessage msg, String subject) throws MessagingException {
-        msg.setSubject(subject, Coding.UTF_8);
+        msg.setSubject(subject, Strings.UTF_8);
     }
 
     /**

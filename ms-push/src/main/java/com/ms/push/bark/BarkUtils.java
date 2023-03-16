@@ -13,7 +13,7 @@ package com.ms.push.bark;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.ms.network.client.Client;
+import com.ms.network.okhttp.OkClient;
 import com.ms.push.bark.factory.BarkDO;
 import com.ms.push.bark.factory.BarkImpl;
 import okhttp3.Response;
@@ -35,7 +35,7 @@ public class BarkUtils {
      */
     public static <T extends BarkImpl> Boolean pushBark(T push) {
         ResponseBody body;
-        try (Response response = Client.getClient().uri(getPushUri(push)).addJsonBody(push).post().sync()) {
+        try (Response response = OkClient.build().uri(getPushUri(push)).post().body(push).execute()) {
             assert response.body() != null;
             String sync = response.body().string();
             JSONObject json = JSON.parseObject(sync);
