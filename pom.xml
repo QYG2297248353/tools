@@ -32,7 +32,7 @@
     <!-- 项目基本信息 -->
     <groupId>io.github.qyg2297248353</groupId>
     <artifactId>tools</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>${ms.tools.version}</version>
     <packaging>pom</packaging>
     <name>Java tools 工具箱</name>
     <description>commons迭代版本</description>
@@ -57,6 +57,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- 版本信息 -->
+        <ms.tools.version>1.1.1-SNAPSHOT</ms.tools.version>
         <lombok.version>1.18.14</lombok.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
@@ -70,6 +71,7 @@
         <com.google.zxing.version>3.5.0</com.google.zxing.version>
         <io.jsonwebtoken.jjwt.version>0.11.5</io.jsonwebtoken.jjwt.version>
         <io.jsonwebtoken.jjwt.extension.version>1.70</io.jsonwebtoken.jjwt.extension.version>
+        <org.yaml.snakeyaml.version>2.0</org.yaml.snakeyaml.version>
         <!-- SpringBoot 版本信息 -->
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
         <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
@@ -161,6 +163,24 @@
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>core</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>io</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${ms.tools.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
