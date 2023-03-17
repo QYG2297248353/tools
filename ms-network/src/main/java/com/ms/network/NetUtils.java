@@ -9,7 +9,6 @@ import java.net.InetAddress;
  */
 public class NetUtils {
 
-
     /**
      * 判断网络是否连接
      *

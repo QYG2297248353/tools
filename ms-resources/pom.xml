@@ -31,13 +31,16 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>io</artifactId>
-            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>commons-compress</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

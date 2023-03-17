@@ -157,6 +157,16 @@ public class StringUtils {
     }
 
     /**
+     * 判断字符串是否不为空
+     *
+     * @param str 字符串
+     * @return 是否不为空
+     */
+    public static boolean isNotEmpty(String str) {
+        return !isEmpty(str);
+    }
+
+    /**
      * 判断字符串是否以指定字符串开头
      *
      * @param str    字符串
@@ -412,6 +422,4 @@ public class StringUtils {
         }
         return list.toArray(new String[0]);
     }
-
-
 }

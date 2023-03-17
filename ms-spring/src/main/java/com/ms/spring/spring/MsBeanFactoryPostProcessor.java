@@ -1,4 +1,4 @@
-package com.ms.network.spring;
+package com.ms.spring.spring;
 
 import com.ms.spring.ClassUtils;
 import org.springframework.beans.BeansException;
@@ -17,7 +17,7 @@ import java.util.Set;
 
 public class MsBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
-    protected static final String BASE_PACKAGE = "com.ms.network";
+    protected static final String BASE_PACKAGE = "com.ms.spring";
 
     protected static final Class[] ANNOTATIONS = new Class[]{Service.class, Controller.class, Configuration.class, Bean.class, Component.class};
 

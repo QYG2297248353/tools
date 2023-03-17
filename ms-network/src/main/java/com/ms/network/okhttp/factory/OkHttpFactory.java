@@ -111,7 +111,10 @@ public class OkHttpFactory {
         }
         if (properties.getProxyEnable() != null && properties.getProxyEnable()) {
             builder.proxy(properties.getProxy());
-            builder.proxyAuthenticator(properties.getProxyAuthenticator());
+            if (properties.getProxyUsername() != null) {
+                Authenticator proxyAuthenticator = properties.getProxyAuthenticator();
+                builder.proxyAuthenticator(proxyAuthenticator);
+            }
         } else {
             builder.proxy(Proxy.NO_PROXY);
         }

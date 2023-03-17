@@ -16,49 +16,41 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-core</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-expression</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

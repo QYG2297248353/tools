@@ -26,13 +26,12 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>core</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-network</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
     </dependencies>
 

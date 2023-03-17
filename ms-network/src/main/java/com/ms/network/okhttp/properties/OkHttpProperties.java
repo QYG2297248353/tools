@@ -190,6 +190,7 @@ public class OkHttpProperties {
     }
 
     public OkHttpProperties setProxy(String host, int port) {
+        proxyEnable = true;
         proxyHost = host;
         proxyPort = port;
         return this;

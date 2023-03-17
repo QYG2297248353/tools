@@ -27,56 +27,55 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-id</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-math</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-canvas</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-resources</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-security</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-spring</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
-
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-network</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-push</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-api</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
     </dependencies>
 
@@ -86,7 +85,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.4.1</version>
+                <version>${maven.assembly.plugin.version}</version>
                 <configuration>
                     <!-- get all project dependencies -->
                     <descriptorRefs>

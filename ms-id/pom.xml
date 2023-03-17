@@ -26,7 +26,6 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>core</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

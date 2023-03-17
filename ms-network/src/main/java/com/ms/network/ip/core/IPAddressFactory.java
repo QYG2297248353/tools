@@ -12,7 +12,10 @@
 package com.ms.network.ip.core;
 
 import com.ms.core.base.basic.FormatUtils;
+import com.ms.network.okhttp.download.DownloadUtils;
+import com.ms.resources.file.FilesUtils;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -110,7 +113,7 @@ public class IPAddressFactory {
                 String msg = FormatUtils.format("IP地址信息文件没有找到，IP显示功能将无法使用" + e.getMessage(), e);
                 log.warning(msg);
                 // 加载在线文件
-                // ipFile = loadOnlineFile();
+                ipFile = loadOnlineFile();
             }
             // 如果打开文件成功，读取文件头信息
             if (ipFile != null) {
@@ -131,6 +134,22 @@ public class IPAddressFactory {
         } catch (Exception e) {
             log.warning("IP地址服务初始化异常:" + e.getMessage());
         }
+    }
+
+    private RandomAccessFile loadOnlineFile() {
+        final String onlineFilePath = "https://github.com/qyggzs2297248353/dataBase/raw/main/chunzhen/qqwry.dat";
+        String savePath = FilesUtils.getSystemTempDirectory() + "qqwry.dat";
+        // OkHttpClient client = new OkHttpFactory().create(new OkHttpProperties().setProxy("127.0.0.1", 7890));
+        DownloadUtils.download(onlineFilePath, savePath, null);
+        File file = new File(savePath);
+        if (file.exists()) {
+            try {
+                return new RandomAccessFile(file, "r");
+            } catch (FileNotFoundException e) {
+                log.warning("IP地址信息文件没有找到，IP显示功能将无法使用" + e.getMessage());
+            }
+        }
+        return null;
     }
 
     /**

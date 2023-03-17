@@ -9,12 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>apache</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>codec</module>
-        <module>io</module>
-        <module>commons-compress</module>
-    </modules>
+    <artifactId>javax-mail</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>${com.sun.mail.javax.mail.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -11,7 +11,23 @@
 
 package com.ms.network.ip;
 
+import com.ms.network.ip.core.IPAddressFactory;
+import com.ms.network.ip.core.IPLocation;
+
 public class IpUtils {
+    /**
+     * 获取IP地址信息
+     * 数据来源
+     * <a href="https://cz88.net/">纯真数据库</a>
+     *
+     * @param ip       ip地址
+     * @param dataPath 数据文件路径
+     * @return IP地址信息
+     */
+    public static IPLocation getIPLocation(String ip, String dataPath) {
+        IPAddressFactory factory = new IPAddressFactory(dataPath);
+        return factory.getIPLocation(ip);
+    }
 
     /**
      * 获取IP地址

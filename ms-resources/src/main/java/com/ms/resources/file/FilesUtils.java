@@ -376,11 +376,63 @@ public class FilesUtils {
         }
     }
 
+    /**
+     * 创建临时文件
+     *
+     * @param prefix 前缀
+     * @return 临时文件
+     * @throws MsToolsException 文件
+     */
+    public static File createTempFile(String prefix) throws MsToolsException {
+        return createTempFile(prefix, null);
+    }
 
+    /**
+     * 创建临时文件
+     *
+     * @param prefix 前缀
+     * @param suffix 后缀
+     * @return 临时文件
+     * @throws MsToolsException 文件
+     */
     public static File createTempFile(String prefix, String suffix) throws MsToolsException {
         return FileFactory.createTempFile(prefix, suffix);
     }
 
+    /**
+     * 创建临时文件
+     * 关闭后删除
+     *
+     * @param prefix 前缀
+     * @return 临时文件
+     * @throws MsToolsException 文件
+     */
+    public static File createTempFileOnExit(String prefix) throws MsToolsException {
+        return FileFactory.createTempFile(prefix, null, null, true);
+    }
+
+    /**
+     * 创建临时文件
+     * 关闭后删除
+     *
+     * @param prefix 前缀
+     * @param suffix 后缀
+     * @return 临时文件
+     * @throws MsToolsException 文件
+     */
+    public static File createTempFileOnExit(String prefix, String suffix) throws MsToolsException {
+        return FileFactory.createTempFile(prefix, suffix, null, true);
+    }
+
+    /**
+     * 创建临时文件
+     *
+     * @param prefix    前缀
+     * @param suffix    后缀
+     * @param directory 目录
+     * @return 临时文件
+     * @throws MsToolsException 文件
+     */
     public static File createTempFile(String prefix, String suffix, File directory) throws MsToolsException {
         return FileFactory.createTempFile(prefix, suffix, directory);
     }
@@ -408,4 +460,15 @@ public class FilesUtils {
     public static String getSuffix(File file) {
         return FileFactory.getSuffix(file);
     }
+
+    /**
+     * 获取系统临时目录
+     *
+     * @return 系统临时目录
+     */
+    public static String getSystemTempDirectory() {
+        return System.getProperty("java.io.tmpdir");
+    }
+
+
 }

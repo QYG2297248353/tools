@@ -32,7 +32,7 @@
     <!-- 项目基本信息 -->
     <groupId>io.github.qyg2297248353</groupId>
     <artifactId>tools</artifactId>
-    <version>${ms.tools.version}</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Java tools 工具箱</name>
     <description>commons迭代版本</description>
@@ -63,6 +63,7 @@
         <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
         <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
         <maven.javadoc.plugin.version>2.9.1</maven.javadoc.plugin.version>
+        <maven.assembly.plugin.version>2.4.1</maven.assembly.plugin.version>
         <nexus.staging.maven.plugin.version>1.6.7</nexus.staging.maven.plugin.version>
         <maven.gpg.plugin.version>1.5</maven.gpg.plugin.version>
         <okhttp.version>4.10.0-RC1</okhttp.version>
@@ -72,6 +73,7 @@
         <io.jsonwebtoken.jjwt.version>0.11.5</io.jsonwebtoken.jjwt.version>
         <io.jsonwebtoken.jjwt.extension.version>1.70</io.jsonwebtoken.jjwt.extension.version>
         <org.yaml.snakeyaml.version>2.0</org.yaml.snakeyaml.version>
+        <com.sun.mail.javax.mail.version>1.6.2</com.sun.mail.javax.mail.version>
         <!-- SpringBoot 版本信息 -->
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
         <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
@@ -79,6 +81,7 @@
         <!-- Apache Commons 组件 -->
         <apache.commons.codec.version>1.15</apache.commons.codec.version>
         <apache.commons.io.version>2.11.0</apache.commons.io.version>
+        <apache.commons.commons-compress.version>1.22</apache.commons.commons-compress.version>
     </properties>
 
     <!-- 远程仓库 -->
@@ -167,6 +170,12 @@
 
             <dependency>
                 <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>core</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
@@ -179,7 +188,115 @@
 
             <dependency>
                 <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>codec</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>javax-mail</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>junit</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>snakeyaml</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>javax-servlet-api</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-boot</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>zxing</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
         </dependencies>

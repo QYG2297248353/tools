@@ -15,19 +15,16 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>lombok</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-expression</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

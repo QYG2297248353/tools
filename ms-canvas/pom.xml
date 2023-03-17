@@ -26,14 +26,11 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>core</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- 二维码工具 -->
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>zxing</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

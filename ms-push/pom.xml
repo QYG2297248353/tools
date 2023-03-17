@@ -26,21 +26,18 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>core</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- JavaMail 邮件 -->
+
         <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>1.6.2</version>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>javax-mail</artifactId>
         </dependency>
 
-        <!-- 网络客户端 -->
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-network</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${ms.tools.version}</version>
         </dependency>
     </dependencies>
 
