@@ -6,11 +6,26 @@ package com.ms.resources.file.enums;
  * @author ms2297248353
  */
 public enum VolumeSizeEnum {
-
     /**
      * 不分卷
      */
     VOLUME_SIZE_0(0L, "不分卷"),
+    /**
+     * 卷大小64K
+     */
+    VOLUME_SIZE_64K(65536L, "64K"),
+    /**
+     * 卷大小128K
+     */
+    VOLUME_SIZE_128K(131072L, "128K"),
+    /**
+     * 卷大小256K
+     */
+    VOLUME_SIZE_256K(262144L, "256K"),
+    /**
+     * 卷大小512K
+     */
+    VOLUME_SIZE_512K(524288L, "512K"),
     /**
      * 卷大小1M
      */
@@ -55,6 +70,14 @@ public enum VolumeSizeEnum {
      * 卷大小2G
      */
     VOLUME_SIZE_2G(2147483648L, "2G"),
+    /**
+     * 卷大小3G
+     */
+    VOLUME_SIZE_3G(3221225472L, "3G"),
+    /**
+     * 卷大小4G
+     */
+    VOLUME_SIZE_4G(4294967296L, "4G"),
     /**
      * 卷大小5G
      */
@@ -142,11 +165,22 @@ public enum VolumeSizeEnum {
 
     /**
      * 获取大小
+     * 单位 B
      *
      * @return 大小
      */
     public Long getSize() {
         return size;
+    }
+
+    /**
+     * 获取大小
+     * 单位 KB
+     *
+     * @return 大小
+     */
+    public Long getSizeKB() {
+        return size / 1024;
     }
 
     /**

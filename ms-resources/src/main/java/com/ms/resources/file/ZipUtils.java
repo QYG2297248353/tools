@@ -4,13 +4,10 @@ import com.ms.core.base.basic.Strings;
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.resources.file.enums.LevelEnum;
 import com.ms.resources.file.enums.VolumeSizeEnum;
-import org.apache.commons.compress.archivers.zip.Zip64Mode;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
-import org.apache.commons.compress.compressors.deflate.DeflateCompressorOutputStream;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.Charset;
 
 /**
@@ -29,7 +26,7 @@ public class ZipUtils {
      * @param comment    压缩文件注释
      * @param password   压缩文件密码
      * @param level      压缩级别
-     * @param volumeSize 卷大小
+     * @param volumeSize 卷大小 Must be between 64kB and about 4GB
      * @param isDelete   是否删除源文件
      * @param encoding   编码
      * @throws MsToolsException 如果压缩失败，抛出该异常
@@ -61,31 +58,36 @@ public class ZipUtils {
             throw new MsToolsException("压缩文件已存在");
         }
 
-        FileOutputStream fileOutputStream;
         try {
-            fileOutputStream = new FileOutputStream(zipFile);
-        } catch (FileNotFoundException e) {
+            ZipArchiveOutputStream zipArchiveOutputStream;
+            if (volumeSize == null || volumeSize == VolumeSizeEnum.VOLUME_SIZE_0) {
+                zipArchiveOutputStream = new ZipArchiveOutputStream(zipFile);
+            } else {
+                zipArchiveOutputStream = new ZipArchiveOutputStream(zipFile, volumeSize.getSize());
+            }
+            // 设置编码
+            zipArchiveOutputStream.setEncoding(encoding.name());
+            // 使用语言编码
+            zipArchiveOutputStream.setUseLanguageEncodingFlag(true);
+            // 设置注释
+            zipArchiveOutputStream.setComment(comment);
+            // 设置压缩级别
+            zipArchiveOutputStream.setLevel(level.getLevel());
+            // 无法编码的字符使用UTF-8编码
+            zipArchiveOutputStream.setFallbackToUTF8(true);
+
+            addFileToZip(zipArchiveOutputStream, sourceD, sourceD.getName(), password);
+
+            zipArchiveOutputStream.finish();
+        } catch (IOException e) {
             throw new MsToolsException(e);
         }
-        ZipArchiveOutputStream zipArchiveOutputStream = new ZipArchiveOutputStream(new DeflateCompressorOutputStream(fileOutputStream));
-        // 设置编码
-        zipArchiveOutputStream.setEncoding(encoding.name());
-        // 使用语言编码
-        zipArchiveOutputStream.setUseLanguageEncodingFlag(true);
-        // 设置注释
-        zipArchiveOutputStream.setComment(comment);
-        // ZIP64支持
-        zipArchiveOutputStream.setUseZip64(Zip64Mode.AsNeeded);
-        // 设置压缩方式
-        zipArchiveOutputStream.setMethod(ZipArchiveOutputStream.DEFLATED);
-        // 设置压缩级别
-        zipArchiveOutputStream.setLevel(level.getLevel());
-        // 设置额外编码信息
-        // zipArchiveOutputStream.setCreateUnicodeExtraFields(ZipArchiveOutputStream.UnicodeExtraFieldPolicy.ALWAYS);
-        // 无法编码的字符使用UTF-8编码
-        zipArchiveOutputStream.setFallbackToUTF8(true);
 
 
+    }
+
+    private static void addFileToZip(ZipArchiveOutputStream zipArchiveOutputStream, File sourceD, String name, String password) {
+        zipArchiveOutputStream.putArchiveEntry();
     }
 
 }
