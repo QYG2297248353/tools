@@ -22,5 +22,6 @@
         <module>zxing</module>
         <module>snakeyaml</module>
         <module>javax-mail</module>
+        <module>zip4j</module>
     </modules>
 </project>

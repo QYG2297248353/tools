@@ -42,6 +42,11 @@
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>snakeyaml</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>zip4j</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
