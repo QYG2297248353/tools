@@ -28,6 +28,7 @@
         <module>ms-api</module>
         <module>ms-tools</module>
         <module>ms-redis</module>
+        <module>ms-jpa</module>
     </modules>
 
     <!-- 项目基本信息 -->
@@ -76,6 +77,7 @@
         <org.yaml.snakeyaml.version>2.0</org.yaml.snakeyaml.version>
         <com.sun.mail.javax.mail.version>1.6.2</com.sun.mail.javax.mail.version>
         <net.lingala.zip4j.vesion>2.11.5</net.lingala.zip4j.vesion>
+        <org.hibernate.core.version>5.4.10.Final</org.hibernate.core.version>
         <!-- SpringBoot 版本信息 -->
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
         <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
@@ -209,6 +211,12 @@
 
             <dependency>
                 <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>hibernate</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>javax-mail</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
@@ -276,6 +284,12 @@
             <dependency>
                 <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>spring-core</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-data-jpa</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 

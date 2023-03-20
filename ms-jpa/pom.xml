@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ms-redis</artifactId>
+    <artifactId>ms-jpa</artifactId>
 
     <dependencies>
         <dependency>
@@ -19,12 +19,17 @@
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>spring-redis</artifactId>
+            <artifactId>hibernate</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
-            <artifactId>ms-spring</artifactId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-id</artifactId>
             <version>${ms.tools.version}</version>
         </dependency>
     </dependencies>

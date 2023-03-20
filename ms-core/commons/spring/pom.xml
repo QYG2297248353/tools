@@ -24,6 +24,7 @@
         <module>spring-web</module>
         <module>spring-boot-autoconfigure</module>
         <module>spring-redis</module>
+        <module>spring-data-jpa</module>
     </modules>
 
     <dependencyManagement>
