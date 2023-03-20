@@ -24,7 +24,6 @@ import javax.persistence.MappedSuperclass;
  * 类型String 防止精度丢失
  *
  * @author qyg2297248353
- * @MappedSuperclass 解决重复生成表
  */
 @MappedSuperclass
 public abstract class AbstractIDEntity {

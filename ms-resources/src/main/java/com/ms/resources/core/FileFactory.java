@@ -230,6 +230,7 @@ public class FileFactory {
      * @param content 内容
      * @param charset 编码
      * @param append  是否追加
+     * @throws MsToolsException 异常
      */
     public static void writeStringToFile(File file, String content, Charset charset, boolean append) throws MsToolsException {
         try (FileOutputStream outputStream = new FileOutputStream(file, append)) {
@@ -263,6 +264,7 @@ public class FileFactory {
      * @param file    文件
      * @param content 字节数组
      * @param append  是否追加
+     * @throws MsToolsException 异常
      */
     public static void writeByteArrayToFile(File file, byte[] content, boolean append) throws MsToolsException {
         try (FileOutputStream outputStream = new FileOutputStream(file, append)) {

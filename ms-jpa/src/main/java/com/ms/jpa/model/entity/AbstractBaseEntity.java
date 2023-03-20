@@ -23,7 +23,6 @@ import java.util.Date;
  * 主键Id
  *
  * @author qyg2297248353
- * @MappedSuperclass 解决重复生成表
  */
 @MappedSuperclass
 public abstract class AbstractBaseEntity extends AbstractIDEntity {

@@ -26,6 +26,7 @@ public class CompressionCore {
      * @param volumeSize 卷大小 Must be between 64kB and about 4GB (depending on the JVM). null 时使用默认卷大小
      * @param isDelete   是否删除源文件 null 时使用 false
      * @param encoding   编码 null 时使用 UTF-8
+     * @param password  密码 null 时使用不加密
      * @throws MsToolsException 如果压缩失败，抛出该异常
      */
     public static void compression(String sourceDir, String zipFileDir, String fileName, String comment, LevelEnum level, VolumeSizeEnum volumeSize, Boolean isDelete, Charset encoding, String password) throws MsToolsException {

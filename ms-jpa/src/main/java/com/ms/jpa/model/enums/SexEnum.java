@@ -2,14 +2,14 @@ package com.ms.jpa.model.enums;
 
 /**
  * 性别枚举
- * <br/>
+ * <p>
  * 参考标准：
  * <a href="https://std.samr.gov.cn/">全国标准信息公共服务平台</a>
- * <br/>
+ * <p>
  * 标准号：GB/T 2261.1-2003
- * <br/>
+ * <p>
  * 中文标准名称：<a href="https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=0FC942D542BC6EE3C707B2647EF81CD8">个人基本信息分类与代码 第1部分:人的性别代码</a>
- * <br/>
+ * <p>
  * 英文标准名称：Classification and codesof basic personal information--Part 1: Codes for sexual distinction of human
  *
  * @author ms2297248353
@@ -32,19 +32,19 @@ public enum SexEnum {
     // 民间衍生的性别代码
     /**
      * 人妖
-     * <br/>
+     * <p>
      * 指男性的外表，女性的内情，或女性的外表，男性的内情的人
      */
     HERMAPHRODITE(3, "人妖", "hermaphrodite"),
     /**
      * 双性人
-     * <br/>
+     * <p>
      * 人妖的一种，指男性和女性两种性别的人，也称雌雄同体、雌雄双体、雌雄同体人、雌雄双体人、
      */
     INTERSEX(4, "双性人", "intersex"),
     /**
      * 变性人
-     * <br/>
+     * <p>
      * 指男性变女性或女性变男性的人
      */
     TRANSSEXUAL(5, "变性人", "transsexual");

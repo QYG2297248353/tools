@@ -22,7 +22,6 @@ import java.io.Serializable;
  * Repository 中间间
  *
  * @author ms2297248353
- * @NoRepositoryBean 中间作用 忽略扫描
  */
 @NoRepositoryBean
 public interface IBaseRepository<T extends IBaseEntity, I extends Serializable> extends JpaRepository<T, I>, JpaSpecificationExecutor<T> {

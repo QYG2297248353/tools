@@ -14,6 +14,7 @@
     <modules>
         <module>apache</module>
         <module>fastjson</module>
+        <module>hibernate</module>
         <module>jjwt</module>
         <module>junit</module>
         <module>lombok</module>

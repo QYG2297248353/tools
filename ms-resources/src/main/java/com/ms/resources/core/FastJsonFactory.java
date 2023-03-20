@@ -40,7 +40,8 @@ public class FastJsonFactory {
     /**
      * JSON文件流读取
      *
-     * @param file 文件
+     * @param file    文件
+     * @param charset 字符集
      * @return JSON文件流
      */
     public static JSONReader fileReader(File file, Charset charset) {

@@ -92,7 +92,7 @@ public class FileFindUtils {
      *
      * @param fileName 文件名
      * @return 文件对象
-     * @throws FileNotFoundException 如果找不到文件，抛出该异常
+     * @throws MsToolsException 如果找不到文件，抛出该异常
      */
     public static File readFile(String fileName) throws MsToolsException {
         File file = new File(fileName);
@@ -141,7 +141,7 @@ public class FileFindUtils {
      *
      * @param fileName 文件名
      * @return 文件对象
-     * @throws IOException 如果找不到文件，抛出该异常
+     * @throws MsToolsException 如果找不到文件，抛出该异常
      */
     public static File findFile(String fileName) throws MsToolsException {
         File file = new File(fileName);

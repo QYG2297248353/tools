@@ -14,6 +14,7 @@ public class StreamUtils {
      *
      * @param inputStream 输入流
      * @return 输入流内容
+     * @throws MsToolsException 如果读取输入流失败，抛出该异常
      */
     public static String readInputStream(InputStream inputStream) throws MsToolsException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
