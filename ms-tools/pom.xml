@@ -32,6 +32,12 @@
 
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-jpa</artifactId>
+            <version>${ms.tools.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-math</artifactId>
             <version>${ms.tools.version}</version>
         </dependency>
@@ -57,6 +63,12 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-spring</artifactId>
+            <version>${ms.tools.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-redis</artifactId>
             <version>${ms.tools.version}</version>
         </dependency>
 

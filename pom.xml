@@ -18,17 +18,17 @@
     <modules>
         <module>ms-core</module>
         <module>ms-id</module>
+        <module>ms-jpa</module>
         <module>ms-math</module>
         <module>ms-canvas</module>
         <module>ms-resources</module>
         <module>ms-security</module>
         <module>ms-spring</module>
+        <module>ms-redis</module>
         <module>ms-network</module>
         <module>ms-push</module>
         <module>ms-api</module>
         <module>ms-tools</module>
-        <module>ms-redis</module>
-        <module>ms-jpa</module>
     </modules>
 
     <!-- 项目基本信息 -->
