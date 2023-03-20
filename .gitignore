@@ -9,3 +9,6 @@
 
 # vscode
 /.vscode/
+
+# cache
+/okhttp/
