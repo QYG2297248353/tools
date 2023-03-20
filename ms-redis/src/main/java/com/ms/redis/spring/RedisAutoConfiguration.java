@@ -1,6 +1,6 @@
 package com.ms.redis.spring;
 
-import com.ms.redis.properties.RedisProperties;
+import com.ms.redis.properties.MsRedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 @Configuration
-@EnableConfigurationProperties(RedisProperties.class)
+@EnableConfigurationProperties(MsRedisProperties.class)
 @ComponentScan(basePackages = MsBeanFactoryPostProcessor.BASE_PACKAGE,
         includeFilters = @ComponentScan.Filter({Service.class, Controller.class, Configuration.class, Bean.class, Component.class}),
         useDefaultFilters = false)

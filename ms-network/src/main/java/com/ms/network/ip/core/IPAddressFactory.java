@@ -49,7 +49,7 @@ public class IPAddressFactory {
      * 未知地区
      */
     private static final String UNKNOWN_AREA = "未知地区";
-    Logger log = Logger.getLogger(IPAddressFactory.class.getName());
+    private static final Logger log = Logger.getLogger(IPAddressFactory.class.getName());
     /**
      * 缓存，查询IP时首先查询缓存，以减少不必要的重复查找
      */

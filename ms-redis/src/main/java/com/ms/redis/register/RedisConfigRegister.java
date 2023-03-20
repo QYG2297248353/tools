@@ -4,6 +4,7 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.base.basic.FormatUtils;
+import com.ms.redis.properties.MsRedisProperties;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
@@ -38,6 +39,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+/**
+ * 注册 Redis 配置
+ *
+ * @author ms2297248353
+ */
 @EnableCaching
 @ConditionalOnClass(RedisOperations.class)
 @EnableConfigurationProperties(RedisProperties.class)
@@ -49,11 +55,14 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
     @Resource
     private RedisProperties redisProperties;
 
+    @Resource
+    private MsRedisProperties msRedisProperties;
+
     /**
      * 设置 redis 数据默认过期时间，默认1天
      * 设置@cacheable 序列化方式
      *
-     * @return
+     * @return 缓存配置对象
      */
     @Bean
     public RedisCacheConfiguration redisCacheConfiguration() {
@@ -75,9 +84,12 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
 
         // 全局开启AutoType，不建议使用
         // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+
         // 建议使用这种方式，小范围指定白名单
-        ParserConfig.getGlobalInstance().addAccept("com.ms");
-        // ParserConfig.getGlobalInstance().addAccept("com.qyg.base");
+        String[] autoType = msRedisProperties.getAutoType();
+        for (String auto : autoType) {
+            ParserConfig.getGlobalInstance().addAccept(auto);
+        }
         // key的序列化采用StringRedisSerializer
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
@@ -89,7 +101,7 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
      * 自定义缓存key生成策略，默认将使用该策略
      * 使用方法 @Cacheable
      *
-     * @return
+     * @return key生成策略
      */
     @Bean
     @Override
@@ -203,7 +215,7 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
                 .poolConfig(genericObjectPoolConfig)
                 .clientOptions(ClusterClientOptions.builder().topologyRefreshOptions(topologyRefreshOptions).build())
                 // 将appID传入连接，方便Redis监控中查看
-                //.clientName(appName + "_lettuce")
+                .clientName(msRedisProperties.getClientName() + "_lettuce")
                 .build();
     }
 }
