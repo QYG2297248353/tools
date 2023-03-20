@@ -23,6 +23,7 @@
         <module>spring-boot</module>
         <module>spring-web</module>
         <module>spring-boot-autoconfigure</module>
+        <module>spring-redis</module>
     </modules>
 
     <dependencyManagement>

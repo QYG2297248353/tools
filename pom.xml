@@ -27,6 +27,7 @@
         <module>ms-push</module>
         <module>ms-api</module>
         <module>ms-tools</module>
+        <module>ms-redis</module>
     </modules>
 
     <!-- 项目基本信息 -->
@@ -83,6 +84,7 @@
         <apache.commons.codec.version>1.15</apache.commons.codec.version>
         <apache.commons.io.version>2.11.0</apache.commons.io.version>
         <apache.commons.commons-compress.version>1.22</apache.commons.commons-compress.version>
+        <apache.commons.pool2.version>2.6.1</apache.commons.pool2.version>
     </properties>
 
     <!-- 远程仓库 -->
@@ -280,6 +282,12 @@
             <dependency>
                 <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>spring-expression</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>spring-redis</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
