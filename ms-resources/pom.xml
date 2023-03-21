@@ -47,6 +47,11 @@
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>zip4j</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>csv</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

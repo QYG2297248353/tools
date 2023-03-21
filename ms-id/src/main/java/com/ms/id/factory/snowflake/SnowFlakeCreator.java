@@ -13,6 +13,10 @@ package com.ms.id.factory.snowflake;
 
 /**
  * SnowFlake 雪花Id
+ * <p>
+ * 单例对象：
+ * 请优先调用有参方法，避免服务之间的冲突
+ * snowflake() snowflakeString()
  *
  * @author ms2297248353
  */
@@ -29,7 +33,7 @@ public class SnowFlakeCreator {
 
     /**
      * 创建SnowFlake 雪花Id
-     * 本对象单例维护
+     * 本对象单例维护(建议项目启动后优先调用一次)
      *
      * @param workerId     工作机器ID(0~31)
      * @param dataCenterId 数据中心ID(0~31)

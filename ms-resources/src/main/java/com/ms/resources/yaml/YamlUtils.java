@@ -1,6 +1,7 @@
 package com.ms.resources.yaml;
 
 import com.ms.core.exception.base.MsToolsException;
+import com.ms.resources.yaml.factory.YamlReaderFactory;
 
 /**
  * Yaml 文件
@@ -16,8 +17,8 @@ public class YamlUtils {
      * @return YamlReaderUtils
      * @throws MsToolsException
      */
-    public static YamlReaderUtils readYaml(String path) throws MsToolsException {
-        return new YamlReaderUtils(path);
+    public static YamlReaderFactory readYaml(String path) throws MsToolsException {
+        return new YamlReaderFactory(path);
     }
 
 }

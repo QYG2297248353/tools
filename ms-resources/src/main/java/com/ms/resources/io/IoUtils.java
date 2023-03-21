@@ -17,6 +17,13 @@ import java.io.*;
  * @author qyg2297248353
  */
 public class IoUtils {
+    /**
+     * 输入流转字符串
+     *
+     * @param inputStream 输入流
+     * @return 字符串
+     * @throws IOException IO异常
+     */
     public static String inputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder buffer = new StringBuilder();
@@ -27,6 +34,13 @@ public class IoUtils {
         return buffer.toString();
     }
 
+    /**
+     * 字符串转输入流
+     *
+     * @param streamStr 字符串
+     * @return 输入流
+     * @throws IOException IO异常
+     */
     public static InputStream stringToInputStream(String streamStr) throws IOException {
         ByteArrayInputStream stream = new ByteArrayInputStream(streamStr.getBytes());
         return stream;

@@ -13,10 +13,13 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * @author ms2297248353
+ */
 public class CompressionCore {
 
     /**
-     * 压缩目录
+     * 密码压缩
      *
      * @param sourceDir  待压缩目录或文件
      * @param zipFileDir 压缩文件保存目录 null 使用压缩目录父目录
@@ -51,7 +54,7 @@ public class CompressionCore {
     }
 
     /**
-     * 压缩目录
+     * 普通压缩
      *
      * @param sourceDir  待压缩目录或文件
      * @param zipFileDir 压缩文件保存目录 null 使用压缩目录父目录

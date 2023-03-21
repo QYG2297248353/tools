@@ -24,5 +24,6 @@
         <module>snakeyaml</module>
         <module>javax-mail</module>
         <module>zip4j</module>
+        <module>csv</module>
     </modules>
 </project>

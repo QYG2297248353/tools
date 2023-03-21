@@ -5,6 +5,7 @@ import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.base.basic.FormatUtils;
 import com.ms.redis.properties.MsRedisProperties;
+import com.ms.redis.utils.RedisReceiver;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
@@ -20,15 +21,15 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.connection.RedisClusterConfiguration;
-import org.springframework.data.redis.connection.RedisNode;
-import org.springframework.data.redis.connection.RedisPassword;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.*;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -37,6 +38,7 @@ import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 
 /**
@@ -217,5 +219,57 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
                 // 将appID传入连接，方便Redis监控中查看
                 .clientName(msRedisProperties.getClientName() + "_lettuce")
                 .build();
+    }
+
+    /**
+     * 初始化监听器
+     *
+     * @param connectionFactory 连接工厂
+     * @param listenerAdapter   监听器适配器
+     * @return Redis消息监听容器
+     */
+    @Bean
+    RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
+                                            MessageListenerAdapter listenerAdapter) {
+
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        // 配置监听通道
+        container.addMessageListener(listenerAdapter, new PatternTopic("chat"));
+        return container;
+    }
+
+    /**
+     * 消息监听器适配器
+     *
+     * @param redisReceiver 消息接收者
+     * @return 消息监听器适配器
+     */
+    @Bean
+    MessageListenerAdapter listenerAdapter(RedisReceiver redisReceiver) {
+        return new MessageListenerAdapter(redisReceiver, "receiveMessage");
+    }
+
+    /**
+     * 消息接收者
+     *
+     * @param latch 计数器
+     * @return 消息接收者
+     */
+    @Bean
+    RedisReceiver receiver(CountDownLatch latch) {
+        return new RedisReceiver(latch);
+    }
+
+    /**
+     * 计数器
+     * CountDownLatch是一个同步辅助类，允许一个或多个线程一直等待，直到其他线程的操作执行完后再执行
+     *
+     * @return 计数器
+     */
+    @Bean
+    CountDownLatch latch() {
+        // 指定了计数的次数 1
+        return new CountDownLatch(1);
     }
 }

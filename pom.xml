@@ -78,6 +78,7 @@
         <com.sun.mail.javax.mail.version>1.6.2</com.sun.mail.javax.mail.version>
         <net.lingala.zip4j.vesion>2.11.5</net.lingala.zip4j.vesion>
         <org.hibernate.core.version>5.4.10.Final</org.hibernate.core.version>
+        <com.opencsv.version>5.5</com.opencsv.version>
         <!-- SpringBoot 版本信息 -->
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
         <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
@@ -200,6 +201,12 @@
             <dependency>
                 <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>commons-compress</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>csv</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 

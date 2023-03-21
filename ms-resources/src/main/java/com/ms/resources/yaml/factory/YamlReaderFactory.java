@@ -1,4 +1,4 @@
-package com.ms.resources.yaml;
+package com.ms.resources.yaml.factory;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * 读取配置文件
  */
-public class YamlReaderUtils {
+public class YamlReaderFactory {
 
     /**
      * 配置文件数据
@@ -24,7 +24,7 @@ public class YamlReaderUtils {
     private static Map<String, Object> yamlMap;
 
 
-    public YamlReaderUtils(String yamlPath) throws MsToolsException {
+    public YamlReaderFactory(String yamlPath) throws MsToolsException {
         readYaml(yamlPath);
     }
 
