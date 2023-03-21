@@ -52,6 +52,11 @@
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>csv</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

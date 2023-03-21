@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>apache</module>
-        <module>fastjson</module>
+
         <module>hibernate</module>
         <module>jjwt</module>
         <module>junit</module>
@@ -25,5 +25,6 @@
         <module>javax-mail</module>
         <module>zip4j</module>
         <module>csv</module>
+        <module>alibaba</module>
     </modules>
 </project>

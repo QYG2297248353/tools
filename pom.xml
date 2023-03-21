@@ -88,6 +88,8 @@
         <apache.commons.io.version>2.11.0</apache.commons.io.version>
         <apache.commons.commons-compress.version>1.22</apache.commons.commons-compress.version>
         <apache.commons.pool2.version>2.6.1</apache.commons.pool2.version>
+        <!-- Alibaba 组件 -->
+        <com.alibaba.easyexcel.version>3.2.1</com.alibaba.easyexcel.version>
     </properties>
 
     <!-- 远程仓库 -->
@@ -188,6 +190,18 @@
 
             <dependency>
                 <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>io</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
@@ -207,12 +221,6 @@
             <dependency>
                 <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>csv</artifactId>
-                <version>${ms.tools.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.qyg2297248353</groupId>
-                <artifactId>fastjson</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 

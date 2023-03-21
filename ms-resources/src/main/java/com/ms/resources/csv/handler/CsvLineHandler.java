@@ -6,5 +6,5 @@ public interface CsvLineHandler {
      *
      * @param line 行数据
      */
-    void nextLine(String[] line);
+    <T> void nextLine(T line);
 }
