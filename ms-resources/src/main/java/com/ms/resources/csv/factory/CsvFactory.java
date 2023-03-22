@@ -27,6 +27,7 @@ public class CsvFactory {
      *
      * @param file 文件
      * @return 字符串数组
+     * @throws MsToolsException 异常
      */
     public static String[] readCsvFirstLine(File file) throws MsToolsException {
         try (CSVReader reader = new CSVReaderBuilder(new FileReader(file)).build()) {
@@ -45,6 +46,7 @@ public class CsvFactory {
      *
      * @param file        文件
      * @param lineHandler 行处理器
+     * @throws MsToolsException 异常
      */
     public static void readCsvLine(File file, CsvLineHandler lineHandler) throws MsToolsException {
         try (CSVReader reader = new CSVReaderBuilder(new FileReader(file)).build()) {
@@ -64,6 +66,7 @@ public class CsvFactory {
      *
      * @param file 文件
      * @return 字符串数组列表
+     * @throws MsToolsException 异常
      */
     public static List<String[]> readCsvAll(File file) throws MsToolsException {
         try (CSVReader reader = new CSVReaderBuilder(new FileReader(file)).build()) {
@@ -94,10 +97,10 @@ public class CsvFactory {
     /**
      * 逐行读取为指定Bean
      *
-     * @param file  文件
-     * @param clazz 类型
-     * @param <T>   类型
-     * @return Bean列表
+     * @param file        文件
+     * @param clazz       类型
+     * @param lineHandler 行处理器
+     * @param <T>         类型
      */
     public static <T> void readCsvLine(File file, Class<T> clazz, CsvLineHandler lineHandler) {
         try {

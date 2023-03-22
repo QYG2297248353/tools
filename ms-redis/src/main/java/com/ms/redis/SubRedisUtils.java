@@ -33,6 +33,7 @@ public class SubRedisUtils {
      * 配置订阅消息监听器
      *
      * @param listener 订阅消息监听器
+     * @param <T>      对象
      * @return 订阅成功返回true，否则返回false
      */
     public <T extends MsReceiverListener> boolean configureMessageListener(T listener) {
@@ -44,6 +45,7 @@ public class SubRedisUtils {
      *
      * @param listener   订阅消息监听器
      * @param methodName 方法名
+     * @param <T>        对象
      * @return 订阅成功返回true，否则返回false
      */
     public <T extends SubReceiver> boolean configureMessageListener(T listener, String methodName) {

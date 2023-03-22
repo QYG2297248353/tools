@@ -269,6 +269,8 @@ public class YamlReaderFactory {
      *
      * @param key          配置文件数据key
      * @param defaultValue 默认值
+     * @param clazz        类型
+     * @param <T>          类型
      * @return 配置文件数据
      */
     public <T> T getYamlMap(String key, Class<T> clazz, T defaultValue) {
@@ -284,6 +286,8 @@ public class YamlReaderFactory {
      *
      * @param key          配置文件数据key
      * @param defaultValue 默认值
+     * @param clazz        类型
+     * @param <T>          类型
      * @return 配置文件数据
      */
     public <T> List<T> getYamlMapList(String key, Class<T> clazz, List<T> defaultValue) {
@@ -299,9 +303,10 @@ public class YamlReaderFactory {
      *
      * @param key          配置文件数据key
      * @param defaultValue 默认值
+     * @param <T>          类型
      * @return 配置文件数据
      */
-    public <T> Map<String, T> getYamlMapMap(String key, Class<T> clazz, Map<String, T> defaultValue) {
+    public <T> Map<String, T> getYamlMapMap(String key, Map<String, T> defaultValue) {
         Object value = yamlMap.get(key);
         if (value == null) {
             return defaultValue;
@@ -313,8 +318,10 @@ public class YamlReaderFactory {
     /**
      * 获取配置文件数据
      *
-     * @param key          配置文件数据key
-     * @param defaultValue 默认值
+     * @param key           配置文件数据key
+     * @param defaultValue  默认值
+     * @param typeReference 类型
+     * @param <T>           类型
      * @return 配置文件数据
      */
     public <T> T getYamlMap(String key, TypeReference<T> typeReference, T defaultValue) {
@@ -328,8 +335,10 @@ public class YamlReaderFactory {
     /**
      * 获取配置文件数据
      *
-     * @param key          配置文件数据key
-     * @param defaultValue 默认值
+     * @param key           配置文件数据key
+     * @param defaultValue  默认值
+     * @param typeReference 类型
+     * @param <T>           类型
      * @return 配置文件数据
      */
     public <T> List<T> getYamlMapList(String key, TypeReference<List<T>> typeReference, List<T> defaultValue) {
@@ -343,8 +352,10 @@ public class YamlReaderFactory {
     /**
      * 获取配置文件数据
      *
-     * @param key          配置文件数据key
-     * @param defaultValue 默认值
+     * @param key           配置文件数据key
+     * @param defaultValue  默认值
+     * @param typeReference 类型
+     * @param <T>           类型
      * @return 配置文件数据
      */
     public <T> Map<String, T> getYamlMapMap(String key, TypeReference<Map<String, T>> typeReference, Map<String, T> defaultValue) {

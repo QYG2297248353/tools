@@ -48,10 +48,12 @@ public class RedisHashMapUtils extends RedisUtils {
     /**
      * 缓存Hash结构
      *
-     * @param key   缓存的键值
-     * @param field 缓存的键值
-     * @param value 缓存的值
-     * @param <T>   缓存的值类型
+     * @param key      缓存的键值
+     * @param field    缓存的键值
+     * @param value    缓存的值
+     * @param timeout  超时时间
+     * @param timeUnit 超时时间单位
+     * @param <T>      缓存的值类型
      * @return true=设置成功；false=设置失败
      */
     public <T> boolean setCacheHash(String key, String field, T value, long timeout, TimeUnit timeUnit) {

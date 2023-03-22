@@ -222,7 +222,8 @@ public class RedisTemplateUtils {
     /**
      * 获取过期时间
      *
-     * @param key 缓存的键值
+     * @param key      缓存的键值
+     * @param timeUnit 时间颗粒度
      * @return 过期时间 单位 timeUnit 指定单位 ；-1=永久有效；-2=不存在
      */
     public Long getExpire(Object key, TimeUnit timeUnit) {

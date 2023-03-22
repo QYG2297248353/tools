@@ -15,7 +15,7 @@ public class YamlUtils {
      *
      * @param path 文件地址
      * @return YamlReaderUtils
-     * @throws MsToolsException
+     * @throws MsToolsException 异常
      */
     public static YamlReaderFactory readYaml(String path) throws MsToolsException {
         return new YamlReaderFactory(path);

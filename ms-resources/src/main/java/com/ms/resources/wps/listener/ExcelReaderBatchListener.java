@@ -7,17 +7,19 @@ import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.ms.core.base.basic.FormatUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 /**
  * @author ms2297248353
  */
-public abstract class ExcelReaderListener extends AnalysisEventListener<Map<Integer, String>> {
+public abstract class ExcelReaderBatchListener extends AnalysisEventListener<Map<Integer, String>> {
 
-    private static final Logger log = Logger.getLogger(ExcelReaderListener.class.getName());
+    private static final Logger log = Logger.getLogger(ExcelReaderBatchListener.class.getName());
+    private final List<Map<Integer, String>> dataList = new ArrayList<>();
     private boolean hasNext = true;
-    private int maxLine = 0;
 
     /**
      * 读取失败
@@ -40,7 +42,15 @@ public abstract class ExcelReaderListener extends AnalysisEventListener<Map<Inte
      *
      * @param data 内容
      */
-    protected abstract void readData(Map<Integer, String> data);
+    protected abstract void readData(List<Map<Integer, String>> data);
+
+    /**
+     * 每次读取的数据量
+     * must be greater than 0
+     *
+     * @return 数据量 0 全部
+     */
+    public abstract int getBatchSize();
 
     /**
      * 是否存在下一行
@@ -85,10 +95,6 @@ public abstract class ExcelReaderListener extends AnalysisEventListener<Map<Inte
         hasNext = false;
     }
 
-    public void readMaxLine(int maxLine) {
-        this.maxLine = maxLine;
-    }
-
     @Override
     public boolean hasNext(AnalysisContext context) {
         return hasNext;
@@ -96,15 +102,21 @@ public abstract class ExcelReaderListener extends AnalysisEventListener<Map<Inte
 
     @Override
     public void invoke(Map<Integer, String> data, AnalysisContext context) {
-        readData(data);
-        if (maxLine > 0 && context.readRowHolder().getRowIndex() >= maxLine) {
-            close();
+        dataList.add(data);
+        if (dataList.size() >= getBatchSize()) {
+            readData(dataList);
+            dataList.clear();
         }
     }
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
+        if (!dataList.isEmpty()) {
+            readData(dataList);
+            dataList.clear();
+        }
         close();
         finish();
     }
+
 }

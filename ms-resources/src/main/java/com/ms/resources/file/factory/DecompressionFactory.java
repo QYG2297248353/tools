@@ -19,7 +19,7 @@ public class DecompressionFactory {
      * @param sourceFile 待解压文件
      * @param targetDir  解压目录
      * @param password   密码
-     * @return 解压后的文件
+     * @throws MsToolsException 异常
      */
     public static void decompression(File sourceFile, File targetDir, String password) throws MsToolsException {
         checkSourceFile(sourceFile);
@@ -41,7 +41,7 @@ public class DecompressionFactory {
      *
      * @param sourceFile 待解压文件
      * @param targetDir  解压目录
-     * @return 解压后的文件
+     * @throws MsToolsException 异常
      */
     public static void decompression(File sourceFile, File targetDir) throws MsToolsException {
         checkSourceFile(sourceFile);

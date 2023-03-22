@@ -23,6 +23,7 @@ public class ZipUtils {
      * @param targetDir  解压目录
      * @param password   密码 null 不使用密码
      * @return 解压后的文件目录
+     * @throws MsToolsException 异常
      */
     public static File decompression(String sourceFile, String targetDir, String password) throws MsToolsException {
         File file = new File(targetDir);
@@ -36,6 +37,7 @@ public class ZipUtils {
      * @param sourceFile 待解压文件
      * @param targetDir  解压目录
      * @return 解压后的文件目录
+     * @throws MsToolsException 异常
      */
     public static File decompression(String sourceFile, String targetDir) throws MsToolsException {
         File file = new File(targetDir);

@@ -26,6 +26,7 @@ public class RedisReceiverService {
      * 配置监听器
      *
      * @param listener 监听器
+     * @param <T>      对象
      * @return 配置成功返回true，否则返回false
      */
     public <T extends SubReceiver> boolean configureListener(T listener) {
@@ -44,6 +45,7 @@ public class RedisReceiverService {
      * 配置监听器
      *
      * @param listener 监听器
+     * @param <T>      对象
      * @return 配置成功返回true，否则返回false
      */
     public <T extends MsReceiverListener> boolean configureListener(T listener) {
@@ -63,6 +65,7 @@ public class RedisReceiverService {
      *
      * @param listener   监听器
      * @param methodName 监听器方法名
+     * @param <T>        对象
      * @return 配置成功返回true，否则返回false
      */
     public <T> boolean configureListener(T listener, String methodName) {

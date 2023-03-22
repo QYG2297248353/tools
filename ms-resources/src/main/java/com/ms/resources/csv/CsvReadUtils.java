@@ -16,6 +16,7 @@ public class CsvReadUtils {
      *
      * @param file 文件
      * @return 字符串数组
+     * @throws MsToolsException 异常
      */
     public static String[] readCsvFirstLine(File file) throws MsToolsException {
         return CsvFactory.readCsvFirstLine(file);
@@ -28,6 +29,7 @@ public class CsvReadUtils {
      *
      * @param file        文件
      * @param lineHandler 行处理器
+     * @throws MsToolsException 异常
      */
     public static void readCsvLine(File file, CsvLineHandler lineHandler) throws MsToolsException {
         CsvFactory.readCsvLine(file, lineHandler);
@@ -52,6 +54,7 @@ public class CsvReadUtils {
      *
      * @param file 文件
      * @return 字符串数组列表
+     * @throws MsToolsException 异常
      */
     public static List<String[]> readCsvAll(File file) throws MsToolsException {
         return CsvFactory.readCsvAll(file);
@@ -62,6 +65,7 @@ public class CsvReadUtils {
      *
      * @param file  文件
      * @param clazz 类型
+     * @param <T>   类型
      * @return 对象列表
      */
     public static <T> List<T> readCsvAll(File file, Class<T> clazz) {
@@ -74,6 +78,7 @@ public class CsvReadUtils {
      * @param file      文件
      * @param clazz     类型
      * @param skipLines 跳过行数
+     * @param <T>       类型
      * @return 对象列表
      */
     public static <T> List<T> readCsvAll(File file, Class<T> clazz, int skipLines) {
@@ -87,6 +92,7 @@ public class CsvReadUtils {
      * @param clazz     类型
      * @param skipLines 跳过行数
      * @param separator 分隔符
+     * @param <T>       类型
      * @return 对象列表
      */
     public static <T> List<T> readCsvAll(File file, Class<T> clazz, int skipLines, char separator) {
@@ -101,6 +107,7 @@ public class CsvReadUtils {
      * @param skipLines 跳过行数
      * @param separator 分隔符
      * @param quoteChar 引号
+     * @param <T>       类型
      * @return 对象列表
      */
     public static <T> List<T> readCsvAll(File file, Class<T> clazz, int skipLines, char separator, char quoteChar) {
@@ -116,6 +123,7 @@ public class CsvReadUtils {
      * @param separator  分隔符
      * @param quoteChar  引号
      * @param escapeChar 转义符
+     * @param <T>        类型
      * @return 对象列表
      */
     public static <T> List<T> readCsvAll(File file, Class<T> clazz, int skipLines, char separator, char quoteChar, char escapeChar) {
@@ -132,6 +140,7 @@ public class CsvReadUtils {
      * @param quoteChar    引号
      * @param escapeChar   转义符
      * @param strictQuotes 严格引号
+     * @param <T>          类型
      * @return 对象列表
      */
     public static <T> List<T> readCsvAll(File file, Class<T> clazz, int skipLines, char separator, char quoteChar, char escapeChar, boolean strictQuotes) {
@@ -149,6 +158,7 @@ public class CsvReadUtils {
      * @param escapeChar              转义符
      * @param strictQuotes            严格引号
      * @param ignoreLeadingWhiteSpace 忽略前导空白
+     * @param <T>                     类型
      * @return 对象列表
      */
     public static <T> List<T> readCsvAll(File file, Class<T> clazz, int skipLines, char separator, char quoteChar, char escapeChar, boolean strictQuotes, boolean ignoreLeadingWhiteSpace) {
@@ -167,6 +177,7 @@ public class CsvReadUtils {
      * @param strictQuotes            严格引号
      * @param ignoreLeadingWhiteSpace 忽略前导空白
      * @param ignoreQuotations        忽略引号
+     * @param <T>                     类型
      * @return 对象列表
      */
     public static <T> List<T> readCsvAll(File file, Class<T> clazz, int skipLines, char separator, char quoteChar, char escapeChar, boolean strictQuotes, boolean ignoreLeadingWhiteSpace, boolean ignoreQuotations) {

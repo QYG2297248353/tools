@@ -326,9 +326,9 @@ public class RedisListUtils extends RedisUtils {
     /**
      * 移除范围之外的数据
      * <p>
-     * start = 0, end = -1  start > end代表移除所有数据
+     * start = 0, end = -1  start 大于 end代表移除所有数据
      * list length = 5
-     * start = 3, end = 8 end > list length 代表移除到最后
+     * start = 3, end = 8 end 大于 list length 代表移除到最后
      *
      * @param key   缓存的键值
      * @param start 开始位置
