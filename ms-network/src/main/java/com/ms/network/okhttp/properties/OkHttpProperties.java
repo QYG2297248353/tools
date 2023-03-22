@@ -157,6 +157,85 @@ public class OkHttpProperties {
         this.retryOnConnectionFailure = retryOnConnectionFailure;
     }
 
+    /**
+     * 关闭日志
+     *
+     * @return OkHttpProperties
+     */
+    public static OkHttpProperties closeLog() {
+        OkHttpProperties okHttpProperties = new OkHttpProperties();
+        okHttpProperties.logEnable = false;
+        return okHttpProperties;
+    }
+
+    /**
+     * 关闭缓存
+     *
+     * @return OkHttpProperties
+     */
+    public static OkHttpProperties closeCache() {
+        OkHttpProperties okHttpProperties = new OkHttpProperties();
+        okHttpProperties.cacheEnable = false;
+        return okHttpProperties;
+    }
+
+    /**
+     * 关闭连接池
+     *
+     * @return OkHttpProperties
+     */
+    public static OkHttpProperties closeConnectionPool() {
+        OkHttpProperties okHttpProperties = new OkHttpProperties();
+        okHttpProperties.connectionPoolEnable = false;
+        return okHttpProperties;
+    }
+
+    /**
+     * 开启代理
+     *
+     * @return OkHttpProperties
+     */
+    public static OkHttpProperties openProxy(String host, int port) {
+        return openProxy(Proxy.Type.HTTP, host, port);
+    }
+
+    /**
+     * 开启代理
+     *
+     * @return OkHttpProperties
+     */
+    public static OkHttpProperties openProxy(Proxy.Type type, String host, int port) {
+        OkHttpProperties okHttpProperties = new OkHttpProperties();
+        okHttpProperties.proxyEnable = true;
+        okHttpProperties.proxyType = type.name();
+        okHttpProperties.proxyHost = host;
+        okHttpProperties.proxyPort = port;
+        return okHttpProperties;
+    }
+
+    /**
+     * 开启dns
+     *
+     * @return OkHttpProperties
+     */
+    public static OkHttpProperties openDns() {
+        OkHttpProperties okHttpProperties = new OkHttpProperties();
+        okHttpProperties.dnsEnable = true;
+        return okHttpProperties;
+    }
+
+    /**
+     * 开启dns
+     *
+     * @return OkHttpProperties
+     */
+    public static OkHttpProperties openDns(String... dns) {
+        OkHttpProperties okHttpProperties = new OkHttpProperties();
+        okHttpProperties.dnsEnable = true;
+        okHttpProperties.dns = dns;
+        return okHttpProperties;
+    }
+
     public Proxy getProxy() {
         if (proxyHost == null || proxyPort == null) {
             throw new IllegalArgumentException("proxyHost or proxyPort is null");
@@ -248,6 +327,10 @@ public class OkHttpProperties {
         return proxyType;
     }
 
+    public void setProxyType(Proxy.Type proxyType) {
+        this.proxyType = proxyType.name();
+    }
+
     public String getProxyHost() {
         return proxyHost;
     }
@@ -275,4 +358,5 @@ public class OkHttpProperties {
     public String getLogLevel() {
         return logLevel;
     }
+
 }

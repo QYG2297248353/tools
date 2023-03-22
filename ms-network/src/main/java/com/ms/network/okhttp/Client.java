@@ -1,8 +1,8 @@
 package com.ms.network.okhttp;
 
 import com.alibaba.fastjson2.JSON;
-import com.ms.core.base.basic.Strings;
 import com.ms.core.exception.base.MsToolsRuntimeException;
+import com.ms.network.http.UriUtils;
 import com.ms.network.okhttp.enums.ContentTypeEnum;
 import com.ms.network.okhttp.enums.RequestMethodEnum;
 import com.ms.network.okhttp.factory.OkHttpFactory;
@@ -63,44 +63,26 @@ public class Client {
         protected OkHttpClient okHttpClient;
         protected String uri;
         protected Map<String, String> headers;
-        protected Map<String, String> params;
+        protected Map<String, Object> params;
 
         public BaseBuilder() {
             headers = new HashMap<>();
             params = new HashMap<>();
         }
 
-        public BaseBuilder(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
+        public BaseBuilder(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
             this.okHttpClient = okHttpClient;
             this.uri = uri;
             this.headers = headers;
+            this.params = params;
         }
 
         void builderUri() {
-            if (Strings.isBlank(uri)) {
-                throw new MsToolsRuntimeException("请求地址不能为空");
-            }
-            if (params.isEmpty()) {
-                return;
-            }
-            StringBuilder sb = new StringBuilder(uri);
-            if (uri.contains(Strings.QUESTION_MARK)) {
-                sb.append(Strings.AND);
-            } else {
-                sb.append(Strings.QUESTION_MARK);
-            }
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                sb.append(entry.getKey()).append(Strings.EQUALS).append(entry.getValue()).append(Strings.AND);
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            uri = sb.toString();
+            uri = UriUtils.buildUrl(uri, params);
         }
     }
 
     public static class Builder extends Client.BaseBuilder {
-        private Map<String, String> headers;
-        private String uri;
-
         private Builder(OkHttpProperties properties) {
             okHttpClient = new OkHttpFactory().create(properties);
             headers = new HashMap<>();
@@ -195,10 +177,70 @@ public class Client {
         /**
          * 添加参数
          *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Client.Builder addParam(String name, int value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Client.Builder addParam(String name, long value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Client.Builder addParam(String name, double value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Client.Builder addParam(String name, boolean value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Client.Builder addParam(String name, Object value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
          * @param params 参数
          * @return 对象
          */
-        public Client.Builder addParams(Map<String, String> params) {
+        public Client.Builder addParams(Map<String, Object> params) {
             this.params.putAll(params);
             return this;
         }
@@ -226,7 +268,7 @@ public class Client {
          * @param params 参数
          * @return 对象
          */
-        public Client.Builder param(Map<String, String> params) {
+        public Client.Builder param(Map<String, Object> params) {
             this.params = params;
             return this;
         }
@@ -239,7 +281,7 @@ public class Client {
          * @return 对象
          */
         public Client.GetRequest get() {
-            return new Client.GetRequest(okHttpClient, uri, headers);
+            return new Client.GetRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -249,7 +291,7 @@ public class Client {
          * @return 对象
          */
         public Client.PutRequest put() {
-            return new Client.PutRequest(okHttpClient, uri, headers);
+            return new Client.PutRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -259,7 +301,7 @@ public class Client {
          * @return 对象
          */
         public Client.PostRequest post() {
-            return new Client.PostRequest(okHttpClient, uri, headers);
+            return new Client.PostRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -269,7 +311,7 @@ public class Client {
          * @return 对象
          */
         public Client.DeleteRequest delete() {
-            return new Client.DeleteRequest(okHttpClient, uri, headers);
+            return new Client.DeleteRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -279,7 +321,7 @@ public class Client {
          * @return 对象
          */
         public Client.PatchRequest patch() {
-            return new Client.PatchRequest(okHttpClient, uri, headers);
+            return new Client.PatchRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -289,7 +331,7 @@ public class Client {
          * @return 对象
          */
         public Client.HeadRequest head() {
-            return new Client.HeadRequest(okHttpClient, uri, headers);
+            return new Client.HeadRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -299,7 +341,7 @@ public class Client {
          * @return 对象
          */
         public Client.OptionsRequest options() {
-            return new Client.OptionsRequest(okHttpClient, uri, headers);
+            return new Client.OptionsRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -309,7 +351,7 @@ public class Client {
          * @return 对象
          */
         public Client.TraceRequest trace() {
-            return new Client.TraceRequest(okHttpClient, uri, headers);
+            return new Client.TraceRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -319,7 +361,7 @@ public class Client {
          * @return 对象
          */
         public Client.ConnectRequest connect() {
-            return new Client.ConnectRequest(okHttpClient, uri, headers);
+            return new Client.ConnectRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -334,9 +376,8 @@ public class Client {
     }
 
     public static class GetRequest extends Client.BaseBuilder {
-        public GetRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
-            params = new HashMap<>();
+        public GetRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -382,8 +423,8 @@ public class Client {
          */
         private String body;
 
-        public PutRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public PutRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             contentType = ContentTypeEnum.APPLICATION_JSON;
         }
 
@@ -479,7 +520,7 @@ public class Client {
         public Client.MultipartFormDataRequest form() {
             contentType = ContentTypeEnum.MULTIPART_FORM_DATA;
             builderUri();
-            return new Client.MultipartFormDataRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers);
+            return new Client.MultipartFormDataRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -491,7 +532,7 @@ public class Client {
         public Client.XWWWFormUrlencodedRequest xwwwFormUrlencoded() {
             contentType = ContentTypeEnum.APPLICATION_X_WWW_FORM_URLENCODED;
             builderUri();
-            return new Client.XWWWFormUrlencodedRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers);
+            return new Client.XWWWFormUrlencodedRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -502,7 +543,7 @@ public class Client {
         public Client.BinaryRequest binary() {
             contentType = ContentTypeEnum.APPLICATION_OCTET_STREAM;
             builderUri();
-            return new Client.BinaryRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers);
+            return new Client.BinaryRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers, params);
         }
 
 
@@ -555,8 +596,8 @@ public class Client {
          */
         private String body;
 
-        public PostRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public PostRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             contentType = ContentTypeEnum.APPLICATION_JSON;
         }
 
@@ -653,7 +694,7 @@ public class Client {
         public Client.MultipartFormDataRequest form() {
             contentType = ContentTypeEnum.MULTIPART_FORM_DATA;
             builderUri();
-            return new Client.MultipartFormDataRequest(RequestMethodEnum.POST, okHttpClient, uri, headers);
+            return new Client.MultipartFormDataRequest(RequestMethodEnum.POST, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -665,7 +706,7 @@ public class Client {
         public Client.XWWWFormUrlencodedRequest xwwwFormUrlencoded() {
             contentType = ContentTypeEnum.APPLICATION_X_WWW_FORM_URLENCODED;
             builderUri();
-            return new Client.XWWWFormUrlencodedRequest(RequestMethodEnum.POST, okHttpClient, uri, headers);
+            return new Client.XWWWFormUrlencodedRequest(RequestMethodEnum.POST, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -676,7 +717,7 @@ public class Client {
         public Client.BinaryRequest binary() {
             contentType = ContentTypeEnum.APPLICATION_OCTET_STREAM;
             builderUri();
-            return new Client.BinaryRequest(RequestMethodEnum.POST, okHttpClient, uri, headers);
+            return new Client.BinaryRequest(RequestMethodEnum.POST, okHttpClient, uri, headers, params);
         }
 
 
@@ -733,8 +774,8 @@ public class Client {
         private String body;
 
 
-        public DeleteRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public DeleteRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             contentType = ContentTypeEnum.APPLICATION_JSON;
         }
 
@@ -795,7 +836,7 @@ public class Client {
         public Client.MultipartFormDataRequest form() {
             contentType = ContentTypeEnum.MULTIPART_FORM_DATA;
             builderUri();
-            return new Client.MultipartFormDataRequest(RequestMethodEnum.DELETE, okHttpClient, uri, headers);
+            return new Client.MultipartFormDataRequest(RequestMethodEnum.DELETE, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -807,7 +848,7 @@ public class Client {
         public Client.XWWWFormUrlencodedRequest xwwwFormUrlencoded() {
             contentType = ContentTypeEnum.APPLICATION_X_WWW_FORM_URLENCODED;
             builderUri();
-            return new Client.XWWWFormUrlencodedRequest(RequestMethodEnum.DELETE, okHttpClient, uri, headers);
+            return new Client.XWWWFormUrlencodedRequest(RequestMethodEnum.DELETE, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -848,32 +889,32 @@ public class Client {
     }
 
     public static class PatchRequest extends Client.BaseBuilder {
-        public PatchRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public PatchRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
     public static class HeadRequest extends Client.BaseBuilder {
-        public HeadRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public HeadRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
     public static class OptionsRequest extends Client.BaseBuilder {
-        public OptionsRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public OptionsRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
     public static class TraceRequest extends Client.BaseBuilder {
-        public TraceRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public TraceRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
     public static class ConnectRequest extends Client.BaseBuilder {
-        public ConnectRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public ConnectRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
@@ -1002,8 +1043,8 @@ public class Client {
          */
         private Map<String, Object> data = new HashMap<>();
 
-        private MultipartFormDataRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        private MultipartFormDataRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             this.method = method;
         }
 
@@ -1109,8 +1150,8 @@ public class Client {
         private Map<String, String> data = new HashMap<>();
 
 
-        private XWWWFormUrlencodedRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        private XWWWFormUrlencodedRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             this.method = method;
         }
 
@@ -1192,8 +1233,8 @@ public class Client {
          */
         private Object data;
 
-        private BinaryRequest(RequestMethodEnum put, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        private BinaryRequest(RequestMethodEnum put, OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             method = put;
         }
 

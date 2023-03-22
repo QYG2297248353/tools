@@ -1,8 +1,8 @@
 package com.ms.network.okhttp;
 
 import com.alibaba.fastjson2.JSON;
-import com.ms.core.base.basic.Strings;
 import com.ms.core.exception.base.MsToolsRuntimeException;
+import com.ms.network.http.UriUtils;
 import com.ms.network.okhttp.enums.ContentTypeEnum;
 import com.ms.network.okhttp.enums.RequestMethodEnum;
 import com.ms.network.okhttp.factory.OkHttpFactory;
@@ -98,44 +98,26 @@ public class OkClient {
         protected OkHttpClient okHttpClient;
         protected String uri;
         protected Map<String, String> headers;
-        protected Map<String, String> params;
+        protected Map<String, Object> params;
 
         public BaseBuilder() {
             headers = new HashMap<>();
             params = new HashMap<>();
         }
 
-        public BaseBuilder(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
+        public BaseBuilder(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
             this.okHttpClient = okHttpClient;
             this.uri = uri;
             this.headers = headers;
+            this.params = params;
         }
 
         void builderUri() {
-            if (Strings.isBlank(uri)) {
-                throw new MsToolsRuntimeException("请求地址不能为空");
-            }
-            if (params.isEmpty()) {
-                return;
-            }
-            StringBuilder sb = new StringBuilder(uri);
-            if (uri.contains(Strings.QUESTION_MARK)) {
-                sb.append(Strings.AND);
-            } else {
-                sb.append(Strings.QUESTION_MARK);
-            }
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                sb.append(entry.getKey()).append(Strings.EQUALS).append(entry.getValue()).append(Strings.AND);
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            uri = sb.toString();
+            uri = UriUtils.buildUrl(uri, params);
         }
     }
 
     public static class Builder extends BaseBuilder {
-        private Map<String, String> headers;
-        private String uri;
-
         private Builder(OkHttpProperties properties) {
             okHttpClient = new OkHttpFactory().create(properties);
             headers = new HashMap<>();
@@ -230,6 +212,66 @@ public class OkClient {
         /**
          * 添加参数
          *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Builder addParam(String name, int value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Builder addParam(String name, long value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Builder addParam(String name, double value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Builder addParam(String name, boolean value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
+         * @param name  键值
+         * @param value 值
+         * @return 对象
+         */
+        public Builder addParam(String name, Object value) {
+            params.put(name, value);
+            return this;
+        }
+
+        /**
+         * 添加参数
+         *
          * @param params 参数
          * @return 对象
          */
@@ -258,10 +300,10 @@ public class OkClient {
          * 覆盖请求参数
          * 针对单词请求
          *
-         * @param params 参数
+         * @param params 参数 v可以是对象必须是基本类型 string int long double float boolean char
          * @return 对象
          */
-        public Builder param(Map<String, String> params) {
+        public Builder param(Map<String, Object> params) {
             this.params = params;
             return this;
         }
@@ -274,7 +316,7 @@ public class OkClient {
          * @return 对象
          */
         public GetRequest get() {
-            return new GetRequest(okHttpClient, uri, headers);
+            return new GetRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -284,7 +326,7 @@ public class OkClient {
          * @return 对象
          */
         public PutRequest put() {
-            return new PutRequest(okHttpClient, uri, headers);
+            return new PutRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -294,7 +336,7 @@ public class OkClient {
          * @return 对象
          */
         public PostRequest post() {
-            return new PostRequest(okHttpClient, uri, headers);
+            return new PostRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -304,7 +346,7 @@ public class OkClient {
          * @return 对象
          */
         public DeleteRequest delete() {
-            return new DeleteRequest(okHttpClient, uri, headers);
+            return new DeleteRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -314,7 +356,7 @@ public class OkClient {
          * @return 对象
          */
         public PatchRequest patch() {
-            return new PatchRequest(okHttpClient, uri, headers);
+            return new PatchRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -324,7 +366,7 @@ public class OkClient {
          * @return 对象
          */
         public HeadRequest head() {
-            return new HeadRequest(okHttpClient, uri, headers);
+            return new HeadRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -334,7 +376,7 @@ public class OkClient {
          * @return 对象
          */
         public OptionsRequest options() {
-            return new OptionsRequest(okHttpClient, uri, headers);
+            return new OptionsRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -344,7 +386,7 @@ public class OkClient {
          * @return 对象
          */
         public TraceRequest trace() {
-            return new TraceRequest(okHttpClient, uri, headers);
+            return new TraceRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -354,7 +396,7 @@ public class OkClient {
          * @return 对象
          */
         public ConnectRequest connect() {
-            return new ConnectRequest(okHttpClient, uri, headers);
+            return new ConnectRequest(okHttpClient, uri, headers, params);
         }
 
         /**
@@ -369,8 +411,8 @@ public class OkClient {
     }
 
     public static class GetRequest extends BaseBuilder {
-        public GetRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public GetRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             params = new HashMap<>();
         }
 
@@ -417,8 +459,8 @@ public class OkClient {
          */
         private String body;
 
-        public PutRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public PutRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             contentType = ContentTypeEnum.APPLICATION_JSON;
         }
 
@@ -514,7 +556,7 @@ public class OkClient {
         public MultipartFormDataRequest form() {
             contentType = ContentTypeEnum.MULTIPART_FORM_DATA;
             builderUri();
-            return new MultipartFormDataRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers);
+            return new MultipartFormDataRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -526,7 +568,7 @@ public class OkClient {
         public XWWWFormUrlencodedRequest xwwwFormUrlencoded() {
             contentType = ContentTypeEnum.APPLICATION_X_WWW_FORM_URLENCODED;
             builderUri();
-            return new XWWWFormUrlencodedRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers);
+            return new XWWWFormUrlencodedRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -537,7 +579,7 @@ public class OkClient {
         public BinaryRequest binary() {
             contentType = ContentTypeEnum.APPLICATION_OCTET_STREAM;
             builderUri();
-            return new BinaryRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers);
+            return new BinaryRequest(RequestMethodEnum.PUT, okHttpClient, uri, headers, params);
         }
 
 
@@ -590,8 +632,8 @@ public class OkClient {
          */
         private String body;
 
-        public PostRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public PostRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             contentType = ContentTypeEnum.APPLICATION_JSON;
         }
 
@@ -688,7 +730,7 @@ public class OkClient {
         public MultipartFormDataRequest form() {
             contentType = ContentTypeEnum.MULTIPART_FORM_DATA;
             builderUri();
-            return new MultipartFormDataRequest(RequestMethodEnum.POST, okHttpClient, uri, headers);
+            return new MultipartFormDataRequest(RequestMethodEnum.POST, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -700,7 +742,7 @@ public class OkClient {
         public XWWWFormUrlencodedRequest xwwwFormUrlencoded() {
             contentType = ContentTypeEnum.APPLICATION_X_WWW_FORM_URLENCODED;
             builderUri();
-            return new XWWWFormUrlencodedRequest(RequestMethodEnum.POST, okHttpClient, uri, headers);
+            return new XWWWFormUrlencodedRequest(RequestMethodEnum.POST, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -711,7 +753,7 @@ public class OkClient {
         public BinaryRequest binary() {
             contentType = ContentTypeEnum.APPLICATION_OCTET_STREAM;
             builderUri();
-            return new BinaryRequest(RequestMethodEnum.POST, okHttpClient, uri, headers);
+            return new BinaryRequest(RequestMethodEnum.POST, okHttpClient, uri, headers, params);
         }
 
 
@@ -768,8 +810,8 @@ public class OkClient {
         private String body;
 
 
-        public DeleteRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public DeleteRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             contentType = ContentTypeEnum.APPLICATION_JSON;
         }
 
@@ -830,7 +872,7 @@ public class OkClient {
         public MultipartFormDataRequest form() {
             contentType = ContentTypeEnum.MULTIPART_FORM_DATA;
             builderUri();
-            return new MultipartFormDataRequest(RequestMethodEnum.DELETE, okHttpClient, uri, headers);
+            return new MultipartFormDataRequest(RequestMethodEnum.DELETE, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -842,7 +884,7 @@ public class OkClient {
         public XWWWFormUrlencodedRequest xwwwFormUrlencoded() {
             contentType = ContentTypeEnum.APPLICATION_X_WWW_FORM_URLENCODED;
             builderUri();
-            return new XWWWFormUrlencodedRequest(RequestMethodEnum.DELETE, okHttpClient, uri, headers);
+            return new XWWWFormUrlencodedRequest(RequestMethodEnum.DELETE, okHttpClient, uri, headers, params);
         }
 
         /**
@@ -883,32 +925,32 @@ public class OkClient {
     }
 
     public static class PatchRequest extends BaseBuilder {
-        public PatchRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public PatchRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
     public static class HeadRequest extends BaseBuilder {
-        public HeadRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public HeadRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
     public static class OptionsRequest extends BaseBuilder {
-        public OptionsRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public OptionsRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
     public static class TraceRequest extends BaseBuilder {
-        public TraceRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public TraceRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
     public static class ConnectRequest extends BaseBuilder {
-        public ConnectRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public ConnectRequest(OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
         }
     }
 
@@ -1037,8 +1079,8 @@ public class OkClient {
          */
         private Map<String, Object> data = new HashMap<>();
 
-        public MultipartFormDataRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public MultipartFormDataRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             this.method = method;
         }
 
@@ -1144,8 +1186,8 @@ public class OkClient {
         private Map<String, String> data = new HashMap<>();
 
 
-        public XWWWFormUrlencodedRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public XWWWFormUrlencodedRequest(RequestMethodEnum method, OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             this.method = method;
         }
 
@@ -1227,8 +1269,8 @@ public class OkClient {
          */
         private Object data;
 
-        public BinaryRequest(RequestMethodEnum put, OkHttpClient okHttpClient, String uri, Map<String, String> headers) {
-            super(okHttpClient, uri, headers);
+        public BinaryRequest(RequestMethodEnum put, OkHttpClient okHttpClient, String uri, Map<String, String> headers, Map<String, Object> params) {
+            super(okHttpClient, uri, headers, params);
             method = put;
         }
 
