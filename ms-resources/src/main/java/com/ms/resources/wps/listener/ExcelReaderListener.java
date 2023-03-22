@@ -35,7 +35,8 @@ public interface ExcelReaderListener {
      *
      * @param next 是否存在
      */
-    void next(boolean next);
+    default void next(boolean next) {
+    }
 
     /**
      * 读取完成
