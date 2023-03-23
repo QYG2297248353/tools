@@ -16,7 +16,7 @@ import com.ms.core.base.basic.Strings;
 import com.ms.core.base.info.EmailUtils;
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.core.exception.base.MsToolsRuntimeException;
-import com.ms.push.mail.enums.MailConfig;
+import com.ms.push.mail.properties.MsMailProperties;
 import org.springframework.stereotype.Component;
 
 import javax.activation.DataHandler;
@@ -46,7 +46,7 @@ public class MailBuild {
 
     private static final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
     @Resource
-    private MailConfig mailConfig;
+    private MsMailProperties msMailProperties;
     private Properties properties;
     private Session session;
     private Transport transport;
@@ -55,17 +55,17 @@ public class MailBuild {
         init();
     }
 
-    private static void sslClient(Properties properties, MailConfig mailConfig) {
+    private static void sslClient(Properties properties, MsMailProperties msMailProperties) {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         properties.setProperty("mail.smtp.socketFactory.fallback", "false");
         properties.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
         properties.setProperty("mail.smtp.ssl.enable", "true");
-        properties.setProperty("mail.smtp.port", mailConfig.getPort());
+        properties.setProperty("mail.smtp.port", msMailProperties.getPort());
         properties.setProperty("mail.smtp.socketFactory.port", "465");
     }
 
-    private static void client(Properties properties, MailConfig mailConfig) {
-        properties.setProperty("mail.smtp.port", mailConfig.getPort());
+    private static void client(Properties properties, MsMailProperties msMailProperties) {
+        properties.setProperty("mail.smtp.port", msMailProperties.getPort());
     }
 
     public MimeMessage mailBuild(
@@ -114,52 +114,52 @@ public class MailBuild {
     }
 
     private void init() {
-        mailConfig = getMailConfig();
-        properties = getProperties(mailConfig);
-        session = getSession(mailConfig);
+        msMailProperties = getMailConfig();
+        properties = getProperties(msMailProperties);
+        session = getSession(msMailProperties);
         try {
             transport = session.getTransport();
             // 设置发件人的账户名和密码
-            transport.connect(mailConfig.getAccount(), mailConfig.getPassword());
+            transport.connect(msMailProperties.getAccount(), msMailProperties.getPassword());
         } catch (MessagingException e) {
             throw new MsToolsRuntimeException("Please enter your authorization code to login.", e);
         }
     }
 
-    private Session getSession(MailConfig mailConfig) {
+    private Session getSession(MsMailProperties msMailProperties) {
         session = Session.getInstance(properties);
-        session.setDebug(mailConfig.getDebug());
+        session.setDebug(msMailProperties.getDebug());
         return session;
     }
 
-    private Properties getProperties(MailConfig mailConfig) {
+    private Properties getProperties(MsMailProperties msMailProperties) {
         if (properties == null) {
             properties = new Properties();
             // 设置用户的认证方式
-            properties.setProperty("mail.smtp.user", mailConfig.getAccount());
-            properties.setProperty("mail.smtp.auth", String.valueOf(mailConfig.getAuth()));
+            properties.setProperty("mail.smtp.user", msMailProperties.getAccount());
+            properties.setProperty("mail.smtp.auth", String.valueOf(msMailProperties.getAuth()));
             // 设置传输协议
-            properties.setProperty("mail.transport.protocol", mailConfig.getProtocol());
+            properties.setProperty("mail.transport.protocol", msMailProperties.getProtocol());
             // 设置发件人的SMTP服务器地址
-            properties.setProperty("mail.smtp.host", mailConfig.getHost());
-            properties.setProperty("mail.smtp.connectiontimeout", mailConfig.getSocketTimeout());
-            properties.setProperty("mail.smtp.timeout", mailConfig.getTimeout());
+            properties.setProperty("mail.smtp.host", msMailProperties.getHost());
+            properties.setProperty("mail.smtp.connectiontimeout", msMailProperties.getSocketTimeout());
+            properties.setProperty("mail.smtp.timeout", msMailProperties.getTimeout());
 
-            if (Boolean.TRUE.equals(mailConfig.getSsl())) {
+            if (Boolean.TRUE.equals(msMailProperties.getSsl())) {
                 // SSL 加密传输
-                sslClient(properties, mailConfig);
+                sslClient(properties, msMailProperties);
             } else {
-                client(properties, mailConfig);
+                client(properties, msMailProperties);
             }
         }
         return properties;
     }
 
-    private MailConfig getMailConfig() {
-        if (mailConfig == null) {
-            mailConfig = new MailConfig();
+    private MsMailProperties getMailConfig() {
+        if (msMailProperties == null) {
+            msMailProperties = new MsMailProperties();
         }
-        return mailConfig;
+        return msMailProperties;
     }
 
 

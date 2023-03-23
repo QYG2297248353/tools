@@ -25,6 +25,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author ms2297248353
+ */
 @Setter
 @Getter
 @ConfigurationProperties(prefix = "ms.network.okhttp")
