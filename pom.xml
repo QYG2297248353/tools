@@ -34,7 +34,7 @@
     <!-- 项目基本信息 -->
     <groupId>io.github.qyg2297248353</groupId>
     <artifactId>tools</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Java tools 工具箱</name>
     <description>commons迭代版本</description>
@@ -59,7 +59,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- 版本信息 -->
-        <ms.tools.version>1.1.1-SNAPSHOT</ms.tools.version>
+        <ms.tools.version>1.1.2-SNAPSHOT</ms.tools.version>
         <lombok.version>1.18.14</lombok.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
