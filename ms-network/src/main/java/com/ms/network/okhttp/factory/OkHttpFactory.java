@@ -99,7 +99,7 @@ public class OkHttpFactory {
             builder.retryOnConnectionFailure(properties.getRetryOnConnectionFailure());
         }
         if (properties.getConnectionPoolEnable() != null && properties.getConnectionPoolEnable()) {
-            ConnectionPool pool = new ConnectionPool(properties.getMaxIdleConnections(), properties.getKeepAliveDuration(), TimeUnit.MINUTES);
+            ConnectionPool pool = new ConnectionPool(properties.getMaxIdleConnections(), properties.getKeepAliveDuration(), properties.getKeepAliveDurationTimeUnit());
             builder.connectionPool(pool);
         }
         if (properties.getCacheEnable() != null && properties.getCacheEnable()) {

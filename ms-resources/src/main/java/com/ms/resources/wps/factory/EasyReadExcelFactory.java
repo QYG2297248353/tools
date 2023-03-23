@@ -8,8 +8,8 @@ import com.alibaba.excel.read.builder.ExcelReaderBuilder;
 import com.alibaba.excel.read.builder.ExcelReaderSheetBuilder;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.ms.core.base.basic.Strings;
-import com.ms.resources.wps.listener.ExcelReaderBatchListener;
-import com.ms.resources.wps.listener.ExcelReaderListener;
+import com.ms.resources.wps.listener.AbstractReaderBatchListener;
+import com.ms.resources.wps.listener.AbstractReaderListener;
 
 import java.io.File;
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @author ms2297248353
  */
-public class EasyExcelFactory {
+public class EasyReadExcelFactory {
 
     private static <T extends ReadListener> void validationParameters(File file, T listener, Integer lineNum, Integer headLine) {
         if (file == null || !file.exists()) {
@@ -44,10 +44,10 @@ public class EasyExcelFactory {
      * @param listener  监听器
      * @param password  密码
      */
-    public static void readBatch(File file, Integer headLine, String sheetName, ExcelReaderBatchListener listener, String password) {
+    public static <T extends AbstractReaderBatchListener> void readBatch(File file, Integer headLine, String sheetName, T listener, String password) {
         validationParameters(file, listener, listener.getBatchSize(), headLine);
         headLine = headLine == null ? 1 : headLine;
-        build(headLine, sheetName, password, EasyExcel.read(file, listener), file, listener);
+        build(headLine, sheetName, password, EasyExcel.read(file, listener));
     }
 
     /**
@@ -60,15 +60,15 @@ public class EasyExcelFactory {
      * @param listener  监听器
      * @param password  密码
      */
-    public static void read(File file, Integer lineNum, Integer headLine, String sheetName, ExcelReaderListener listener, String password) {
+    public static <T extends AbstractReaderListener> void read(File file, Integer lineNum, Integer headLine, String sheetName, T listener, String password) {
         validationParameters(file, listener, lineNum, headLine);
         lineNum = lineNum == null ? 0 : lineNum;
         listener.readMaxLine(lineNum);
         headLine = headLine == null ? 1 : headLine;
-        build(headLine, sheetName, password, EasyExcel.read(file, listener), file, listener);
+        build(headLine, sheetName, password, EasyExcel.read(file, listener));
     }
 
-    private static <T extends ReadListener> void build(Integer headLine, String sheetName, String password, ExcelReaderBuilder read, File file, T listener) {
+    private static void build(Integer headLine, String sheetName, String password, ExcelReaderBuilder read) {
         sheetName = Strings.isBlank(sheetName) ? null : sheetName;
 
         if (headLine > 1) {
@@ -96,7 +96,7 @@ public class EasyExcelFactory {
      * @param listener 监听器
      * @param password 密码
      */
-    public static void readBatch(File file, Integer headLine, Integer sheetNum, ExcelReaderBatchListener listener, String password) {
+    public static <T extends AbstractReaderBatchListener> void readBatch(File file, Integer headLine, Integer sheetNum, T listener, String password) {
         validationParameters(file, listener, listener.getBatchSize(), headLine);
         headLine = headLine == null ? 1 : headLine;
         buildPass(headLine, sheetNum, password, EasyExcel.read(file, listener));
@@ -113,7 +113,7 @@ public class EasyExcelFactory {
      * @param listener 监听器
      * @param password 密码
      */
-    public static void read(File file, Integer lineNum, Integer headLine, Integer sheetNum, ExcelReaderListener listener, String password) {
+    public static <T extends AbstractReaderListener> void read(File file, Integer lineNum, Integer headLine, Integer sheetNum, T listener, String password) {
         validationParameters(file, listener, lineNum, headLine);
         lineNum = lineNum == null ? 0 : lineNum;
         listener.readMaxLine(lineNum);
@@ -121,7 +121,7 @@ public class EasyExcelFactory {
         buildPass(headLine, sheetNum, password, EasyExcel.read(file, listener));
     }
 
-    private static <T extends ReadListener> void buildPass(Integer headLine, Integer sheetNum, String password, ExcelReaderBuilder read) {
+    private static void buildPass(Integer headLine, Integer sheetNum, String password, ExcelReaderBuilder read) {
         if (headLine > 1) {
             read.headRowNumber(headLine);
         }

@@ -12,6 +12,7 @@ import java.net.InetAddress;
 import java.net.Proxy;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Setter
 @Getter
@@ -60,6 +61,12 @@ public class OkHttpProperties {
      * 默认5分钟
      */
     private Long keepAliveDuration = 5L;
+
+    /**
+     * 空闲连接存活时间单位
+     * 默认分钟
+     */
+    private String keepAliveDurationTimeUnit = "MINUTES";
 
     /**
      * 是否开启缓存
@@ -236,6 +243,20 @@ public class OkHttpProperties {
         return okHttpProperties;
     }
 
+    /**
+     * 开启线程池
+     *
+     * @return OkHttpProperties
+     */
+    public static OkHttpProperties openThreadPool(int maxIdleConnections, long keepAliveDuration, TimeUnit timeUnit) {
+        OkHttpProperties okHttpProperties = new OkHttpProperties();
+        okHttpProperties.connectionPoolEnable = true;
+        okHttpProperties.maxIdleConnections = maxIdleConnections;
+        okHttpProperties.keepAliveDuration = keepAliveDuration;
+        okHttpProperties.keepAliveDurationTimeUnit = timeUnit.name();
+        return okHttpProperties;
+    }
+
     public Proxy getProxy() {
         if (proxyHost == null || proxyPort == null) {
             throw new IllegalArgumentException("proxyHost or proxyPort is null");
@@ -246,9 +267,7 @@ public class OkHttpProperties {
     public Authenticator getProxyAuthenticator() {
         return (route, response) -> {
             String credential = Credentials.basic(proxyUsername, proxyPassword);
-            return response.request().newBuilder()
-                    .header("Authorization", credential)
-                    .build();
+            return response.request().newBuilder().header("Authorization", credential).build();
         };
     }
 
@@ -359,4 +378,7 @@ public class OkHttpProperties {
         return logLevel;
     }
 
+    public TimeUnit getKeepAliveDurationTimeUnit() {
+        return TimeUnit.valueOf(keepAliveDurationTimeUnit.toUpperCase());
+    }
 }

@@ -6,17 +6,19 @@ import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.ms.core.base.basic.FormatUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 /**
  * @author ms2297248353
  */
-public abstract class ExcelReaderListener extends AbstractReaderListener<Map<Integer, String>> {
+public abstract class ExcelReaderObjBatchListener<T> extends AbstractReaderBatchListener<T> {
 
-    private static final Logger log = Logger.getLogger(ExcelReaderListener.class.getName());
+    private static final Logger log = Logger.getLogger(ExcelReaderObjBatchListener.class.getName());
+    private final List<T> dataList = new ArrayList<>();
     private boolean hasNext = true;
-    private int maxLine = 0;
 
     /**
      * 读取失败
@@ -39,7 +41,7 @@ public abstract class ExcelReaderListener extends AbstractReaderListener<Map<Int
      *
      * @param data 内容
      */
-    protected abstract void readData(Map<Integer, String> data);
+    protected abstract void readData(List<T> data);
 
     /**
      * 是否存在下一行
@@ -85,26 +87,27 @@ public abstract class ExcelReaderListener extends AbstractReaderListener<Map<Int
     }
 
     @Override
-    public void readMaxLine(int maxLine) {
-        this.maxLine = maxLine;
-    }
-
-    @Override
     public boolean hasNext(AnalysisContext context) {
         return hasNext;
     }
 
     @Override
-    public void invoke(Map<Integer, String> data, AnalysisContext context) {
-        readData(data);
-        if (maxLine > 0 && context.readRowHolder().getRowIndex() >= maxLine) {
-            close();
+    public void invoke(T data, AnalysisContext context) {
+        dataList.add(data);
+        if (dataList.size() >= getBatchSize()) {
+            readData(dataList);
+            dataList.clear();
         }
     }
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
+        if (!dataList.isEmpty()) {
+            readData(dataList);
+            dataList.clear();
+        }
         close();
         finish();
     }
+
 }

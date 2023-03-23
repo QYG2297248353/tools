@@ -1,7 +1,6 @@
 package com.ms.resources.wps.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.metadata.data.ReadCellData;
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
 /**
  * @author ms2297248353
  */
-public abstract class ExcelReaderBatchListener extends AnalysisEventListener<Map<Integer, String>> {
+public abstract class ExcelReaderBatchListener extends AbstractReaderBatchListener<Map<Integer, String>> {
 
     private static final Logger log = Logger.getLogger(ExcelReaderBatchListener.class.getName());
     private final List<Map<Integer, String>> dataList = new ArrayList<>();
@@ -43,14 +42,6 @@ public abstract class ExcelReaderBatchListener extends AnalysisEventListener<Map
      * @param data 内容
      */
     protected abstract void readData(List<Map<Integer, String>> data);
-
-    /**
-     * 每次读取的数据量
-     * must be greater than 0
-     *
-     * @return 数据量 0 全部
-     */
-    public abstract int getBatchSize();
 
     /**
      * 是否存在下一行

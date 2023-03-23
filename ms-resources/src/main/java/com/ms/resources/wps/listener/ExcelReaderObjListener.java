@@ -12,11 +12,10 @@ import java.util.logging.Logger;
 /**
  * @author ms2297248353
  */
-public abstract class ExcelReaderListener extends AbstractReaderListener<Map<Integer, String>> {
+public abstract class ExcelReaderObjListener<T> extends AbstractReaderListener<T> {
 
-    private static final Logger log = Logger.getLogger(ExcelReaderListener.class.getName());
+    private static final Logger log = Logger.getLogger(ExcelReaderObjListener.class.getName());
     private boolean hasNext = true;
-    private int maxLine = 0;
 
     /**
      * 读取失败
@@ -39,7 +38,7 @@ public abstract class ExcelReaderListener extends AbstractReaderListener<Map<Int
      *
      * @param data 内容
      */
-    protected abstract void readData(Map<Integer, String> data);
+    protected abstract void readData(T data);
 
     /**
      * 是否存在下一行
@@ -85,17 +84,12 @@ public abstract class ExcelReaderListener extends AbstractReaderListener<Map<Int
     }
 
     @Override
-    public void readMaxLine(int maxLine) {
-        this.maxLine = maxLine;
-    }
-
-    @Override
     public boolean hasNext(AnalysisContext context) {
         return hasNext;
     }
 
     @Override
-    public void invoke(Map<Integer, String> data, AnalysisContext context) {
+    public void invoke(T data, AnalysisContext context) {
         readData(data);
         if (maxLine > 0 && context.readRowHolder().getRowIndex() >= maxLine) {
             close();

@@ -1,8 +1,8 @@
 package com.ms.resources.wps;
 
-import com.ms.resources.wps.factory.EasyExcelFactory;
-import com.ms.resources.wps.listener.ExcelReaderBatchListener;
-import com.ms.resources.wps.listener.ExcelReaderListener;
+import com.ms.resources.wps.factory.EasyReadExcelFactory;
+import com.ms.resources.wps.listener.AbstractReaderBatchListener;
+import com.ms.resources.wps.listener.AbstractReaderListener;
 
 import java.io.File;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class ExcelUtils {
      * @return 表头
      */
     public static Map<Integer, String> readExcelHead(File file) {
-        return EasyExcelFactory.readHead(file, null);
+        return EasyReadExcelFactory.readHead(file, null);
     }
 
 
@@ -30,7 +30,7 @@ public class ExcelUtils {
      * @return 表头
      */
     public static Map<Integer, String> readExcelHead(File file, int headLine) {
-        return EasyExcelFactory.readHead(file, headLine);
+        return EasyReadExcelFactory.readHead(file, headLine);
     }
 
     /**
@@ -39,8 +39,8 @@ public class ExcelUtils {
      * @param file     文件路径
      * @param listener 处理器
      */
-    public static void readExcel(File file, ExcelReaderListener listener) {
-        EasyExcelFactory.read(file, null, null, "", listener, null);
+    public static <T extends AbstractReaderListener> void readExcel(File file, T listener) {
+        EasyReadExcelFactory.read(file, null, null, "", listener, null);
     }
 
     /**
@@ -50,8 +50,8 @@ public class ExcelUtils {
      * @param listener 处理器
      * @param password 密码
      */
-    public static void readExcelPass(File file, String password, ExcelReaderListener listener) {
-        EasyExcelFactory.read(file, null, null, "", listener, password);
+    public static <T extends AbstractReaderListener> void readExcelPass(File file, String password, T listener) {
+        EasyReadExcelFactory.read(file, null, null, "", listener, password);
     }
 
     /**
@@ -61,8 +61,8 @@ public class ExcelUtils {
      * @param headLine 读取行数
      * @param listener 处理器
      */
-    public static void readExcelByHead(File file, int headLine, ExcelReaderListener listener) {
-        EasyExcelFactory.read(file, null, headLine, "", listener, null);
+    public static <T extends AbstractReaderListener> void readExcelByHead(File file, int headLine, T listener) {
+        EasyReadExcelFactory.read(file, null, headLine, "", listener, null);
     }
 
     /**
@@ -72,8 +72,8 @@ public class ExcelUtils {
      * @param line     读取行数
      * @param listener 处理器
      */
-    public static void readExcel(File file, int line, ExcelReaderListener listener) {
-        EasyExcelFactory.read(file, line, null, "", listener, null);
+    public static <T extends AbstractReaderListener> void readExcel(File file, int line, T listener) {
+        EasyReadExcelFactory.read(file, line, null, "", listener, null);
     }
 
     /**
@@ -82,8 +82,8 @@ public class ExcelUtils {
      * @param file     文件路径
      * @param listener 处理器
      */
-    public static void readExcelBatch(File file, ExcelReaderBatchListener listener) {
-        EasyExcelFactory.readBatch(file, null, "", listener, null);
+    public static <T extends AbstractReaderBatchListener> void readExcelBatch(File file, T listener) {
+        EasyReadExcelFactory.readBatch(file, null, "", listener, null);
     }
 
     /**
@@ -93,8 +93,8 @@ public class ExcelUtils {
      * @param listener 处理器
      * @param password 密码
      */
-    public static void readExcelBatch(File file, String password, ExcelReaderBatchListener listener) {
-        EasyExcelFactory.readBatch(file, null, "", listener, password);
+    public static <T extends AbstractReaderBatchListener> void readExcelBatch(File file, String password, T listener) {
+        EasyReadExcelFactory.readBatch(file, null, "", listener, password);
     }
 
 
@@ -105,8 +105,8 @@ public class ExcelUtils {
      * @param head     表头占用行数量
      * @param listener 处理器
      */
-    public static void readExcelBatchByHead(File file, int head, ExcelReaderBatchListener listener) {
-        EasyExcelFactory.readBatch(file, head, "", listener, null);
+    public static <T extends AbstractReaderBatchListener> void readExcelBatchByHead(File file, int head, T listener) {
+        EasyReadExcelFactory.readBatch(file, head, "", listener, null);
     }
 
     /**
@@ -117,7 +117,7 @@ public class ExcelUtils {
      * @param listener 处理器
      * @param password 密码
      */
-    public static void readExcelBatchByHeadPass(File file, int head, String password, ExcelReaderBatchListener listener) {
-        EasyExcelFactory.readBatch(file, head, "", listener, password);
+    public static <T extends AbstractReaderBatchListener> void readExcelBatchByHeadPass(File file, int head, String password, T listener) {
+        EasyReadExcelFactory.readBatch(file, head, "", listener, password);
     }
 }
