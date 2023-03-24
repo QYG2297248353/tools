@@ -16,15 +16,7 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * 参考地址
- * <p>
- * https://www.yiibai.com/javamail_api/javamail_api_core_classes.html
- * <p>
- * https://kaithyrookie.github.io/2019/10/14/Java-JavaMail-%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E8%A7%A3%E9%87%8A/
- * <p>
- * https://hezhiqiang8909.gitbook.io/java/docs/javalib/javamail#message-jie-gou
- * <p>
- * https://iowiki.com/javamail_api/javamail_api_core_classes.html
+ * 邮件配置
  *
  * @author ms2297248353
  */
@@ -68,7 +60,7 @@ public class MsMailProperties {
      * 默认465
      * 可选值：25、465、587
      */
-    private String port = "465";
+    private Integer port = 465;
 
     // 以下为可选配置
 
@@ -89,13 +81,61 @@ public class MsMailProperties {
 
     /**
      * 读取超时
+     * 单位 毫秒
      * 默认 不超时
      */
     private String timeout;
 
     /**
      * 连接超时
+     * 单位 毫秒
      * 默认 不超时
      */
-    private String socketTimeout;
+    private String connectionTimeout;
+
+    /**
+     * 是否开启ssl
+     * 默认开启
+     */
+    private Boolean ssl = true;
+
+    /**
+     * 是否使用代理
+     */
+    private Boolean proxy = false;
+
+    /**
+     * 代理地址
+     */
+    private String proxyHost;
+
+    /**
+     * 代理端口
+     */
+    private String proxyPort;
+
+    /**
+     * 代理用户名
+     */
+    private String proxyUsername;
+
+    /**
+     * 代理密码
+     */
+    private String proxyPassword;
+
+
+    public String getDebugStr() {
+        return String.valueOf(debug);
+    }
+
+    public String getAuthStr() {
+        return String.valueOf(auth);
+    }
+
+    public String getPortStr() {
+        return String.valueOf(port);
+    }
+
+
 }

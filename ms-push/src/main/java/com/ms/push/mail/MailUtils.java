@@ -12,113 +12,93 @@
 package com.ms.push.mail;
 
 import com.ms.core.exception.base.MsToolsException;
-import com.ms.push.mail.factory.MailBuild;
-import org.springframework.stereotype.Service;
+import com.ms.push.mail.factory.MailFactory;
+import com.ms.push.mail.properties.MsMailProperties;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import java.io.File;
 
 /**
  * @author ms2297248353
  */
-@Service
+@Component
 public class MailUtils {
+
     @Resource
-    private MailBuild mailBuild;
+    private MsMailProperties msMailProperties;
 
-    /**
-     * 发送邮件
-     *
-     * @param to          收信人
-     * @param subject     主题
-     * @param content     内容
-     * @param isHtml      是否为Html
-     * @param attachments 附件(可选)
-     * @throws MsToolsException 异常
-     */
-    public void sendEmail(String to, String subject, String content, boolean isHtml, String... attachments) throws MsToolsException {
-        sendEmail(to, null, null, subject, content, isHtml, attachments);
+    private MailUtils() {
     }
 
-    /**
-     * 发送邮件
-     *
-     * @param to          收信人
-     * @param subject     主题
-     * @param content     内容
-     * @param isHtml      是否为Html
-     * @param attachments 附件(可选)
-     * @throws MsToolsException 异常
-     */
-    public void sendEmail(String[] to, String subject, String content, boolean isHtml, String... attachments) throws MsToolsException {
-        sendEmails(to, null, null, subject, content, isHtml, attachments);
-    }
-
-    /**
-     * 发送邮件
-     *
-     * @param to          收信人
-     * @param cc          抄送人
-     * @param subject     主题
-     * @param content     内容
-     * @param isHtml      是否为Html
-     * @param attachments 附件(可选)
-     * @throws MsToolsException 异常
-     */
-    public void sendEmail(String to, String cc, String subject, String content, boolean isHtml, String... attachments) throws MsToolsException {
-        sendEmail(to, cc, null, subject, content, isHtml, attachments);
-    }
-
-    /**
-     * 发送邮件
-     *
-     * @param to          收信人 看不见密送人信息
-     * @param cc          抄送人 看不见密送人信息
-     * @param bcc         密送人 完整信息
-     * @param subject     主题
-     * @param content     内容
-     * @param isHtml      是否为Html
-     * @param attachments 附件(可选)
-     * @throws MsToolsException 异常
-     */
-    public void sendEmail(String to, String cc, String bcc, String subject, String content, boolean isHtml, String... attachments) throws MsToolsException {
-        MailBuild factory = getMailBuildFactory();
-        MimeMessage mimeMessage = factory.mailBuild(to, cc, bcc, subject, content, isHtml, attachments);
-        try {
-            factory.send(mimeMessage);
-        } catch (MessagingException e) {
-            throw new MsToolsException(e);
+    public MailUtils(MsMailProperties msMailProperties) {
+        this();
+        if (msMailProperties != null) {
+            this.msMailProperties = msMailProperties;
+        }
+        if (this.msMailProperties == null) {
+            throw new IllegalArgumentException("MailUtils初始化失败，配置文件未加载");
         }
     }
 
     /**
      * 发送邮件
      *
-     * @param to          收信人 看不见密送人信息
-     * @param cc          抄送人 看不见密送人信息
-     * @param bcc         密送人 完整信息
-     * @param subject     主题
-     * @param content     内容
-     * @param isHtml      是否为Html
-     * @param attachments 附件(可选)
+     * @param to      收件人邮箱地址
+     * @param subject 标题
+     * @param content 内容 纯文本
      * @throws MsToolsException 异常
      */
-    public void sendEmails(String[] to, String[] cc, String[] bcc, String subject, String content, boolean isHtml, String... attachments) throws MsToolsException {
-        MailBuild factory = getMailBuildFactory();
-        MimeMessage mimeMessage = factory.mailBuild(to, cc, bcc, subject, content, isHtml, attachments);
-        try {
-            factory.send(mimeMessage);
-        } catch (MessagingException e) {
-            throw new MsToolsException(e);
-        }
+    public void send(String to, String subject, String content) throws MsToolsException {
+        MailFactory.getInstance(msMailProperties).send(to, subject, content);
     }
 
-
-    private MailBuild getMailBuildFactory() {
-        if (mailBuild == null) {
-            mailBuild = new MailBuild();
-        }
-        return mailBuild;
+    /**
+     * 发送邮件
+     *
+     * @param to      收件人邮箱地址
+     * @param subject 标题
+     * @param content 内容 纯文本
+     * @param file    附件 文件夹将会取出文件列表
+     * @throws MsToolsException 异常
+     */
+    public void send(String to, String subject, String content, File... file) throws MsToolsException {
+        MailFactory.getInstance(msMailProperties).sendAttachment(to, subject, content, file);
     }
+
+    /**
+     * 发送邮件
+     *
+     * @param to      收件人邮箱地址
+     * @param subject 标题
+     * @param content 内容 Html语言
+     * @throws MsToolsException 异常
+     */
+    public void sendHtml(String to, String subject, String content) throws MsToolsException {
+        MailFactory.getInstance(msMailProperties).sendHtml(to, subject, content);
+    }
+
+    /**
+     * 发送邮件
+     *
+     * @param to      收件人邮箱地址
+     * @param subject 标题
+     * @param content 内容 Html语言
+     * @param file    附件 文件夹将会取出文件列表
+     * @throws MsToolsException 异常
+     */
+    public void sendHtml(String to, String subject, String content, File... file) throws MsToolsException {
+        MailFactory.getInstance(msMailProperties).sendHtmlAttachment(to, subject, content, file);
+    }
+
+    /**
+     * 发送邮件
+     *
+     * @param build 接口
+     * @throws MsToolsException 异常
+     */
+    public void send(MailFactory.MailBuild build) throws MsToolsException {
+        MailFactory.getInstance(msMailProperties).send(build);
+    }
+
 }
