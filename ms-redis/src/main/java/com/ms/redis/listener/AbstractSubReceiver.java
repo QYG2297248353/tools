@@ -9,29 +9,35 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.redis.utils;
+package com.ms.redis.listener;
+
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.logging.Logger;
 
 /**
  * @author ms2297248353
  */
-public class RedisReceiver extends SubReceiver {
-    private static final Logger logger = Logger.getLogger(RedisReceiver.class.getName());
+@Component
+public abstract class AbstractSubReceiver {
+    /**
+     * 用于接收消息的计数器
+     */
+    private final CountDownLatch latch;
 
-    public RedisReceiver(CountDownLatch latch) {
-        super(latch);
+    /**
+     * 构造方法
+     *
+     * @param latch 计数器
+     */
+    protected AbstractSubReceiver(CountDownLatch latch) {
+        this.latch = latch;
     }
 
     /**
-     * 消息处理
+     * 消息处理接口
      *
      * @param message 消息
      */
-    @Override
-    public void onMessage(String message) {
-        logger.warning("请重新配置监听器或重新实现方法");
-    }
-
+    public abstract void onMessage(String message);
 }

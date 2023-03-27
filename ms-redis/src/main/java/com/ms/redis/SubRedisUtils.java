@@ -11,16 +11,20 @@
 
 package com.ms.redis;
 
-import com.ms.redis.utils.MsReceiverListener;
-import com.ms.redis.utils.RedisReceiverService;
-import com.ms.redis.utils.SubReceiver;
+import com.ms.redis.service.RedisReceiverService;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Redis 订阅客户端
- * 订阅者（Subscriber）可以根据自己的需要，订阅一个或多个频道（Channel）。
+ * 订阅者（Subscriber）可以根据自己的需要，订阅一个或多个频道（Channel）或者模式（Pattern）。
  *
  * @author ms2297248353
  */
@@ -29,79 +33,135 @@ public class SubRedisUtils {
 
     @Resource
     private RedisReceiverService redisReceiverService;
+    @Resource
+    private MessageListenerAdapter listenerAdapter;
 
-    /**
-     * 配置订阅消息监听器
-     *
-     * @param listener 订阅消息监听器
-     * @return 订阅成功返回true，否则返回false
-     */
-    public <T extends SubReceiver> boolean configureMessageListener(T listener) {
-        return redisReceiverService.configureListener(listener);
+    public static MessageListenerAdapter createMessageListenerAdapter(Object bean, String method) {
+        return new MessageListenerAdapter(bean, method);
     }
 
     /**
-     * 配置订阅消息监听器
-     *
-     * @param listener 订阅消息监听器
-     * @param <T>      对象
-     * @return 订阅成功返回true，否则返回false
-     */
-    public <T extends MsReceiverListener> boolean configureMessageListener(T listener) {
-        return redisReceiverService.configureListener(listener);
-    }
-
-    /**
-     * 配置自定义订阅消息监听器
-     *
-     * @param listener   订阅消息监听器
-     * @param methodName 方法名
-     * @param <T>        对象
-     * @return 订阅成功返回true，否则返回false
-     */
-    public <T extends SubReceiver> boolean configureMessageListener(T listener, String methodName) {
-        return redisReceiverService.configureListener(listener, methodName);
-    }
-
-
-    /**
-     * 订阅消息
-     *
-     * @param channel 频道
-     * @return 订阅成功返回true，否则返回false
-     */
-    public boolean subscribe(String channel) {
-        return redisReceiverService.subscribe(channel);
-    }
-
-    /**
-     * 批量订阅消息
+     * 订阅-频道消息
      *
      * @param channels 频道
      * @return 订阅成功返回true，否则返回false
      */
-    public boolean subscribe(String... channels) {
-        return redisReceiverService.subscribe(channels);
+    public boolean subscribeChannel(String... channels) {
+        List<ChannelTopic> topics = Arrays.stream(channels).map(ChannelTopic::new).collect(Collectors.toList());
+        return subscribeChannel(topics);
     }
 
     /**
-     * 取消订阅消息
-     *
-     * @param channel 频道
-     * @return 取消订阅成功返回true，否则返回false
-     */
-    public boolean unsubscribe(String channel) {
-        return redisReceiverService.unsubscribe(channel);
-    }
-
-    /**
-     * 批量取消订阅消息
+     * 取消订阅-频道消息
      *
      * @param channels 频道
      * @return 取消订阅成功返回true，否则返回false
      */
-    public boolean unsubscribe(String... channels) {
-        return redisReceiverService.unsubscribe(channels);
+    public boolean unsubscribeChannel(String... channels) {
+        List<ChannelTopic> topics = Arrays.stream(channels).map(ChannelTopic::new).collect(Collectors.toList());
+        return unsubscribeChannel(topics);
+    }
+
+    /**
+     * 订阅-模式消息
+     *
+     * @param pattern 频道
+     * @return 订阅成功返回true，否则返回false
+     */
+    public boolean subscribePattern(String... pattern) {
+        List<PatternTopic> topics = Arrays.stream(pattern).map(PatternTopic::new).collect(Collectors.toList());
+        return subscribePattern(topics);
+    }
+
+    /**
+     * 取消订阅-模式消息
+     *
+     * @param pattern 频道
+     * @return 取消订阅成功返回true，否则返回false
+     */
+    public boolean unsubscribePattern(String... pattern) {
+        List<PatternTopic> topics = Arrays.stream(pattern).map(PatternTopic::new).collect(Collectors.toList());
+        return unsubscribePattern(topics);
+    }
+
+    /**
+     * 订阅-频道消息
+     *
+     * @param channels 频道
+     * @return 订阅成功返回true，否则返回false
+     */
+    public boolean subscribeChannel(List<ChannelTopic> channels) {
+        return redisReceiverService.subscribeChannel(listenerAdapter, channels);
+    }
+
+    /**
+     * 取消订阅-频道消息
+     *
+     * @param channels 频道
+     * @return 取消订阅成功返回true，否则返回false
+     */
+    public boolean unsubscribeChannel(List<ChannelTopic> channels) {
+        return redisReceiverService.unsubscribeChannel(listenerAdapter, channels);
+    }
+
+    /**
+     * 订阅-模式消息
+     *
+     * @param pattern 模式
+     * @return 订阅成功返回true，否则返回false
+     */
+    public boolean subscribePattern(List<PatternTopic> pattern) {
+        return redisReceiverService.subscribePattern(listenerAdapter, pattern);
+    }
+
+    /**
+     * 取消订阅-模式消息
+     *
+     * @param pattern 模式
+     * @return 取消订阅成功返回true，否则返回false
+     */
+    public boolean unsubscribePattern(List<PatternTopic> pattern) {
+        return redisReceiverService.unsubscribePattern(listenerAdapter, pattern);
+    }
+
+    /**
+     * 自定义订阅-频道消息
+     *
+     * @param channels 频道
+     * @return 订阅成功返回true，否则返回false
+     */
+    public boolean subscribeChannel(MessageListenerAdapter listenerAdapter, List<ChannelTopic> channels) {
+        return redisReceiverService.subscribeChannel(listenerAdapter, channels);
+    }
+
+    /**
+     * 取消自定义订阅-频道消息
+     *
+     * @param channels 频道
+     * @return 取消订阅成功返回true，否则返回false
+     */
+    public boolean unsubscribeChannel(MessageListenerAdapter listenerAdapter, List<ChannelTopic> channels) {
+        return redisReceiverService.unsubscribeChannel(listenerAdapter, channels);
+    }
+
+    /**
+     * 自定义订阅-模式消息
+     *
+     * @param pattern 模式
+     * @return 订阅成功返回true，否则返回false
+     */
+    public boolean subscribePattern(MessageListenerAdapter listenerAdapter, List<PatternTopic> pattern) {
+        return redisReceiverService.subscribePattern(listenerAdapter, pattern);
+    }
+
+    /**
+     * 取消自定义订阅-模式消息
+     *
+     * @param pattern 模式
+     * @return 取消订阅成功返回true，否则返回false
+     */
+    public boolean unsubscribePattern(MessageListenerAdapter listenerAdapter, List<PatternTopic> pattern) {
+        return redisReceiverService.unsubscribePattern(listenerAdapter, pattern);
     }
 
 }

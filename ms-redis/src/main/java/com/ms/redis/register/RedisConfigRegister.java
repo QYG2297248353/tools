@@ -15,8 +15,8 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.base.basic.FormatUtils;
+import com.ms.redis.listener.AbstractSubReceiver;
 import com.ms.redis.properties.MsRedisProperties;
-import com.ms.redis.utils.RedisReceiver;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
@@ -37,7 +37,6 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
@@ -60,7 +59,6 @@ import java.util.logging.Logger;
 @EnableConfigurationProperties(RedisProperties.class)
 @Configuration
 public class RedisConfigRegister extends CachingConfigurerSupport {
-
     private final Logger log = Logger.getLogger(RedisConfigRegister.class.getName());
 
     @Resource
@@ -68,6 +66,8 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
 
     @Resource
     private MsRedisProperties msRedisProperties;
+    @Resource
+    private AbstractSubReceiver abstractSubReceiver;
 
     /**
      * 设置 redis 数据默认过期时间，默认1天
@@ -179,7 +179,17 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
         poolConfig.setMinIdle(redisProperties.getLettuce().getPool().getMinIdle());
         poolConfig.setMaxTotal(redisProperties.getLettuce().getPool().getMaxActive());
 
-        if (redisProperties.getCluster() == null || redisProperties.getCluster().getNodes().size() > 1) {
+        if (redisProperties.getCluster() == null) {
+            /**
+             * 单节点配置
+             */
+            RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
+            redisStandaloneConfiguration.setHostName(redisProperties.getHost());
+            redisStandaloneConfiguration.setPassword(redisProperties.getPassword());
+            redisStandaloneConfiguration.setDatabase(redisProperties.getDatabase());
+            redisStandaloneConfiguration.setPort(redisProperties.getPort());
+            return new LettuceConnectionFactory(redisStandaloneConfiguration, getLettuceClientConfiguration(poolConfig));
+        } else {
             /**
              * 集群配置
              */
@@ -195,16 +205,6 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
             clusterConfiguration.setPassword(RedisPassword.of(redisProperties.getPassword()));
             clusterConfiguration.setMaxRedirects(redisProperties.getCluster().getMaxRedirects());
             return new LettuceConnectionFactory(clusterConfiguration, getLettuceClientConfiguration(poolConfig));
-        } else {
-            /**
-             * 单节点配置
-             */
-            RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
-            redisStandaloneConfiguration.setHostName(redisProperties.getHost());
-            redisStandaloneConfiguration.setPassword(redisProperties.getPassword());
-            redisStandaloneConfiguration.setDatabase(redisProperties.getDatabase());
-            redisStandaloneConfiguration.setPort(redisProperties.getPort());
-            return new LettuceConnectionFactory(redisStandaloneConfiguration, getLettuceClientConfiguration(poolConfig));
         }
     }
 
@@ -234,40 +234,33 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
      * 初始化监听器
      *
      * @param connectionFactory 连接工厂
-     * @param listenerAdapter   监听器适配器
      * @return Redis消息监听容器
      */
     @Bean
-    RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
-                                            MessageListenerAdapter listenerAdapter) {
-
+    RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        // 配置监听通道
-        container.addMessageListener(listenerAdapter, new PatternTopic("chat"));
         return container;
     }
 
     /**
      * 消息监听器适配器
      *
-     * @param redisReceiver 消息接收者
      * @return 消息监听器适配器
      */
     @Bean
-    MessageListenerAdapter listenerAdapter(RedisReceiver redisReceiver) {
-        return new MessageListenerAdapter(redisReceiver, "receiveMessage");
-    }
-
-    /**
-     * 消息接收者
-     *
-     * @param latch 计数器
-     * @return 消息接收者
-     */
-    @Bean
-    RedisReceiver receiver(CountDownLatch latch) {
-        return new RedisReceiver(latch);
+    MessageListenerAdapter listenerAdapter(CountDownLatch latch) {
+        if (abstractSubReceiver == null) {
+            final String msg = "请实现 com.ms.redis.listener.AbstractSubReceiver";
+            log.warning(msg);
+            abstractSubReceiver = new AbstractSubReceiver(latch) {
+                @Override
+                public void onMessage(String message) {
+                    log.warning(msg);
+                }
+            };
+        }
+        return new MessageListenerAdapter(abstractSubReceiver, "onMessage");
     }
 
     /**

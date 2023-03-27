@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 /**
  * Redis 发布客户端
  * 发布订阅模式是一种消息通信模式，它的特点是：发布者（Publisher）不会将消息直接发送给特定的订阅者（Subscriber），
+ * 这里不限定频道（Channel）或者模式（Pattern）的数量，发布者只需要将消息发送给频道，而订阅者可以根据自己的需要，订阅一个或多个频道（Channel）或者模式（Pattern）。
  *
  * @author ms2297248353
  */
