@@ -30,7 +30,7 @@ public class RedisReceiver extends SubReceiver {
      * @param message 消息
      */
     @Override
-    void onMessage(String message) {
+    public void onMessage(String message) {
         logger.warning("请重新配置监听器或重新实现方法");
     }
 

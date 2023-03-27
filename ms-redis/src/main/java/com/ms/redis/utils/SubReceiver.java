@@ -33,14 +33,14 @@ public abstract class SubReceiver {
      *
      * @param message 消息
      */
-    abstract void onMessage(String message);
+    public abstract void onMessage(String message);
 
     /**
      * 收到通道的消息之后执行的方法
      *
      * @param message 消息
      */
-    public void receiveMessage(String message) {
+    protected void receiveMessage(String message) {
         onMessage(message);
         latch.countDown();
     }
