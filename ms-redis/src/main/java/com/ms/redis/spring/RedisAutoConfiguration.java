@@ -20,6 +20,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author ms2297248353
+ */
 @Configuration
 @EnableConfigurationProperties(MsRedisProperties.class)
 @ComponentScan(basePackages = MsBeanFactoryPostProcessor.BASE_PACKAGE,
@@ -33,7 +36,7 @@ public class RedisAutoConfiguration {
      * @return MyUtilsBeanFactoryPostProcessor
      */
     @Bean
-    public MsBeanFactoryPostProcessor msBeanFactoryPostProcessor() {
+    public static MsBeanFactoryPostProcessor msBeanFactoryPostProcessor() {
         return new MsBeanFactoryPostProcessor();
     }
 

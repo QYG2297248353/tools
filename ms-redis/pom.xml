@@ -31,6 +31,7 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-redis</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

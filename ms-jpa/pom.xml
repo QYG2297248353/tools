@@ -36,6 +36,7 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>spring-data-jpa</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

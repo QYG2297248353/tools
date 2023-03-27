@@ -179,7 +179,7 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
         poolConfig.setMinIdle(redisProperties.getLettuce().getPool().getMinIdle());
         poolConfig.setMaxTotal(redisProperties.getLettuce().getPool().getMaxActive());
 
-        if (redisProperties.getCluster().getNodes().size() > 1) {
+        if (redisProperties.getCluster() == null || redisProperties.getCluster().getNodes().size() > 1) {
             /**
              * 集群配置
              */
