@@ -17,7 +17,6 @@ import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,10 +30,13 @@ import java.util.stream.Collectors;
 @Component
 public class SubRedisUtils {
 
-    @Resource
     private RedisReceiverService redisReceiverService;
-    @Resource
     private MessageListenerAdapter listenerAdapter;
+
+    SubRedisUtils(MessageListenerAdapter listenerAdapter, RedisReceiverService redisReceiverService) {
+        this.listenerAdapter = listenerAdapter;
+        this.redisReceiverService = redisReceiverService;
+    }
 
     public static MessageListenerAdapter createMessageListenerAdapter(Object bean, String method) {
         return new MessageListenerAdapter(bean, method);

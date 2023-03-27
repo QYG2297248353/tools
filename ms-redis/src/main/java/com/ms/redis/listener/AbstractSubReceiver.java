@@ -11,27 +11,19 @@
 
 package com.ms.redis.listener;
 
-import org.springframework.stereotype.Component;
-
 import java.util.concurrent.CountDownLatch;
 
 /**
  * @author ms2297248353
  */
-@Component
 public abstract class AbstractSubReceiver {
     /**
      * 用于接收消息的计数器
      */
     private final CountDownLatch latch;
 
-    /**
-     * 构造方法
-     *
-     * @param latch 计数器
-     */
-    protected AbstractSubReceiver(CountDownLatch latch) {
-        this.latch = latch;
+    protected AbstractSubReceiver() {
+        latch = new CountDownLatch(1);
     }
 
     /**

@@ -15,6 +15,7 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.base.basic.FormatUtils;
+import com.ms.core.exception.base.MsToolsRuntimeException;
 import com.ms.redis.listener.AbstractSubReceiver;
 import com.ms.redis.properties.MsRedisProperties;
 import io.lettuce.core.cluster.ClusterClientOptions;
@@ -47,7 +48,6 @@ import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 
 /**
@@ -249,29 +249,12 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
      * @return 消息监听器适配器
      */
     @Bean
-    MessageListenerAdapter listenerAdapter(CountDownLatch latch) {
+    MessageListenerAdapter listenerAdapter() {
         if (abstractSubReceiver == null) {
             final String msg = "请实现 com.ms.redis.listener.AbstractSubReceiver";
             log.warning(msg);
-            abstractSubReceiver = new AbstractSubReceiver(latch) {
-                @Override
-                public void onMessage(String message) {
-                    log.warning(msg);
-                }
-            };
+            throw new MsToolsRuntimeException(msg);
         }
         return new MessageListenerAdapter(abstractSubReceiver, "onMessage");
-    }
-
-    /**
-     * 计数器
-     * CountDownLatch是一个同步辅助类，允许一个或多个线程一直等待，直到其他线程的操作执行完后再执行
-     *
-     * @return 计数器
-     */
-    @Bean
-    CountDownLatch latch() {
-        // 指定了计数的次数 1
-        return new CountDownLatch(1);
     }
 }
