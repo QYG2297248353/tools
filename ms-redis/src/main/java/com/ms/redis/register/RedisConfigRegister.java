@@ -61,7 +61,7 @@ import java.util.logging.Logger;
 @Configuration
 public class RedisConfigRegister extends CachingConfigurerSupport {
 
-    private Logger log = Logger.getLogger(RedisConfigRegister.class.getName());
+    private final Logger log = Logger.getLogger(RedisConfigRegister.class.getName());
 
     @Resource
     private RedisProperties redisProperties;
