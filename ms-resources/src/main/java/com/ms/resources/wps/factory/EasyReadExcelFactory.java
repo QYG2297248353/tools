@@ -82,7 +82,7 @@ public class EasyReadExcelFactory {
     private static void build(Integer headLine, String sheetName, String password, ExcelReaderBuilder read) {
         sheetName = Strings.isBlank(sheetName) ? null : sheetName;
 
-        if (headLine > 1) {
+        if (headLine != null) {
             read.headRowNumber(headLine);
         }
         if (Strings.isNotBlank(password)) {

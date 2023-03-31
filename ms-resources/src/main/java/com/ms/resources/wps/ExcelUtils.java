@@ -12,11 +12,14 @@
 package com.ms.resources.wps;
 
 import com.ms.resources.wps.factory.EasyReadExcelFactory;
+import com.ms.resources.wps.factory.EasyWriteExcelFactory;
 import com.ms.resources.wps.listener.AbstractReaderBatchListener;
 import com.ms.resources.wps.listener.AbstractReaderListener;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * @author ms2297248353
@@ -131,4 +134,60 @@ public class ExcelUtils {
     public static <T extends AbstractReaderBatchListener> void readExcelBatchByHeadPass(File file, int head, String password, T listener) {
         EasyReadExcelFactory.readBatch(file, head, "", listener, password);
     }
+
+    /**
+     * 写入数据
+     *
+     * @param file 待写入文件路径
+     * @param data 待写入数据
+     */
+    public static void writeExcel(File file, Collection<?> data) {
+        EasyWriteExcelFactory.write(file, null, null, null, null, "", null, data);
+    }
+
+    /**
+     * 写入数据
+     *
+     * @param file    待写入文件路径
+     * @param useHead 是否使用表头
+     * @param head    表头
+     * @param data    待写入数据
+     */
+    public static void writeExcel(File file, Boolean useHead, Class head, Collection<?> data) {
+        EasyWriteExcelFactory.write(file, useHead, head, null, null, "", null, data);
+    }
+
+    /**
+     * 写入数据
+     *
+     * @param file     待写入文件路径
+     * @param data     待写入数据
+     * @param password 密码
+     */
+    public static void writeExcelPass(File file, String password, Collection<?> data) {
+        EasyWriteExcelFactory.write(file, null, null, null, null, "", password, data);
+    }
+
+    /**
+     * 写入数据
+     *
+     * @param file 待写入文件路径
+     * @param data 待写入数据
+     */
+    public static void writeExcel(File file, Supplier<Collection<?>> data) {
+        EasyWriteExcelFactory.write(file, null, null, null, null, "", null, data);
+    }
+
+    /**
+     * 写入数据
+     *
+     * @param file     待写入文件路径
+     * @param data     待写入数据
+     * @param password 密码
+     */
+    public static void writeExcelPass(File file, String password, Supplier<Collection<?>> data) {
+        EasyWriteExcelFactory.write(file, null, null, null, null, "", password, data);
+    }
+
+
 }

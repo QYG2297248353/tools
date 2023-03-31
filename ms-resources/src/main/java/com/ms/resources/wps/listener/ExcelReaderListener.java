@@ -14,7 +14,6 @@ package com.ms.resources.wps.listener;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.metadata.CellExtra;
-import com.alibaba.excel.metadata.data.ReadCellData;
 import com.ms.core.base.basic.FormatUtils;
 
 import java.util.Map;
@@ -76,10 +75,6 @@ public abstract class ExcelReaderListener extends AbstractReaderListener<Map<Int
             return;
         }
         readFailed(exception);
-    }
-
-    @Override
-    public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
     }
 
     @Override
