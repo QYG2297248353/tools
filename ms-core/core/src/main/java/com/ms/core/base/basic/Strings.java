@@ -240,4 +240,78 @@ public interface Strings {
         return new String[]{String.valueOf(list)};
     }
 
+    /**
+     * 字符串转为数组
+     *
+     * @param str 字符串
+     * @return 数组
+     */
+    static double[] toDoubleArray(String str) {
+        String[] array = str.split(",");
+        double[] doubles = new double[array.length];
+        for (int i = 0; i < array.length; i++) {
+            doubles[i] = Double.parseDouble(array[i]);
+        }
+        return doubles;
+    }
+
+    /**
+     * 字符串转为数组
+     *
+     * @param str 字符串
+     * @return 数组
+     */
+    static float[] toFloatArray(String str) {
+        String[] array = str.split(",");
+        float[] floats = new float[array.length];
+        for (int i = 0; i < array.length; i++) {
+            floats[i] = Float.parseFloat(array[i]);
+        }
+        return floats;
+    }
+
+    /**
+     * 字符串转为数组
+     *
+     * @param str 字符串
+     * @return 数组
+     */
+    static int[] toIntArray(String str) {
+        String[] array = str.split(",");
+        int[] ints = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            ints[i] = Integer.parseInt(array[i]);
+        }
+        return ints;
+    }
+
+    /**
+     * 字符串转为数组
+     *
+     * @param str 字符串
+     * @return 数组
+     */
+    static long[] toLongArray(String str) {
+        String[] array = str.split(",");
+        long[] longs = new long[array.length];
+        for (int i = 0; i < array.length; i++) {
+            longs[i] = Long.parseLong(array[i]);
+        }
+        return longs;
+    }
+
+    /**
+     * 字符串转为数组
+     *
+     * @param str 字符串
+     * @return 数组
+     */
+    static short[] toShortArray(String str) {
+        String[] array = str.split(",");
+        short[] shorts = new short[array.length];
+        for (int i = 0; i < array.length; i++) {
+            shorts[i] = Short.parseShort(array[i]);
+        }
+        return shorts;
+    }
 }
