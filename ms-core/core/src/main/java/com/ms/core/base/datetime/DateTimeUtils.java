@@ -11,6 +11,13 @@
 
 package com.ms.core.base.datetime;
 
+import com.ms.core.exception.base.MsToolsRuntimeException;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 日期时间工具
  * 规范标准 ISO 8601 格式
@@ -20,4 +27,39 @@ package com.ms.core.base.datetime;
  */
 public class DateTimeUtils {
 
+    /**
+     * 任意格式字符串时间转为时间
+     * 无需指定格式
+     *
+     * @param dateTime 时间
+     * @return 时间
+     */
+    public static Date parseTime(String dateTime) {
+        return parseTime(dateTime, null);
+    }
+
+    /**
+     * 格式字符串时间转为时间
+     *
+     * @param dateTime 时间
+     * @param pattern  格式
+     * @return 时间
+     */
+    public static Date parseTime(String dateTime, String pattern) {
+        if (pattern == null) {
+            pattern = dateTime.replaceFirst("[0-9]{4}([^0-9]?)", "yyyy$1");
+            pattern = pattern.replaceFirst("^[0-9]{2}([^0-9]?)", "yy$1");
+            pattern = pattern.replaceFirst("([^0-9]?)[0-9]{1,2}([^0-9]?)", "$1MM$2");
+            pattern = pattern.replaceFirst("([^0-9]?)[0-9]{1,2}( ?)", "$1dd$2");
+            pattern = pattern.replaceFirst("( )[0-9]{1,2}([^0-9]?)", "$1HH$2");
+            pattern = pattern.replaceFirst("([^0-9]?)[0-9]{1,2}([^0-9]?)", "$1mm$2");
+            pattern = pattern.replaceFirst("([^0-9]?)[0-9]{1,2}([^0-9]?)", "$1ss$2");
+        }
+        DateFormat format = new SimpleDateFormat(pattern);
+        try {
+            return format.parse(dateTime);
+        } catch (ParseException e) {
+            throw new MsToolsRuntimeException(e);
+        }
+    }
 }
