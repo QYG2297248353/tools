@@ -160,11 +160,6 @@ public class FileFindUtils {
             return file;
         }
 
-        file = new File(fileName);
-        if (file.exists()) {
-            return file;
-        }
-
         URL resourceUrl = Thread.currentThread().getContextClassLoader().getResource(fileName);
         if (resourceUrl != null) {
             try {
