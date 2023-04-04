@@ -46,11 +46,16 @@ public class DateTimeUtils {
      * @return 时间
      */
     public static Date parseTime(String dateTime, String pattern) {
+        String str = dateTime;
         if (pattern == null) {
+            // 日期
             pattern = dateTime.replaceFirst("[0-9]{4}([^0-9]?)", "yyyy$1");
-            pattern = pattern.replaceFirst("^[0-9]{2}([^0-9]?)", "yy$1");
+            if (str.equals(pattern)) {
+                pattern = pattern.replaceFirst("^[0-9]{2}([^0-9]?)", "yy$1");
+            }
             pattern = pattern.replaceFirst("([^0-9]?)[0-9]{1,2}([^0-9]?)", "$1MM$2");
             pattern = pattern.replaceFirst("([^0-9]?)[0-9]{1,2}( ?)", "$1dd$2");
+            // 时间
             pattern = pattern.replaceFirst("( )[0-9]{1,2}([^0-9]?)", "$1HH$2");
             pattern = pattern.replaceFirst("([^0-9]?)[0-9]{1,2}([^0-9]?)", "$1mm$2");
             pattern = pattern.replaceFirst("([^0-9]?)[0-9]{1,2}([^0-9]?)", "$1ss$2");
