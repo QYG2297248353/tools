@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  * @author ms
  */
 public class DownloadUtils {
-    private static Logger logger = Logger.getLogger("DownloadUtils");
+    private static Logger log = Logger.getLogger(DownloadUtils.class.getName());
 
     private String uri;
 
@@ -135,7 +135,7 @@ public class DownloadUtils {
         } catch (Exception e) {
             if (listener != null) {
                 listener.onFailure(e);
-                logger.warning(e.getMessage());
+                log.warning(e.getMessage());
             }
         }
     }

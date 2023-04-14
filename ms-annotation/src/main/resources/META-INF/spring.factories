@@ -1,0 +1,4 @@
+## AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ms.annotation.config.MsLimiterConfig,\
+  com.ms.annotation.aspect.RequestLimitAspect

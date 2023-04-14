@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  */
 @Service
 public class RedisReceiverService {
-    private static final Logger logger = Logger.getLogger(RedisReceiverService.class.getName());
+    private static final Logger log = Logger.getLogger(RedisReceiverService.class.getName());
 
     @Resource
     private RedisMessageListenerContainer container;
@@ -46,7 +46,7 @@ public class RedisReceiverService {
             }
             return true;
         } catch (Exception e) {
-            logger.warning("批量订阅消息失败：" + e.getMessage());
+            log.warning("批量订阅消息失败：" + e.getMessage());
             return false;
         }
     }
@@ -64,7 +64,7 @@ public class RedisReceiverService {
             }
             return true;
         } catch (Exception e) {
-            logger.warning("批量订阅消息失败：" + e.getMessage());
+            log.warning("批量订阅消息失败：" + e.getMessage());
             return false;
         }
     }
@@ -82,7 +82,7 @@ public class RedisReceiverService {
             }
             return true;
         } catch (Exception e) {
-            logger.warning("批量取消订阅消息失败：" + e.getMessage());
+            log.warning("批量取消订阅消息失败：" + e.getMessage());
             return false;
         }
     }
@@ -100,7 +100,7 @@ public class RedisReceiverService {
             }
             return true;
         } catch (Exception e) {
-            logger.warning("批量取消订阅消息失败：" + e.getMessage());
+            log.warning("批量取消订阅消息失败：" + e.getMessage());
             return false;
         }
     }

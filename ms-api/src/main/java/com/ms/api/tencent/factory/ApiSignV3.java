@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * @author qyg2297248353
  */
 public class ApiSignV3 {
-    private static final Logger LOGGER = Logger.getLogger(ApiSignV3.class.getName());
+    private static final Logger log = Logger.getLogger(ApiSignV3.class.getName());
 
     private static byte[] hmac256(byte[] key, String msg) throws Exception {
         Mac mac = Mac.getInstance("HmacSHA256");
@@ -44,9 +44,9 @@ public class ApiSignV3 {
 
     public static String signV3(String secretId, String secretKey, String timestamp, String payload) {
         try {
-            String service = "sms";
+            final String service = "sms";
             String host = TencentCloudApiConfig.Host.MAIN_SMS.getHost();
-            String algorithm = "TC3-HMAC-SHA256";
+            final String algorithm = "TC3-HMAC-SHA256";
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             // 注意时区，否则容易出错
@@ -54,11 +54,11 @@ public class ApiSignV3 {
             String date = sdf.format(new Date(Long.parseLong(timestamp + "000")));
 
             // ************* 步骤 1：拼接规范请求串 *************
-            String httpRequestMethod = "POST";
-            String canonicalUri = "/";
-            String canonicalQueryString = "";
+            final String httpRequestMethod = "POST";
+            final String canonicalUri = "/";
+            final String canonicalQueryString = "";
             String canonicalHeaders = "content-type:application/json; charset=utf-8\n" + "host:" + host + "\n";
-            String signedHeaders = "content-type;host";
+            final String signedHeaders = "content-type;host";
 
             String hashedRequestPayload = sha256Hex(payload);
             String canonicalRequest = httpRequestMethod + "\n" + canonicalUri + "\n" + canonicalQueryString + "\n"
@@ -79,7 +79,7 @@ public class ApiSignV3 {
             return algorithm + " " + "Credential=" + secretId + "/" + credentialScope + ", "
                     + "SignedHeaders=" + signedHeaders + ", " + "Signature=" + signature;
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            log.warning(e.getMessage());
             return "";
         }
     }

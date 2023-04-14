@@ -28,17 +28,22 @@ import java.util.Map;
  * @author 萌森 Ms
  */
 public class FormatUtils {
+
     /**
      * 字符串格式化
      * %s字符串 %c字符
      * %d整数 %f浮点
      * %b 布尔
+     * {} 日志占位符
      *
      * @param str  待格式化
      * @param args 插入数据
      * @return 结果数据
      */
     public static String format(String str, Object... args) {
+        if (str.contains("{}")) {
+            return String.format(str.replace("{}", "%s"), args);
+        }
         return String.format(str, args);
     }
 

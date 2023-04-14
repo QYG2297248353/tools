@@ -63,7 +63,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
     /**
      * The logger for this class.
      */
-    private static final Logger LOGGER = Logger.getLogger(GoogleAuthenticator.class.getName());
+    private static final Logger log = Logger.getLogger(GoogleAuthenticator.class.getName());
 
     /**
      * Number of digits of a scratch code represented as a decimal integer.
@@ -92,7 +92,6 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
      * @see java.security.SecureRandom#getInstance(String)
      * @since 0.5.0
      */
-    @SuppressWarnings("SpellCheckingInspection")
     private static final String DEFAULT_RANDOM_NUMBER_ALGORITHM = "SHA1PRNG";
 
     /**
@@ -127,7 +126,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
     public GoogleAuthenticator() {
         config = new GoogleAuthenticatorConfig();
 
-        this.secureRandom = new ReseedingSecureRandom(
+        secureRandom = new ReseedingSecureRandom(
                 getRandomNumberAlgorithm(),
                 getRandomNumberAlgorithmProvider());
     }
@@ -144,7 +143,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
 
         this.config = config;
 
-        this.secureRandom = new ReseedingSecureRandom(
+        secureRandom = new ReseedingSecureRandom(
                 getRandomNumberAlgorithm(),
                 getRandomNumberAlgorithmProvider()
         );
@@ -156,7 +155,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
      * @param randomNumberAlgorithm         The random number algorithm to define the secure random number generator. If this is null the randomNumberAlgorithmProvider must be null.
      * @param randomNumberAlgorithmProvider The random number algorithm provider to define the secure random number generator. This value may be null.
      */
-    public GoogleAuthenticator(final String randomNumberAlgorithm, final String randomNumberAlgorithmProvider) {
+    public GoogleAuthenticator(String randomNumberAlgorithm, String randomNumberAlgorithmProvider) {
         this(new GoogleAuthenticatorConfig(), randomNumberAlgorithm, randomNumberAlgorithmProvider);
 
     }
@@ -168,7 +167,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
      * @param randomNumberAlgorithm         The random number algorithm to define the secure random number generator. If this is null the randomNumberAlgorithmProvider must be null.
      * @param randomNumberAlgorithmProvider The random number algorithm provider to define the secure random number generator. This value may be null.
      */
-    public GoogleAuthenticator(GoogleAuthenticatorConfig config, final String randomNumberAlgorithm, final String randomNumberAlgorithmProvider) {
+    public GoogleAuthenticator(GoogleAuthenticatorConfig config, String randomNumberAlgorithm, String randomNumberAlgorithmProvider) {
         if (config == null) {
             throw new IllegalArgumentException("Configuration cannot be null.");
         }
@@ -176,11 +175,11 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
         this.config = config;
 
         if (randomNumberAlgorithm == null && randomNumberAlgorithmProvider == null) {
-            this.secureRandom = new ReseedingSecureRandom();
+            secureRandom = new ReseedingSecureRandom();
         } else if (randomNumberAlgorithm == null) {
             throw new IllegalArgumentException("RandomNumberAlgorithm must not be null. If the RandomNumberAlgorithm is null, the RandomNumberAlgorithmProvider must also be null.");
         } else if (randomNumberAlgorithmProvider == null) {
-            this.secureRandom = new ReseedingSecureRandom(randomNumberAlgorithm);
+            secureRandom = new ReseedingSecureRandom(randomNumberAlgorithm);
         }
     }
 
@@ -261,7 +260,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
             return (int) truncatedHash;
         } catch (NoSuchAlgorithmException | InvalidKeyException ex) {
             // Logging the exception.
-            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            log.log(Level.SEVERE, ex.getMessage(), ex);
 
             // We're not disclosing internal error details to our clients.
             throw new GoogleAuthenticatorException("The operation cannot be performed now.");
@@ -269,7 +268,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
     }
 
     private long getTimeWindowFromTime(long time) {
-        return time / this.config.getTimeStepSizeInMillis();
+        return time / config.getTimeStepSizeInMillis();
     }
 
     /**
@@ -293,7 +292,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
 
         // convert unix time into a 30 second "window" as specified by the
         // TOTP specification. Using Google's default interval of 30 seconds.
-        final long timeWindow = getTimeWindowFromTime(timestamp);
+        long timeWindow = getTimeWindowFromTime(timestamp);
 
         // Calculating the verification code of the given key in each of the
         // time intervals and returning true if the provided code is equal to
@@ -376,7 +375,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
     }
 
     private List<Integer> calculateScratchCodes() {
-        final List<Integer> scratchCodes = new ArrayList<>();
+        List<Integer> scratchCodes = new ArrayList<>();
 
         for (int i = 0; i < config.getNumberOfScratchCodes(); ++i) {
             scratchCodes.add(generateScratchCode());
@@ -454,18 +453,22 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
     }
 
 
+    @Override
     public int getTotpPassword(String secret) {
         return getTotpPassword(secret, System.currentTimeMillis());
     }
 
+    @Override
     public int getTotpPassword(String secret, long time) {
         return calculateCode(decodeSecret(secret), getTimeWindowFromTime(time));
     }
 
+    @Override
     public int getTotpPasswordOfUser(String userName) {
         return getTotpPasswordOfUser(userName, System.currentTimeMillis());
     }
 
+    @Override
     public int getTotpPasswordOfUser(String userName, long time) {
         ICredentialRepository repository = getValidCredentialRepository();
 
@@ -504,7 +507,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
         }
 
         // Checking if the verification code is between the legal bounds.
-        if (verificationCode <= 0 || verificationCode >= this.config.getKeyModulus()) {
+        if (verificationCode <= 0 || verificationCode >= config.getKeyModulus()) {
             return false;
         }
 
@@ -513,7 +516,7 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
                 secret,
                 verificationCode,
                 time,
-                this.config.getWindowSize());
+                config.getWindowSize());
     }
 
     @Override
@@ -556,23 +559,23 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
      * @return the first registered ICredentialRepository or <code>null</code>
      * if none is found.
      */
+    @Override
     public ICredentialRepository getCredentialRepository() {
-        if (this.credentialRepositorySearched) {
-            return this.credentialRepository;
+        if (credentialRepositorySearched) {
+            return credentialRepository;
         }
 
-        this.credentialRepositorySearched = true;
+        credentialRepositorySearched = true;
 
         ServiceLoader<ICredentialRepository> loader =
                 ServiceLoader.load(ICredentialRepository.class);
 
-        // noinspection LoopStatementThatDoesntLoop
         for (ICredentialRepository repository : loader) {
-            this.credentialRepository = repository;
+            credentialRepository = repository;
             break;
         }
 
-        return this.credentialRepository;
+        return credentialRepository;
     }
 
     /**
@@ -583,8 +586,8 @@ public final class GoogleAuthenticator implements IGoogleAuthenticator {
      */
     @Override
     public void setCredentialRepository(ICredentialRepository repository) {
-        this.credentialRepository = repository;
-        this.credentialRepositorySearched = true;
+        credentialRepository = repository;
+        credentialRepositorySearched = true;
     }
 
     /**

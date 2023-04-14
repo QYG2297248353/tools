@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 @Component
 public class RedisHashMapUtils extends RedisUtils {
-    private static final Logger LOGGER = Logger.getLogger(RedisHashMapUtils.class.getName());
+    private static final Logger log = Logger.getLogger(RedisHashMapUtils.class.getName());
 
     /**
      * 构造方法
@@ -51,7 +51,7 @@ public class RedisHashMapUtils extends RedisUtils {
             redisTemplate.opsForHash().put(key, field, value);
             return true;
         } catch (Exception e) {
-            LOGGER.warning("缓存Hash结构失败：" + e.getMessage());
+            log.warning("缓存Hash结构失败：" + e.getMessage());
             return false;
         }
     }
@@ -73,7 +73,7 @@ public class RedisHashMapUtils extends RedisUtils {
             expire(key, timeout, timeUnit);
             return true;
         } catch (Exception e) {
-            LOGGER.warning("缓存Hash结构失败：" + e.getMessage());
+            log.warning("缓存Hash结构失败：" + e.getMessage());
             return false;
         }
     }
@@ -102,7 +102,7 @@ public class RedisHashMapUtils extends RedisUtils {
             redisTemplate.opsForHash().delete(key, field);
             return true;
         } catch (Exception e) {
-            LOGGER.warning("删除Hash结构失败：" + e.getMessage());
+            log.warning("删除Hash结构失败：" + e.getMessage());
             return false;
         }
     }
