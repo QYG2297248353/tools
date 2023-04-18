@@ -75,7 +75,9 @@ public class MsMailProperties {
      * session的协议
      * <p>
      * 默认smtp
-     * 可选值：smtp、pop3、imap
+     * 可选值：smtp
+     * 以下为收信协议
+     * pop3、imap
      */
     private String transport = "smtp";
 
@@ -136,6 +138,4 @@ public class MsMailProperties {
     public String getPortStr() {
         return String.valueOf(port);
     }
-
-
 }
