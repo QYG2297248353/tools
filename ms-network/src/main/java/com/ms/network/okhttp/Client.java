@@ -763,7 +763,7 @@ public class Client {
             if (body != null) {
                 builder.addHeader("Content-Type", contentType.getValue());
                 RequestBody requestBody = RequestBody.create(body, MediaType.parse(contentType.getValue()));
-                builder.put(requestBody);
+                builder.post(requestBody);
             }
             return builder.build();
         }
