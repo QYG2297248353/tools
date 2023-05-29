@@ -26,7 +26,7 @@ public class SendSmsTencentVo {
 
     private SendSmsTencentVo() {
         basic = new BasicSmsTencentVo();
-        basic.setVersion("2021-01-11");
+        basic.setVersion(TencentCloudApiConfig.Version.V20210111);
         basic.setAction(TencentCloudApiConfig.Action.SEND_SMS);
         basic.setRegion(TencentCloudApiConfig.Region.AP_GUANGZHOU);
     }

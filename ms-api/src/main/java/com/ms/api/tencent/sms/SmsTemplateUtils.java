@@ -13,14 +13,20 @@ package com.ms.api.tencent.sms;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.ms.api.tencent.factory.TencentSmsFactory;
 import com.ms.api.tencent.sms.response.TemplateValidationSmsResponse;
 import com.ms.api.tencent.sms.vo.TemplateValidationTencentVo;
 import com.ms.core.exception.base.MsToolsException;
 
-public class TemplateSmsTencentUtils {
+/**
+ * 短信模板
+ *
+ * @author ms2297248353
+ */
+public class SmsTemplateUtils {
 
     /**
-     * 短信模板效验
+     * 短信模板-状态查询
      * <a href="https://console.cloud.tencent.com/cam/capi">API密匙</a>
      *
      * @param secretId   密钥Id
@@ -32,7 +38,7 @@ public class TemplateSmsTencentUtils {
         TemplateValidationTencentVo push = TemplateValidationTencentVo.build(validation);
         String json = JSON.toJSONString(validation);
         try {
-            String res = TencentSmsUtils.push(secretId, secretKey, json, push.getBasic());
+            String res = TencentSmsFactory.push(secretId, secretKey, json, push.getBasic());
             String response = JSON.parseObject(res).getString("Response");
             TemplateValidationSmsResponse validationSmsResponse = JSONObject.parseObject(response, TemplateValidationSmsResponse.class);
             validationSmsResponse.finishing();

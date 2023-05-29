@@ -9,16 +9,14 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.api.tencent.sms;
+package com.ms.api.tencent.factory;
 
-import com.ms.api.tencent.factory.ApiSignV3;
-import com.ms.api.tencent.factory.TencentCloudApiConfig;
 import com.ms.api.tencent.sms.vo.BasicSmsTencentVo;
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.network.okhttp.OkClient;
 import okhttp3.Response;
 
-public class TencentSmsUtils {
+public class TencentSmsFactory {
     /**
      * 请求服务
      *
@@ -28,7 +26,7 @@ public class TencentSmsUtils {
      * @param basic     请求类型
      * @return 响应
      */
-    protected static String push(String secretId, String secretKey, String bodyJson, BasicSmsTencentVo basic) throws MsToolsException {
+    public static String push(String secretId, String secretKey, String bodyJson, BasicSmsTencentVo basic) throws MsToolsException {
         String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
         String authorization = ApiSignV3.signV3(secretId, secretKey, timestamp, bodyJson);
 

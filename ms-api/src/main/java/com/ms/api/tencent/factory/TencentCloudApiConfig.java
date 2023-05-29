@@ -201,6 +201,34 @@ public class TencentCloudApiConfig {
         }
     }
 
+    public enum Version {
+        /**
+         * 2021-01-11
+         */
+        V20210111("2021-01-11", "2021-01-11", SmsApi.Version);
+        private String version;
+        private String description;
+        private String header;
+
+        Version(String version, String description, String header) {
+            this.version = version;
+            this.description = description;
+            this.header = header;
+        }
+
+        public String getVersion() {
+            return version;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getHeader() {
+            return header;
+        }
+    }
+
     public static class SmsApi {
         public static String Token = "X-TC-Token";
         public static String Authorization = "Authorization";

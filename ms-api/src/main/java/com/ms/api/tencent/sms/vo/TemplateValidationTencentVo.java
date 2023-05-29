@@ -28,7 +28,7 @@ public class TemplateValidationTencentVo {
 
     private TemplateValidationTencentVo() {
         basic = new BasicSmsTencentVo();
-        basic.setVersion("2021-01-11");
+        basic.setVersion(TencentCloudApiConfig.Version.V20210111);
         basic.setAction(TencentCloudApiConfig.Action.DESCRIBE_SMS_SIGN_LIST);
         basic.setRegion(TencentCloudApiConfig.Region.AP_GUANGZHOU);
     }

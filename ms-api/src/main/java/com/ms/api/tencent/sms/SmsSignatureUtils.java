@@ -13,14 +13,20 @@ package com.ms.api.tencent.sms;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.ms.api.tencent.factory.TencentSmsFactory;
 import com.ms.api.tencent.sms.response.SignatureValidationSmsResponse;
 import com.ms.api.tencent.sms.vo.SignatureValidationTencentVo;
 import com.ms.core.exception.base.MsToolsException;
 
-public class SignatureSmsTencentUtils {
+/**
+ * 短信签名
+ *
+ * @author ms2297248353
+ */
+public class SmsSignatureUtils {
 
     /**
-     * 短信签名效验
+     * 短信签名-状态查询
      * <a href="https://console.cloud.tencent.com/cam/capi">API密匙</a>
      *
      * @param secretId   密钥Id
@@ -32,7 +38,7 @@ public class SignatureSmsTencentUtils {
         SignatureValidationTencentVo push = SignatureValidationTencentVo.build(validation);
         String json = JSON.toJSONString(validation);
         try {
-            String res = TencentSmsUtils.push(secretId, secretKey, json, push.getBasic());
+            String res = TencentSmsFactory.push(secretId, secretKey, json, push.getBasic());
             String response = JSON.parseObject(res).getString("Response");
             SignatureValidationSmsResponse validationSmsResponse = JSONObject.parseObject(response, SignatureValidationSmsResponse.class);
             validationSmsResponse.finishing();

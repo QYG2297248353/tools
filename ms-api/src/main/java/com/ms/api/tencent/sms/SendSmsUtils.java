@@ -13,6 +13,7 @@ package com.ms.api.tencent.sms;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.ms.api.tencent.factory.TencentSmsFactory;
 import com.ms.api.tencent.sms.response.SendSmsResponse;
 import com.ms.api.tencent.sms.vo.SendSmsTencentVo;
 import com.ms.core.exception.base.MsToolsException;
@@ -22,7 +23,7 @@ import com.ms.core.exception.base.MsToolsException;
  *
  * @author qyg2297248353
  */
-public class SendSmsTencentUtils {
+public class SendSmsUtils {
 
     /**
      * 发送短信
@@ -37,7 +38,7 @@ public class SendSmsTencentUtils {
         SendSmsTencentVo push = SendSmsTencentVo.build(send);
         String json = JSON.toJSONString(send);
         try {
-            String res = TencentSmsUtils.push(secretId, secretKey, json, push.getBasic());
+            String res = TencentSmsFactory.push(secretId, secretKey, json, push.getBasic());
             String response = JSON.parseObject(res).getString("Response");
             SendSmsResponse sendSmsResponse = JSONObject.parseObject(response, SendSmsResponse.class);
             sendSmsResponse.finishing(send);

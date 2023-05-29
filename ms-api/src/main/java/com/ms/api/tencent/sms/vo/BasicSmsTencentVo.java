@@ -32,8 +32,8 @@ public class BasicSmsTencentVo {
         return version;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
+    public void setVersion(TencentCloudApiConfig.Version version) {
+        this.version = version.getVersion();
     }
 
     public String getAction() {
