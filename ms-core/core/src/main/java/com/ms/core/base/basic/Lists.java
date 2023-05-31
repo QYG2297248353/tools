@@ -22,79 +22,9 @@ public interface Lists {
         return new ArrayList<>();
     }
 
-    static <T> List<T> of(T t1) {
+    static <T> List<T> of(T... t) {
         List<T> list = of();
-        list.add(t1);
-        return list;
-    }
-
-    static <T> List<T> of(T t1, T t2) {
-        List<T> list = of();
-        list.add(t1);
-        list.add(t2);
-        return list;
-    }
-
-    static <T> List<T> of(T t1, T t2, T t3) {
-        List<T> list = of();
-        list.add(t1);
-        list.add(t2);
-        list.add(t3);
-        return list;
-    }
-
-    static <T> List<T> of(T t1, T t2, T t3, T t4) {
-        List<T> list = of();
-        list.add(t1);
-        list.add(t2);
-        list.add(t3);
-        list.add(t4);
-        return list;
-    }
-
-    static <T> List<T> of(T t1, T t2, T t3, T t4, T t5) {
-        List<T> list = of();
-        list.add(t1);
-        list.add(t2);
-        list.add(t3);
-        list.add(t4);
-        list.add(t5);
-        return list;
-    }
-
-    static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6) {
-        List<T> list = of();
-        list.add(t1);
-        list.add(t2);
-        list.add(t3);
-        list.add(t4);
-        list.add(t5);
-        list.add(t6);
-        return list;
-    }
-
-    static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7) {
-        List<T> list = of();
-        list.add(t1);
-        list.add(t2);
-        list.add(t3);
-        list.add(t4);
-        list.add(t5);
-        list.add(t6);
-        list.add(t7);
-        return list;
-    }
-
-    static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8) {
-        List<T> list = of();
-        list.add(t1);
-        list.add(t2);
-        list.add(t3);
-        list.add(t4);
-        list.add(t5);
-        list.add(t6);
-        list.add(t7);
-        list.add(t8);
+        Collections.addAll(list, t);
         return list;
     }
 
@@ -144,7 +74,44 @@ public interface Lists {
         return list;
     }
 
+    /**
+     * 数组空判断
+     *
+     * @param array 数组
+     * @return boolean
+     */
     static boolean isEmpty(String[] array) {
         return array == null || array.length == 0;
+    }
+
+    /**
+     * 随机列表-不重复
+     * 通过百分比返回随机列表
+     *
+     * @param list    列表
+     * @param percent 随机数量百分比 0-100
+     * @param <T>     泛型
+     * @return 随机列表
+     */
+    static <T> List<T> random(List<T> list, int percent) {
+        if (percent < 0 || percent > 100) {
+            throw new IllegalArgumentException("percent must be between 0 and 100");
+        }
+        if (percent == 0) {
+            return Lists.of();
+        }
+        if (percent == 100) {
+            return list;
+        }
+        int size = list.size();
+        int randomSize = (int) Math.round(size * percent / 100.0);
+        List<T> randomList = Lists.of();
+        for (int i = 0; i < randomSize; i++) {
+            int randomIndex = (int) (Math.random() * size);
+            randomList.add(list.get(randomIndex));
+            list.remove(randomIndex);
+            size--;
+        }
+        return randomList;
     }
 }

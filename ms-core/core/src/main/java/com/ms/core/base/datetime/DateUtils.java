@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.core.base.datetime.factory;
+package com.ms.core.base.datetime;
 
 import com.ms.core.base.basic.StringUtils;
 import com.ms.core.base.datetime.enums.CalendarFieldEnum;
@@ -28,7 +28,7 @@ import static com.ms.core.base.basic.FormatUtils.format;
  *
  * @author ms
  */
-public class DateFactory {
+public class DateUtils {
 
     /**
      * 获取当前时间
@@ -36,7 +36,7 @@ public class DateFactory {
      * @return 当前时间
      */
     public static Date now() {
-        return new DateFactory().create();
+        return new DateUtils().create();
     }
 
     /**
@@ -124,12 +124,13 @@ public class DateFactory {
     /**
      * 创建指定时间
      *
-     * @param year   年
-     * @param month  月
-     * @param day    日
-     * @param hour   时
-     * @param minute 分
-     * @param second 秒
+     * @param year        年
+     * @param month       月
+     * @param day         日
+     * @param hour        时
+     * @param minute      分
+     * @param second      秒
+     * @param millisecond 毫秒
      * @return 指定时间
      */
     public Date createDate(int year, int month, int day, int hour, int minute, int second, int millisecond) {
@@ -281,6 +282,10 @@ public class DateFactory {
 
     /**
      * 前一个日期是否在后一个日期之前
+     *
+     * @param date1 日期1
+     * @param date2 日期2
+     * @return 是否在前
      */
     public boolean isBefore(Date date1, Date date2) {
         return compare(date1, date2) == -1;
@@ -288,6 +293,10 @@ public class DateFactory {
 
     /**
      * 前一个日期是否在后一个日期之后
+     *
+     * @param date1 日期1
+     * @param date2 日期2
+     * @return 是否在后
      */
     public boolean isAfter(Date date1, Date date2) {
         return compare(date1, date2) == 1;
@@ -394,7 +403,6 @@ public class DateFactory {
             case Calendar.HOUR_OF_DAY:
                 return 1000 * 60 * 60;
             case Calendar.DAY_OF_YEAR:
-                return 1000 * 60 * 60 * 24;
             default:
                 return 1000 * 60 * 60 * 24;
         }
@@ -402,6 +410,9 @@ public class DateFactory {
 
     /**
      * 获取年份
+     *
+     * @param date 日期
+     * @return 年份
      */
     public int getYear(Date date) {
         return get(date, Calendar.YEAR);
@@ -409,6 +420,9 @@ public class DateFactory {
 
     /**
      * 获取月份
+     *
+     * @param date 日期
+     * @return 月份
      */
     public int getMonth(Date date) {
         return get(date, Calendar.MONTH);
@@ -416,6 +430,9 @@ public class DateFactory {
 
     /**
      * 获取日期
+     *
+     * @param date 日期
+     * @return 日期
      */
     public int getDay(Date date) {
         return get(date, Calendar.DAY_OF_MONTH);
@@ -423,6 +440,9 @@ public class DateFactory {
 
     /**
      * 获取小时
+     *
+     * @param date 日期
+     * @return 小时
      */
     public int getHour(Date date) {
         return get(date, Calendar.HOUR_OF_DAY);
@@ -430,6 +450,9 @@ public class DateFactory {
 
     /**
      * 获取分钟
+     *
+     * @param date 日期
+     * @return 分钟
      */
     public int getMinute(Date date) {
         return get(date, Calendar.MINUTE);
@@ -437,6 +460,9 @@ public class DateFactory {
 
     /**
      * 获取秒
+     *
+     * @param date 日期
+     * @return 秒
      */
     public int getSecond(Date date) {
         return get(date, Calendar.SECOND);
@@ -444,6 +470,9 @@ public class DateFactory {
 
     /**
      * 获取毫秒
+     *
+     * @param date 日期
+     * @return 毫秒
      */
     public int getMilliSecond(Date date) {
         return get(date, Calendar.MILLISECOND);
@@ -451,6 +480,10 @@ public class DateFactory {
 
     /**
      * 获取日期
+     *
+     * @param date  日期
+     * @param field 字段
+     * @return 日期
      */
     public int get(Date date, CalendarFieldEnum field) {
         return get(date, field.getField());
@@ -458,6 +491,10 @@ public class DateFactory {
 
     /**
      * 获取日期
+     *
+     * @param date  日期
+     * @param field 字段
+     * @return 日期
      */
     public int get(Date date, int field) {
         if (date == null) {
@@ -470,6 +507,8 @@ public class DateFactory {
 
     /**
      * 获取当前年份
+     *
+     * @return 当前年份
      */
     public int getYear() {
         return getYear(now());
@@ -477,6 +516,8 @@ public class DateFactory {
 
     /**
      * 获取月份
+     *
+     * @return 月份
      */
     public int getMonth() {
         return getMonth(now());
@@ -484,6 +525,8 @@ public class DateFactory {
 
     /**
      * 获取日期
+     *
+     * @return 日期
      */
     public int getDay() {
         return getDay(now());
@@ -491,6 +534,8 @@ public class DateFactory {
 
     /**
      * 获取小时
+     *
+     * @return 小时
      */
     public int getHour() {
         return getHour(now());
@@ -498,6 +543,8 @@ public class DateFactory {
 
     /**
      * 获取分钟
+     *
+     * @return 分钟
      */
     public int getMinute() {
         return getMinute(now());
@@ -505,6 +552,8 @@ public class DateFactory {
 
     /**
      * 获取秒
+     *
+     * @return 秒
      */
     public int getSecond() {
         return getSecond(now());
@@ -512,6 +561,8 @@ public class DateFactory {
 
     /**
      * 获取毫秒
+     *
+     * @return 毫秒
      */
     public int getMilliSecond() {
         return getMilliSecond(now());
@@ -519,6 +570,8 @@ public class DateFactory {
 
     /**
      * 获取当前日期路径
+     *
+     * @return 当前日期路径
      */
     public String getNowPath() {
         return getNowPath(null);
@@ -526,6 +579,9 @@ public class DateFactory {
 
     /**
      * 获取当前日期路径
+     *
+     * @param format 格式
+     * @return 当前日期路径
      */
     public String getNowPath(String format) {
         if (StringUtils.isBlank(format)) {
@@ -536,11 +592,12 @@ public class DateFactory {
 
     /**
      * 获取当前日期路径
+     *
+     * @param format 格式
+     * @param suffix 后缀
+     * @return 当前日期路径
      */
     public String getNowPath(String format, String suffix) {
-        if (StringUtils.isBlank(format)) {
-            format = "yyyy/MM/dd";
-        }
-        return format(now(), format) + suffix;
+        return getNowPath(format) + suffix;
     }
 }

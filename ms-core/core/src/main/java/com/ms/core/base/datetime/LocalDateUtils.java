@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.core.base.datetime.factory;
+package com.ms.core.base.datetime;
 
 import com.ms.core.base.datetime.enums.ZoneIdEnum;
 
@@ -23,7 +23,7 @@ import java.util.Date;
 /**
  * @author ms
  */
-public class LocalDateFactory {
+public class LocalDateUtils {
 
     /**
      * 创建当前时间

@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.core.base.datetime.factory;
+package com.ms.core.base.datetime;
 
 import com.ms.core.base.datetime.enums.ZoneIdEnum;
 

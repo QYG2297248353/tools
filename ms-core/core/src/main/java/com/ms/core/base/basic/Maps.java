@@ -11,6 +11,7 @@
 
 package com.ms.core.base.basic;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,18 @@ public interface Maps {
 
     static <K, V> Map<K, V> of() {
         return new HashMap<>();
+    }
+
+    static <T> Map of(T... t) {
+        Map map = of();
+        // 奇数个参数 放弃最后一个
+        if (t.length % 2 != 0) {
+            t = Arrays.copyOf(t, t.length - 1);
+        }
+        for (int i = 0; i < t.length; i += 2) {
+            map.put(t[i], t[i + 1]);
+        }
+        return map;
     }
 
     static <K, V> Map<K, V> of(K k1, V v1) {

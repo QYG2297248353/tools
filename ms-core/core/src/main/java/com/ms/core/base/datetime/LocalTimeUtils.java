@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.core.base.datetime.factory;
+package com.ms.core.base.datetime;
 
 
 import com.ms.core.base.datetime.enums.ZoneIdEnum;
@@ -25,7 +25,7 @@ import java.util.Date;
  *
  * @author ms
  */
-public class LocalTimeFactory {
+public class LocalTimeUtils {
     /**
      * 创建当前时间
      *
@@ -95,7 +95,7 @@ public class LocalTimeFactory {
      * @param hour   时
      * @param minute 分
      * @param second 秒
-     * @return
+     * @return 指定时间
      */
     public LocalTime create(int hour, int minute, int second) {
         return LocalTime.of(hour, minute, second);

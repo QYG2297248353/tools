@@ -9,14 +9,14 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.core.base.datetime.factory;
+package com.ms.core.base.datetime;
 
 
 import com.ms.core.base.datetime.enums.ZoneIdEnum;
 
 import java.time.ZoneId;
 
-public class ZoneIdFactory {
+public class ZoneIdUtils {
 
     /**
      * 创建时区
