@@ -11,14 +11,13 @@
 
 package com.ms.core.response;
 
+import com.ms.core.config.SystemConfiguration;
 import lombok.*;
 
 import java.io.Serializable;
 
 /**
- * JSON 统一响应格式
- * status: 200
- * message: success
+ * JSON 统一响应格式 - 扩展版本
  *
  * @author ms2297248353
  */
@@ -26,7 +25,7 @@ import java.io.Serializable;
 @Builder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ResponseResult<T> {
+public class ResponseExtension<T> {
     /**
      * response code
      * 默认值
@@ -57,11 +56,43 @@ public class ResponseResult<T> {
     private long timestamp = System.currentTimeMillis();
 
     /**
+     * response version 1.0.0
+     */
+    @Builder.Default
+    private String version = SystemConfiguration.getSystemVersion();
+
+    /**
+     * response encoding format utf-8
+     */
+    @Builder.Default
+    private String charset = SystemConfiguration.getSystemEncoding();
+
+    /**
+     * response language zh_CN
+     */
+    @Builder.Default
+    private String language = SystemConfiguration.getSystemLanguage();
+
+    /**
+     * response timezone GMT+8
+     */
+    @Builder.Default
+    private String timezone = SystemConfiguration.getSystemTimezone();
+
+
+    /**
+     * response country CN
+     */
+    @Builder.Default
+    private String country = SystemConfiguration.getSystemCountry();
+
+
+    /**
      * response success
      *
      * @return ResponseResult
      */
-    public static ResponseResult success() {
+    public static ResponseExtension success() {
         return success(ResponseHttpStatus.SUCCESS.getDescription());
     }
 
@@ -71,7 +102,7 @@ public class ResponseResult<T> {
      * @param message message
      * @return ResponseResult
      */
-    public static ResponseResult success(String message) {
+    public static ResponseExtension success(String message) {
         return success(ResponseHttpStatus.SUCCESS.getCode(), message);
     }
 
@@ -80,11 +111,10 @@ public class ResponseResult<T> {
      *
      * @param code    code
      * @param message message
-     * @param <T>     响应类
      * @return ResponseResult
      */
-    public static <T extends Serializable> ResponseResult<T> success(String code, String message) {
-        return ResponseResult.<T>builder()
+    public static ResponseExtension success(String code, String message) {
+        return ResponseExtension.builder()
                 .status(code)
                 .message(message)
                 .build();
@@ -97,7 +127,18 @@ public class ResponseResult<T> {
      * @param <T>  响应类
      * @return ResponseResult
      */
-    public static <T extends Serializable> ResponseResult<T> success(T data) {
+    public static <T extends Serializable> ResponseExtension<T> success(T data) {
+        return success(ResponseHttpStatus.SUCCESS.getDescription(), data);
+    }
+
+    /**
+     * response success
+     *
+     * @param data data
+     * @param <T>  响应类
+     * @return ResponseResult
+     */
+    public static <T> ResponseExtension<T> success(T data) {
         return success(ResponseHttpStatus.SUCCESS.getDescription(), data);
     }
 
@@ -109,7 +150,19 @@ public class ResponseResult<T> {
      * @param <T>     响应类
      * @return ResponseResult
      */
-    public static <T extends Serializable> ResponseResult<T> success(String message, T data) {
+    public static <T extends Serializable> ResponseExtension<T> success(String message, T data) {
+        return success(ResponseHttpStatus.SUCCESS.getCode(), message, data);
+    }
+
+    /**
+     * response success
+     *
+     * @param message message
+     * @param data    data
+     * @param <T>     响应类
+     * @return ResponseResult
+     */
+    public static <T> ResponseExtension<T> success(String message, T data) {
         return success(ResponseHttpStatus.SUCCESS.getCode(), message, data);
     }
 
@@ -122,22 +175,8 @@ public class ResponseResult<T> {
      * @param <T>     响应类
      * @return ResponseResult
      */
-    public static <T extends Serializable> ResponseResult<T> success(Integer code, String message, T data) {
-        String status = String.valueOf(code);
-        return success(status, message, data);
-    }
-
-    /**
-     * response success
-     *
-     * @param code    code
-     * @param message message
-     * @param data    data
-     * @param <T>     响应类
-     * @return ResponseResult
-     */
-    public static <T extends Serializable> ResponseResult<T> success(String code, String message, T data) {
-        return ResponseResult.<T>builder()
+    public static <T extends Serializable> ResponseExtension<T> success(String code, String message, T data) {
+        return ResponseExtension.<T>builder()
                 .status(code)
                 .message(message)
                 .data(data)
@@ -147,37 +186,27 @@ public class ResponseResult<T> {
     /**
      * response success
      *
-     * @param message message
-     * @param data    data
-     * @param <T>     响应类
-     * @return ResponseResult
-     */
-    public static <T> ResponseResult<T> success(String message, T data) {
-        return success(ResponseHttpStatus.SUCCESS.getCode(), message, data);
-    }
-
-    /**
-     * response success
-     *
      * @param code    code
      * @param message message
      * @param data    data
      * @param <T>     响应类
      * @return ResponseResult
      */
-    public static <T> ResponseResult<T> success(String code, String message, T data) {
-        return ResponseResult.<T>builder().data(data)
-                .message(message)
+    public static <T> ResponseExtension<T> success(String code, String message, T data) {
+        return ResponseExtension.<T>builder()
                 .status(code)
+                .message(message)
+                .data(data)
                 .build();
     }
+
 
     /**
      * response fail
      *
      * @return ResponseResult
      */
-    public static ResponseResult fail() {
+    public static ResponseExtension fail() {
         return fail(ResponseHttpStatus.FAIL.getDescription());
     }
 
@@ -187,8 +216,8 @@ public class ResponseResult<T> {
      * @param message message
      * @return ResponseResult
      */
-    public static ResponseResult fail(String message) {
-        return ResponseResult.builder()
+    public static ResponseExtension fail(String message) {
+        return ResponseExtension.builder()
                 .status(ResponseHttpStatus.FAIL.getCode())
                 .message(message)
                 .build();
@@ -202,7 +231,7 @@ public class ResponseResult<T> {
      * @param <T>     响应类
      * @return ResponseResult
      */
-    public static <T extends Serializable> ResponseResult<T> fail(String message, T data) {
+    public static <T extends Serializable> ResponseExtension<T> fail(String message, T data) {
         return fail(ResponseHttpStatus.FAIL.getCode(), message, data);
     }
 
@@ -212,7 +241,7 @@ public class ResponseResult<T> {
      * @param code code
      * @return ResponseResult
      */
-    public static ResponseResult fail(Integer code) {
+    public static ResponseExtension fail(Integer code) {
         return fail(code, ResponseHttpStatus.FAIL.getDescription());
     }
 
@@ -223,7 +252,7 @@ public class ResponseResult<T> {
      * @param message message
      * @return ResponseResult
      */
-    public static ResponseResult fail(Integer code, String message) {
+    public static ResponseExtension fail(Integer code, String message) {
         String status = String.valueOf(code);
         return fail(status, message);
     }
@@ -235,8 +264,8 @@ public class ResponseResult<T> {
      * @param message message
      * @return ResponseResult
      */
-    public static ResponseResult fail(String code, String message) {
-        return ResponseResult.builder()
+    public static ResponseExtension fail(String code, String message) {
+        return ResponseExtension.builder()
                 .status(code)
                 .message(message)
                 .build();
@@ -251,8 +280,8 @@ public class ResponseResult<T> {
      * @param <T>     响应类
      * @return ResponseResult
      */
-    public static <T extends Serializable> ResponseResult<T> fail(String code, String message, T data) {
-        return ResponseResult.<T>builder()
+    public static <T extends Serializable> ResponseExtension<T> fail(String code, String message, T data) {
+        return ResponseExtension.<T>builder()
                 .status(code)
                 .message(message)
                 .data(data)
@@ -267,7 +296,7 @@ public class ResponseResult<T> {
      * @param <T>     响应类
      * @return ResponseResult
      */
-    public static <T> ResponseResult<T> fail(String message, T data) {
+    public static <T> ResponseExtension<T> fail(String message, T data) {
         return fail(ResponseHttpStatus.FAIL.getCode(), message, data);
     }
 
@@ -280,12 +309,11 @@ public class ResponseResult<T> {
      * @param <T>     响应类
      * @return ResponseResult
      */
-    public static <T> ResponseResult<T> fail(String code, String message, T data) {
-        return ResponseResult.<T>builder()
+    public static <T> ResponseExtension<T> fail(String code, String message, T data) {
+        return ResponseExtension.<T>builder()
                 .status(code)
                 .message(message)
                 .data(data)
                 .build();
     }
-
 }

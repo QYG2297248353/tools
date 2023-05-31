@@ -11,6 +11,8 @@
 
 package com.ms.core.response;
 
+import com.ms.core.config.SystemConfiguration;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -75,6 +77,12 @@ public enum ResponseHttpStatus {
      * @return 状态码
      */
     public String getCode() {
+        if (this == SUCCESS) {
+            return SystemConfiguration.getSystemSuccessCode();
+        }
+        if (this == FAIL) {
+            return SystemConfiguration.getSystemFailCode();
+        }
         return code;
     }
 
@@ -84,6 +92,12 @@ public enum ResponseHttpStatus {
      * @return 消息
      */
     public String getDescription() {
+        if (this == SUCCESS) {
+            return SystemConfiguration.getSystemSuccessMsg();
+        }
+        if (this == FAIL) {
+            return SystemConfiguration.getSystemFailMsg();
+        }
         return description;
     }
 }
