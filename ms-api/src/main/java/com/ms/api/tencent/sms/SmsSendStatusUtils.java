@@ -21,7 +21,6 @@ import com.ms.core.exception.base.MsToolsException;
 
 /**
  * @author ms2297248353
- * @date 2023年05月29日 10:56
  */
 public class SmsSendStatusUtils {
 

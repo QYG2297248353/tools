@@ -13,8 +13,10 @@ package com.ms.jpa.model.entity;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import java.util.Date;
@@ -24,8 +26,10 @@ import java.util.Date;
  *
  * @author qyg2297248353
  */
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class AbstractBaseEntity extends AbstractIDEntity {
+    private static final long serialVersionUID = -2708743279844732312L;
     /**
      * 创建时间
      */

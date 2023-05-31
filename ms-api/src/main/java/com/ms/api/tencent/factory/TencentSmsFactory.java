@@ -25,6 +25,7 @@ public class TencentSmsFactory {
      * @param bodyJson  请求数据JSON
      * @param basic     请求类型
      * @return 响应
+     * @throws MsToolsException 异常
      */
     public static String push(String secretId, String secretKey, String bodyJson, BasicSmsTencentVo basic) throws MsToolsException {
         String timestamp = String.valueOf(System.currentTimeMillis() / 1000);

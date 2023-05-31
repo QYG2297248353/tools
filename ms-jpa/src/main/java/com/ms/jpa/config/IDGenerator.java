@@ -11,7 +11,7 @@
 
 package com.ms.jpa.config;
 
-import com.ms.id.factory.snowflake.SnowFlakeCore;
+import com.ms.id.ID;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
@@ -25,7 +25,6 @@ import java.io.Serializable;
 public class IDGenerator implements IdentifierGenerator {
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object obj) {
-        long snowFlakeId = SnowFlakeCore.getInstance().getSnowFlakeId();
-        return String.valueOf(snowFlakeId);
+        return ID.snowflakeString();
     }
 }

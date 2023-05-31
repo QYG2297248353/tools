@@ -206,7 +206,7 @@ public class SendSmsTencentVo {
          *
          * @param phoneNumber   手机号码 数组
          * @param templateParam 变量参数 数组
-         * @return
+         * @return Send
          */
         public Send build(String[] phoneNumber, String[] templateParam) {
             this.phoneNumber = phoneNumber;
@@ -219,7 +219,7 @@ public class SendSmsTencentVo {
          *
          * @param phoneNumber   手机号码
          * @param templateParam 变量参数
-         * @return
+         * @return Send
          */
         public Send build(String phoneNumber, String templateParam) {
             this.phoneNumber = new String[]{phoneNumber};
@@ -232,7 +232,7 @@ public class SendSmsTencentVo {
          *
          * @param phoneNumber   手机号码
          * @param templateParam 变量参数 数组
-         * @return
+         * @return Send
          */
         public Send build(String phoneNumber, String... templateParam) {
             this.phoneNumber = new String[]{phoneNumber};

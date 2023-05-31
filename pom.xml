@@ -35,7 +35,7 @@
     <!-- 项目基本信息 -->
     <groupId>io.github.qyg2297248353</groupId>
     <artifactId>tools</artifactId>
-    <version>1.1.3-SNAPSHOT</version>
+    <version>1.1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Java tools 工具箱</name>
     <description>commons迭代版本</description>
@@ -60,7 +60,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- 版本信息 -->
-        <ms.tools.version>1.1.3-SNAPSHOT</ms.tools.version>
+        <ms.tools.version>1.1.4-SNAPSHOT</ms.tools.version>
         <lombok.version>1.18.14</lombok.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
@@ -86,9 +86,9 @@
         <org.apache.velocity.velocity.engine.core.version>2.0</org.apache.velocity.velocity.engine.core.version>
 
         <!-- SpringBoot 版本信息 -->
-        <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
-        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
-        <spring-boot.version>2.2.3.RELEASE</spring-boot.version>
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
+        <spring-cloud.version>2021.0.7-SNAPSHOT</spring-cloud.version>
+        <spring-boot.version>2.7.12-SNAPSHOT</spring-boot.version>
         <!-- Apache Commons 组件 -->
         <apache.commons.codec.version>1.15</apache.commons.codec.version>
         <apache.commons.io.version>2.11.0</apache.commons.io.version>
@@ -153,62 +153,102 @@
     <!-- 远程仓库配置 -->
     <repositories>
         <repository>
-            <id>ALiYunMaven</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>Repo1</id>
-            <url>https://repo1.maven.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>SonatypeDev</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
             <snapshots>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
-            <id>Sonatype</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
             <releases>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>repo1</id>
+            <name>repo1</name>
+            <url>https://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <name>sonatype</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sonatype-dev</id>
+            <name>sonatype-dev</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
             </releases>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>ALiYunMaven</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-        <pluginRepository>
-            <id>Repo1</id>
-            <url>https://repo1.maven.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-        <pluginRepository>
-            <id>Sonatype</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-        <pluginRepository>
-            <id>SonatypeDev</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
             <snapshots>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>aliyun</id>
+            <name>ALiYun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>repo1</id>
+            <name>Repo1</name>
+            <url>https://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>sonatype</id>
+            <name>Sonatype</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>sonatype-dev</id>
+            <name>Sonatype Dev</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </pluginRepository>
     </pluginRepositories>
 

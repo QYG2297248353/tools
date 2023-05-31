@@ -26,7 +26,9 @@ import javax.persistence.MappedSuperclass;
  * @author qyg2297248353
  */
 @MappedSuperclass
-public abstract class AbstractIDEntity {
+public abstract class AbstractIDEntity implements IBaseEntity {
+    private static final long serialVersionUID = -8184484342689305155L;
+
     @Id
     @GenericGenerator(name = "snowFlakeIdGenerator", strategy = "com.ms.jpa.config.IDGenerator", parameters = {@Parameter(name = "snowFlakeIdGenerator", value = "com.ms.jpa.config.IDGenerator")})
     @GeneratedValue(generator = "snowFlakeIdGenerator")

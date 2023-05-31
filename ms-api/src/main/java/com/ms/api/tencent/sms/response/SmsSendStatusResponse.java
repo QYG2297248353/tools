@@ -17,7 +17,6 @@ import java.util.List;
 
 /**
  * @author ms2297248353
- * @date 2023年05月29日 11:17
  */
 
 public class SmsSendStatusResponse {
