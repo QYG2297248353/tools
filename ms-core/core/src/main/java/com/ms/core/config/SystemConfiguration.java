@@ -55,6 +55,10 @@ public class SystemConfiguration {
      */
     public static final String SYSTEM_FAIL_MSG = "failed";
     /**
+     * 系统默认时间格式
+     */
+    public static final String SYSTEM_DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
+    /**
      * 系统编码
      */
     private static final String SYSTEM_KEY_ENCODING = "MS_PROJECT_ENCODING";
@@ -90,6 +94,10 @@ public class SystemConfiguration {
      * 失败状态码 msg
      */
     private static final String SYSTEM_KEY_FAIL_MSG = "MS_PROJECT_FAIL_MSG";
+    /**
+     * 系统默认时间格式
+     */
+    private static final String SYSTEM_KEY_DATE_FORMAT = "MS_PROJECT_DATE_FORMAT";
 
     /**
      * 获取系统版本号
@@ -171,5 +179,14 @@ public class SystemConfiguration {
      */
     public static String getSystemFailMsg() {
         return System.getenv(SYSTEM_KEY_FAIL_MSG) == null ? SYSTEM_FAIL_MSG : System.getenv(SYSTEM_KEY_FAIL_MSG);
+    }
+
+    /**
+     * 获取系统默认时间格式
+     *
+     * @return 系统默认时间格式
+     */
+    public static String getSystemDateFormat() {
+        return System.getenv(SYSTEM_KEY_DATE_FORMAT) == null ? SYSTEM_DATE_FORMAT : System.getenv(SYSTEM_KEY_DATE_FORMAT);
     }
 }

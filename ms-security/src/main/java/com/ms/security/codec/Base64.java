@@ -11,5 +11,49 @@
 
 package com.ms.security.codec;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 public class Base64 extends org.apache.commons.codec.binary.Base64 {
+
+    /**
+     * 编码
+     *
+     * @param str 字符串
+     * @return 编码后的字符串
+     */
+    public static String encodeStr(String str) {
+        return encodeBase64String(str.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * 解码
+     *
+     * @param str 字符串
+     * @return 解码后的字符串
+     */
+    public static String decodeStr(String str) {
+        return new String(decodeBase64(str), StandardCharsets.UTF_8);
+    }
+
+
+    /**
+     * 编码
+     *
+     * @param str 字符串
+     * @return 编码后的字符串
+     */
+    public static String encodeStr(String str, Charset charset) {
+        return encodeBase64String(str.getBytes(charset));
+    }
+
+    /**
+     * 解码
+     *
+     * @param str 字符串
+     * @return 解码后的字符串
+     */
+    public static String decodeStr(String str, Charset charset) {
+        return new String(decodeBase64(str), charset);
+    }
 }
