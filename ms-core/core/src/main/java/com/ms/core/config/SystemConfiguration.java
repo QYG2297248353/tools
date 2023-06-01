@@ -105,7 +105,7 @@ public class SystemConfiguration {
      * @return 系统版本号
      */
     public static String getSystemVersion() {
-        return System.getenv(SYSTEM_KEY_VERSION) == null ? SYSTEM_VERSION : System.getenv(SYSTEM_KEY_VERSION);
+        return System.getenv(SYSTEM_KEY_VERSION) == null ? System.getProperty(SYSTEM_KEY_VERSION, SYSTEM_VERSION) : System.getenv(SYSTEM_KEY_VERSION);
     }
 
     /**
@@ -114,7 +114,7 @@ public class SystemConfiguration {
      * @return 系统编码
      */
     public static String getSystemEncoding() {
-        return System.getenv(SYSTEM_KEY_ENCODING) == null ? SYSTEM_ENCODING : System.getenv(SYSTEM_KEY_ENCODING);
+        return System.getenv(SYSTEM_KEY_ENCODING) == null ? System.getProperty(SYSTEM_KEY_ENCODING, SYSTEM_ENCODING) : System.getenv(SYSTEM_KEY_ENCODING);
     }
 
     /**
@@ -123,7 +123,7 @@ public class SystemConfiguration {
      * @return 系统默认语言
      */
     public static String getSystemLanguage() {
-        return System.getenv(SYSTEM_KEY_LANGUAGE) == null ? SYSTEM_LANGUAGE : System.getenv(SYSTEM_KEY_LANGUAGE);
+        return System.getenv(SYSTEM_KEY_LANGUAGE) == null ? System.getProperty(SYSTEM_KEY_LANGUAGE, SYSTEM_LANGUAGE) : System.getenv(SYSTEM_KEY_LANGUAGE);
     }
 
     /**
@@ -133,7 +133,7 @@ public class SystemConfiguration {
      */
     public static String getSystemTimezone() {
         final String timezone = "user.timezone";
-        return System.getenv(SYSTEM_KEY_TIMEZONE) == null ? System.getProperty(timezone) == null ? SYSTEM_TIMEZONE : System.getProperty(timezone) : System.getenv(SYSTEM_KEY_TIMEZONE);
+        return System.getenv(SYSTEM_KEY_TIMEZONE) == null ? System.getProperty(SYSTEM_KEY_TIMEZONE, System.getProperty(timezone, SYSTEM_TIMEZONE)) : System.getenv(SYSTEM_KEY_TIMEZONE);
     }
 
     /**
@@ -142,7 +142,7 @@ public class SystemConfiguration {
      * @return 系统默认国家
      */
     public static String getSystemCountry() {
-        return System.getenv(SYSTEM_KEY_COUNTRY) == null ? SYSTEM_COUNTRY : System.getenv(SYSTEM_KEY_COUNTRY);
+        return System.getenv(SYSTEM_KEY_COUNTRY) == null ? System.getProperty(SYSTEM_KEY_COUNTRY, SYSTEM_COUNTRY) : System.getenv(SYSTEM_KEY_COUNTRY);
     }
 
     /**
@@ -151,7 +151,7 @@ public class SystemConfiguration {
      * @return 系统默认成功状态码
      */
     public static String getSystemSuccessCode() {
-        return System.getenv(SYSTEM_KEY_SUCCESS_CODE) == null ? SYSTEM_SUCCESS_CODE : System.getenv(SYSTEM_KEY_SUCCESS_CODE);
+        return System.getenv(SYSTEM_KEY_SUCCESS_CODE) == null ? System.getProperty(SYSTEM_KEY_SUCCESS_CODE, SYSTEM_SUCCESS_CODE) : System.getenv(SYSTEM_KEY_SUCCESS_CODE);
     }
 
     /**
@@ -160,7 +160,7 @@ public class SystemConfiguration {
      * @return 系统默认失败状态码
      */
     public static String getSystemFailCode() {
-        return System.getenv(SYSTEM_KEY_FAIL_CODE) == null ? SYSTEM_FAIL_CODE : System.getenv(SYSTEM_KEY_FAIL_CODE);
+        return System.getenv(SYSTEM_KEY_FAIL_CODE) == null ? System.getProperty(SYSTEM_KEY_FAIL_CODE, SYSTEM_FAIL_CODE) : System.getenv(SYSTEM_KEY_FAIL_CODE);
     }
 
     /**
@@ -169,7 +169,7 @@ public class SystemConfiguration {
      * @return 系统默认成功状态码 msg
      */
     public static String getSystemSuccessMsg() {
-        return System.getenv(SYSTEM_KEY_SUCCESS_MSG) == null ? SYSTEM_SUCCESS_MSG : System.getenv(SYSTEM_KEY_SUCCESS_MSG);
+        return System.getenv(SYSTEM_KEY_SUCCESS_MSG) == null ? System.getProperty(SYSTEM_KEY_SUCCESS_MSG, SYSTEM_SUCCESS_MSG) : System.getenv(SYSTEM_KEY_SUCCESS_MSG);
     }
 
     /**
@@ -178,7 +178,7 @@ public class SystemConfiguration {
      * @return 系统默认失败状态码 msg
      */
     public static String getSystemFailMsg() {
-        return System.getenv(SYSTEM_KEY_FAIL_MSG) == null ? SYSTEM_FAIL_MSG : System.getenv(SYSTEM_KEY_FAIL_MSG);
+        return System.getenv(SYSTEM_KEY_FAIL_MSG) == null ? System.getProperty(SYSTEM_KEY_FAIL_MSG, SYSTEM_FAIL_MSG) : System.getenv(SYSTEM_KEY_FAIL_MSG);
     }
 
     /**
@@ -187,6 +187,6 @@ public class SystemConfiguration {
      * @return 系统默认时间格式
      */
     public static String getSystemDateFormat() {
-        return System.getenv(SYSTEM_KEY_DATE_FORMAT) == null ? SYSTEM_DATE_FORMAT : System.getenv(SYSTEM_KEY_DATE_FORMAT);
+        return System.getenv(SYSTEM_KEY_DATE_FORMAT) == null ? System.getProperty(SYSTEM_KEY_DATE_FORMAT, SYSTEM_DATE_FORMAT) : System.getenv(SYSTEM_KEY_DATE_FORMAT);
     }
 }
