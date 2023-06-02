@@ -124,6 +124,46 @@ public class ObjectCopyUtils {
         return target;
     }
 
+
+    /**
+     * 对象拷贝工具方法
+     *
+     * @param source 源对象
+     * @param target 目标对象 class
+     * @param <T>    源对象类型
+     * @param <S>    目标对象类型
+     */
+    public static <T, S> S copyProperties(T source, Class<S> target) {
+        return copyProperties(source, target, new String[0]);
+    }
+
+    /**
+     * 对象拷贝工具方法
+     *
+     * @param source 源对象
+     * @param target 目标对象 class
+     * @param ignore 忽略的属性
+     * @param <T>    源对象类型
+     * @param <S>    目标对象类型
+     */
+    public static <T, S> S copyProperties(T source, Class<S> target, String[] ignore) {
+        if (source == null || target == null) {
+            return null;
+        }
+        S s = null;
+        try {
+            s = target.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        if (s == null) {
+            return null;
+        }
+        BeanCopyUtils.copyProperties(source, s, ignore);
+        return s;
+    }
+
+
     /**
      * 对象拷贝工具方法
      *
