@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
  */
 @Configuration
 @EnableConfigurationProperties(MsMailProperties.class)
-@ComponentScan(basePackages = MsBeanFactoryPostProcessor.BASE_PACKAGE,
+@ComponentScan(basePackages = MsPushBeanFactoryPostProcessor.BASE_PACKAGE,
         includeFilters = @ComponentScan.Filter({Service.class, Controller.class, Configuration.class, Bean.class, Component.class}),
         useDefaultFilters = false)
 public class PushAutoConfiguration {
@@ -36,8 +36,8 @@ public class PushAutoConfiguration {
      * @return MyUtilsBeanFactoryPostProcessor
      */
     @Bean
-    public MsBeanFactoryPostProcessor msBeanFactoryPostProcessor() {
-        return new MsBeanFactoryPostProcessor();
+    public MsPushBeanFactoryPostProcessor msPushBeanFactoryPostProcessor() {
+        return new MsPushBeanFactoryPostProcessor();
     }
 
 

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 @Configuration
-@ComponentScan(basePackages = MsBeanFactoryPostProcessor.BASE_PACKAGE,
+@ComponentScan(basePackages = MsSpringBeanFactoryPostProcessor.BASE_PACKAGE,
         includeFilters = @ComponentScan.Filter({Service.class, Controller.class, Configuration.class, Bean.class, Component.class}),
         useDefaultFilters = false)
 public class SpringAutoConfiguration {
@@ -30,8 +30,8 @@ public class SpringAutoConfiguration {
      * @return MyUtilsBeanFactoryPostProcessor
      */
     @Bean
-    public MsBeanFactoryPostProcessor msBeanFactoryPostProcessor() {
-        return new MsBeanFactoryPostProcessor();
+    public MsSpringBeanFactoryPostProcessor msSpringBeanFactoryPostProcessor() {
+        return new MsSpringBeanFactoryPostProcessor();
     }
 
 

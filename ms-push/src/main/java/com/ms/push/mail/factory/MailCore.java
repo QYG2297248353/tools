@@ -11,6 +11,7 @@
 
 package com.ms.push.mail.factory;
 
+import com.ms.core.exception.base.MsToolsRuntimeException;
 import com.ms.push.mail.properties.MsMailProperties;
 
 import javax.mail.MessagingException;
@@ -34,6 +35,11 @@ public class MailCore {
 
     protected MailCore(MsMailProperties msMailProperties) {
         this.msMailProperties = msMailProperties;
+        try {
+            createTransport();
+        } catch (Exception e) {
+            throw new MsToolsRuntimeException(e);
+        }
     }
 
     public static void sendMail(MailCore core, MimeMessage message) throws MessagingException {
@@ -45,7 +51,7 @@ public class MailCore {
     private Session createSession() throws NoSuchProviderException {
         Properties prop = new Properties();
         String smtp = "smtp";
-        if (msMailProperties.getSsl()) {
+        if (Boolean.TRUE.equals(msMailProperties.getSsl())) {
             prop.setProperty("mail.smtp.ssl.enable", "true");
             smtp = "smtps";
         }
@@ -64,7 +70,7 @@ public class MailCore {
             prop.setProperty("mail." + smtp + ".connectiontimeout", msMailProperties.getConnectionTimeout());
         }
 
-        if (msMailProperties.getProxy()) {
+        if (Boolean.TRUE.equals(msMailProperties.getProxy())) {
             prop.setProperty("mail." + smtp + ".proxy.host", msMailProperties.getProxyHost());
             prop.setProperty("mail." + smtp + ".proxy.port", msMailProperties.getProxyPort());
             if (msMailProperties.getProxyUsername() != null) {

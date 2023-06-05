@@ -57,7 +57,14 @@ public class RandomUtils {
     }
 
 
-    private static String getSecureRandom(int length, String character) {
+    /**
+     * 随机生验证码
+     *
+     * @param length    长度
+     * @param character 字符
+     * @return 随机验证码
+     */
+    public static String getSecureRandom(int length, String character) {
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {

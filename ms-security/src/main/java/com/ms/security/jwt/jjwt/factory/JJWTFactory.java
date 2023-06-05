@@ -429,7 +429,7 @@ public class JJWTFactory {
 
         /**
          * 偏移时间
-         * 60秒 = 3 * 60
+         * 180秒 = 3 * 60
          *
          * @param seconds 时间 单位秒 s
          * @return 构建
@@ -489,7 +489,7 @@ public class JJWTFactory {
          * @param notBefore 生效时间
          * @return 构建
          */
-        public Parser requireSubject(Date notBefore) {
+        public Parser requireNotBefore(Date notBefore) {
             parserBuilder.requireNotBefore(notBefore);
             return this;
         }

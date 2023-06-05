@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
  */
 @Configuration
 @EnableConfigurationProperties(MsRedisProperties.class)
-@ComponentScan(basePackages = MsBeanFactoryPostProcessor.BASE_PACKAGE,
+@ComponentScan(basePackages = MsRedisBeanFactoryPostProcessor.BASE_PACKAGE,
         includeFilters = @ComponentScan.Filter({Service.class, Controller.class, Configuration.class, Bean.class, Component.class}),
         useDefaultFilters = false)
 public class RedisAutoConfiguration {
@@ -36,8 +36,8 @@ public class RedisAutoConfiguration {
      * @return MyUtilsBeanFactoryPostProcessor
      */
     @Bean
-    public static MsBeanFactoryPostProcessor msBeanFactoryPostProcessor() {
-        return new MsBeanFactoryPostProcessor();
+    public static MsRedisBeanFactoryPostProcessor msRedisBeanFactoryPostProcessor() {
+        return new MsRedisBeanFactoryPostProcessor();
     }
 
 

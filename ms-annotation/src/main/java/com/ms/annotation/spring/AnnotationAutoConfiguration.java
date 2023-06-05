@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  * @author ms2297248353
  */
 @Configuration
-@ComponentScan(basePackages = MsBeanFactoryPostProcessor.BASE_PACKAGE,
+@ComponentScan(basePackages = MsAnnotationBeanFactoryPostProcessor.BASE_PACKAGE,
         includeFilters = @ComponentScan.Filter({Service.class, Controller.class, Configuration.class, Bean.class, Component.class}),
         useDefaultFilters = false)
 public class AnnotationAutoConfiguration {
@@ -33,8 +33,8 @@ public class AnnotationAutoConfiguration {
      * @return MyUtilsBeanFactoryPostProcessor
      */
     @Bean
-    public static MsBeanFactoryPostProcessor msBeanFactoryPostProcessor() {
-        return new MsBeanFactoryPostProcessor();
+    public static MsAnnotationBeanFactoryPostProcessor msAnnotationBeanFactoryPostProcessor() {
+        return new MsAnnotationBeanFactoryPostProcessor();
     }
 
 

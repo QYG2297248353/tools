@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-public class MsBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
+public class MsNetworkBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
     protected static final String BASE_PACKAGE = "com.ms.network";
 

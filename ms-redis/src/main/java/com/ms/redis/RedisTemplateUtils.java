@@ -15,10 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -485,6 +482,28 @@ public class RedisTemplateUtils {
     }
 
     /**
+     * 获取map缓存中的某个key对应的值
+     *
+     * @param key     缓存键值
+     * @param hashKey 项
+     * @return 值
+     */
+    public Object getCacheMapValue(Object key, Object hashKey) {
+        return redisTemplate.opsForHash().get(key, hashKey);
+    }
+
+    /**
+     * 获取map缓存中keys对应的值
+     *
+     * @param key     缓存键值
+     * @param hashKey 项
+     * @return 值
+     */
+    public List<Object> getCacheMapValues(Object key, Object... hashKey) {
+        return redisTemplate.opsForHash().multiGet(key, Arrays.asList(hashKey));
+    }
+
+    /**
      * 删除hash表中的值
      *
      * @param key      缓存键值
@@ -497,11 +516,12 @@ public class RedisTemplateUtils {
     /**
      * 判断缓存中是否有对应的value
      *
-     * @param key 缓存键值
+     * @param key     缓存键值
+     * @param hashKey 项
      * @return true 存在 false不存在
      */
-    public boolean containsKey(Object key) {
-        return redisTemplate.hasKey(key);
+    public boolean containsKey(Object key, Object hashKey) {
+        return Boolean.TRUE.equals(redisTemplate.opsForHash().hasKey(key, hashKey));
     }
 
     /**

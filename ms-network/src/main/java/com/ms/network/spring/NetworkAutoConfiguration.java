@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 @Configuration
 @EnableConfigurationProperties(OkHttpProperties.class)
-@ComponentScan(basePackages = MsBeanFactoryPostProcessor.BASE_PACKAGE,
+@ComponentScan(basePackages = MsNetworkBeanFactoryPostProcessor.BASE_PACKAGE,
         includeFilters = @ComponentScan.Filter({Service.class, Controller.class, Configuration.class, Bean.class, Component.class}),
         useDefaultFilters = false)
 public class NetworkAutoConfiguration {
@@ -33,8 +33,8 @@ public class NetworkAutoConfiguration {
      * @return MyUtilsBeanFactoryPostProcessor
      */
     @Bean
-    public MsBeanFactoryPostProcessor msBeanFactoryPostProcessor() {
-        return new MsBeanFactoryPostProcessor();
+    public MsNetworkBeanFactoryPostProcessor msNetworkBeanFactoryPostProcessor() {
+        return new MsNetworkBeanFactoryPostProcessor();
     }
 
 

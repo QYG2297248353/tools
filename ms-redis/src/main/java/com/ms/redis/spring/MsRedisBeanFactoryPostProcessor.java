@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.spring.spring;
+package com.ms.redis.spring;
 
 import com.ms.spring.ClassUtils;
 import org.springframework.beans.BeansException;
@@ -26,9 +26,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-public class MsBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
+public class MsRedisBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
-    protected static final String BASE_PACKAGE = "com.ms.spring";
+    protected static final String BASE_PACKAGE = "com.ms.redis";
 
     protected static final Class[] ANNOTATIONS = new Class[]{Service.class, Controller.class, Configuration.class, Bean.class, Component.class};
 
