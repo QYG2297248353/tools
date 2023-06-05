@@ -51,6 +51,7 @@ public class MailCore {
     private Session createSession() throws NoSuchProviderException {
         Properties prop = new Properties();
         String smtp = "smtp";
+        // TODO: 2023/6/5 待解决 SSL 问题 
         if (Boolean.TRUE.equals(msMailProperties.getSsl())) {
             prop.setProperty("mail.smtp.ssl.enable", "true");
             smtp = "smtps";
