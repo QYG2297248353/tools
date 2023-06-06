@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.push.mail.properties;
+package com.ms.push.email.properties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,13 +22,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Setter
 @Getter
-@ConfigurationProperties(prefix = "ms.push.mail")
-public class MsMailProperties {
+@ConfigurationProperties(prefix = "ms.push.mail.receive")
+public class MsBoxEmailProperties {
     /**
      * 是否开启认证
      * 默认开启
      */
-    private Boolean auth = false;
+    private Boolean auth;
 
     /**
      * 用户名
@@ -43,13 +43,6 @@ public class MsMailProperties {
     private String password;
 
     /**
-     * 发件人
-     * 发送邮件的邮箱地址
-     * 与username可能不一致 例如qq邮箱
-     */
-    private String from;
-
-    /**
      * 邮箱服务器地址
      * 格式smtp.xxx.xxx
      */
@@ -60,7 +53,7 @@ public class MsMailProperties {
      * 默认465
      * 可选值：25、465、587
      */
-    private Integer port = 465;
+    private Integer port;
 
     // 以下为可选配置
 
@@ -68,7 +61,7 @@ public class MsMailProperties {
      * 是否开启调试模式
      * 默认关闭
      */
-    private Boolean debug = false;
+    private Boolean debug;
 
     /**
      * 发送协议
@@ -79,7 +72,7 @@ public class MsMailProperties {
      * 以下为收信协议
      * pop3、imap
      */
-    private String transport = "smtp";
+    private String transport;
 
     /**
      * 读取超时
@@ -99,12 +92,12 @@ public class MsMailProperties {
      * 是否开启ssl
      * 默认开启
      */
-    private Boolean ssl = true;
+    private Boolean ssl;
 
     /**
      * 是否使用代理
      */
-    private Boolean proxy = false;
+    private Boolean proxy;
 
     /**
      * 代理地址
@@ -126,6 +119,27 @@ public class MsMailProperties {
      */
     private String proxyPassword;
 
+    public MsBoxEmailProperties() {
+        debug = false;
+        auth = true;
+        port = 993;
+        ssl = true;
+        proxy = false;
+        transport = "imap";
+    }
+
+
+    public MsBoxEmailProperties(String username, String password, String host, Integer port) {
+        this();
+        this.username = username;
+        this.password = password;
+        this.host = host;
+        this.port = port;
+    }
+
+    public MsBoxEmailProperties(String username, String password, String host) {
+        this(username, password, host, 993);
+    }
 
     public String getDebugStr() {
         return String.valueOf(debug);

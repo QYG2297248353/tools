@@ -28,7 +28,7 @@ public class RandomUtils {
      * @return 随机验证码
      */
     public static String randomCode(int length) {
-        String character = PasswordRandomEnum.Grade.CHARACTER_NUMBER;
+        final String character = PasswordRandomEnum.Grade.CHARACTER_NUMBER;
         return getSecureRandom(length, character);
     }
 
@@ -40,7 +40,7 @@ public class RandomUtils {
      * @return 随机验证码
      */
     public static String randomCodeLetter(int length) {
-        String character = PasswordRandomEnum.Grade.CHARACTER_LOW;
+        final String character = PasswordRandomEnum.Grade.CHARACTER_LOW;
         return getSecureRandom(length, character);
     }
 
@@ -52,7 +52,19 @@ public class RandomUtils {
      * @return 随机验证码
      */
     public static String randomCodeLetterUpper(int length) {
-        String character = PasswordRandomEnum.Grade.CHARACTER_HIGH;
+        final String character = PasswordRandomEnum.Grade.CHARACTER_HIGH;
+        return getSecureRandom(length, character);
+    }
+
+    /**
+     * 随机生验证码
+     * 数字+大写字母
+     *
+     * @param length 长度
+     * @return 随机验证码
+     */
+    public static String randomCodeLetterUpperNumber(int length) {
+        final String character = PasswordRandomEnum.Grade.CHARACTER_HIGH_NUMBER;
         return getSecureRandom(length, character);
     }
 
@@ -125,7 +137,7 @@ public class RandomUtils {
      * @return 随机
      */
     public static String randomString(int length) {
-        String character = PasswordRandomEnum.Grade.HIGH_CHARACTER;
+        final String character = PasswordRandomEnum.Grade.HIGH_CHARACTER;
         return getSecureRandom(length, character);
     }
 
@@ -178,7 +190,7 @@ public class RandomUtils {
 
         // Add at least one number if required
         if (includeNumber) {
-            String number = PasswordRandomEnum.Grade.CHARACTER_NUMBER;
+            final String number = PasswordRandomEnum.Grade.CHARACTER_NUMBER;
             int numberIndex = random.nextInt(number.length());
             sb.append(number.charAt(numberIndex));
             length--;
@@ -186,7 +198,7 @@ public class RandomUtils {
 
         // Add at least one special character if required
         if (includeSpecialChar) {
-            String special = PasswordRandomEnum.Grade.CHARACTER_SPECIAL;
+            final String special = PasswordRandomEnum.Grade.CHARACTER_SPECIAL;
             int specialCharIndex = random.nextInt(special.length());
             sb.append(special.charAt(specialCharIndex));
             length--;
@@ -225,7 +237,7 @@ public class RandomUtils {
 
         // Add at least one number if required
         if (includeNumber) {
-            String number = PasswordRandomEnum.Grade.CHARACTER_NUMBER;
+            final String number = PasswordRandomEnum.Grade.CHARACTER_NUMBER;
             int numberIndex = random.nextInt(number.length());
             sb.append(number.charAt(numberIndex));
             length--;
@@ -233,7 +245,7 @@ public class RandomUtils {
 
         // Add at least one special character if required
         if (includeSpecialChar) {
-            String special = PasswordRandomEnum.Grade.CHARACTER_SPECIAL;
+            final String special = PasswordRandomEnum.Grade.CHARACTER_SPECIAL;
             int specialCharIndex = random.nextInt(special.length());
             sb.append(special.charAt(specialCharIndex));
             length--;

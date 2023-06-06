@@ -157,19 +157,20 @@ public enum PasswordRandomEnum {
         public static final Integer CUSTOM_LENGTH_MIN = null;
         public static final Integer CUSTOM_LENGTH_MAX = null;
         public static final String CUSTOM_CHARACTER = null;
-        public static Integer LOW_LENGTH_MIN = 8;
-        public static Integer LOW_LENGTH_MAX = 16;
-        public static Integer MEDIUM_LENGTH_MIN = 8;
-        public static Integer MEDIUM_LENGTH_MAX = 22;
-        public static Integer HIGH_LENGTH_MIN = 8;
-        public static Integer HIGH_LENGTH_MAX = 32;
-        public static String CHARACTER_NUMBER = "0123456789";
-        public static String CHARACTER_LOW = "abcdefghijklmnopqrstuvwxyz";
-        public static String CHARACTER_HIGH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public static String CHARACTER_SPECIAL = "!@#$%^&*()_+|~-=\\`{}[]:\";'<>?,./";
-        public static String LOW_CHARACTER = CHARACTER_NUMBER + CHARACTER_LOW;
-        public static String MEDIUM_CHARACTER = CHARACTER_NUMBER + CHARACTER_LOW + CHARACTER_HIGH;
-        public static String HIGH_CHARACTER = CHARACTER_NUMBER + CHARACTER_LOW + CHARACTER_HIGH + CHARACTER_SPECIAL;
+        public static final Integer LOW_LENGTH_MIN = 8;
+        public static final Integer LOW_LENGTH_MAX = 16;
+        public static final Integer MEDIUM_LENGTH_MIN = 8;
+        public static final Integer MEDIUM_LENGTH_MAX = 22;
+        public static final Integer HIGH_LENGTH_MIN = 8;
+        public static final Integer HIGH_LENGTH_MAX = 32;
+        public static final String CHARACTER_NUMBER = "0123456789";
+        public static final String CHARACTER_LOW = "abcdefghijklmnopqrstuvwxyz";
+        public static final String CHARACTER_HIGH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public static final String CHARACTER_SPECIAL = "!@#$%^&*()_+|~-=\\`{}[]:\";'<>?,./";
+        public static final String CHARACTER_HIGH_NUMBER = CHARACTER_NUMBER + CHARACTER_HIGH;
+        public static final String LOW_CHARACTER = CHARACTER_NUMBER + CHARACTER_LOW;
+        public static final String MEDIUM_CHARACTER = CHARACTER_NUMBER + CHARACTER_LOW + CHARACTER_HIGH;
+        public static final String HIGH_CHARACTER = CHARACTER_NUMBER + CHARACTER_LOW + CHARACTER_HIGH + CHARACTER_SPECIAL;
         Integer level;
 
         Grade(Integer level) {

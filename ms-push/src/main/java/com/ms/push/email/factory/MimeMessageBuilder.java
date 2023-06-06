@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.push.mail.factory;
+package com.ms.push.email.factory;
 
 import javax.mail.Address;
 import javax.mail.Message;

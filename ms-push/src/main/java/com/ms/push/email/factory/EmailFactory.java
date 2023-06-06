@@ -9,10 +9,10 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.push.mail.factory;
+package com.ms.push.email.factory;
 
 import com.ms.core.exception.base.MsToolsException;
-import com.ms.push.mail.properties.MsMailProperties;
+import com.ms.push.email.properties.MsEmailProperties;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -22,20 +22,20 @@ import java.io.File;
 /**
  * @author ms2297248353
  */
-public class MailFactory {
+public class EmailFactory {
 
-    private MailCore core;
+    private EmailCore core;
 
-    private MailFactory() {
+    private EmailFactory() {
     }
 
-    public static MailFactory getInstance(MsMailProperties msMailProperties) {
-        MailFactoryHolder.INSTANCE.core = MailFactoryHolder.INSTANCE.create(msMailProperties);
+    public static EmailFactory getInstance(MsEmailProperties msEmailProperties) {
+        MailFactoryHolder.INSTANCE.core = MailFactoryHolder.INSTANCE.create(msEmailProperties);
         return MailFactoryHolder.INSTANCE;
     }
 
-    private MailCore create(MsMailProperties msMailProperties) {
-        return new MailCore(msMailProperties);
+    private EmailCore create(MsEmailProperties msEmailProperties) {
+        return new EmailCore(msEmailProperties);
     }
 
     /**
@@ -55,7 +55,7 @@ public class MailFactory {
                     .sendText()
                     .text(content)
                     .build();
-            MailCore.sendMail(core, message);
+            EmailCore.sendMail(core, message);
         } catch (MessagingException e) {
             throw new MsToolsException(e);
         }
@@ -78,7 +78,7 @@ public class MailFactory {
                     .sendHtml()
                     .html(content)
                     .build();
-            MailCore.sendMail(core, message);
+            EmailCore.sendMail(core, message);
         } catch (MessagingException e) {
             throw new MsToolsException(e);
         }
@@ -103,7 +103,7 @@ public class MailFactory {
                     .text(content)
                     .attach(files)
                     .build();
-            MailCore.sendMail(core, message);
+            EmailCore.sendMail(core, message);
         } catch (MessagingException e) {
             throw new MsToolsException(e);
         }
@@ -128,7 +128,7 @@ public class MailFactory {
                     .html(content)
                     .attach(files)
                     .build();
-            MailCore.sendMail(core, message);
+            EmailCore.sendMail(core, message);
         } catch (MessagingException e) {
             throw new MsToolsException(e);
         }
@@ -143,7 +143,7 @@ public class MailFactory {
     public void send(MailBuild mail) throws MsToolsException {
         try {
             MimeMessageBuilder builder = MimeMessageBuilder.create(core.getSession());
-            MailCore.sendMail(core, mail.build(builder));
+            EmailCore.sendMail(core, mail.build(builder));
         } catch (MessagingException e) {
             throw new MsToolsException(e);
         }
@@ -161,7 +161,7 @@ public class MailFactory {
 
 
     private static class MailFactoryHolder {
-        private static final MailFactory INSTANCE = new MailFactory();
+        private static final EmailFactory INSTANCE = new EmailFactory();
     }
 
 

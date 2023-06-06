@@ -422,4 +422,17 @@ public class StringUtils {
         }
         return list.toArray(new String[0]);
     }
+
+    /**
+     * 去除字符串两端的空白字符
+     *
+     * @param value 要处理的字符串
+     * @return 去除两端空白字符后的字符串
+     */
+    public static String trim(String value) {
+        if (Strings.isBlank(value)) {
+            return value;
+        }
+        return value.trim();
+    }
 }

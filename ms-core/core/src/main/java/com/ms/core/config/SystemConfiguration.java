@@ -59,6 +59,22 @@ public class SystemConfiguration {
      */
     public static final String SYSTEM_DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
     /**
+     * 作者
+     */
+    public static final String TOOLS_AUTHOR = "萌森";
+    /**
+     * 团队
+     */
+    public static final String TOOLS_TEAM = "萌森工作室";
+    /**
+     * 技术支持-网站
+     */
+    public static final String TOOLS_SUPPORT_URL = "https://qyg2297248353.top";
+    /**
+     * 技术支持-邮箱
+     */
+    public static final String TOOLS_SUPPORT_EMAIL = "qyg2297248353@163.com";
+    /**
      * 系统编码
      */
     private static final String SYSTEM_KEY_ENCODING = "MS_PROJECT_ENCODING";

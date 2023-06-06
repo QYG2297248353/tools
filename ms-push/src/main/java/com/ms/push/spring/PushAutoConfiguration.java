@@ -11,7 +11,8 @@
 
 package com.ms.push.spring;
 
-import com.ms.push.mail.properties.MsMailProperties;
+import com.ms.push.email.properties.MsBoxEmailProperties;
+import com.ms.push.email.properties.MsEmailProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,7 +25,7 @@ import org.springframework.stereotype.Service;
  * @author ms2297248353
  */
 @Configuration
-@EnableConfigurationProperties(MsMailProperties.class)
+@EnableConfigurationProperties({MsEmailProperties.class, MsBoxEmailProperties.class})
 @ComponentScan(basePackages = MsPushBeanFactoryPostProcessor.BASE_PACKAGE,
         includeFilters = @ComponentScan.Filter({Service.class, Controller.class, Configuration.class, Bean.class, Component.class}),
         useDefaultFilters = false)

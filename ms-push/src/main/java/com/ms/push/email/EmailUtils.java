@@ -9,11 +9,11 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.push.mail;
+package com.ms.push.email;
 
 import com.ms.core.exception.base.MsToolsException;
-import com.ms.push.mail.factory.MailFactory;
-import com.ms.push.mail.properties.MsMailProperties;
+import com.ms.push.email.factory.EmailFactory;
+import com.ms.push.email.properties.MsEmailProperties;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -23,20 +23,20 @@ import java.io.File;
  * @author ms2297248353
  */
 @Component
-public class MailUtils {
+public class EmailUtils {
 
     @Resource
-    private MsMailProperties msMailProperties;
+    private MsEmailProperties msEmailProperties;
 
-    private MailUtils() {
+    private EmailUtils() {
     }
 
-    public MailUtils(MsMailProperties msMailProperties) {
+    public EmailUtils(MsEmailProperties msEmailProperties) {
         this();
-        if (msMailProperties != null) {
-            this.msMailProperties = msMailProperties;
+        if (msEmailProperties != null) {
+            this.msEmailProperties = msEmailProperties;
         }
-        if (this.msMailProperties == null) {
+        if (this.msEmailProperties == null) {
             throw new IllegalArgumentException("MailUtils初始化失败，配置文件未加载");
         }
     }
@@ -50,7 +50,7 @@ public class MailUtils {
      * @throws MsToolsException 异常
      */
     public void send(String to, String subject, String content) throws MsToolsException {
-        MailFactory.getInstance(msMailProperties).send(to, subject, content);
+        EmailFactory.getInstance(msEmailProperties).send(to, subject, content);
     }
 
     /**
@@ -63,7 +63,7 @@ public class MailUtils {
      * @throws MsToolsException 异常
      */
     public void send(String to, String subject, String content, File... file) throws MsToolsException {
-        MailFactory.getInstance(msMailProperties).sendAttachment(to, subject, content, file);
+        EmailFactory.getInstance(msEmailProperties).sendAttachment(to, subject, content, file);
     }
 
     /**
@@ -75,7 +75,7 @@ public class MailUtils {
      * @throws MsToolsException 异常
      */
     public void sendHtml(String to, String subject, String content) throws MsToolsException {
-        MailFactory.getInstance(msMailProperties).sendHtml(to, subject, content);
+        EmailFactory.getInstance(msEmailProperties).sendHtml(to, subject, content);
     }
 
     /**
@@ -88,7 +88,7 @@ public class MailUtils {
      * @throws MsToolsException 异常
      */
     public void sendHtml(String to, String subject, String content, File... file) throws MsToolsException {
-        MailFactory.getInstance(msMailProperties).sendHtmlAttachment(to, subject, content, file);
+        EmailFactory.getInstance(msEmailProperties).sendHtmlAttachment(to, subject, content, file);
     }
 
     /**
@@ -97,8 +97,8 @@ public class MailUtils {
      * @param build 接口
      * @throws MsToolsException 异常
      */
-    public void send(MailFactory.MailBuild build) throws MsToolsException {
-        MailFactory.getInstance(msMailProperties).send(build);
+    public void send(EmailFactory.MailBuild build) throws MsToolsException {
+        EmailFactory.getInstance(msEmailProperties).send(build);
     }
 
 }

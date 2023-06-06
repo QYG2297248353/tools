@@ -81,11 +81,13 @@ public class FormatUtils {
      * map模板形式
      * k为占位符v为替换值
      * #{[K]}
+     * <p>
+     * [k]  占位符 k 对应 map 中的 key
      *
      * @param str    待格式化
      * @param data   键值对数据
-     * @param prefix prefix 前缀
-     * @param suffix suffix 后缀
+     * @param prefix prefix 前缀 默认 '#{'
+     * @param suffix suffix 后缀 默认 '}'
      * @return 格式化结果
      */
     public static String formatTemplate(String str, Map<String, String> data, String prefix, String suffix) {
@@ -147,6 +149,4 @@ public class FormatUtils {
     public static String format(long date, DatePatternEnum pattern) {
         return new SimpleDateFormat(pattern.getPattern()).format(new Date(date));
     }
-
-
 }

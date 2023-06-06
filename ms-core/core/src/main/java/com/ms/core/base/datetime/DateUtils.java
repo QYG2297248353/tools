@@ -14,13 +14,14 @@ package com.ms.core.base.datetime;
 import com.ms.core.base.basic.StringUtils;
 import com.ms.core.base.datetime.enums.CalendarFieldEnum;
 import com.ms.core.base.datetime.enums.ZoneIdEnum;
+import com.ms.core.config.SystemConfiguration;
 
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
-
-import static com.ms.core.base.basic.FormatUtils.format;
 
 
 /**
@@ -36,7 +37,7 @@ public class DateUtils {
      * @return 当前时间
      */
     public static Date now() {
-        return new DateUtils().create();
+        return create();
     }
 
     /**
@@ -44,7 +45,7 @@ public class DateUtils {
      *
      * @return 当前时间
      */
-    public Date create() {
+    public static Date create() {
         return new Date();
     }
 
@@ -54,7 +55,7 @@ public class DateUtils {
      * @param time 指定时间
      * @return 指定时间
      */
-    public Date create(long time) {
+    public static Date create(long time) {
         return new Date(time);
     }
 
@@ -70,7 +71,7 @@ public class DateUtils {
      * @return 指定时间
      */
     @Deprecated
-    public Date create(int year, int month, int day, int hour, int minute, int second) {
+    public static Date create(int year, int month, int day, int hour, int minute, int second) {
         return new Date(year, month, day, hour, minute, second);
     }
 
@@ -82,7 +83,7 @@ public class DateUtils {
      * @param day   日
      * @return 指定时间
      */
-    public Date createDate(int year, int month, int day) {
+    public static Date createDate(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         return calendar.getTime();
@@ -98,7 +99,7 @@ public class DateUtils {
      * @param minute 分
      * @return 指定时间
      */
-    public Date createDate(int year, int month, int day, int hour, int minute) {
+    public static Date createDate(int year, int month, int day, int hour, int minute) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day, hour, minute);
         return calendar.getTime();
@@ -115,7 +116,7 @@ public class DateUtils {
      * @param second 秒
      * @return 指定时间
      */
-    public Date createDate(int year, int month, int day, int hour, int minute, int second) {
+    public static Date createDate(int year, int month, int day, int hour, int minute, int second) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day, hour, minute, second);
         return calendar.getTime();
@@ -133,7 +134,7 @@ public class DateUtils {
      * @param millisecond 毫秒
      * @return 指定时间
      */
-    public Date createDate(int year, int month, int day, int hour, int minute, int second, int millisecond) {
+    public static Date createDate(int year, int month, int day, int hour, int minute, int second, int millisecond) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day, hour, minute, second);
         calendar.set(Calendar.MILLISECOND, millisecond);
@@ -145,7 +146,7 @@ public class DateUtils {
      *
      * @return 日历时间
      */
-    public Calendar createCalendar() {
+    public static Calendar createCalendar() {
         return Calendar.getInstance();
     }
 
@@ -155,7 +156,7 @@ public class DateUtils {
      * @param timeZone 时区
      * @return 日历时间
      */
-    public Calendar createCalendar(TimeZone timeZone) {
+    public static Calendar createCalendar(TimeZone timeZone) {
         return Calendar.getInstance(timeZone);
     }
 
@@ -165,7 +166,7 @@ public class DateUtils {
      * @param zoneId 时区
      * @return 日历时间
      */
-    public Calendar createCalendar(ZoneId zoneId) {
+    public static Calendar createCalendar(ZoneId zoneId) {
         return Calendar.getInstance(TimeZone.getTimeZone(zoneId));
     }
 
@@ -175,7 +176,7 @@ public class DateUtils {
      * @param zoneId 时区
      * @return 日历时间
      */
-    public Calendar createCalendar(ZoneIdEnum zoneId) {
+    public static Calendar createCalendar(ZoneIdEnum zoneId) {
         return Calendar.getInstance(zoneId.toTimeZone());
     }
 
@@ -204,7 +205,7 @@ public class DateUtils {
      * @param amount 数量
      * @return 移动后的时间
      */
-    public Date move(Date date, int field, int amount) {
+    public static Date move(Date date, int field, int amount) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(field, amount);
@@ -236,7 +237,7 @@ public class DateUtils {
      * @param amount 数量
      * @return 移动后的时间
      */
-    public Date move(Date date, CalendarFieldEnum field, int amount) {
+    public static Date move(Date date, CalendarFieldEnum field, int amount) {
         return move(date, field.getField(), amount);
     }
 
@@ -252,7 +253,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 比较结果
      */
-    public int compare(Date date1, Date date2) {
+    public static int compare(Date date1, Date date2) {
         if (date1 == null || date2 == null) {
             return 0;
         }
@@ -267,7 +268,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 是否相等
      */
-    public boolean isSameDay(Date date1, Date date2) {
+    public static boolean isSameDay(Date date1, Date date2) {
         if (date1 == null || date2 == null) {
             return false;
         }
@@ -287,7 +288,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 是否在前
      */
-    public boolean isBefore(Date date1, Date date2) {
+    public static boolean isBefore(Date date1, Date date2) {
         return compare(date1, date2) == -1;
     }
 
@@ -298,7 +299,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 是否在后
      */
-    public boolean isAfter(Date date1, Date date2) {
+    public static boolean isAfter(Date date1, Date date2) {
         return compare(date1, date2) == 1;
     }
 
@@ -309,7 +310,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 天数
      */
-    public long betweenDay(Date date1, Date date2) {
+    public static long betweenDay(Date date1, Date date2) {
         return between(date1, date2, Calendar.DAY_OF_YEAR);
     }
 
@@ -320,7 +321,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 小时数
      */
-    public long betweenHour(Date date1, Date date2) {
+    public static long betweenHour(Date date1, Date date2) {
         return between(date1, date2, Calendar.HOUR_OF_DAY);
     }
 
@@ -331,7 +332,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 分钟数
      */
-    public long betweenMinute(Date date1, Date date2) {
+    public static long betweenMinute(Date date1, Date date2) {
         return between(date1, date2, Calendar.MINUTE);
     }
 
@@ -342,7 +343,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 秒数
      */
-    public long betweenSecond(Date date1, Date date2) {
+    public static long betweenSecond(Date date1, Date date2) {
         return between(date1, date2, Calendar.SECOND);
     }
 
@@ -353,7 +354,7 @@ public class DateUtils {
      * @param date2 日期2
      * @return 毫秒数
      */
-    public long betweenMilliSecond(Date date1, Date date2) {
+    public static long betweenMilliSecond(Date date1, Date date2) {
         return between(date1, date2, Calendar.MILLISECOND);
     }
 
@@ -365,7 +366,7 @@ public class DateUtils {
      * @param field 字段
      * @return 时间差
      */
-    public long between(Date date1, Date date2, CalendarFieldEnum field) {
+    public static long between(Date date1, Date date2, CalendarFieldEnum field) {
         return between(date1, date2, field.getField());
     }
 
@@ -377,7 +378,7 @@ public class DateUtils {
      * @param field 字段
      * @return 时间差
      */
-    public long between(Date date1, Date date2, int field) {
+    public static long between(Date date1, Date date2, int field) {
         if (date1 == null || date2 == null) {
             return 0;
         }
@@ -392,7 +393,7 @@ public class DateUtils {
      * @param field 字段
      * @return 时间差
      */
-    private long getMillis(int field) {
+    private static long getMillis(int field) {
         switch (field) {
             case Calendar.MILLISECOND:
                 return 1;
@@ -414,7 +415,7 @@ public class DateUtils {
      * @param date 日期
      * @return 年份
      */
-    public int getYear(Date date) {
+    public static int getYear(Date date) {
         return get(date, Calendar.YEAR);
     }
 
@@ -424,7 +425,7 @@ public class DateUtils {
      * @param date 日期
      * @return 月份
      */
-    public int getMonth(Date date) {
+    public static int getMonth(Date date) {
         return get(date, Calendar.MONTH);
     }
 
@@ -434,7 +435,7 @@ public class DateUtils {
      * @param date 日期
      * @return 日期
      */
-    public int getDay(Date date) {
+    public static int getDay(Date date) {
         return get(date, Calendar.DAY_OF_MONTH);
     }
 
@@ -444,7 +445,7 @@ public class DateUtils {
      * @param date 日期
      * @return 小时
      */
-    public int getHour(Date date) {
+    public static int getHour(Date date) {
         return get(date, Calendar.HOUR_OF_DAY);
     }
 
@@ -454,7 +455,7 @@ public class DateUtils {
      * @param date 日期
      * @return 分钟
      */
-    public int getMinute(Date date) {
+    public static int getMinute(Date date) {
         return get(date, Calendar.MINUTE);
     }
 
@@ -464,7 +465,7 @@ public class DateUtils {
      * @param date 日期
      * @return 秒
      */
-    public int getSecond(Date date) {
+    public static int getSecond(Date date) {
         return get(date, Calendar.SECOND);
     }
 
@@ -474,7 +475,7 @@ public class DateUtils {
      * @param date 日期
      * @return 毫秒
      */
-    public int getMilliSecond(Date date) {
+    public static int getMilliSecond(Date date) {
         return get(date, Calendar.MILLISECOND);
     }
 
@@ -485,7 +486,7 @@ public class DateUtils {
      * @param field 字段
      * @return 日期
      */
-    public int get(Date date, CalendarFieldEnum field) {
+    public static int get(Date date, CalendarFieldEnum field) {
         return get(date, field.getField());
     }
 
@@ -496,7 +497,7 @@ public class DateUtils {
      * @param field 字段
      * @return 日期
      */
-    public int get(Date date, int field) {
+    public static int get(Date date, int field) {
         if (date == null) {
             return 0;
         }
@@ -510,7 +511,7 @@ public class DateUtils {
      *
      * @return 当前年份
      */
-    public int getYear() {
+    public static int getYear() {
         return getYear(now());
     }
 
@@ -519,7 +520,7 @@ public class DateUtils {
      *
      * @return 月份
      */
-    public int getMonth() {
+    public static int getMonth() {
         return getMonth(now());
     }
 
@@ -528,7 +529,7 @@ public class DateUtils {
      *
      * @return 日期
      */
-    public int getDay() {
+    public static int getDay() {
         return getDay(now());
     }
 
@@ -537,7 +538,7 @@ public class DateUtils {
      *
      * @return 小时
      */
-    public int getHour() {
+    public static int getHour() {
         return getHour(now());
     }
 
@@ -546,7 +547,7 @@ public class DateUtils {
      *
      * @return 分钟
      */
-    public int getMinute() {
+    public static int getMinute() {
         return getMinute(now());
     }
 
@@ -555,7 +556,7 @@ public class DateUtils {
      *
      * @return 秒
      */
-    public int getSecond() {
+    public static int getSecond() {
         return getSecond(now());
     }
 
@@ -564,7 +565,7 @@ public class DateUtils {
      *
      * @return 毫秒
      */
-    public int getMilliSecond() {
+    public static int getMilliSecond() {
         return getMilliSecond(now());
     }
 
@@ -573,7 +574,7 @@ public class DateUtils {
      *
      * @return 当前日期路径
      */
-    public String getNowPath() {
+    public static String getNowPath() {
         return getNowPath(null);
     }
 
@@ -583,7 +584,7 @@ public class DateUtils {
      * @param format 格式
      * @return 当前日期路径
      */
-    public String getNowPath(String format) {
+    public static String getNowPath(String format) {
         if (StringUtils.isBlank(format)) {
             format = "yyyy/MM/dd";
         }
@@ -597,7 +598,158 @@ public class DateUtils {
      * @param suffix 后缀
      * @return 当前日期路径
      */
-    public String getNowPath(String format, String suffix) {
+    public static String getNowPath(String format, String suffix) {
         return getNowPath(format) + suffix;
+    }
+
+    /**
+     * 时间戳 转为 日期
+     * <p>
+     * 时间戳为10位时,自动转为13位
+     *
+     * @param timestamp 时间戳
+     * @return 日期
+     */
+    public static Date timestampToDate(long timestamp) {
+        if (String.valueOf(timestamp).length() == 10) {
+            timestamp *= 1000;
+        }
+        return new Date(timestamp);
+    }
+
+    /**
+     * 日期 转为 时间戳
+     *
+     * @param date 日期
+     * @return 时间戳
+     */
+    public static long dateToTimestamp(Date date) {
+        return date.getTime();
+    }
+
+    /**
+     * 获取当前时间戳
+     *
+     * @return 时间戳
+     */
+    public static long timestamp() {
+        return dateToTimestamp(now());
+    }
+
+    /**
+     * 获取当前时间戳
+     * 10位
+     *
+     * @return 时间戳
+     */
+    public static int timestamp10() {
+        return (int) (timestamp() / 1000);
+    }
+
+    /**
+     * 获取当前时间戳
+     * 10位
+     *
+     * @return 时间戳
+     */
+    public static long timestampTen() {
+        return timestamp10();
+    }
+
+
+    /**
+     * 获取当前时间戳
+     * 13位
+     *
+     * @return 时间戳
+     */
+    public static long timestamp13() {
+        return timestamp();
+    }
+
+
+    /**
+     * 获取当前格式化日期
+     *
+     * @return 当前格式化日期
+     */
+    public static String getNowFormat() {
+        return getNowFormat(null);
+    }
+
+    /**
+     * 获取当前格式化日期
+     *
+     * @param format 格式
+     * @return 当前格式化日期
+     */
+    public static String getNowFormat(String format) {
+        return format(now(), format);
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date 日期
+     * @return 格式化后的日期
+     */
+    public static String format(Date date) {
+        return format(date, null);
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date   日期
+     * @param format 格式
+     * @return 格式化后的日期
+     */
+    public static String format(Date date, String format) {
+        if (date == null) {
+            return null;
+        }
+        if (StringUtils.isBlank(format)) {
+            format = SystemConfiguration.getSystemDateFormat();
+        }
+        return new SimpleDateFormat(format).format(date);
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date   日期
+     * @param format 格式
+     * @param locale 本地化
+     * @return 格式化后的日期
+     */
+    public static String format(Date date, String format, Locale locale) {
+        if (date == null) {
+            return null;
+        }
+        if (StringUtils.isBlank(format)) {
+            format = SystemConfiguration.getSystemDateFormat();
+        }
+        return new SimpleDateFormat(format, locale).format(date);
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date     日期
+     * @param format   格式
+     * @param locale   本地化
+     * @param timeZone 时区
+     * @return 格式化后的日期
+     */
+    public static String format(Date date, String format, Locale locale, TimeZone timeZone) {
+        if (date == null) {
+            return null;
+        }
+        if (StringUtils.isBlank(format)) {
+            format = SystemConfiguration.getSystemDateFormat();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format, locale);
+        sdf.setTimeZone(timeZone);
+        return sdf.format(date);
     }
 }
