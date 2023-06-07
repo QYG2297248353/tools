@@ -110,4 +110,8 @@ public interface Maps {
         map.put(k8, v8);
         return map;
     }
+
+    static <T, S> Map<T, S> newHashMap() {
+        return new HashMap<>();
+    }
 }

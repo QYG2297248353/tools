@@ -17,6 +17,7 @@ import com.ms.push.email.properties.MsEmailProperties;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 /**
@@ -99,6 +100,16 @@ public class EmailUtils {
      */
     public void send(EmailFactory.MailBuild build) throws MsToolsException {
         EmailFactory.getInstance(msEmailProperties).send(build);
+    }
+
+    /**
+     * 发送邮件
+     *
+     * @param message 接口
+     * @throws MsToolsException 异常
+     */
+    public void sendHtml(MimeMessage message) throws MsToolsException {
+        EmailFactory.getInstance(msEmailProperties).send(message);
     }
 
 }

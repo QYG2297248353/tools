@@ -149,6 +149,19 @@ public class EmailFactory {
         }
     }
 
+    /**
+     * 发送邮件
+     *
+     * @param message 邮件构建
+     */
+    public void send(MimeMessage message) throws MsToolsException {
+        try {
+            EmailCore.sendMail(core, message);
+        } catch (MessagingException e) {
+            throw new MsToolsException(e);
+        }
+    }
+
     public interface MailBuild {
         /**
          * 构建邮件

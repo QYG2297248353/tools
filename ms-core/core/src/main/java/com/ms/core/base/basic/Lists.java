@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 public interface Lists {
-    List EMPTY_LIST = new ArrayList(0);
+    List EMPTY_LIST = new ArrayList();
 
     static <T> List<T> of() {
         return new ArrayList<>();
@@ -113,5 +113,13 @@ public interface Lists {
             size--;
         }
         return randomList;
+    }
+
+    static <T> List<T> newArrayList(T[] bcc) {
+        return toList(bcc);
+    }
+
+    static <T> List<T> empty() {
+        return EMPTY_LIST;
     }
 }

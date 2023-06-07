@@ -42,7 +42,7 @@ public class EmailCore {
         }
     }
 
-    public static void sendMail(EmailCore core, MimeMessage message) throws MessagingException {
+    protected static void sendMail(EmailCore core, MimeMessage message) throws MessagingException {
         Transport transport = core.getTransport();
         transport.sendMessage(message, message.getAllRecipients());
         core.close();

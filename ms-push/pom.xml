@@ -28,7 +28,6 @@
             <artifactId>core</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>javax-mail</artifactId>
@@ -37,6 +36,12 @@
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>
             <artifactId>ms-network</artifactId>
+            <version>${ms.tools.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>ms-id</artifactId>
             <version>${ms.tools.version}</version>
         </dependency>
     </dependencies>

@@ -12,6 +12,7 @@
 package com.ms.resources.core;
 
 import com.ms.core.exception.base.MsToolsException;
+import com.ms.id.ID;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -176,6 +177,22 @@ public class FileFactory {
             builder.append(temp);
         }
         return builder.toString();
+    }
+
+    public static File writeToTempFile(InputStream fileStream, String suffix) throws MsToolsException {
+        File tempFile = createTempFile(ID.uuid(), suffix);
+        copyInputStreamToFile(fileStream, tempFile);
+        return tempFile;
+    }
+
+    public static File writeToTempFile(byte[] fileBytes, String suffix) throws MsToolsException {
+        File tempFile = createTempFile(ID.uuid(), suffix);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(tempFile)) {
+            fileOutputStream.write(fileBytes);
+        } catch (IOException e) {
+            throw new MsToolsException(e);
+        }
+        return tempFile;
     }
 
     public static void writeToFile(String filePath, String content) throws MsToolsException {
@@ -393,4 +410,6 @@ public class FileFactory {
         }
         return fileName.substring(index + 1);
     }
+
+
 }

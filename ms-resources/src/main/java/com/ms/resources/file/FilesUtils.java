@@ -12,6 +12,7 @@
 package com.ms.resources.file;
 
 import com.ms.core.exception.base.MsToolsException;
+import com.ms.id.ID;
 import com.ms.resources.core.FileFactory;
 import com.ms.resources.core.ResourcesFactory;
 
@@ -77,6 +78,40 @@ public class FilesUtils {
      */
     public static File createDirectory(String path) throws MsToolsException {
         return FileFactory.createDirectory(path);
+    }
+
+    /**
+     * 写入临时文件
+     *
+     * @param fileStream 文件流
+     * @return 文件
+     * @throws MsToolsException 异常
+     */
+    public static File writeToTempFile(InputStream fileStream) throws MsToolsException {
+        return FileFactory.writeToTempFile(fileStream, null);
+    }
+
+    /**
+     * 写入临时文件
+     *
+     * @param fileBytes 文件字节
+     * @return 文件
+     * @throws MsToolsException 异常
+     */
+    public static File writeToTempFile(byte[] fileBytes) throws MsToolsException {
+        return FileFactory.writeToTempFile(fileBytes, null);
+    }
+
+    /**
+     * 写入临时文件
+     *
+     * @param fileStream 文件流
+     * @param suffix     后缀
+     * @return 文件
+     * @throws MsToolsException 异常
+     */
+    public static File writeToTempFile(InputStream fileStream, String suffix) throws MsToolsException {
+        return FileFactory.writeToTempFile(fileStream, suffix);
     }
 
     /**
@@ -379,6 +414,16 @@ public class FilesUtils {
     /**
      * 创建临时文件
      *
+     * @return 临时文件
+     * @throws MsToolsException 文件
+     */
+    public static File createTempFile() throws MsToolsException {
+        return createTempFile(ID.uuid(), null);
+    }
+
+    /**
+     * 创建临时文件
+     *
      * @param prefix 前缀
      * @return 临时文件
      * @throws MsToolsException 文件
@@ -469,6 +514,4 @@ public class FilesUtils {
     public static String getSystemTempDirectory() {
         return System.getProperty("java.io.tmpdir");
     }
-
-
 }
