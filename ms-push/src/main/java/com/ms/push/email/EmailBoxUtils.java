@@ -115,6 +115,9 @@ public class EmailBoxUtils {
 
     /**
      * 获取收件箱列表
+     * <p>
+     * 排序说明
+     * 取决于支持SORT extension defined by RFC 5256
      *
      * @param pageNo  页码
      * @param pageNum 每页数量
@@ -126,14 +129,18 @@ public class EmailBoxUtils {
 
     /**
      * 获取文件夹列表
+     * <p>
+     * 排序说明
+     * 取决于支持SORT extension defined by RFC 5256
      *
      * @param folder  文件夹名称
+     * @param isSend  是否为发件箱 true 发件箱 false 收件箱
      * @param pageNo  页码
      * @param pageNum 每页数量
      * @return 获取文件夹列表
      */
-    public PageBoxTemplate<List<EmailBoxTemplate>> getBoxList(String folder, int pageNo, int pageNum) {
-        return BoxEmailFactory.getBoxList(getMsReceiveEmailProperties(), folder, pageNo, pageNum);
+    public PageBoxTemplate<List<EmailBoxTemplate>> getBoxList(String folder, boolean isSend, int pageNo, int pageNum) {
+        return BoxEmailFactory.getBoxList(getMsReceiveEmailProperties(), folder, isSend, pageNo, pageNum);
     }
 
 

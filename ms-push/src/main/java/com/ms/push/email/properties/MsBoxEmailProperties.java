@@ -107,7 +107,7 @@ public class MsBoxEmailProperties {
     /**
      * 代理端口
      */
-    private String proxyPort;
+    private Integer proxyPort;
 
     /**
      * 代理用户名

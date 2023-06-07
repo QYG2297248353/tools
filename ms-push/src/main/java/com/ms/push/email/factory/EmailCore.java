@@ -71,7 +71,7 @@ public class EmailCore {
 
         if (Boolean.TRUE.equals(msEmailProperties.getProxy())) {
             prop.setProperty("mail." + smtp + ".proxy.host", msEmailProperties.getProxyHost());
-            prop.setProperty("mail." + smtp + ".proxy.port", msEmailProperties.getProxyPort());
+            prop.setProperty("mail." + smtp + ".proxy.port", String.valueOf(msEmailProperties.getProxyPort()));
             if (msEmailProperties.getProxyUsername() != null) {
                 prop.setProperty("mail." + smtp + ".proxy.user", msEmailProperties.getProxyUsername());
                 prop.setProperty("mail." + smtp + ".proxy.password", msEmailProperties.getProxyPassword());

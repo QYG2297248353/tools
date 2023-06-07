@@ -86,6 +86,11 @@ public class EmailBoxTemplate {
     private boolean hasAttachment;
 
     /**
+     * 附件数量
+     */
+    private int attachmentCount;
+
+    /**
      * 邮件内容
      * <p>
      * 截取前100个字符
@@ -230,9 +235,23 @@ public class EmailBoxTemplate {
             template.setRead(false);
         }
         try {
-            // TODO: 2023/6/6 无法判断
-            template.setHasAttachment(message.isMimeType("multipart/*"));
-        } catch (MessagingException e) {
+            if (message.isMimeType("multipart/*")) {
+                Multipart multipart = (Multipart) message.getContent();
+                // 附件数量
+                int attachmentCount = 0;
+                for (int i = 0; i < multipart.getCount(); i++) {
+                    BodyPart bodyPart = multipart.getBodyPart(i);
+                    if (Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition())) {
+                        attachmentCount++;
+                    }
+                }
+                template.setHasAttachment(attachmentCount > 0);
+                template.setAttachmentCount(attachmentCount);
+            } else {
+                template.setHasAttachment(false);
+                template.setAttachmentCount(0);
+            }
+        } catch (MessagingException | IOException e) {
             template.setHasAttachment(false);
         }
         try {
@@ -491,6 +510,14 @@ public class EmailBoxTemplate {
 
     public void setFromList(List<String> fromList) {
         this.fromList = fromList;
+    }
+
+    public int getAttachmentCount() {
+        return attachmentCount;
+    }
+
+    public void setAttachmentCount(int attachmentCount) {
+        this.attachmentCount = attachmentCount;
     }
 
     public String getMessageId() {

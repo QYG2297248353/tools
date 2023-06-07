@@ -19,12 +19,14 @@ import com.ms.push.email.properties.MsBoxEmailProperties;
 import com.ms.push.email.template.EmailBoxTemplate;
 import com.ms.push.email.template.EmailFolderTemplate;
 import com.ms.push.email.template.PageBoxTemplate;
+import com.sun.mail.imap.IMAPFolder;
 import com.sun.mail.imap.IMAPStore;
+import com.sun.mail.imap.SortTerm;
 
 import javax.mail.*;
 import javax.mail.search.ComparisonTerm;
 import javax.mail.search.ReceivedDateTerm;
-import javax.mail.search.SearchTerm;
+import javax.mail.search.SentDateTerm;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -36,11 +38,6 @@ import java.util.stream.Collectors;
  */
 public class BoxEmailFactory {
     private static final Logger log = Logger.getLogger(BoxEmailFactory.class.getName());
-    /**
-     * 邮件数量阈值
-     * 超过阈值则进行日期限制
-     */
-    private static final int EMAIL_COUNT_THRESHOLD = 500;
 
     /**
      * 获取收件箱列表
@@ -56,12 +53,13 @@ public class BoxEmailFactory {
         // 打开收件箱
         try {
             // 获取收件箱
-            Folder inbox = store.getFolder(EmailBoxTypeEnum.INBOX.getCode());
+            Folder folder = store.getFolder(EmailBoxTypeEnum.INBOX.getCode());
+
             // 以只读方式打开收件箱
-            inbox.open(Folder.READ_ONLY);
+            folder.open(Folder.READ_ONLY);
 
             // 获取总邮件数
-            int total = inbox.getMessageCount();
+            int total = folder.getMessageCount();
 
             // 获取总页数
             int totalPage = total % pageNum == 0 ? total / pageNum : total / pageNum + 1;
@@ -69,8 +67,20 @@ public class BoxEmailFactory {
             // 获取指定页的邮件
             int start = (pageNo - 1) * pageNum + 1;
             int end = Math.min(pageNo * pageNum, total);
-            // 获取邮件列表
-            List<Message> messageList = getMessages(inbox, start, end);
+
+            // 排序
+            boolean sorted = sortDefaultFolder(folder, false);
+            List<Message> messageList;
+            if (sorted) {
+                // 获取邮件列表
+                messageList = getBoxMessages(folder, start, end);
+            } else {
+                log.info("尝试使用检索排序");
+                ReceivedDateTerm receivedDateTerm = new ReceivedDateTerm(ComparisonTerm.LE, new Date());
+                Message[] search = folder.search(receivedDateTerm);
+                messageList = getBoxMessages(search, start, end);
+            }
+            // 转换为模板
             List<EmailBoxTemplate> collect = messageList.stream().map(EmailBoxTemplate::coverTo).collect(Collectors.toList());
             return new PageBoxTemplate(total, totalPage, pageNo, pageNum, collect);
         } catch (MessagingException e) {
@@ -81,52 +91,23 @@ public class BoxEmailFactory {
         }
     }
 
-    private static List<Message> getMessages(Folder inbox, int start, int end) {
-        try {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_MONTH, -14);
-            SearchTerm searchTerm = new ReceivedDateTerm(ComparisonTerm.GE, calendar.getTime());
-            Message[] messages = inbox.search(searchTerm);
-            sortDefaultMessage(messages);
-            if (start > messages.length) {
-                return Collections.emptyList();
-            }
-            if (end > messages.length) {
-                end = messages.length;
-            }
-            return Arrays.stream(messages).skip(start - 1).limit(end - start + 1).collect(Collectors.toList());
-        } catch (MessagingException e) {
-            throw new MsToolsRuntimeException(e);
-        }
-    }
-
-    private static void sortDefaultMessage(Message[] messages) {
-        // 按照收信时间降序排序
-        Arrays.sort(messages, Collections.reverseOrder((m1, m2) -> {
-            try {
-                return m1.getReceivedDate().compareTo(m2.getReceivedDate());
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-            return 0;
-        }));
-    }
 
     /**
-     * 获取收件箱文件夹列表
+     * 获取文件夹列表
      *
      * @param properties 邮箱配置
      * @param pageNo     页码
      * @param pageNum    每页数量
      * @return 收件箱列表
      */
-    public static PageBoxTemplate<List<EmailBoxTemplate>> getBoxList(MsBoxEmailProperties properties, String folder, int pageNo, int pageNum) {
+    public static PageBoxTemplate<List<EmailBoxTemplate>> getBoxList(MsBoxEmailProperties properties, String folderName, boolean isSend, int pageNo, int pageNum) {
         // 连接服务器
         Store store = connectStore(properties);
         // 打开收件箱
         try {
             // 获取收件箱
-            Folder inbox = store.getFolder(folder);
+            Folder inbox = store.getFolder(folderName);
+            IMAPFolder folder = (IMAPFolder) inbox;
             // 以只读方式打开发件箱
             inbox.open(Folder.READ_ONLY);
             // 获取总邮件数
@@ -137,8 +118,26 @@ public class BoxEmailFactory {
             // 获取指定页的邮件
             int start = (pageNo - 1) * pageNum + 1;
             int end = Math.min(pageNo * pageNum, total);
-            // 获取邮件列表
-            List<Message> messageList = getBoxMessages(inbox, start, end);
+
+            // 排序
+            boolean sorted = sortDefaultFolder(folder, isSend);
+            List<Message> messageList;
+            if (sorted) {
+                // 获取邮件列表
+                messageList = getBoxMessages(folder, start, end);
+            } else {
+                log.info("尝试使用检索排序");
+                if (isSend) {
+                    SentDateTerm sentDateTerm = new SentDateTerm(ComparisonTerm.LE, new Date());
+                    Message[] search = folder.search(sentDateTerm);
+                    messageList = getBoxMessages(search, start, end);
+                } else {
+                    ReceivedDateTerm receivedDateTerm = new ReceivedDateTerm(ComparisonTerm.LE, new Date());
+                    Message[] search = folder.search(receivedDateTerm);
+                    messageList = getBoxMessages(search, start, end);
+                }
+            }
+
             List<EmailBoxTemplate> collect = messageList.stream().map(EmailBoxTemplate::coverTo).collect(Collectors.toList());
             return new PageBoxTemplate(total, totalPage, pageNo, pageNum, collect);
         } catch (MessagingException e) {
@@ -149,43 +148,46 @@ public class BoxEmailFactory {
         }
     }
 
-    private static List<Message> getBoxMessages(Folder inbox, int start, int end) {
+    private static boolean sortDefaultFolder(Folder folder, boolean isSend) {
+        // 检查是否支持SORT扩展
+        if (folder instanceof IMAPFolder) {
+            IMAPFolder folderImap = (IMAPFolder) folder;
+            try {
+                if (isSend) {
+                    SortTerm[] sortTerm = new SortTerm[]{SortTerm.DATE};
+                    folderImap.getSortedMessages(sortTerm);
+                } else {
+                    SortTerm[] sortTerm = new SortTerm[]{SortTerm.ARRIVAL};
+                    folderImap.getSortedMessages(sortTerm);
+                }
+                return true;
+            } catch (MessagingException e) {
+                log.warning(e.getMessage());
+            }
+        }
+        log.warning("当前协议不支持排序");
+        return false;
+    }
+
+    private static List<Message> getBoxMessages(Message[] search, int start, int end) {
+        int length = search.length;
+        if (start > length) {
+            return Collections.emptyList();
+        }
+        if (end > length) {
+            end = length;
+        }
+        return Arrays.stream(search).skip(start - 1).limit(end - start + 1).collect(Collectors.toList());
+    }
+
+    private static List<Message> getBoxMessages(Folder folder, int start, int end) {
         try {
-            // 获取邮件数量
-            int messageCount = inbox.getMessageCount();
-            // 如果邮件数量小于阈值，则直接获取
-            Message[] messages;
-            if (messageCount > EMAIL_COUNT_THRESHOLD) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_MONTH, -14);
-                SearchTerm searchTerm = new ReceivedDateTerm(ComparisonTerm.GE, calendar.getTime());
-                messages = inbox.search(searchTerm);
-            } else {
-                messages = inbox.getMessages();
-            }
-            sortDefaultFolderMessage(messages);
-            if (start > messages.length) {
-                return Collections.emptyList();
-            }
-            if (end > messages.length) {
-                end = messages.length;
-            }
-            return Arrays.stream(messages).skip(start - 1).limit(end - start + 1).collect(Collectors.toList());
+            Message[] test = folder.getMessages(start, end);
+            Message[] messages = folder.getMessages();
+            return getBoxMessages(messages, start, end);
         } catch (MessagingException e) {
             throw new MsToolsRuntimeException(e);
         }
-    }
-
-    private static void sortDefaultFolderMessage(Message[] messages) {
-        // 按照发信时间降序排序
-        Arrays.sort(messages, Collections.reverseOrder((m1, m2) -> {
-            try {
-                return m1.getSentDate().compareTo(m2.getSentDate());
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-            return 0;
-        }));
     }
 
     private static void closeStore(Store store) {
@@ -250,7 +252,7 @@ public class BoxEmailFactory {
 
         if (Boolean.TRUE.equals(properties.getProxy())) {
             prop.setProperty("mail." + protocol + ".proxy.host", properties.getProxyHost());
-            prop.setProperty("mail." + protocol + ".proxy.port", properties.getProxyPort());
+            prop.setProperty("mail." + protocol + ".proxy.port", String.valueOf(properties.getProxyPort()));
             if (properties.getProxyUsername() != null) {
                 prop.setProperty("mail." + protocol + ".proxy.user", properties.getProxyUsername());
                 prop.setProperty("mail." + protocol + ".proxy.password", properties.getProxyPassword());
