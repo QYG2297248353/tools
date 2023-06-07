@@ -558,7 +558,7 @@ public class EmailMimeMessageBuilders {
          *
          * @param content 内容
          */
-        public EmailMimeMessageBuilder addContent(EmailMultipartBuilder content) {
+        public EmailMimeMessageBuilder addContent(EmailMultipartBuilder.EmailMultipart content) {
             try {
                 if (content.status()) {
                     this.content.addBodyPart(content.build());
@@ -576,9 +576,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param content 内容
          */
-        public EmailMimeMessageBuilder addContent(EmailMultipartBuilder... content) {
+        public EmailMimeMessageBuilder addContent(EmailMultipartBuilder.EmailMultipart... content) {
             try {
-                for (EmailMultipartBuilder builder : content) {
+                for (EmailMultipartBuilder.EmailMultipart builder : content) {
                     if (builder.status()) {
                         this.content.addBodyPart(builder.build());
                     } else {

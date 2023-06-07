@@ -82,7 +82,7 @@ public class BoxEmailFactory {
             }
             // 转换为模板
             List<EmailBoxTemplate> collect = messageList.stream().map(EmailBoxTemplate::coverTo).collect(Collectors.toList());
-            return new PageBoxTemplate(total, totalPage, pageNo, pageNum, collect);
+            return new PageBoxTemplate<>(total, totalPage, pageNo, pageNum, collect);
         } catch (MessagingException e) {
             throw new MsToolsRuntimeException(e);
         } finally {
