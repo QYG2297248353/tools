@@ -13,6 +13,7 @@ package com.ms.push.email;
 
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.push.email.factory.EmailFactory;
+import com.ms.push.email.factory.EmailMimeMessageBuilders;
 import com.ms.push.email.properties.MsEmailProperties;
 import org.springframework.stereotype.Component;
 
@@ -24,15 +25,15 @@ import java.io.File;
  * @author ms2297248353
  */
 @Component
-public class EmailUtils {
+public class EmailPushUtils {
 
     @Resource
     private MsEmailProperties msEmailProperties;
 
-    private EmailUtils() {
+    private EmailPushUtils() {
     }
 
-    public EmailUtils(MsEmailProperties msEmailProperties) {
+    public EmailPushUtils(MsEmailProperties msEmailProperties) {
         this();
         if (msEmailProperties != null) {
             this.msEmailProperties = msEmailProperties;
@@ -108,8 +109,18 @@ public class EmailUtils {
      * @param message 接口
      * @throws MsToolsException 异常
      */
-    public void sendHtml(MimeMessage message) throws MsToolsException {
+    public void send(MimeMessage message) throws MsToolsException {
         EmailFactory.getInstance(msEmailProperties).send(message);
+    }
+
+    /**
+     * 发送邮件
+     *
+     * @param builders 接口
+     * @throws MsToolsException 异常
+     */
+    public void send(EmailMimeMessageBuilders.EmailMimeMessageBuilder builders) throws MsToolsException {
+        EmailFactory.getInstance(msEmailProperties).send(builders);
     }
 
 }

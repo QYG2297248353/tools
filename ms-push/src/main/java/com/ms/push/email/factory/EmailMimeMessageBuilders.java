@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.push.email.builder;
+package com.ms.push.email.factory;
 
 import com.ms.core.base.basic.Lists;
 import com.ms.core.base.basic.Maps;
@@ -47,7 +47,7 @@ public class EmailMimeMessageBuilders {
         return new EmailMimeMessageBuilder();
     }
 
-    private static class EmailMimeMessageBuilder {
+    public static class EmailMimeMessageBuilder {
 
 
         /**
@@ -124,7 +124,7 @@ public class EmailMimeMessageBuilders {
          */
         private Map<String, String> headers;
 
-        public EmailMimeMessageBuilder() {
+        private EmailMimeMessageBuilder() {
             to = Lists.empty();
             cc = Lists.empty();
             bcc = Lists.empty();
@@ -141,8 +141,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param from 发件人地址
          */
-        public void setFrom(Address from) {
+        public EmailMimeMessageBuilder setFrom(Address from) {
             this.from = from;
+            return this;
         }
 
         /**
@@ -150,12 +151,13 @@ public class EmailMimeMessageBuilders {
          *
          * @param from 发件人地址
          */
-        public void setFrom(String from) {
+        public EmailMimeMessageBuilder setFrom(String from) {
             try {
                 this.from = new InternetAddress(from);
             } catch (AddressException e) {
                 log.warning("邮件地址错误{" + from + "}");
             }
+            return this;
         }
 
         /**
@@ -163,8 +165,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param to 收件人地址
          */
-        public void addTo(Address... to) {
+        public EmailMimeMessageBuilder addTo(Address... to) {
             this.to = Lists.newArrayList(to);
+            return this;
         }
 
         /**
@@ -172,8 +175,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param bcc 抄送人地址
          */
-        public void addBcc(Address... bcc) {
+        public EmailMimeMessageBuilder addBcc(Address... bcc) {
             this.bcc = Lists.newArrayList(bcc);
+            return this;
         }
 
         /**
@@ -181,8 +185,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param cc 密送人地址
          */
-        public void addCc(Address... cc) {
+        public EmailMimeMessageBuilder addCc(Address... cc) {
             this.cc = Lists.newArrayList(cc);
+            return this;
         }
 
         /**
@@ -190,7 +195,7 @@ public class EmailMimeMessageBuilders {
          *
          * @param to 收件人地址
          */
-        public void addTo(String... to) {
+        public EmailMimeMessageBuilder addTo(String... to) {
             for (String email : to) {
                 try {
                     InternetAddress internetAddress = new InternetAddress(email);
@@ -199,6 +204,7 @@ public class EmailMimeMessageBuilders {
                     log.warning("邮件地址错误{" + email + "}");
                 }
             }
+            return this;
         }
 
         /**
@@ -206,7 +212,7 @@ public class EmailMimeMessageBuilders {
          *
          * @param bcc 抄送人地址
          */
-        public void addBcc(String... bcc) {
+        public EmailMimeMessageBuilder addBcc(String... bcc) {
             for (String email : bcc) {
                 try {
                     InternetAddress internetAddress = new InternetAddress(email);
@@ -215,6 +221,7 @@ public class EmailMimeMessageBuilders {
                     log.warning("邮件地址错误{" + email + "}");
                 }
             }
+            return this;
         }
 
         /**
@@ -222,7 +229,7 @@ public class EmailMimeMessageBuilders {
          *
          * @param cc 密送人地址
          */
-        public void addCc(String... cc) {
+        public EmailMimeMessageBuilder addCc(String... cc) {
             for (String email : cc) {
                 try {
                     InternetAddress internetAddress = new InternetAddress(email);
@@ -231,13 +238,15 @@ public class EmailMimeMessageBuilders {
                     log.warning("邮件地址错误{" + email + "}");
                 }
             }
+            return this;
         }
 
         /**
          * 设置为回复邮件
          */
-        public void setReply() {
+        public EmailMimeMessageBuilder setReply() {
             reply = true;
+            return this;
         }
 
         /**
@@ -245,8 +254,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param reply 是否为回复邮件
          */
-        public void setReply(Boolean reply) {
+        public EmailMimeMessageBuilder setReply(Boolean reply) {
             this.reply = reply != null && reply;
+            return this;
         }
 
         /**
@@ -254,8 +264,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param subject 主题
          */
-        public void setSubject(String subject) {
+        public EmailMimeMessageBuilder setSubject(String subject) {
             this.subject = subject;
+            return this;
         }
 
         /**
@@ -264,9 +275,10 @@ public class EmailMimeMessageBuilders {
          * @param subject 主题
          * @param charset 编码
          */
-        public void setSubject(String subject, String charset) {
+        public EmailMimeMessageBuilder setSubject(String subject, String charset) {
             this.subject = subject;
             this.charset = charset;
+            return this;
         }
 
         /**
@@ -274,8 +286,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param description 描述
          */
-        public void setDescription(String description) {
+        public EmailMimeMessageBuilder setDescription(String description) {
             this.description = description;
+            return this;
         }
 
         /**
@@ -283,8 +296,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param charset 编码
          */
-        public void setCharset(String charset) {
+        public EmailMimeMessageBuilder setCharset(String charset) {
             this.charset = charset;
+            return this;
         }
 
         /**
@@ -292,9 +306,10 @@ public class EmailMimeMessageBuilders {
          *
          * @param file 附件文件
          */
-        public void addAttachment(File file) {
+        public EmailMimeMessageBuilder addAttachment(File file) {
             String name = file.getName();
             attachments.put(name, file);
+            return this;
         }
 
         /**
@@ -303,8 +318,9 @@ public class EmailMimeMessageBuilders {
          * @param name 附件名称
          * @param file 附件文件
          */
-        public void addAttachment(String name, File file) {
+        public EmailMimeMessageBuilder addAttachment(String name, File file) {
             attachments.put(name, file);
+            return this;
         }
 
         /**
@@ -313,13 +329,14 @@ public class EmailMimeMessageBuilders {
          * @param name       附件名称
          * @param fileStream 附件文件流
          */
-        public void addAttachment(String name, InputStream fileStream) {
+        public EmailMimeMessageBuilder addAttachment(String name, InputStream fileStream) {
             try {
                 File file = FilesUtils.writeToTempFile(fileStream);
                 attachments.put(name, file);
             } catch (MsToolsException e) {
                 log.warning("附件添加失败：" + e.getMessage());
             }
+            return this;
         }
 
         /**
@@ -329,13 +346,14 @@ public class EmailMimeMessageBuilders {
          * @param fileStream 附件文件流
          * @param suffix     附件后缀 例如：.jpg .json
          */
-        public void addAttachment(String name, InputStream fileStream, String suffix) {
+        public EmailMimeMessageBuilder addAttachment(String name, InputStream fileStream, String suffix) {
             try {
                 File file = FilesUtils.writeToTempFile(fileStream, suffix);
                 attachments.put(name, file);
             } catch (MsToolsException e) {
                 log.warning("附件添加失败：" + e.getMessage());
             }
+            return this;
         }
 
         /**
@@ -343,8 +361,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param attachments 附件
          */
-        public void addAttachments(Map<String, File> attachments) {
+        public EmailMimeMessageBuilder addAttachments(Map<String, File> attachments) {
             this.attachments.putAll(attachments);
+            return this;
         }
 
         /**
@@ -352,8 +371,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param sentDate 发送日期
          */
-        public void setSentDate(long sentDate) {
+        public EmailMimeMessageBuilder setSentDate(long sentDate) {
             this.sentDate = new Date(sentDate);
+            return this;
         }
 
         /**
@@ -361,8 +381,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param sentDate 发送日期
          */
-        public void setSentDate(Date sentDate) {
+        public EmailMimeMessageBuilder setSentDate(Date sentDate) {
             this.sentDate = sentDate;
+            return this;
         }
 
 
@@ -371,8 +392,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param headers 头部字段
          */
-        public void addHeader(Map<String, String> headers) {
+        public EmailMimeMessageBuilder addHeader(Map<String, String> headers) {
             this.headers.putAll(headers);
+            return this;
         }
 
         /**
@@ -381,8 +403,9 @@ public class EmailMimeMessageBuilders {
          * @param key   头部字段key
          * @param value 头部字段value
          */
-        public void addHeader(String key, String value) {
+        public EmailMimeMessageBuilder addHeader(String key, String value) {
             headers.put(key, value);
+            return this;
         }
 
         /**
@@ -390,8 +413,9 @@ public class EmailMimeMessageBuilders {
          *
          * @param text 内容
          */
-        public void setText(String text) {
+        public EmailMimeMessageBuilder setText(String text) {
             this.text = text;
+            return this;
         }
 
         /**
@@ -399,9 +423,10 @@ public class EmailMimeMessageBuilders {
          *
          * @param html 内容
          */
-        public void setHtml(String html) {
+        public EmailMimeMessageBuilder setHtml(String html) {
             text = html;
             textType = "text/html";
+            return this;
         }
 
         /**
@@ -418,9 +443,10 @@ public class EmailMimeMessageBuilders {
          * @param text     内容
          * @param textType 内容类型
          */
-        public void setHtml(String text, String textType) {
+        public EmailMimeMessageBuilder setHtml(String text, String textType) {
             this.text = text;
             this.textType = textType;
+            return this;
         }
 
         /**
@@ -429,15 +455,16 @@ public class EmailMimeMessageBuilders {
          * @param content 内容
          * @param index   添加位置
          */
-        public <T extends BodyPart> void setContent(T content, int index) {
+        public <T extends BodyPart> EmailMimeMessageBuilder setContent(T content, int index) {
             try {
                 this.content.addBodyPart(content, index);
             } catch (MessagingException e) {
                 log.warning("内容添加失败：" + e.getMessage());
             }
+            return this;
         }
 
-        private void build(MimeMessage msg) throws MessagingException {
+        protected void build(MimeMessage msg) throws MessagingException {
             msg.addRecipients(MimeMessage.RecipientType.TO, to.toArray(new Address[0]));
             msg.addRecipients(MimeMessage.RecipientType.CC, cc.toArray(new Address[0]));
             msg.addRecipients(MimeMessage.RecipientType.BCC, bcc.toArray(new Address[0]));
@@ -487,12 +514,13 @@ public class EmailMimeMessageBuilders {
          *
          * @param content 内容
          */
-        public <T extends BodyPart> void setContent(T content) {
+        public <T extends BodyPart> EmailMimeMessageBuilder setContent(T content) {
             try {
                 this.content = new MimeMultipart(content);
             } catch (MessagingException e) {
                 log.warning("内容添加失败：" + e.getMessage());
             }
+            return this;
         }
 
         /**
@@ -500,12 +528,13 @@ public class EmailMimeMessageBuilders {
          *
          * @param content 内容
          */
-        public <T extends BodyPart> void addContent(T content) {
+        public <T extends BodyPart> EmailMimeMessageBuilder addContent(T content) {
             try {
                 this.content.addBodyPart(content);
             } catch (MessagingException e) {
                 log.warning("内容添加失败：" + e.getMessage());
             }
+            return this;
         }
 
         /**
@@ -513,7 +542,7 @@ public class EmailMimeMessageBuilders {
          *
          * @param content 内容
          */
-        public <T extends Multipart> void addContent(T content) {
+        public <T extends Multipart> EmailMimeMessageBuilder addContent(T content) {
             try {
                 MimeBodyPart mimeBodyPart = new MimeBodyPart();
                 mimeBodyPart.setContent(content);
@@ -521,6 +550,7 @@ public class EmailMimeMessageBuilders {
             } catch (MessagingException e) {
                 log.warning("内容添加失败：" + e.getMessage());
             }
+            return this;
         }
 
         /**
@@ -528,7 +558,7 @@ public class EmailMimeMessageBuilders {
          *
          * @param content 内容
          */
-        public void addContent(EmailMultipartBuilder content) {
+        public EmailMimeMessageBuilder addContent(EmailMultipartBuilder content) {
             try {
                 if (content.status()) {
                     this.content.addBodyPart(content.build());
@@ -538,6 +568,7 @@ public class EmailMimeMessageBuilders {
             } catch (MessagingException e) {
                 log.warning("内容添加失败：" + e.getMessage());
             }
+            return this;
         }
 
         /**
@@ -545,7 +576,7 @@ public class EmailMimeMessageBuilders {
          *
          * @param content 内容
          */
-        public void addContent(EmailMultipartBuilder... content) {
+        public EmailMimeMessageBuilder addContent(EmailMultipartBuilder... content) {
             try {
                 for (EmailMultipartBuilder builder : content) {
                     if (builder.status()) {
@@ -557,6 +588,7 @@ public class EmailMimeMessageBuilders {
             } catch (MessagingException e) {
                 log.warning("内容添加失败：" + e.getMessage());
             }
+            return this;
         }
 
         private Address[] getReplyTo() {

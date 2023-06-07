@@ -9,7 +9,7 @@
  * Website：https://qyg2297248353.top
  */
 
-package com.ms.push.email.builder;
+package com.ms.push.email.factory;
 
 import com.ms.core.base.basic.Strings;
 import com.ms.core.exception.base.MsToolsException;
@@ -29,15 +29,10 @@ import java.io.IOException;
  */
 public class EmailMultipartBuilder {
 
-    private MimeBodyPart part;
-
-    private boolean status;
-
     public EmailMultipartBuilder() {
-        status = true;
     }
 
-    public EmailMultipartBuilder creat() {
+    public static EmailMultipartBuilder create() {
         return new EmailMultipartBuilder();
     }
 
@@ -47,14 +42,15 @@ public class EmailMultipartBuilder {
      * @param text 文本
      * @return 对象
      */
-    public EmailMultipartBuilder builder(String text) {
+    public EmailMultipart builder(String text) {
         try {
             MimeBodyPart part = new MimeBodyPart();
             part.setText(text, "UTF-8", "text/plain");
+            return new EmailMultipart(part);
         } catch (MessagingException ignored) {
 
         }
-        return this;
+        return new EmailMultipart();
     }
 
     /**
@@ -63,15 +59,15 @@ public class EmailMultipartBuilder {
      * @param html html
      * @return 对象
      */
-    public EmailMultipartBuilder builderHtml(String html) {
+    public EmailMultipart builderHtml(String html) {
         try {
             MimeBodyPart part = new MimeBodyPart();
             part.setText(html, "UTF-8", "text/html");
-
+            return new EmailMultipart(part);
         } catch (MessagingException ignored) {
 
         }
-        return this;
+        return new EmailMultipart();
     }
 
     /**
@@ -81,14 +77,15 @@ public class EmailMultipartBuilder {
      * @param encoding 编码
      * @return 对象
      */
-    public EmailMultipartBuilder builder(String text, String encoding) {
+    public EmailMultipart builder(String text, String encoding) {
         try {
             MimeBodyPart part = new MimeBodyPart();
             part.setText(text, encoding, "text/plain");
+            return new EmailMultipart(part);
         } catch (MessagingException ignored) {
 
         }
-        return this;
+        return new EmailMultipart();
     }
 
     /**
@@ -98,14 +95,15 @@ public class EmailMultipartBuilder {
      * @param encoding 编码
      * @return 对象
      */
-    public EmailMultipartBuilder builderHtml(String html, String encoding) {
+    public EmailMultipart builderHtml(String html, String encoding) {
         try {
             MimeBodyPart part = new MimeBodyPart();
             part.setText(html, encoding, "text/html");
+            return new EmailMultipart(part);
         } catch (MessagingException ignored) {
 
         }
-        return this;
+        return new EmailMultipart();
     }
 
     /**
@@ -115,14 +113,15 @@ public class EmailMultipartBuilder {
      * @param contentType 结构类型 Mime type of the object
      * @return 对象
      */
-    public EmailMultipartBuilder builderCustom(Object custom, String contentType) {
+    public EmailMultipart builderCustom(Object custom, String contentType) {
         try {
             MimeBodyPart part = new MimeBodyPart();
             part.setContent(custom, contentType);
+            return new EmailMultipart(part);
         } catch (MessagingException ignored) {
 
         }
-        return this;
+        return new EmailMultipart();
     }
 
     /**
@@ -131,13 +130,13 @@ public class EmailMultipartBuilder {
      * @param fileBytes 文件字节
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(byte[] fileBytes) {
+    public EmailMultipart builderFile(byte[] fileBytes) {
         try {
             File file = FilesUtils.writeToTempFile(fileBytes);
             return builderFile(null, file, null);
         } catch (MsToolsException ignored) {
         }
-        return this;
+        return new EmailMultipart();
     }
 
     /**
@@ -147,13 +146,13 @@ public class EmailMultipartBuilder {
      * @param contentType 文件类型
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(byte[] fileBytes, String contentType) {
+    public EmailMultipart builderFile(byte[] fileBytes, String contentType) {
         try {
             File file = FilesUtils.writeToTempFile(fileBytes);
             return builderFile(null, file, contentType);
         } catch (MsToolsException ignored) {
         }
-        return this;
+        return new EmailMultipart();
     }
 
     /**
@@ -162,7 +161,7 @@ public class EmailMultipartBuilder {
      * @param path 文件路径
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(String path) {
+    public EmailMultipart builderFile(String path) {
         return builderFile("", path);
     }
 
@@ -173,13 +172,13 @@ public class EmailMultipartBuilder {
      * @param path     文件路径
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(String fileName, String path) {
+    public EmailMultipart builderFile(String fileName, String path) {
         try {
             File file = FileFindUtils.findFile(path);
             return builderFile(fileName, file, null);
         } catch (MsToolsException ignored) {
         }
-        return this;
+        return new EmailMultipart();
     }
 
     /**
@@ -188,7 +187,7 @@ public class EmailMultipartBuilder {
      * @param file 文件
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(File file) {
+    public EmailMultipart builderFile(File file) {
         return builderFile(null, file, null);
     }
 
@@ -199,7 +198,7 @@ public class EmailMultipartBuilder {
      * @param file     文件
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(String fileName, File file) {
+    public EmailMultipart builderFile(String fileName, File file) {
         return builderFile(fileName, file, null);
     }
 
@@ -211,7 +210,7 @@ public class EmailMultipartBuilder {
      * @param contentType 文件类型
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(String fileName, File file, String contentType) {
+    public EmailMultipart builderFile(String fileName, File file, String contentType) {
         return builderFile(fileName, file, contentType, null);
     }
 
@@ -222,7 +221,7 @@ public class EmailMultipartBuilder {
      * @param contentType 文件类型
      * @return 对象 编码
      */
-    public EmailMultipartBuilder builderFile(File file, String contentType) {
+    public EmailMultipart builderFile(File file, String contentType) {
         return builderFile(null, file, contentType, null);
     }
 
@@ -234,7 +233,7 @@ public class EmailMultipartBuilder {
      * @param encoding    编码
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(File file, String contentType, String encoding) {
+    public EmailMultipart builderFile(File file, String contentType, String encoding) {
         return builderFile(null, file, contentType, encoding);
     }
 
@@ -247,23 +246,46 @@ public class EmailMultipartBuilder {
      * @param encoding    编码
      * @return 对象
      */
-    public EmailMultipartBuilder builderFile(String fileName, File file, String contentType, String encoding) {
+    public EmailMultipart builderFile(String fileName, File file, String contentType, String encoding) {
         try {
             MimeBodyPart part = new MimeBodyPart();
             part.setFileName(Strings.isBlank(fileName) ? file.getName() : fileName);
             part.attachFile(file, contentType, encoding);
+            return new EmailMultipart(part);
         } catch (MessagingException | IOException ignored) {
 
         }
-        return this;
+        return new EmailMultipart();
     }
 
-    protected MimeBodyPart build() {
-        status = part != null;
-        return part;
+    public class EmailMultipart {
+        private MimeBodyPart part;
+
+        private boolean status;
+
+        public EmailMultipart() {
+            status = false;
+        }
+
+        public EmailMultipart(MimeBodyPart part, boolean status) {
+            this(part);
+            this.status = status;
+        }
+
+        public EmailMultipart(MimeBodyPart part) {
+            this();
+            this.part = part;
+        }
+
+        protected MimeBodyPart build() {
+            status = part != null;
+            return part;
+        }
+
+        protected boolean status() {
+            return status;
+        }
     }
 
-    protected boolean status() {
-        return status;
-    }
+
 }

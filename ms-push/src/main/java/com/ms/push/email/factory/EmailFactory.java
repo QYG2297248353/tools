@@ -162,6 +162,22 @@ public class EmailFactory {
         }
     }
 
+    /**
+     * 发送邮件
+     *
+     * @param message 邮件构建
+     */
+    public void send(EmailMimeMessageBuilders.EmailMimeMessageBuilder message) throws MsToolsException {
+        Session session = core.getSession();
+        try {
+            MimeMessage mimeMessage = new MimeMessage(session);
+            message.build(mimeMessage);
+            EmailCore.sendMail(core, mimeMessage);
+        } catch (MessagingException e) {
+            throw new MsToolsException(e);
+        }
+    }
+
     public interface MailBuild {
         /**
          * 构建邮件
