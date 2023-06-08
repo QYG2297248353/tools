@@ -17,6 +17,7 @@ import com.ms.core.base.basic.Strings;
 import com.ms.core.base.datetime.DateUtils;
 import com.ms.core.exception.base.MsToolsException;
 import com.ms.id.ID;
+import com.ms.push.email.properties.MsEmailProperties;
 import com.ms.resources.file.FilesUtils;
 
 import javax.mail.Address;
@@ -108,6 +109,8 @@ public class EmailMimeMessageBuilders {
          */
         private String textType;
 
+        private String subtype;
+
 
         /**
          * 附件
@@ -133,6 +136,7 @@ public class EmailMimeMessageBuilders {
             reply = false;
             headers = Maps.newHashMap();
             textType = "text/plain";
+            subtype = "plain";
             attachments = Maps.newHashMap();
         }
 
@@ -419,13 +423,32 @@ public class EmailMimeMessageBuilders {
         }
 
         /**
+         * 设置内容-文本
+         *
+         * @param str      内容
+         * @param textType 内容类型
+         */
+        public EmailMimeMessageBuilder setText(String str, String textType) {
+            text = str;
+            setTextType(textType);
+            return this;
+        }
+
+        public void setTextType(String textType) {
+            this.textType = textType;
+            if (textType.contains("/")) {
+                subtype = textType.split("/")[1];
+            }
+        }
+
+        /**
          * 设置内容-HTML
          *
          * @param html 内容
          */
         public EmailMimeMessageBuilder setHtml(String html) {
             text = html;
-            textType = "text/html";
+            setTextType("text/html");
             return this;
         }
 
@@ -445,7 +468,7 @@ public class EmailMimeMessageBuilders {
          */
         public EmailMimeMessageBuilder setHtml(String text, String textType) {
             this.text = text;
-            this.textType = textType;
+            setTextType(textType);
             return this;
         }
 
@@ -464,10 +487,13 @@ public class EmailMimeMessageBuilders {
             return this;
         }
 
-        protected void build(MimeMessage msg) throws MessagingException {
+        protected void build(MimeMessage msg, MsEmailProperties properties) throws MessagingException {
             msg.addRecipients(MimeMessage.RecipientType.TO, to.toArray(new Address[0]));
             msg.addRecipients(MimeMessage.RecipientType.CC, cc.toArray(new Address[0]));
             msg.addRecipients(MimeMessage.RecipientType.BCC, bcc.toArray(new Address[0]));
+            if (from == null) {
+                setFrom(properties.getFrom());
+            }
             msg.setFrom(from);
             msg.setSender(from);
             msg.setSubject(subject, charset);
@@ -485,10 +511,17 @@ public class EmailMimeMessageBuilders {
                 msg.setHeader(entry.getKey(), entry.getValue());
             }
             if (Strings.isNotBlank(text)) {
-                msg.setText(text, charset, textType);
+                msg.setText(text, charset, subtype);
             }
             if (content != null) {
                 msg.setContent(getContent());
+            } else {
+                if (!attachments.isEmpty() && Strings.isNotBlank(text)) {
+                    MimeBodyPart textBodyPart = new MimeBodyPart();
+                    textBodyPart.setText(text, charset, subtype);
+                    content = new MimeMultipart(textBodyPart);
+                    msg.setContent(getContent());
+                }
             }
         }
 

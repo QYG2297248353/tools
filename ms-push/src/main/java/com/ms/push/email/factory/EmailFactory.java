@@ -171,7 +171,7 @@ public class EmailFactory {
         Session session = core.getSession();
         try {
             MimeMessage mimeMessage = new MimeMessage(session);
-            message.build(mimeMessage);
+            message.build(mimeMessage, core.getProperties());
             EmailCore.sendMail(core, mimeMessage);
         } catch (MessagingException e) {
             throw new MsToolsException(e);

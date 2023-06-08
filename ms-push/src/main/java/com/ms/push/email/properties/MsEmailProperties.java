@@ -11,6 +11,8 @@
 
 package com.ms.push.email.properties;
 
+import com.ms.core.base.basic.Strings;
+import com.ms.core.exception.base.MsToolsRuntimeException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -126,7 +128,7 @@ public class MsEmailProperties {
      */
     private String proxyPassword;
 
-    public MsEmailProperties() {
+    private MsEmailProperties() {
         debug = false;
         auth = true;
         port = 465;
@@ -161,8 +163,28 @@ public class MsEmailProperties {
         return String.valueOf(port);
     }
 
+    public String getUsername() {
+        if (Strings.isBlank(username)) {
+            username = from;
+        }
+        if (Strings.isBlank(username) && Strings.isBlank(from)) {
+            throw new MsToolsRuntimeException("ms.push.mail.send.username 或 ms.push.mail.send.username 至少配置其一");
+        }
+        return username;
+    }
+
+    public String getFrom() {
+        if (Strings.isBlank(from)) {
+            from = username;
+        }
+        if (Strings.isBlank(username) && Strings.isBlank(from)) {
+            throw new MsToolsRuntimeException("ms.push.mail.send.username 或 ms.push.mail.send.username 至少配置其一");
+        }
+        return from;
+    }
+
     public MsBoxEmailProperties getReceive() {
-        MsBoxEmailProperties receive = new MsBoxEmailProperties();
+        MsBoxEmailProperties receive = MsBoxEmailProperties.build();
         receive.setAuth(auth);
         receive.setUsername(username);
         receive.setPassword(password);

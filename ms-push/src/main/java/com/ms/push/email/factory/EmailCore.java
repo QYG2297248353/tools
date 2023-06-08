@@ -112,4 +112,8 @@ public class EmailCore {
         }
         return transport;
     }
+
+    protected MsEmailProperties getProperties() {
+        return msEmailProperties;
+    }
 }
