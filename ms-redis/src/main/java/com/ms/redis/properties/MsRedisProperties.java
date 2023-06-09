@@ -24,14 +24,26 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MsRedisProperties {
 
     /**
-     * 开启 AutoType
+     * 白名单
+     * AutoType 自动识别转换
+     * <p>
+     * 添加自己项目需要转换的包名即可
      */
-    private String[] autoType = new String[]{"com.cc"};
+    private String[] autoType = new String[]{"com.ms"};
 
     /**
      * 客户端名称 clientName
      */
     private String clientName = "ms-redis";
+
+    /**
+     * 全局过期时间
+     * <p>
+     * 单位 s秒
+     * <p>
+     * 默认7天
+     */
+    private Long globalExpire = 1L * 60 * 60 * 24 * 7;
 
 
     /**

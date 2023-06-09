@@ -13,6 +13,7 @@ package com.ms.redis.register;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.base.basic.FormatUtils;
 import com.ms.core.exception.base.MsToolsRuntimeException;
@@ -70,7 +71,7 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
     private AbstractSubReceiver abstractSubReceiver;
 
     /**
-     * 设置 redis 数据默认过期时间，默认1天
+     * 设置 redis 数据默认过期时间，默认7天
      * 设置@cacheable 序列化方式
      *
      * @return 缓存配置对象
@@ -79,7 +80,8 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
     public RedisCacheConfiguration redisCacheConfiguration() {
         FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig();
-        configuration = configuration.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(fastJsonRedisSerializer)).entryTtl(Duration.ofDays(7));
+        RedisCacheConfiguration redisCacheConfiguration = configuration.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(fastJsonRedisSerializer));
+        configuration = redisCacheConfiguration.entryTtl(Duration.ofSeconds(msRedisProperties.getGlobalExpire()));
         return configuration;
     }
 
@@ -87,11 +89,16 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
     @ConditionalOnMissingBean(name = "redisTemplate")
     public RedisTemplate<Object, Object> redisTemplate(LettuceConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
-        // 序列化
-        FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
+
+        // key的序列化采用StringRedisSerializer
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setHashKeySerializer(new StringRedisSerializer());
+
+        // 对象序列化
+        GenericFastJsonRedisSerializer genericFastJsonRedisSerializer = new GenericFastJsonRedisSerializer();
         // value值的序列化采用fastJsonRedisSerializer
-        template.setValueSerializer(fastJsonRedisSerializer);
-        template.setHashValueSerializer(fastJsonRedisSerializer);
+        template.setValueSerializer(genericFastJsonRedisSerializer);
+        template.setHashValueSerializer(genericFastJsonRedisSerializer);
 
         // 全局开启AutoType，不建议使用
         // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
@@ -101,9 +108,6 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
         for (String auto : autoType) {
             ParserConfig.getGlobalInstance().addAccept(auto);
         }
-        // key的序列化采用StringRedisSerializer
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new StringRedisSerializer());
         template.setConnectionFactory(redisConnectionFactory);
         return template;
     }
