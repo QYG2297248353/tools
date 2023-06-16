@@ -28,8 +28,6 @@ public class ApiSignatureCore {
     // 2.建议使用方法二，所有参数都需要一一填写。
     // 3."最终signature"才是您需要的签名最终结果。
     public static void main(String[] args) throws UnsupportedEncodingException {
-        // 方法二
-        System.out.println("方法二：");
         Map<String, String> map = new HashMap<>();
         // 公共参数
         map.put("Format", "JSON");

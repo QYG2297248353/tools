@@ -11,6 +11,7 @@
 
 package com.ms.core.base.copy;
 
+import com.ms.core.base.basic.ArrayUtils;
 import com.ms.core.config.SystemConfiguration;
 
 import java.lang.reflect.Field;
@@ -30,99 +31,6 @@ import java.util.List;
 public class ObjectCopyUtils {
 
     private static final String DATE_FORMAT = SystemConfiguration.SYSTEM_DATE_FORMAT;
-
-    /**
-     * 拷贝对象
-     * 类型不一致的属性不拷贝
-     * 源对象属性为null的不拷贝
-     * 不拷贝serialVersionUID
-     *
-     * @param source 源对象
-     * @param target 目标对象
-     * @param <T>    目标对象类型
-     * @return 目标对象
-     */
-    public static <T> T copy(Object source, T target) {
-        return copy(source, target, new String[0]);
-    }
-
-    /**
-     * 拷贝对象
-     * 类型不一致的属性不拷贝
-     * 源对象属性为null的不拷贝
-     * 不拷贝serialVersionUID
-     *
-     * @param source 源对象
-     * @param target 目标对象
-     * @param <T>    目标对象类型
-     * @param ignore 忽略的属
-     * @return 目标对象
-     */
-    public static <T> T copy(Object source, T target, String... ignore) {
-        if (source == null || target == null) {
-            return null;
-        }
-        BeanCopyUtils.copyProperties(source, target, ignore);
-        return target;
-    }
-
-    /**
-     * 拷贝对象
-     *
-     * @param source 源对象
-     * @param target 目标对象
-     * @param <T>    目标对象类型
-     * @return 目标对象
-     */
-    public static <T> T copyNonNull(Object source, T target) {
-        return copyNonNull(source, target, new String[0]);
-    }
-
-    /**
-     * 拷贝对象
-     *
-     * @param source 源对象
-     * @param target 目标对象
-     * @param <T>    目标对象类型
-     * @param ignore 忽略的属性
-     * @return 目标对象
-     */
-    public static <T> T copyNonNull(Object source, T target, String... ignore) {
-        if (source == null || target == null) {
-            return null;
-        }
-        BeanCopyUtils.copyPropertiesNonNull(source, target, ignore);
-        return target;
-    }
-
-    /**
-     * 拷贝对象
-     *
-     * @param source 源对象
-     * @param target 目标对象
-     * @param <T>    目标对象类型
-     * @return 目标对象
-     */
-    public static <T> T copyNonNullAndEmpty(Object source, T target) {
-        return copyNonNullAndEmpty(source, target, null);
-    }
-
-    /**
-     * 拷贝对象
-     *
-     * @param source 源对象
-     * @param target 目标对象
-     * @param <T>    目标对象类型
-     * @param ignore 忽略的属性
-     * @return 目标对象
-     */
-    public static <T> T copyNonNullAndEmpty(Object source, T target, String... ignore) {
-        if (source == null || target == null) {
-            return null;
-        }
-        BeanCopyUtils.copyPropertiesNonNullAndEmpty(source, target, ignore);
-        return target;
-    }
 
 
     /**
@@ -159,7 +67,7 @@ public class ObjectCopyUtils {
         if (s == null) {
             return null;
         }
-        BeanCopyUtils.copyProperties(source, s, ignore);
+        copyProperties(source, s, ignore);
         return s;
     }
 
@@ -186,14 +94,35 @@ public class ObjectCopyUtils {
      * @param <S>    目标对象类型
      */
     public static <T, S> void copyProperties(T source, S target, String[] ignore) {
+        copyProperties(source, target, ignore, true);
+    }
+
+    /**
+     * 对象拷贝工具方法
+     *
+     * @param source           源对象
+     * @param target           目标对象
+     * @param ignore           忽略的属性
+     * @param serialVersionUID 是否忽略 serialVersionUID 属性
+     * @param <T>              源对象类型
+     * @param <S>              目标对象类型
+     */
+    public static <T, S> void copyProperties(T source, S target, String[] ignore, boolean serialVersionUID) {
         if (source == null || target == null) {
             return;
         }
-        List<String> ignoreList = new ArrayList<>(Arrays.asList(ignore));
-        ignoreList.add("serialVersionUID");
 
+        List<String> ignoreList = new ArrayList<>(Arrays.asList(ignore));
+        if (serialVersionUID) {
+            ignoreList.add("serialVersionUID");
+        }
         Field[] sourceFields = source.getClass().getDeclaredFields();
+        Field[] superFields = source.getClass().getSuperclass().getDeclaredFields();
+        sourceFields = ArrayUtils.addAll(sourceFields, superFields);
+
         Field[] targetFields = target.getClass().getDeclaredFields();
+        superFields = target.getClass().getSuperclass().getDeclaredFields();
+        targetFields = ArrayUtils.addAll(targetFields, superFields);
 
         for (Field sourceField : sourceFields) {
             sourceField.setAccessible(true);

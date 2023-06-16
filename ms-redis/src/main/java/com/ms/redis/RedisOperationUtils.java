@@ -486,7 +486,7 @@ public class RedisOperationUtils<T, S> {
      * @param value 值
      * @return 移除的个数
      */
-    public long removeCacheList(T key, long count, S value) {
+    public long removeList(T key, long count, S value) {
         Long remove = redisTemplate.opsForList().remove(key, count, value);
         remove = remove == null ? 0 : remove;
         return remove;
@@ -533,7 +533,7 @@ public class RedisOperationUtils<T, S> {
      * @param timeUnit 时间颗粒度
      * @return 缓存数据的对象
      */
-    public long setCacheSet(T key, Set<S> value, Long timeout, TimeUnit timeUnit) {
+    public long setSet(T key, Set<S> value, Long timeout, TimeUnit timeUnit) {
         long set = setSet(key, value);
         expire(key, timeout, timeUnit);
         return set;
@@ -567,7 +567,7 @@ public class RedisOperationUtils<T, S> {
      * @param key   缓存键值
      * @param value 值
      */
-    public long removeCacheSet(T key, S value) {
+    public long removeSet(T key, S value) {
         Long remove = redisTemplate.opsForSet().remove(key, value);
         remove = remove == null ? 0 : remove;
         return remove;
@@ -657,7 +657,7 @@ public class RedisOperationUtils<T, S> {
      * @param timeout  时间(秒)
      * @param timeUnit 时间颗粒度
      */
-    public <TT, SS> void setCacheMapValue(T key, TT hashKey, SS value, long timeout, TimeUnit timeUnit) {
+    public <TT, SS> void setMapValue(T key, TT hashKey, SS value, long timeout, TimeUnit timeUnit) {
         timeUnit = timeUnit == null ? TimeUnit.SECONDS : timeUnit;
         addHashMapValue(key, hashKey, value);
         expire(key, timeout, timeUnit);
@@ -670,7 +670,7 @@ public class RedisOperationUtils<T, S> {
      * @param hashKey 项
      * @return 值
      */
-    public <TT, SS> SS getCacheMapValue(T key, TT hashKey) {
+    public <TT, SS> SS getMapValue(T key, TT hashKey) {
         Object val = redisTemplate.opsForHash().get(key, hashKey);
         return val == null ? null : (SS) val;
     }
@@ -682,7 +682,7 @@ public class RedisOperationUtils<T, S> {
      * @param hashKey 项
      * @return 值
      */
-    public <TT, SS> List<SS> getCacheMapValues(T key, TT... hashKey) {
+    public <TT, SS> List<SS> getMapValues(T key, TT... hashKey) {
         List<Object> multiGet = redisTemplate.opsForHash().multiGet(key, Arrays.asList(hashKey));
         return (List<SS>) multiGet;
     }
@@ -693,7 +693,7 @@ public class RedisOperationUtils<T, S> {
      * @param key      缓存键值
      * @param hashKeys 项 可以使多个 不能使null
      */
-    public <TT> long deleteCacheMap(T key, TT... hashKeys) {
+    public <TT> long deleteMap(T key, TT... hashKeys) {
         Long delete = redisTemplate.opsForHash().delete(key, hashKeys);
         delete = delete == null ? 0 : delete;
         return delete;
@@ -728,9 +728,9 @@ public class RedisOperationUtils<T, S> {
      *
      * @param pattern 缓存键值
      */
-    public void deleteCacheByPattern(Collection<T> pattern) {
+    public void deletePattern(Collection<T> pattern) {
         for (T object : pattern) {
-            deleteCacheByPattern(object);
+            deletePattern(object);
         }
     }
 
@@ -739,9 +739,9 @@ public class RedisOperationUtils<T, S> {
      *
      * @param pattern 缓存键值
      */
-    public void deleteCacheByPattern(T... pattern) {
+    public void deleteByPattern(T... pattern) {
         for (T object : pattern) {
-            deleteCacheByPattern(object);
+            deletePattern(object);
         }
     }
 
