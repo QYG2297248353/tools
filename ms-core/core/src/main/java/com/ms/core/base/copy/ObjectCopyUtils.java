@@ -12,11 +12,12 @@
 package com.ms.core.base.copy;
 
 import com.ms.core.base.basic.ArrayUtils;
+import com.ms.core.base.datetime.DateTimeUtils;
 import com.ms.core.config.SystemConfiguration;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.text.ParseException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -160,21 +161,44 @@ public class ObjectCopyUtils {
     }
 
     private static Object convertValue(Object value, Class<?> targetType) {
+        // 如果类型相同，直接返回
         if (value.getClass().equals(targetType)) {
             return value;
         }
 
+        // 如果目标类型是 String 类型 当前为其他类型
         if (targetType.equals(String.class)) {
-            if (value instanceof Date) {
+            // 如果源类型是 Date 类型 ，则格式化日期 yyyy/MM/dd HH:mm:ss
+            if (value instanceof Timestamp) {
+                // 如果源类型是 Timestamp 类型 ，则格式化日期 yyyy/MM/dd HH:mm:ss
+                return formatDate(new Date(((Timestamp) value).getTime()));
+            } else if (value instanceof Date) {
                 return formatDate((Date) value);
-            } else {
-                return value.toString();
+            } else if (value instanceof Integer) {
+                // 如果源类型是 Integer 类型 ，则格式化日期 yyyy/MM/dd HH:mm:ss
+                return formatDate(new Date((Integer) value * 1000L));
+            } else if (value instanceof Long) {
+                // 如果源类型是 Long 类型 ，则格式化日期 yyyy/MM/dd HH:mm:ss
+                return formatDate(new Date((Long) value));
             }
+            // 其他类型直接转换为 String 类型
+            return value.toString();
         }
 
+        // 如果目标类型是 Date 类型 当前为其他类型
         if (targetType.equals(Date.class)) {
             if (value instanceof String) {
-                return parseDate((String) value);
+                // 如果源类型是 String 类型
+                return DateTimeUtils.parseTime((String) value);
+            } else if (value instanceof Long) {
+                // 如果类型是 13位 Long 时间戳类型
+                return new Date((Long) value);
+            } else if (value instanceof Integer) {
+                // 如果类型是 10位 Integer 时间戳类型
+                return new Date((Integer) value * 1000L);
+            } else if (value instanceof Timestamp) {
+                // 如果类型是 Timestamp 类型
+                return new Date(((Timestamp) value).getTime());
             }
         }
 
@@ -191,15 +215,5 @@ public class ObjectCopyUtils {
     private static String formatDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         return sdf.format(date);
-    }
-
-    private static Date parseDate(String dateString) {
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-        try {
-            return sdf.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }
