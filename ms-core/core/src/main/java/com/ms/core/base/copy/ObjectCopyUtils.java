@@ -117,21 +117,21 @@ public class ObjectCopyUtils {
             ignoreList.add("serialVersionUID");
         }
         Field[] sourceFields = source.getClass().getDeclaredFields();
-        Field[] superFields = source.getClass().getSuperclass().getDeclaredFields();
-        sourceFields = ArrayUtils.addAll(sourceFields, superFields);
+        Field[] sourceSuperFields = source.getClass().getSuperclass().getDeclaredFields();
+        Field[] fieldsL = ArrayUtils.addAll(sourceFields, sourceSuperFields);
 
         Field[] targetFields = target.getClass().getDeclaredFields();
-        superFields = target.getClass().getSuperclass().getDeclaredFields();
-        targetFields = ArrayUtils.addAll(targetFields, superFields);
+        Field[] targetSuperFields = target.getClass().getSuperclass().getDeclaredFields();
+        Field[] fieldsR = ArrayUtils.addAll(targetFields, targetSuperFields);
 
-        for (Field sourceField : sourceFields) {
+        for (Field sourceField : fieldsL) {
             sourceField.setAccessible(true);
             String fieldName = sourceField.getName();
             if (ignoreList.contains(fieldName)) {
                 continue;
             }
 
-            for (Field targetField : targetFields) {
+            for (Field targetField : fieldsR) {
                 targetField.setAccessible(true);
                 if (fieldName.equals(targetField.getName())) {
                     try {
