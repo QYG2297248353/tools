@@ -11,8 +11,13 @@
 
 package com.ms.network.ip;
 
+import com.ms.core.base.basic.StringUtils;
+import com.ms.core.base.enums.regular.RegexpEnum;
 import com.ms.network.ip.core.IPAddressFactory;
 import com.ms.network.ip.core.IPLocation;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class IpUtils {
     /**
@@ -66,6 +71,36 @@ public class IpUtils {
             }
         }
         return ip[0];
+    }
+
+    /**
+     * 判断是否是IP地址
+     *
+     * @param str the str
+     * @return the boolean
+     */
+    public static boolean isIp(String str) {
+        str = StringUtils.replaceBlank(str);
+        Pattern r = Pattern.compile(RegexpEnum.REGEX_IP_ADD.regex());
+        Matcher m = r.matcher(str);
+        return m.matches();
+    }
+
+    /**
+     * 判断是否是IPv4地址
+     * 排除局域网
+     *
+     * @param str the str
+     * @return the boolean
+     */
+    public static boolean isIpv4(String str) {
+        str = StringUtils.replaceBlank(str);
+        if (isIp(str)) {
+            Pattern r = Pattern.compile(RegexpEnum.REGEX_LAN_IP_ADD.regex());
+            Matcher m = r.matcher(str);
+            return !m.matches();
+        }
+        return false;
     }
 
 }
