@@ -412,4 +412,19 @@ public class FileFactory {
     }
 
 
+    public static boolean exists(String path) {
+        try {
+            return getFile(path).exists();
+        } catch (MsToolsException e) {
+            return false;
+        }
+    }
+
+    public static boolean delete(String path) {
+        try {
+            return getFile(path).delete();
+        } catch (MsToolsException e) {
+            return false;
+        }
+    }
 }

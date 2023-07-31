@@ -49,6 +49,11 @@
             <artifactId>ms-spring</artifactId>
             <version>${ms.tools.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.qyg2297248353</groupId>
+            <artifactId>dnsjava</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

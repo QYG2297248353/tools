@@ -23,6 +23,7 @@ public enum RegexpEnum {
     REGEX_UCC(RegexpConstant.REGEX_UCC, "正则表达式：验证统一信用代码", "是否为统一信用代码效验"),
     REGEX_IP_ADD(RegexpConstant.REGEX_IP_ADD, "正则表达式：验证IPV4地址(含局域网)", "是否为IPV4地址(含局域网)效验"),
     REGEX_LAN_IP_ADD(RegexpConstant.REGEX_LAN_IP_ADD, "正则表达式：验证IPV4地址", "是否为IPV4地址效验"),
+    REGEX_IPV6_ADD(RegexpConstant.REGEX_IPV6_ADD, "正则表达式：验证IPV6地址", "是否为IPV6地址效验"),
     REGEX_STRING(RegexpConstant.REGEX_STRING, "正则表达式：匹配空格、回车、换行符、制表符", "是否为空格、回车、换行符、制表符效验"),
     REGEX_URL(RegexpConstant.REGEX_URL, "正则表达式：链接匹配", "是否url链接,ip,与本地链接均为false"),
     REGEX_URL_FTP(RegexpConstant.REGEX_URL_FTP, "正则表达式：链接(FTP)匹配", "是否url链接"),
@@ -75,6 +76,10 @@ public enum RegexpEnum {
          * 正则表达式：验证IPV4地址
          */
         public static final String REGEX_LAN_IP_ADD = "(?:(?:10(?:(?:\\.1[0-9][0-9])|(?:\\.2[0-4][0-9])|(?:\\.25[0-5])|(?:\\.[1-9][0-9])|(?:\\.[0-9])))|(?:172(?:\\.(?:1[6-9])|(?:2[0-9])|(?:3[0-1])))|(?:192\\.168))(?:(?:\\.1[0-9][0-9])|(?:\\.2[0-4][0-9])|(?:\\.25[0-5])|(?:\\.[1-9][0-9])|(?:\\.[0-9])){2}";
+        /**
+         * 正则表达式：验证IPV6地址
+         */
+        public static final String REGEX_IPV6_ADD = "([\\da-fA-F]{1,4}:){7}[\\da-fA-F]{1,4}";
         /**
          * 正则表达式：HTML标签
          */

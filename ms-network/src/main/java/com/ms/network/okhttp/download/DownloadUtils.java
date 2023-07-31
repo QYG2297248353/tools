@@ -11,6 +11,7 @@
 
 package com.ms.network.okhttp.download;
 
+import com.ms.core.base.size.FileSizeUtils;
 import com.ms.network.okhttp.factory.OkHttpFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -97,6 +98,10 @@ public class DownloadUtils {
             ResponseBody body = response.body();
             assert body != null;
             long contentLength = body.contentLength();
+            if (contentLength == -1) {
+                log.warning("无法获取文件大小，下载失败");
+                return;
+            }
             if (listener != null) {
                 listener.onStart(contentLength);
             }
@@ -124,6 +129,9 @@ public class DownloadUtils {
                 currentLength += read;
                 if (listener != null) {
                     listener.onProgress(currentLength, contentLength);
+                    if (listener.isLog()) {
+                        log.info("下载进度：" + FileSizeUtils.BTrim.convert(currentLength) + "/" + FileSizeUtils.BTrim.convert(contentLength));
+                    }
                 }
             }
             sink.flush();

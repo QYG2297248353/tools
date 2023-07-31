@@ -11,7 +11,11 @@
 
 package com.ms.network.okhttp.download;
 
+/**
+ * @author ms
+ */
 public interface DownloadListener {
+
     /**
      * 下载开始时回调
      *
@@ -38,4 +42,11 @@ public interface DownloadListener {
      * @param e 异常
      */
     void onFailure(Exception e);
+
+    /**
+     * 进度日志开关
+     */
+    default boolean isLog() {
+        return false;
+    }
 }

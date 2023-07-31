@@ -12,6 +12,8 @@
 package com.ms.network.ip.core;
 
 import com.ms.core.base.basic.FormatUtils;
+import com.ms.core.base.basic.Strings;
+import com.ms.network.domain.DomainUtils;
 import com.ms.network.okhttp.download.DownloadUtils;
 import com.ms.resources.file.FilesUtils;
 
@@ -85,21 +87,46 @@ public class IPAddressFactory {
     private byte[] b3;
 
     /**
-     * 构造函数
-     *
-     * @param filePath IP地址库文件路径
+     * 单例对象
      */
-    public IPAddressFactory(String filePath) {
+    private static IPAddressFactory instance = new IPAddressFactory();
+
+    /**
+     * 私有构造函数
+     */
+    private IPAddressFactory() {
+        init("");
+    }
+
+    /**
+     * 私有构造函数
+     */
+    private IPAddressFactory(String filePath) {
         init(filePath);
     }
 
-    public static void main(String[] args) {
-        IPAddressFactory ip = new IPAddressFactory("");
-        final String address = "110.152.38.55";
-        System.out.println("IP地址[" + address + "]获取到的区域信息:" + ip.getIPLocation(address).getCountry() + ", 获取到的城市:" + ip.getIPLocation(address).getCity() + ", 运营商:" + ip.getIPLocation(address).getArea());
+    /**
+     * 获取单一实例(指定路径)
+     *
+     * @return 单一实例
+     */
+    public static IPAddressFactory getInstance(String filePath) {
+        instance = new IPAddressFactory(filePath);
+        return instance;
     }
 
-    public void init(String filePath) {
+
+    /**
+     * 获取单一实例
+     *
+     * @return 单一实例
+     */
+    public static IPAddressFactory getInstance() {
+        return instance;
+    }
+
+
+    private void init(String filePath) {
         try {
             // 缓存一定要用ConcurrentHashMap， 避免多线程下获取为空
             ipCache = new ConcurrentHashMap<>();
@@ -108,12 +135,17 @@ public class IPAddressFactory {
             b4 = new byte[4];
             b3 = new byte[3];
             try {
-                ipFile = new RandomAccessFile(filePath, "r");
+                // 判断filePath 是否为链接
+                if (Strings.isNotBlank(filePath) && DomainUtils.isUrl(filePath)) {
+                    ipFile = loadOnlineFile(filePath);
+                } else {
+                    ipFile = new RandomAccessFile(filePath, "r");
+                }
             } catch (FileNotFoundException e) {
-                String msg = FormatUtils.format("IP地址信息文件没有找到，IP显示功能将无法使用" + e.getMessage(), e);
+                String msg = FormatUtils.format("数据文件未找到，请前往官网下载：" + e.getMessage());
                 log.warning(msg);
-                // 加载在线文件
-                ipFile = loadOnlineFile();
+                log.warning("尝试加载在线IP地址库文件");
+                ipFile = loadOnlineFile("");
             }
             // 如果打开文件成功，读取文件头信息
             if (ipFile != null) {
@@ -125,7 +157,7 @@ public class IPAddressFactory {
                         ipFile = null;
                     }
                 } catch (IOException e) {
-                    String msg = FormatUtils.format("IP地址信息文件格式有错误，IP显示功能将无法使用" + e.getMessage(), e);
+                    String msg = FormatUtils.format("文件格式异常:" + e.getMessage());
                     log.warning(msg);
                     ipFile = null;
                 }
@@ -136,10 +168,15 @@ public class IPAddressFactory {
         }
     }
 
-    private RandomAccessFile loadOnlineFile() {
-        final String onlineFilePath = "https://github.com/qyggzs2297248353/dataBase/raw/main/chunzhen/qqwry.dat";
+    private RandomAccessFile loadOnlineFile(String filePath) {
+        String onlineFilePath = "https://qyg2297248353.top/cz88/qqwry.dat";
+        if (Strings.isNotBlank(filePath)) {
+            onlineFilePath = filePath;
+        }
         String savePath = FilesUtils.getSystemTempDirectory() + "qqwry.dat";
-        // OkHttpClient client = new OkHttpFactory().create(new OkHttpProperties().setProxy("127.0.0.1", 7890));
+        if (FilesUtils.exists(savePath)) {
+            FilesUtils.delete(savePath);
+        }
         DownloadUtils.download(onlineFilePath, savePath, null);
         File file = new File(savePath);
         if (file.exists()) {
@@ -393,8 +430,8 @@ public class IPAddressFactory {
     /**
      * 把两个byte当作无符号数进行比较
      *
-     * @param b1
-     * @param b2
+     * @param b1 第一个ip地址
+     * @param b2 第二个ip地址
      * @return 若b1大于b2则返回1，相等返回0，小于返回-1
      */
     private int compareByte(byte b1, byte b2) {
@@ -460,9 +497,9 @@ public class IPAddressFactory {
     /**
      * 得到begin偏移和end偏移中间位置记录的偏移
      *
-     * @param begin
-     * @param end
-     * @return
+     * @param begin 起始偏移
+     * @param end   结束偏移
+     * @return 中间位置记录偏移
      */
     private long getMiddleOffset(long begin, long end) {
         long records = (end - begin) / IP_RECORD_LENGTH;
@@ -554,7 +591,7 @@ public class IPAddressFactory {
      *
      * @param offset 地区记录的起始偏移
      * @return 地区名字符串
-     * @throws IOException
+     * @throws IOException 异常
      */
     private String readArea(long offset) throws IOException {
         ipFile.seek(offset);
@@ -572,6 +609,8 @@ public class IPAddressFactory {
     }
 
     /**
+     * 读取地区名称
+     *
      * @param offset 地区记录的起始偏移
      * @return 地区名字符串
      */
@@ -632,6 +671,12 @@ public class IPAddressFactory {
         return "";
     }
 
+    /**
+     * 获取城市名
+     *
+     * @param ipAddress IP地址
+     * @return 地区名字符串
+     */
     public String getCity(String ipAddress) {
         try {
             if (ipAddress.startsWith("192.168.")) {

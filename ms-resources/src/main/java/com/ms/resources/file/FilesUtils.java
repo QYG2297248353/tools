@@ -514,4 +514,24 @@ public class FilesUtils {
     public static String getSystemTempDirectory() {
         return System.getProperty("java.io.tmpdir");
     }
+
+    /**
+     * 判断文件是否存在
+     *
+     * @param path 文件路径
+     * @return 是否存在
+     */
+    public static boolean exists(String path) {
+        return FileFactory.exists(path);
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param path 文件路径
+     * @return
+     */
+    public static boolean delete(String path) {
+        return FileFactory.delete(path);
+    }
 }

@@ -36,6 +36,7 @@
         <module>javax-mail</module>
         <module>zip4j</module>
         <module>csv</module>
+        <module>dnsjava</module>
         <module>alibaba</module>
         <module>mybatis-plus</module>
     </modules>

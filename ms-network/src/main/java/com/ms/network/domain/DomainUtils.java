@@ -1,6 +1,14 @@
 package com.ms.network.domain;
 
+import com.ms.core.base.basic.Lists;
+import com.ms.core.base.basic.Strings;
+import org.xbill.DNS.*;
+
 import java.net.IDN;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -116,6 +124,7 @@ public class DomainUtils {
             ".招聘",
             ".政务"
     };
+    private static final String URL_REGULAR = "^(http|https)://.*";
 
     /**
      * 中文域名转换ASCII
@@ -203,7 +212,7 @@ public class DomainUtils {
             return host;
         }
         // 判断是否是中国顶级域名 com.cn .gov.cn
-        boolean chineseTopDomain = isChinaTopDomain(host);
+        boolean chineseTopDomain = isChinaTopDomain(domain);
         if (chineseTopDomain) {
             String[] split = host.split(LEVEL_REGULAR);
             // 只保留最后 xxx.xxx.xxx 三级
@@ -223,11 +232,12 @@ public class DomainUtils {
     /**
      * 是否为中国顶级域名
      *
-     * @param host 域名
+     * @param domain 域名
      * @return 是否为中国顶级域名
      * @see #CHINA_TOP_LEVEL_DOMAIN
      */
-    public static boolean isChinaTopDomain(String host) {
+    public static boolean isChinaTopDomain(String domain) {
+        String host = getHost(domain);
         for (String chinaTopLevelDomain : CHINA_TOP_LEVEL_DOMAIN) {
             if (host.endsWith(chinaTopLevelDomain)) {
                 return true;
@@ -340,5 +350,65 @@ public class DomainUtils {
             domain = "";
         }
         return domain;
+    }
+
+    /**
+     * 域名转ip
+     *
+     * @param domain 域名
+     * @return 域名
+     */
+    public static List<String> domainCoverIp(String domain) {
+        try {
+            Resolver resolver = new SimpleResolver("114.114.114.114");
+            Lookup lookup = new Lookup(domain);
+            lookup.setResolver(resolver);
+            Record[] records = lookup.run();
+            List<String> ips = new ArrayList<>();
+            if (lookup.getResult() == Lookup.SUCCESSFUL) {
+                for (Record record : records) {
+                    // IP 地址
+                    if (record instanceof ARecord) {
+                        ARecord aRecord = (ARecord) record;
+                        ips.add(aRecord.getAddress().getHostAddress());
+                    }
+                }
+            }
+            return ips;
+        } catch (UnknownHostException | TextParseException e) {
+            e.printStackTrace();
+        }
+        return Lists.EMPTY_LIST;
+    }
+
+    /**
+     * 域名转ip
+     *
+     * @param domain 域名
+     * @return ip
+     */
+    public static String domainToIp(String domain) {
+        String host = getHost(domain);
+        try {
+            InetAddress address = InetAddress.getByName(host);
+            return address.getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+    /**
+     * 是否为链接
+     *
+     * @param uri 链接
+     * @return 是否为链接
+     */
+    public static boolean isUrl(String uri) {
+        if (Strings.isBlank(uri)) {
+            return false;
+        }
+        return uri.matches(URL_REGULAR);
     }
 }
