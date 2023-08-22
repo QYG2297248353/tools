@@ -2,6 +2,7 @@ package com.ms.network.domain;
 
 import com.ms.core.base.basic.Lists;
 import com.ms.core.base.basic.Strings;
+import com.ms.network.ip.IpUtils;
 import org.xbill.DNS.*;
 
 import java.net.IDN;
@@ -201,6 +202,10 @@ public class DomainUtils {
      */
     public static String getTopLevelDomain(String domain) {
         String host = getHost(domain);
+        // ip 域名
+        if (IpUtils.isIpPort(host)) {
+            return host;
+        }
         // 判断是否是中文域名
         boolean chineseDomain = isChineseDomain(host);
         if (chineseDomain) {
@@ -288,7 +293,7 @@ public class DomainUtils {
         String path = getUrlPath(domain);
         domain = domain.replace(path, "");
         String coverUrl = chineseCoverUrl(domain);
-        Pattern pattern = Pattern.compile("(?i)(?:https?|ftp|udp|tcp)://(?:www\\.)?([\\w.-]+)");
+        Pattern pattern = Pattern.compile("(?i)https?://(?:www\\.)?([\\w.-]+)(?::\\d+)?");
         Matcher matcher = pattern.matcher(coverUrl);
         String hostUrl = domain;
         if (matcher.find()) {
@@ -319,11 +324,14 @@ public class DomainUtils {
         String path = getUrlPath(domain);
         domain = domain.replace(path, "");
         String coverUrl = chineseCoverUrl(domain);
-        Pattern pattern = Pattern.compile("(?i)(?:https?|ftp|udp|tcp)://(?:www\\.)?([\\w.-]+)");
+        Pattern pattern = Pattern.compile("(?i)https?://(?:www\\.)?([\\w.-]+)(?::\\d+)?");
         Matcher matcher = pattern.matcher(coverUrl);
         String hostUrl = domain;
         if (matcher.find()) {
-            hostUrl = matcher.group(1);
+            // 匹配结果
+            String match = matcher.group();
+            // 去除协议
+            hostUrl = match.replace(getProtocol(match), "");
         }
         hostUrl = urlCoverChinese(hostUrl);
         return hostUrl;
@@ -401,6 +409,7 @@ public class DomainUtils {
 
     /**
      * 是否为链接
+     * 仅限 http(s):// 开头
      *
      * @param uri 链接
      * @return 是否为链接

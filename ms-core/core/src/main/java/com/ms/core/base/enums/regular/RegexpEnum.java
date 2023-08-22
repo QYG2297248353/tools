@@ -22,6 +22,7 @@ public enum RegexpEnum {
     REGEX_PHONE(RegexpConstant.REGEX_PHONE, "正则表达式：验证手机号", "是否为手机号效验"),
     REGEX_UCC(RegexpConstant.REGEX_UCC, "正则表达式：验证统一信用代码", "是否为统一信用代码效验"),
     REGEX_IP_ADD(RegexpConstant.REGEX_IP_ADD, "正则表达式：验证IPV4地址(含局域网)", "是否为IPV4地址(含局域网)效验"),
+    REGEX_IP_ADD_PORT(RegexpConstant.REGEX_IP_ADD_PORT, "正则表达式：验证IPV4地址(含局域网含端口号)", "是否为IPV4地址(含局域网含端口号)效验"),
     REGEX_LAN_IP_ADD(RegexpConstant.REGEX_LAN_IP_ADD, "正则表达式：验证IPV4地址", "是否为IPV4地址效验"),
     REGEX_IPV6_ADD(RegexpConstant.REGEX_IPV6_ADD, "正则表达式：验证IPV6地址", "是否为IPV6地址效验"),
     REGEX_STRING(RegexpConstant.REGEX_STRING, "正则表达式：匹配空格、回车、换行符、制表符", "是否为空格、回车、换行符、制表符效验"),
@@ -72,6 +73,11 @@ public enum RegexpEnum {
          * 正则表达式：验证IPV4地址(含局域网)
          */
         public static final String REGEX_IP_ADD = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
+        /**
+         * 正则表达式：验证IPV4地址(含局域网含端口号)
+         * 端口号可选
+         */
+        public static final String REGEX_IP_ADD_PORT = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?):\\d{1,5}";
         /**
          * 正则表达式：验证IPV4地址
          */

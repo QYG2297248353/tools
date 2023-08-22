@@ -77,6 +77,23 @@ public class IpUtils {
     }
 
     /**
+     * 判断是否是IP地址
+     * 含局域网
+     * 含端口号
+     *
+     * @param ip the str
+     * @return the boolean
+     */
+    public static boolean isIpPort(String ip) {
+        ip = StringUtils.replaceBlank(ip);
+        Pattern r = Pattern.compile(RegexpEnum.REGEX_IP_ADD_PORT.regex());
+        Matcher m = r.matcher(ip);
+        return m.matches();
+    }
+
+
+
+    /**
      * 判断是否是IPv4地址
      * 排除局域网
      *

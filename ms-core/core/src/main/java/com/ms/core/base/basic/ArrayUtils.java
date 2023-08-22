@@ -26,6 +26,7 @@ public class ArrayUtils {
      * @param array1 数组1
      * @param array2  数组2
      * @return 合并后的数组
+     * @param <T> 数组类型
      */
     public static <T> T[] addAll(T[] array1, T[] array2) {
         int length1 = array1.length;

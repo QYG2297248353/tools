@@ -41,6 +41,7 @@ public class ObjectCopyUtils {
      * @param target 目标对象 class
      * @param <T>    源对象类型
      * @param <S>    目标对象类型
+     * @return 目标对象
      */
     public static <T, S> S copyProperties(T source, Class<S> target) {
         return copyProperties(source, target, new String[0]);
@@ -54,6 +55,7 @@ public class ObjectCopyUtils {
      * @param ignore 忽略的属性
      * @param <T>    源对象类型
      * @param <S>    目标对象类型
+     * @return 目标对象
      */
     public static <T, S> S copyProperties(T source, Class<S> target, String[] ignore) {
         if (source == null || target == null) {
