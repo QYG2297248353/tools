@@ -23,13 +23,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "ms.network.redis")
 public class MsRedisProperties {
 
+    private final static String DEFAULT_PREFIX = "com.ms.";
+
     /**
      * 白名单
      * AutoType 自动识别转换
      * <p>
      * 添加自己项目需要转换的包名即可
      */
-    private String[] autoType = new String[]{"com.ms"};
+    private String[] autoType = new String[]{DEFAULT_PREFIX};
 
     /**
      * 客户端名称 clientName
@@ -53,17 +55,11 @@ public class MsRedisProperties {
      */
     public String[] getAutoType() {
         if (autoType == null || autoType.length == 0) {
-            return new String[]{"com.ms"};
+            return new String[]{DEFAULT_PREFIX};
         } else {
-            // 如果不存在指定的包名，则添加默认的包名
-            for (String s : autoType) {
-                if (s.equals("com.ms")) {
-                    return autoType;
-                }
-            }
             String[] autoType = new String[this.autoType.length + 1];
             System.arraycopy(this.autoType, 0, autoType, 0, this.autoType.length);
-            autoType[autoType.length - 1] = "com.ms";
+            autoType[autoType.length - 1] = DEFAULT_PREFIX;
             return autoType;
         }
     }

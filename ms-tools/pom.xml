@@ -23,6 +23,18 @@
     <artifactId>ms-tools</artifactId>
     <packaging>jar</packaging>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.qyg2297248353</groupId>
+                <artifactId>tools</artifactId>
+                <version>1.1.5-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>io.github.qyg2297248353</groupId>

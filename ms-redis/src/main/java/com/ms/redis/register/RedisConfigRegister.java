@@ -70,6 +70,11 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
     @Resource
     private AbstractSubReceiver abstractSubReceiver;
 
+    static {
+        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+    }
+
+
     /**
      * 设置 redis 数据默认过期时间，默认7天
      * 设置@cacheable 序列化方式
@@ -99,16 +104,13 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
         // value值的序列化采用fastJsonRedisSerializer
         template.setValueSerializer(genericFastJsonRedisSerializer);
         template.setHashValueSerializer(genericFastJsonRedisSerializer);
+        template.setConnectionFactory(redisConnectionFactory);
 
-        // 全局开启AutoType，不建议使用
-        // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
-
-        // 建议使用这种方式，小范围指定白名单
+        // FastJson AutoType 白名单
         String[] autoType = msRedisProperties.getAutoType();
         for (String auto : autoType) {
             ParserConfig.getGlobalInstance().addAccept(auto);
         }
-        template.setConnectionFactory(redisConnectionFactory);
         return template;
     }
 

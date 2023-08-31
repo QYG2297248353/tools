@@ -291,4 +291,46 @@ public class ID {
     public static String shortSuffixCombGuid() {
         return UuidCreator.getShortSuffixComb().toString();
     }
+
+    /**
+     * 短链
+     *
+     * @param originalURL 原始链接
+     * @return 短链
+     */
+    public static String shortUrl(String originalURL) {
+        return RobustShortURLGenerator.generateShortURL(originalURL);
+    }
+
+    /**
+     * 短链 指定长度
+     *
+     * @param originalURL 原始链接
+     * @param length      长度
+     * @return 短链
+     */
+    public static String shortUrl(String originalURL, int length) {
+        return RobustShortURLGenerator.generateShortURL(originalURL, length);
+    }
+
+    /**
+     * 压缩字符串
+     *
+     * @param str 字符串
+     * @return 压缩后的字符串
+     */
+    public static String compress(String str) {
+        return RobustShortURLGenerator.generateShortURL(str);
+    }
+
+    /**
+     * 压缩字符串 指定长度
+     *
+     * @param str    字符串
+     * @param length 长度
+     * @return 压缩后的字符串
+     */
+    public static String compress(String str, int length) {
+        return RobustShortURLGenerator.generateShortURL(str, length);
+    }
 }
