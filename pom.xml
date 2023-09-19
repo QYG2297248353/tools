@@ -99,6 +99,7 @@
         <com.alibaba.easyexcel.version>3.2.1</com.alibaba.easyexcel.version>
         <!-- Google 组件 -->
         <com.google.guava.version>29.0-jre</com.google.guava.version>
+        <spring-data-commons.version>2.7.12</spring-data-commons.version>
     </properties>
 
     <!-- 远程仓库 -->
@@ -446,6 +447,13 @@
                 <groupId>io.github.qyg2297248353</groupId>
                 <artifactId>zxing</artifactId>
                 <version>${ms.tools.version}</version>
+            </dependency>
+
+            <!-- 其他组件库 -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-commons</artifactId>
+                <version>${spring-data-commons.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

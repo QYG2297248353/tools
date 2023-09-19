@@ -31,7 +31,7 @@ public class MsRedisProperties {
      * <p>
      * 添加自己项目需要转换的包名即可
      */
-    private String[] autoType = new String[]{DEFAULT_PREFIX};
+    private String[] autoType = new String[]{};
 
     /**
      * 客户端名称 clientName
@@ -54,13 +54,6 @@ public class MsRedisProperties {
      * @return AutoType
      */
     public String[] getAutoType() {
-        if (autoType == null || autoType.length == 0) {
-            return new String[]{DEFAULT_PREFIX};
-        } else {
-            String[] autoType = new String[this.autoType.length + 1];
-            System.arraycopy(this.autoType, 0, autoType, 0, this.autoType.length);
-            autoType[autoType.length - 1] = DEFAULT_PREFIX;
-            return autoType;
-        }
+        return autoType;
     }
 }

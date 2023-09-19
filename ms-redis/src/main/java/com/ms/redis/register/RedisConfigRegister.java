@@ -11,11 +11,11 @@
 
 package com.ms.redis.register;
 
-import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import com.alibaba.fastjson2.JSON;
 import com.ms.core.base.basic.FormatUtils;
+import com.ms.core.commons.alibaba.fastjson.FastGlobalConfiguration;
 import com.ms.core.exception.base.MsToolsRuntimeException;
 import com.ms.redis.listener.AbstractSubReceiver;
 import com.ms.redis.properties.MsRedisProperties;
@@ -67,12 +67,9 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
 
     @Resource
     private MsRedisProperties msRedisProperties;
+
     @Resource
     private AbstractSubReceiver abstractSubReceiver;
-
-    static {
-        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
-    }
 
 
     /**
@@ -88,30 +85,6 @@ public class RedisConfigRegister extends CachingConfigurerSupport {
         RedisCacheConfiguration redisCacheConfiguration = configuration.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(fastJsonRedisSerializer));
         configuration = redisCacheConfiguration.entryTtl(Duration.ofSeconds(msRedisProperties.getGlobalExpire()));
         return configuration;
-    }
-
-    @Bean(name = "redisTemplate")
-    @ConditionalOnMissingBean(name = "redisTemplate")
-    public RedisTemplate<Object, Object> redisTemplate(LettuceConnectionFactory redisConnectionFactory) {
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
-
-        // key的序列化采用StringRedisSerializer
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new StringRedisSerializer());
-
-        // 对象序列化
-        GenericFastJsonRedisSerializer genericFastJsonRedisSerializer = new GenericFastJsonRedisSerializer();
-        // value值的序列化采用fastJsonRedisSerializer
-        template.setValueSerializer(genericFastJsonRedisSerializer);
-        template.setHashValueSerializer(genericFastJsonRedisSerializer);
-        template.setConnectionFactory(redisConnectionFactory);
-
-        // FastJson AutoType 白名单
-        String[] autoType = msRedisProperties.getAutoType();
-        for (String auto : autoType) {
-            ParserConfig.getGlobalInstance().addAccept(auto);
-        }
-        return template;
     }
 
     /**

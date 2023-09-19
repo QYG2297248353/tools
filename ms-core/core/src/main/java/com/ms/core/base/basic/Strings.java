@@ -221,7 +221,7 @@ public interface Strings {
      */
     static <T> String[] toArray(T list) {
         if (list == null) {
-            return null;
+            return new String[0];
         }
         if (list instanceof String[]) {
             return (String[]) list;
@@ -231,7 +231,7 @@ public interface Strings {
         }
         if (list instanceof Collection) {
             Collection<?> collection = (Collection<?>) list;
-            return collection.toArray(new String[collection.size()]);
+            return collection.toArray(new String[0]);
         }
         if (list instanceof Object[]) {
             Object[] objects = (Object[]) list;

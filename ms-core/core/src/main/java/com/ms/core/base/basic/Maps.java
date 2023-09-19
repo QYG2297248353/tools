@@ -16,9 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface Maps {
-    Map EMPTY_MAP = new HashMap();
-
-
     static <K, V> Map<K, V> of() {
         return new HashMap<>();
     }

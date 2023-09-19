@@ -23,12 +23,12 @@ import java.util.stream.Collectors;
  * @param <S> 目标数据类型
  * @author ms2297248353
  */
-public class PaginationTemplate<T, S> {
+public class PageTemplate<T, S> {
 
     /**
      * 当前页
      */
-    private Integer current;
+    private Integer page;
 
     /**
      * 每页大小
@@ -60,11 +60,11 @@ public class PaginationTemplate<T, S> {
      */
     private List<S> data;
 
-    private PaginationTemplate() {
+    private PageTemplate() {
     }
 
-    public PaginationTemplate(Page<T> page, DataHandler<T, S> handler) {
-        this.current = page.getNumber() + 1;
+    public PageTemplate(Page<T> page, DataHandler<T, S> handler) {
+        this.page = page.getNumber() + 1;
         this.size = page.getSize();
         this.pages = page.getTotalPages();
         this.total = page.getTotalElements();
@@ -73,8 +73,8 @@ public class PaginationTemplate<T, S> {
         this.data = page.getContent().stream().map(handler::handle).collect(Collectors.toList());
     }
 
-    public PaginationTemplate(Integer current, Integer size, Integer pages, Long total, Boolean hasNext, Boolean hasPrevious) {
-        this.current = current;
+    public PageTemplate(Integer current, Integer size, Integer pages, Long total, Boolean hasNext, Boolean hasPrevious) {
+        this.page = current;
         this.size = size;
         this.pages = pages;
         this.total = total;
@@ -82,8 +82,8 @@ public class PaginationTemplate<T, S> {
         this.hasPrevious = hasPrevious;
     }
 
-    public PaginationTemplate(Integer current, Integer size, Integer pages, Long total, Boolean hasNext, Boolean hasPrevious, List<S> data) {
-        this.current = current;
+    public PageTemplate(Integer current, Integer size, Integer pages, Long total, Boolean hasNext, Boolean hasPrevious, List<S> data) {
+        this.page = current;
         this.size = size;
         this.pages = pages;
         this.total = total;
@@ -99,19 +99,19 @@ public class PaginationTemplate<T, S> {
      * @param handler 处理器
      * @return 分页模板
      */
-    public PaginationTemplate<T, S> handle(List<T> d, DataHandler<T, S> handler) {
+    public PageTemplate<T, S> handle(List<T> d, DataHandler<T, S> handler) {
         if (!d.isEmpty()) {
             data = d.stream().map(handler::handle).collect(Collectors.toList());
         }
         return this;
     }
 
-    public Integer getCurrent() {
-        return current;
+    public Integer getPage() {
+        return page;
     }
 
-    public void setCurrent(Integer current) {
-        this.current = current;
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
     public Integer getSize() {
