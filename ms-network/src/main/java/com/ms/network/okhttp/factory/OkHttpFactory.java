@@ -42,26 +42,27 @@ public class OkHttpFactory {
     public static final String CACHE_CONTROL_NETWORK = "max-age=0";
     private OkHttpClient okHttpClient;
     private OkHttpClient.Builder builder;
-    private Interceptor cacheControlInterceptor = chain -> {
+    private final Interceptor cacheControlInterceptor = chain -> {
         Request request = chain.request();
-        if (!NetUtils.isNetworkConnected()) {
-            // 如果没有网络则设置Request是读取缓存
-            request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
+        if (NetUtils.isNetworkConnected()) {
+            request = request.newBuilder()
+                    .cacheControl(CacheControl.FORCE_NETWORK)
+                    .build();
+        } else {
+            request = request.newBuilder()
+                    .cacheControl(CacheControl.FORCE_CACHE)
+                    .build();
         }
         Response originalResponse = chain.proceed(request);
         if (NetUtils.isNetworkConnected()) {
-            // 有网的时候获取自定义的Request请求设置，是否读取缓存
-            String cacheControl = request.cacheControl().toString();
             return originalResponse.newBuilder()
-                    .removeHeader("Pragma")// Pragma:no-cache,在HTTP/1.1协议中，它的含义和Cache-Control:no-cache相同,为了确保缓存生效
-                    .header("Cache-Control", cacheControl)
+                    .header("Cache-Control", CACHE_CONTROL_NETWORK)
+                    .removeHeader("Pragma")
                     .build();
         } else {
-            // 没有网络的时候统一设置读取缓存
             return originalResponse.newBuilder()
+                    .header("Cache-Control", "public, " + CACHE_CONTROL_CACHE)
                     .removeHeader("Pragma")
-                    // //only-if-cached只查询缓存而不会请求服务器
-                    .header("Cache-Control", "public, only-if-cached, max-stale=" + CACHE_STALE_LONG)
                     .build();
         }
     };

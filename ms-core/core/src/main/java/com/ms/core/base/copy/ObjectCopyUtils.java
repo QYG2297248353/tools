@@ -213,6 +213,16 @@ public class ObjectCopyUtils {
             }
         }
 
+        // 如果目标类型是 Integer 类型 当前为布尔类型
+        if (targetType.equals(Integer.class) && (value instanceof Boolean)) {
+            return Boolean.TRUE.equals(value) ? 1 : 0;
+        }
+
+        // 如果目标类型是 Boolean 类型 当前为 Integer 类型
+        if (targetType.equals(Boolean.class) && (value instanceof Integer)) {
+            return 1 == (Integer) value;
+        }
+
         try {
             Method valueOfMethod = targetType.getMethod("valueOf", String.class);
             return valueOfMethod.invoke(null, value.toString());

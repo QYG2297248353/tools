@@ -21,14 +21,14 @@ import java.net.InetAddress;
 public class NetUtils {
 
     /**
-     * 判断网络是否连接
+     * 判断网络是否正常
      *
      * @return true:已连接 false:未连接
      */
     public static boolean isNetworkConnected() {
         try {
-            InetAddress address = InetAddress.getByName("8.8.8.8");
-            return !address.equals("");
+            InetAddress address = InetAddress.getByName("www.baidu.com");
+            return address != null;
         } catch (Exception e) {
             return false;
         }

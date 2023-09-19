@@ -88,14 +88,14 @@ public class OkHttpProperties {
      */
     private Boolean cacheEnable = true;
     /**
-     * 缓存大小
-     * 默认10M
+     * 缓存大小 单位 MB
+     * 默认1G
      */
-    private Long cacheSize = 10L;
+    private Long cacheSize = 1024L;
     /**
      * 缓存路径
      */
-    private String cachePath = "okhttp/cache";
+    private String cachePath = "./okhttp/cache";
 
     /**
      * 是否开启代理
