@@ -16,15 +16,15 @@
     <parent>
         <artifactId>ms-core</artifactId>
         <groupId>io.github.qyg2297248353</groupId>
-        <version>1.1.5-SNAPSHOT</version>
+        <version>1.1.6-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>commons</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>apache</module>
-
         <module>hibernate</module>
         <module>jjwt</module>
         <module>junit</module>
@@ -40,4 +40,5 @@
         <module>alibaba</module>
         <module>mybatis-plus</module>
     </modules>
+
 </project>

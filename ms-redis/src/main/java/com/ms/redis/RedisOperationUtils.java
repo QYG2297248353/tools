@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author ms2297248353
  */
+@Deprecated
 @Component
 public class RedisOperationUtils<T, S> {
 

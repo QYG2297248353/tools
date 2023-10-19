@@ -20,4 +20,6 @@
 
 [FastJson](https://github.com/alibaba/fastjson2/releases) 官网
 
-> 当前使用 FastJson 2.0.24 版本，以及 1.0兼容版本
+> 当前使用 FastJson2 2.0.41 版本
+> FastJson 兼容版本
+> FastJson-spring 5.x 扩展版本

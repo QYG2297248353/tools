@@ -16,7 +16,7 @@
     <parent>
         <artifactId>commons</artifactId>
         <groupId>io.github.qyg2297248353</groupId>
-        <version>1.1.5-SNAPSHOT</version>
+        <version>1.1.6-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -25,19 +25,19 @@
 
     <modules>
         <module>javax-servlet-api</module>
+        <module>spring-context</module>
         <module>spring-annotation</module>
         <module>spring-core</module>
         <module>spring-beans</module>
         <module>spring-expression</module>
-        <module>spring-context</module>
         <module>spring-context-support</module>
         <module>spring-boot-configuration-processor</module>
-        <module>spring-boot</module>
         <module>spring-web</module>
         <module>spring-boot-autoconfigure</module>
         <module>spring-redis</module>
         <module>spring-data-jpa</module>
         <module>spring-jdbc</module>
+        <module>spring-boot</module>
     </modules>
 
     <dependencyManagement>

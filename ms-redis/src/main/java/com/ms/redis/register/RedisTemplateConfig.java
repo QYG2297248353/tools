@@ -20,7 +20,6 @@ public class RedisTemplateConfig {
     @Resource
     private MsRedisProperties msRedisProperties;
 
-
     @Bean(name = "redisTemplate")
     @ConditionalOnMissingBean(name = "redisTemplate")
     public RedisTemplate<Object, Object> redisTemplate(LettuceConnectionFactory redisConnectionFactory) {
@@ -33,12 +32,14 @@ public class RedisTemplateConfig {
         template.setConnectionFactory(redisConnectionFactory);
 
         StringRedisSerializer serializer = new StringRedisSerializer();
+        template.setDefaultSerializer(serializer);
         template.setKeySerializer(serializer);
         template.setHashKeySerializer(serializer);
 
-        FastJson2JsonRedisSerializer fastJsonRedisSerializer = new FastJson2JsonRedisSerializer(Object.class);
-        template.setValueSerializer(fastJsonRedisSerializer);
-        template.setHashValueSerializer(fastJsonRedisSerializer);
+        // FastJson2JsonRedisSerializer fastJsonRedisSerializer = new FastJson2JsonRedisSerializer(Object.class);
+        GenericFastJsonRedisSerializer genericFastJsonRedisSerializer = new GenericFastJsonRedisSerializer();
+        template.setValueSerializer(genericFastJsonRedisSerializer);
+        template.setHashValueSerializer(genericFastJsonRedisSerializer);
 
         template.afterPropertiesSet();
         return template;
