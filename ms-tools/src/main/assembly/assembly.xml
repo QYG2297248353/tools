@@ -1,0 +1,91 @@
+<!--
+  ~ @MS 2022-12-13
+  ~ Copyright (c) 2001-2023 萌森
+  ~ 保留所有权利
+  ~ 本软件为萌森工作室所有及包含机密信息，须遵守其相关许可证条款进行使用。
+  ~ Copyright (c) 2001-2023 Meng Sen
+  ~ All rights reserved
+  ~ This software is owned by Mengsen Studio and contains confidential information, and must be used in accordance with its relevant license terms.
+  ~ Website：https://qyg2297248353.top
+  -->
+
+<assembly>
+    <!-- 唯一ID -->
+    <id>bin</id>
+    <formats>
+        <!-- 打包格式 -->
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+    <!-- 是否生成根目录 -->
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <!--第三方依赖设置-->
+    <dependencySets>
+        <dependencySet>
+            <!--不使用项目的artifact，第三方jar不要解压，打包进tar.gz文件的lib目录-->
+            <!--配置项目第三方provided、system、runtime不同方式的jar打包进lib目录-->
+            <unpack>false</unpack>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <scope>provided</scope>
+            <excludes>
+                <!--排除assembly模块的jar包-->
+                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+            </excludes>
+        </dependencySet>
+        <dependencySet>
+            <scope>system</scope>
+            <excludes>
+                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+            </excludes>
+        </dependencySet>
+        <dependencySet>
+            <scope>runtime</scope>
+            <excludes>
+                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+
+    <!-- 文件设置 -->
+    <fileSets>
+        <!--模块资源resources-->
+        <fileSet>
+            <directory>${project.parent.basedir}/../src/main/resources</directory>
+            <outputDirectory>resources</outputDirectory>
+            <includes>
+                <include>*.xml</include>
+                <include>*.properties</include>
+                <include>*.yml</include>
+                <include>*.yaml</include>
+                <include>*.md</include>
+            </includes>
+        </fileSet>
+
+        <!--执行脚本-->
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-tools/src/main/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+                <include>*.bat</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <moduleSets>
+        <moduleSet>
+            <useAllReactorProjects>true</useAllReactorProjects>
+            <includes>
+                <!--配置子模块，按groupId:artifactId配置，然后根据各子模块依赖的顺序排列-->
+                <include>io.github.qyg2297248353:ms-core</include>
+            </includes>
+            <binaries>
+                <outputDirectory>lib</outputDirectory>
+                <unpack>false</unpack>
+            </binaries>
+        </moduleSet>
+    </moduleSets>
+
+</assembly>
