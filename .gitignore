@@ -78,6 +78,6 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 target/
-/*/target/*
+/*/target/
 !**/src/main/**/target/
 !**/src/test/**/target/
