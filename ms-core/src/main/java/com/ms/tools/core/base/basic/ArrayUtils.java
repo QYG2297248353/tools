@@ -34,14 +34,6 @@ public interface ArrayUtils {
         return EMPTY_ARRAY;
     }
 
-    public static void main(String[] args) {
-        Object[] empty = empty();
-
-        System.out.println(Arrays.toString(empty));
-        System.out.println(Arrays.toString(EMPTY_ARRAY));
-
-    }
-
     /**
      * 判断数组是否为空
      */

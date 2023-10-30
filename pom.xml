@@ -115,10 +115,10 @@
     </dependencyManagement>
 
     <modules>
+        <module>ms-components</module>
         <module>ms-core</module>
 
         <module>ms-tools</module>
-        <module>ms-components/ms-components-parent/apache/commons-lang3</module>
     </modules>
 
     <!-- 构建插件 -->
