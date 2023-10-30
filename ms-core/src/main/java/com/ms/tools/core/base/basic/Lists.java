@@ -16,14 +16,41 @@ import java.util.Collections;
 import java.util.List;
 
 public interface Lists {
-    List EMPTY_LIST = new ArrayList();
 
-    static <T> List<T> of() {
-        return new ArrayList<>();
+    /**
+     * 空列表
+     */
+    List<?> EMPTY_LIST = Collections.emptyList();
+
+    /**
+     * 空列表
+     *
+     * @param <T> 泛型
+     * @return 空列表
+     */
+    static <T> List<T> empty() {
+        return (List<T>) EMPTY_LIST;
     }
 
+    /**
+     * 空列表
+     *
+     * @param <T> 泛型
+     * @return 空列表
+     */
+    static <T> List<T> of() {
+        return (List<T>) EMPTY_LIST;
+    }
+
+    /**
+     * 数组转List
+     *
+     * @param t   数组
+     * @param <T> 泛型
+     * @return List
+     */
     static <T> List<T> of(T... t) {
-        List<T> list = of();
+        List<T> list = new ArrayList<>();
         Collections.addAll(list, t);
         return list;
     }
@@ -36,9 +63,7 @@ public interface Lists {
      * @return List
      */
     static <T> List<T> toList(T[] array) {
-        List<T> list = of();
-        Collections.addAll(list, array);
-        return list;
+        return of(array);
     }
 
 
@@ -57,32 +82,6 @@ public interface Lists {
         return list;
     }
 
-    /**
-     * 数组转List
-     *
-     * @param array 数组
-     * @param <T>   泛型
-     * @return List
-     */
-    static <T> List<T> toList(T[][][] array) {
-        List<T> list = of();
-        for (T[][] ts : array) {
-            for (T[] t : ts) {
-                Collections.addAll(list, t);
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 数组空判断
-     *
-     * @param array 数组
-     * @return boolean
-     */
-    static boolean isEmpty(String[] array) {
-        return array == null || array.length == 0;
-    }
 
     /**
      * 随机列表-不重复
@@ -113,13 +112,5 @@ public interface Lists {
             size--;
         }
         return randomList;
-    }
-
-    static <T> List<T> newArrayList(T[] bcc) {
-        return toList(bcc);
-    }
-
-    static <T> List<T> empty() {
-        return EMPTY_LIST;
     }
 }

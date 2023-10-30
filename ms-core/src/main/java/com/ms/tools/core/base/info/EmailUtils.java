@@ -12,10 +12,9 @@
 package com.ms.tools.core.base.info;
 
 
-import com.ms.core.base.basic.StringUtils;
-import com.ms.core.base.basic.Strings;
-import com.ms.core.base.enums.regular.RegexpEnum;
-import com.ms.core.base.info.enums.EmailManufacturerEnum;
+import com.ms.tools.core.base.basic.Strings;
+import com.ms.tools.core.enums.baseinfo.EmailManufacturerEnum;
+import com.ms.tools.core.enums.regular.RegexpEnum;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +33,7 @@ public class EmailUtils {
      * @return 是否为邮箱 boolean
      */
     public static boolean isEmail(String str) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         // 判断字符串是否存在字符@
         if (!str.contains(Strings.AT)) {
             return false;
@@ -51,7 +50,7 @@ public class EmailUtils {
      * @return 邮箱信息
      */
     public static EmailManufacturerEnum getEmailManufacturer(String email) {
-        if (StringUtils.isBlank(email)) {
+        if (Strings.isBlank(email)) {
             return null;
         }
         String[] split = email.split(Strings.AT);

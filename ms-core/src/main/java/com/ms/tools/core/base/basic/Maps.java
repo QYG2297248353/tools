@@ -11,41 +11,63 @@
 
 package com.ms.tools.core.base.basic;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public interface Maps {
+
+    /**
+     * 空map
+     * <p>
+     * 当前对象为不可变对象 无法修改
+     */
+    Map EMPTY_MAP_FINAL = Collections.emptyMap();
+
+    /**
+     * 空map
+     */
+    static <K, V> Map<K, V> emptyMap() {
+        return new HashMap<>();
+    }
+
+    /**
+     * 空map
+     */
     static <K, V> Map<K, V> of() {
         return new HashMap<>();
     }
 
-    static <T> Map of(T... t) {
-        Map map = of();
-        // 奇数个参数 放弃最后一个
-        if (t.length % 2 != 0) {
-            t = Arrays.copyOf(t, t.length - 1);
+    /**
+     * 对象转map
+     * key 为序号
+     *
+     * @param obj 对象
+     * @param <V> 泛型
+     * @return map
+     */
+    static <V> Map of(V... obj) {
+        Map<Integer, V> map = of();
+        for (int i = 0; i < obj.length; i++) {
+            map.put(i, obj[i]);
         }
-        for (int i = 0; i < t.length; i += 2) {
-            map.put(t[i], t[i + 1]);
-        }
         return map;
     }
 
-    static <K, V> Map<K, V> of(K k1, V v1) {
+    static <K, V> Map<K, V> convert(K k1, V v1) {
         Map<K, V> map = of();
         map.put(k1, v1);
         return map;
     }
 
-    static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2) {
+    static <K, V> Map<K, V> convert(K k1, V v1, K k2, V v2) {
         Map<K, V> map = of();
         map.put(k1, v1);
         map.put(k2, v2);
         return map;
     }
 
-    static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
+    static <K, V> Map<K, V> convert(K k1, V v1, K k2, V v2, K k3, V v3) {
         Map<K, V> map = of();
         map.put(k1, v1);
         map.put(k2, v2);
@@ -53,7 +75,7 @@ public interface Maps {
         return map;
     }
 
-    static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
+    static <K, V> Map<K, V> convert(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
         Map<K, V> map = of();
         map.put(k1, v1);
         map.put(k2, v2);
@@ -62,7 +84,7 @@ public interface Maps {
         return map;
     }
 
-    static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
+    static <K, V> Map<K, V> convert(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
         Map<K, V> map = of();
         map.put(k1, v1);
         map.put(k2, v2);
@@ -72,7 +94,7 @@ public interface Maps {
         return map;
     }
 
-    static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6) {
+    static <K, V> Map<K, V> convert(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6) {
         Map<K, V> map = of();
         map.put(k1, v1);
         map.put(k2, v2);
@@ -83,32 +105,39 @@ public interface Maps {
         return map;
     }
 
-    static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7) {
-        Map<K, V> map = of();
-        map.put(k1, v1);
-        map.put(k2, v2);
-        map.put(k3, v3);
-        map.put(k4, v4);
-        map.put(k5, v5);
-        map.put(k6, v6);
-        map.put(k7, v7);
-        return map;
+    /**
+     * 删除map中的空值
+     *
+     * @param map map
+     * @param <K> key
+     * @param <V> value
+     * @return map
+     */
+    static <K, V> Map<K, V> removeNullValue(Map<K, V> map) {
+        Map<K, V> result = new HashMap<>();
+        map.forEach((k, v) -> {
+            if (v != null) {
+                result.put(k, v);
+            }
+        });
+        return result;
     }
 
-    static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8) {
-        Map<K, V> map = of();
-        map.put(k1, v1);
-        map.put(k2, v2);
-        map.put(k3, v3);
-        map.put(k4, v4);
-        map.put(k5, v5);
-        map.put(k6, v6);
-        map.put(k7, v7);
-        map.put(k8, v8);
-        return map;
-    }
-
-    static <T, S> Map<T, S> newHashMap() {
-        return new HashMap<>();
+    /**
+     * 删除map中的空值与空字符串
+     *
+     * @param map map
+     * @param <K> key
+     * @param <V> value
+     * @return map
+     */
+    static <K, V> Map<K, V> removeNullAndEmptyValue(Map<K, V> map) {
+        Map<K, V> result = new HashMap<>();
+        map.forEach((k, v) -> {
+            if (v != null && !"".equals(v)) {
+                result.put(k, v);
+            }
+        });
+        return result;
     }
 }

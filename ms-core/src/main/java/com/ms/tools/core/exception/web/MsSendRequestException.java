@@ -11,6 +11,11 @@
 
 package com.ms.tools.core.exception.web;
 
+/**
+ * 发送请求异常
+ *
+ * @author ms
+ */
 public class MsSendRequestException extends Exception {
     private static final long serialVersionUID = 4177930991742488041L;
 

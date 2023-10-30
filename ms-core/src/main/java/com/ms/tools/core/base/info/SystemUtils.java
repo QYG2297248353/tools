@@ -11,8 +11,10 @@
 
 package com.ms.tools.core.base.info;
 
-import com.ms.core.base.basic.StringUtils;
 
+import com.ms.tools.core.base.basic.Strings;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -87,7 +89,11 @@ public class SystemUtils {
      * @return 系统文件分隔符
      */
     public static String getFileSeparator() {
-        return System.getProperty("file.separator");
+        String separator = System.getProperty("file.separator");
+        if (Strings.isBlank(separator)) {
+            separator = File.separator;
+        }
+        return separator;
     }
 
     /**
@@ -359,7 +365,7 @@ public class SystemUtils {
         for (String name : properties.stringPropertyNames()) {
             if (name.startsWith(prefix)) {
                 String value = properties.getProperty(name);
-                if (!ignoreEmptyValue || StringUtils.isNotEmpty(value)) {
+                if (!ignoreEmptyValue || Strings.isNotEmpty(value)) {
                     map.put(stripPrefix ? name.substring(prefix.length()) : name, value);
                 }
             }
@@ -383,9 +389,9 @@ public class SystemUtils {
             if (name.startsWith(prefix)) {
                 String value = properties.getProperty(name);
                 if (trimValue) {
-                    value = StringUtils.trim(value);
+                    value = Strings.trim(value);
                 }
-                if (!ignoreEmptyValue || StringUtils.isNotEmpty(value)) {
+                if (!ignoreEmptyValue || Strings.isNotEmpty(value)) {
                     map.put(stripPrefix ? name.substring(prefix.length()) : name, value);
                 }
             }
@@ -410,9 +416,9 @@ public class SystemUtils {
             if (name.startsWith(prefix)) {
                 String value = properties.getProperty(name);
                 if (trimValue) {
-                    value = StringUtils.trim(value);
+                    value = Strings.trim(value);
                 }
-                if (!ignoreEmptyValue || StringUtils.isNotEmpty(value)) {
+                if (!ignoreEmptyValue || Strings.isNotEmpty(value)) {
                     map.put(toLowerCase ? (stripPrefix ? name.substring(prefix.length()).toLowerCase() : name.toLowerCase()) : (stripPrefix ? name.substring(prefix.length()) : name), value);
                 }
             }

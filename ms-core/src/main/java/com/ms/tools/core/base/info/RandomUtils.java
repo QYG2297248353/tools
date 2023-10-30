@@ -11,7 +11,8 @@
 
 package com.ms.tools.core.base.info;
 
-import com.ms.core.base.info.enums.PasswordRandomEnum;
+
+import com.ms.tools.core.enums.baseinfo.PasswordRandomEnum;
 
 import java.security.SecureRandom;
 

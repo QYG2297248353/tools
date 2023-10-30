@@ -12,8 +12,8 @@
 package com.ms.tools.core.base.info;
 
 
-import com.ms.core.base.basic.StringUtils;
-import com.ms.core.base.enums.regular.RegexpEnum;
+import com.ms.tools.core.base.basic.Strings;
+import com.ms.tools.core.enums.regular.RegexpEnum;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,7 +35,7 @@ public class UccRegexpUtils {
      * @return 是否为统一信用代码 boolean
      */
     public static boolean isUcc(String str) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         if (str.length() != UCC_UNIT_SIZE) {
             return false;
         }

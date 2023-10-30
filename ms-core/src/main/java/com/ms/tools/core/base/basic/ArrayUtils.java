@@ -11,8 +11,6 @@
 
 package com.ms.tools.core.base.basic;
 
-import jdk.nashorn.internal.objects.NativeString;
-
 import java.util.Arrays;
 
 /**
@@ -21,6 +19,28 @@ import java.util.Arrays;
  * @author ms
  */
 public interface ArrayUtils {
+
+    /**
+     * 空数组
+     */
+    Object[] EMPTY_ARRAY = new Object[0];
+
+    /**
+     * 空对象数组
+     *
+     * @return 空对象数组
+     */
+    static Object[] empty() {
+        return EMPTY_ARRAY;
+    }
+
+    public static void main(String[] args) {
+        Object[] empty = empty();
+
+        System.out.println(Arrays.toString(empty));
+        System.out.println(Arrays.toString(EMPTY_ARRAY));
+
+    }
 
     /**
      * 判断数组是否为空
@@ -70,36 +90,44 @@ public interface ArrayUtils {
     }
 
     /**
-     * 删除数组中的元素
+     * 删除数组中指定的元素
      *
-     * @param array    数组
-     * @param delArray 要删除的数组
-     * @return 删除后的数组
+     * @param array    原始数组
+     * @param delArray 要删除的数组对象
+     * @return 处理后的数组
      */
     static <T> T[] remove(T[] array, T... delArray) {
-        int length = array.length;
-        int delLength = delArray.length;
-        T[] result = Arrays.copyOf(array, length - delLength);
+        if (isEmpty(array) || isEmpty(delArray)) {
+            return array;
+        }
+        // 复制对象
+        T[] arrayCopy = Arrays.copyOf(array, array.length);
         for (T t : delArray) {
-            int index = NativeString.indexOf(array, t);
+            int index = indexOf(arrayCopy, t);
             if (index != -1) {
-                System.arraycopy(array, index + 1, result, index, length - index - 1);
+                arrayCopy = remove(arrayCopy, index);
             }
         }
-        return result;
+        return arrayCopy;
     }
 
-    static void main(String[] args) {
-        String[] array1 = {"1", "2", "3", "4", "5"};
-        String[] array2 = {"6", "7", "8", "9", "10"};
-        String[] merge = merge(array1, array2);
-        System.out.println(Arrays.toString(merge));
-
-        String[] remove = remove(array1, 2);
-        System.out.println(Arrays.toString(remove));
-
-        String[] remove1 = remove(array1, "2", "3");
-        System.out.println(Arrays.toString(remove1));
+    /**
+     * 获取数组中指定元素的索引
+     *
+     * @param array 数组
+     * @param t     元素
+     * @param <T>   数组类型
+     * @return 索引
+     */
+    static <T> int indexOf(T[] array, T t) {
+        if (isEmpty(array)) {
+            return -1;
+        }
+        for (int i = 0; i < array.length; i++) {
+            if (t.equals(array[i])) {
+                return i;
+            }
+        }
+        return -1;
     }
-
 }

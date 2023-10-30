@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  *
  * @param <T> 泛型带转换数据
  * @param <R> ID,Parent数据类型,使用相同数据类型 String,Integer,Long
- * @author qyg2297248353
+ * @author ms
  */
 public class TreeUtils<T extends TreeMixin, R> {
     /**

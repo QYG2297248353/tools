@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ms.tools.components</groupId>
+    <artifactId>ms-components</artifactId>
+    <version>${ms.tools.version}</version>
+    <packaging>pom</packaging>
+    <name>Java Maven One</name>
+    <description>萌森工作室-统一依赖规范</description>
+    <url>https://github.com/QYG2297248353/tools.git</url>
+
+    <!-- 统一配置 -->
+    <properties>
+        <!-- 项目配置 -->
+        <ms.tools.version>2.0.0-SNAPSHOT</ms.tools.version>
+
+        <!-- 基础配置 -->
+        <java.version>8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- 插件版本信息 -->
+        <lombok.version>1.18.14</lombok.version>
+
+        <!-- maven-compiler-plugin 构建插件 -->
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.deploy.verbose>true</maven.deploy.verbose>
+
+        <!-- 构建插件 -->
+        <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
+        <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+        <maven.javadoc.plugin.version>2.9.1</maven.javadoc.plugin.version>
+        <maven.assembly.plugin.version>2.4.1</maven.assembly.plugin.version>
+        <nexus.staging.maven.plugin.version>1.6.7</nexus.staging.maven.plugin.version>
+        <maven.gpg.plugin.version>1.5</maven.gpg.plugin.version>
+
+        <!-- SpringBoot 版本信息 -->
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
+        <spring-cloud.version>2021.0.7-SNAPSHOT</spring-cloud.version>
+        <spring-boot.version>2.7.12-SNAPSHOT</spring-boot.version>
+        <!-- Spring 组件 -->
+        <spring-data-commons.version>2.7.12</spring-data-commons.version>
+
+        <!-- Apache Commons 组件 -->
+        <apache.commons.codec.version>1.15</apache.commons.codec.version>
+        <apache.commons.io.version>2.11.0</apache.commons.io.version>
+        <apache.commons.commons-compress.version>1.22</apache.commons.commons-compress.version>
+        <apache.commons.commons-lang3.version>3.12.0</apache.commons.commons-lang3.version>
+        <apache.commons.pool2.version>2.6.1</apache.commons.pool2.version>
+        <org.apache.velocity.velocity.engine.core.version>2.0</org.apache.velocity.velocity.engine.core.version>
+
+        <!-- Alibaba 组件 -->
+        <fastjson.version>2.0.41</fastjson.version>
+        <com.alibaba.easyexcel.version>3.2.1</com.alibaba.easyexcel.version>
+
+        <!-- Google 组件 -->
+        <com.google.guava.version>29.0-jre</com.google.guava.version>
+        <!-- 二次开发 -->
+        <com.google.zxing.version>3.5.0</com.google.zxing.version>
+
+        <!-- 插件库 -->
+        <!-- OkHttp 请求客户端 -->
+        <okhttp.version>4.10.0-RC1</okhttp.version>
+        <!-- JJWT -->
+        <io.jsonwebtoken.jjwt.version>0.11.5</io.jsonwebtoken.jjwt.version>
+        <io.jsonwebtoken.jjwt.extension.version>1.70</io.jsonwebtoken.jjwt.extension.version>
+        <!-- Yaml 文件读写 -->
+        <org.yaml.snakeyaml.version>2.0</org.yaml.snakeyaml.version>
+        <!-- 邮件服务 -->
+        <com.sun.mail.javax.mail.version>1.6.2</com.sun.mail.javax.mail.version>
+        <!-- 压缩文件 -->
+        <net.lingala.zip4j.vesion>2.11.5</net.lingala.zip4j.vesion>
+        <!-- 对象关系映射 -->
+        <org.hibernate.core.version>5.4.10.Final</org.hibernate.core.version>
+        <!-- csv 文件读写 -->
+        <com.opencsv.version>5.5</com.opencsv.version>
+        <!-- 拦截器 -->
+        <javax.interceptor.api.version>1.2</javax.interceptor.api.version>
+        <!-- Mybatis Plus 插件 -->
+        <com.baomidou.mybatis.plus.starter.version>3.5.1</com.baomidou.mybatis.plus.starter.version>
+        <com.baomidou.mybatis.plus.generator.version>3.5.2</com.baomidou.mybatis.plus.generator.version>
+        <!-- DNS 解析 -->
+        <dns.java.version>3.5.2</dns.java.version>
+    </properties>
+
+    <modules>
+        <!-- Spring Cloud 组件 -->
+        <module>ms-cloud-components-parent</module>
+        <!-- Spring 组件 -->
+        <module>ms-components-parent</module>
+    </modules>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringCloud 规范 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 组件依赖规范 -->
+            <!-- Cloud组件规范 -->
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>alibaba-nacos</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>alibaba-sentinel</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>qiniu-cloud</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>spring-openfeign</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <!-- 组件规范 -->
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>codec</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>io</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>javax-servlet-api</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <!-- Spring 组件版本规范 -->
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-annotation</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-data-commons</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-redis</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <!-- 组合式组件 -->
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-boot</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

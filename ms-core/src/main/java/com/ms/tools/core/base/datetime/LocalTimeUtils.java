@@ -12,7 +12,7 @@
 package com.ms.tools.core.base.datetime;
 
 
-import com.ms.core.base.datetime.enums.ZoneIdEnum;
+import com.ms.tools.core.enums.datetime.ZoneIdEnum;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

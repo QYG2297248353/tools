@@ -11,9 +11,10 @@
 
 package com.ms.tools.core.base.copy;
 
-import com.ms.core.base.basic.ArrayUtils;
-import com.ms.core.base.datetime.DateTimeUtils;
-import com.ms.core.config.SystemConfiguration;
+
+import com.ms.tools.core.base.basic.ArrayUtils;
+import com.ms.tools.core.base.format.DateTimeFormatUtils;
+import com.ms.tools.core.config.SystemConfiguration;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -124,7 +125,7 @@ public class ObjectCopyUtils {
         Class<?> sourceSuperclass = source.getClass().getSuperclass();
         while (sourceSuperclass != null) {
             Field[] sourceSuperFields = sourceSuperclass.getDeclaredFields();
-            fieldsL = ArrayUtils.addAll(fieldsL, sourceSuperFields);
+            fieldsL = ArrayUtils.merge(fieldsL, sourceSuperFields);
             sourceSuperclass = sourceSuperclass.getSuperclass();
         }
         Field[] fieldsR;
@@ -132,7 +133,7 @@ public class ObjectCopyUtils {
         Class<?> targetSuperclass = target.getClass().getSuperclass();
         while (targetSuperclass != null) {
             Field[] targetSuperFields = targetSuperclass.getDeclaredFields();
-            fieldsR = ArrayUtils.addAll(fieldsR, targetSuperFields);
+            fieldsR = ArrayUtils.merge(fieldsR, targetSuperFields);
             targetSuperclass = targetSuperclass.getSuperclass();
         }
 
@@ -200,7 +201,7 @@ public class ObjectCopyUtils {
         if (targetType.equals(Date.class)) {
             if (value instanceof String) {
                 // 如果源类型是 String 类型
-                return DateTimeUtils.parseTime((String) value);
+                return DateTimeFormatUtils.parseTime((String) value);
             } else if (value instanceof Long) {
                 // 如果类型是 13位 Long 时间戳类型
                 return new Date((Long) value);

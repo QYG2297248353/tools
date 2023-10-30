@@ -12,9 +12,8 @@
 package com.ms.tools.core.base.info;
 
 
-import com.ms.core.base.basic.StringUtils;
-import com.ms.core.base.basic.Strings;
-import com.ms.core.base.enums.regular.RegexpEnum;
+import com.ms.tools.core.base.basic.Strings;
+import com.ms.tools.core.enums.regular.RegexpEnum;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,7 +34,7 @@ public class PhoneUtils {
      * @return 是否为手机号 boolean
      */
     public static boolean isChinaPhone(String str) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         if (str.startsWith(Strings.PLUS)) {
             str = str.substring(str.length() - PHONE_NUMBER_UNIT_SIZE);
         }

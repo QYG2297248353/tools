@@ -11,7 +11,7 @@
 
 package com.ms.tools.core.base.basic;
 
-public class CharSequenceUtils {
+public interface CharSequenceUtils {
     /**
      * 查找CharSequence中的最后一个索引，处理null
      * <p>
@@ -36,7 +36,7 @@ public class CharSequenceUtils {
      * @param startPos  从第几个开始查找
      * @return 返回查找到的位置
      */
-    public static int lastIndexOf(CharSequence seq, CharSequence searchSeq, int startPos) {
+    static int lastIndexOf(CharSequence seq, CharSequence searchSeq, int startPos) {
         if (seq == null || searchSeq == null) {
             return -1;
         }
@@ -67,7 +67,7 @@ public class CharSequenceUtils {
      * @param startPos  从第几个开始查找
      * @return 返回查找到的位置
      */
-    public static int indexOf(CharSequence seq, CharSequence searchSeq, int startPos) {
+    static int indexOf(CharSequence seq, CharSequence searchSeq, int startPos) {
         if (seq == null || searchSeq == null) {
             return -1;
         }

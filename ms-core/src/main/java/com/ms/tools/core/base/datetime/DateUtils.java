@@ -11,10 +11,11 @@
 
 package com.ms.tools.core.base.datetime;
 
-import com.ms.core.base.basic.StringUtils;
-import com.ms.core.base.datetime.enums.CalendarFieldEnum;
-import com.ms.core.base.datetime.enums.ZoneIdEnum;
-import com.ms.core.config.SystemConfiguration;
+
+import com.ms.tools.core.base.basic.Strings;
+import com.ms.tools.core.config.SystemConfiguration;
+import com.ms.tools.core.enums.datetime.CalendarFieldEnum;
+import com.ms.tools.core.enums.datetime.ZoneIdEnum;
 
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -25,7 +26,7 @@ import java.util.TimeZone;
 
 
 /**
- * 时间工厂
+ * 日期时间工具
  *
  * @author ms
  */
@@ -585,7 +586,7 @@ public class DateUtils {
      * @return 当前日期路径
      */
     public static String getNowPath(String format) {
-        if (StringUtils.isBlank(format)) {
+        if (Strings.isBlank(format)) {
             format = "yyyy/MM/dd";
         }
         return format(now(), format);
@@ -708,7 +709,7 @@ public class DateUtils {
         if (date == null) {
             return null;
         }
-        if (StringUtils.isBlank(format)) {
+        if (Strings.isBlank(format)) {
             format = SystemConfiguration.getSystemDateFormat();
         }
         return new SimpleDateFormat(format).format(date);
@@ -726,7 +727,7 @@ public class DateUtils {
         if (date == null) {
             return null;
         }
-        if (StringUtils.isBlank(format)) {
+        if (Strings.isBlank(format)) {
             format = SystemConfiguration.getSystemDateFormat();
         }
         return new SimpleDateFormat(format, locale).format(date);
@@ -745,7 +746,7 @@ public class DateUtils {
         if (date == null) {
             return null;
         }
-        if (StringUtils.isBlank(format)) {
+        if (Strings.isBlank(format)) {
             format = SystemConfiguration.getSystemDateFormat();
         }
         SimpleDateFormat sdf = new SimpleDateFormat(format, locale);

@@ -11,6 +11,8 @@
 
 package com.ms.tools.core.response;
 
+import lombok.*;
+
 import java.io.Serializable;
 
 /**

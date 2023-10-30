@@ -11,7 +11,9 @@
 
 package com.ms.tools.core.response;
 
-import com.ms.core.config.SystemConfiguration;
+
+import com.ms.tools.core.config.SystemConfiguration;
+import lombok.*;
 
 import java.io.Serializable;
 

@@ -12,7 +12,7 @@
 package com.ms.tools.core.base.info;
 
 
-import com.ms.core.base.basic.StringUtils;
+import com.ms.tools.core.base.basic.Strings;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,7 +45,7 @@ public class UserNameRegexpUtils {
     public static boolean isUserName(String str, Integer min, Integer max) {
         min--;
         max--;
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         Pattern r = Pattern.compile(usernameCharm(min, max));
         Matcher m = r.matcher(str);
         return m.matches();

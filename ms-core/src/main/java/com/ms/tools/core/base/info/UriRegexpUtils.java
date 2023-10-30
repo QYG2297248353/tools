@@ -12,8 +12,8 @@
 package com.ms.tools.core.base.info;
 
 
-import com.ms.core.base.basic.StringUtils;
-import com.ms.core.base.enums.regular.RegexpEnum;
+import com.ms.tools.core.base.basic.Strings;
+import com.ms.tools.core.enums.regular.RegexpEnum;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,7 +73,7 @@ public class UriRegexpUtils {
      * @return 域名链接 http(s)://www.cjms.cf/
      */
     public static String getWebsite(String str) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         if (isUrl(str)) {
             Pattern r = Pattern.compile(RegexpEnum.REGEX_URL.regex());
             Matcher m = r.matcher(str);
@@ -81,9 +81,9 @@ public class UriRegexpUtils {
                 String group = m.group();
                 int index = 0;
                 int end = group.length();
-                boolean hasEnd = group.lastIndexOf(END) == StringUtils.ordinalIndexOf(group, END, 2);
+                boolean hasEnd = group.lastIndexOf(END) == Strings.ordinalIndexOf(group, END, 2);
                 if (!hasEnd) {
-                    end = StringUtils.ordinalIndexOf(group, END, 3) + 1;
+                    end = Strings.ordinalIndexOf(group, END, 3) + 1;
                 }
                 String substring = group.substring(index, end);
                 if (substring.startsWith(HOST)) {
@@ -146,7 +146,7 @@ public class UriRegexpUtils {
      * @return 是否为链接
      */
     public static boolean isUrl(String str) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         Pattern r = Pattern.compile(RegexpEnum.REGEX_URL.regex());
         Matcher m = r.matcher(str);
         return m.matches();
@@ -160,7 +160,7 @@ public class UriRegexpUtils {
      * @return 是否为链接
      */
     public static boolean isUrlFtp(String str) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         Pattern r = Pattern.compile(RegexpEnum.REGEX_URL_FTP.regex());
         Matcher m = r.matcher(str);
         return m.matches();
@@ -174,7 +174,7 @@ public class UriRegexpUtils {
      * @return 是否为链接
      */
     public static boolean isImgUrl(String str) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         Pattern r = Pattern.compile(RegexpEnum.REGEX_IMG_URL.regex());
         Matcher m = r.matcher(str);
         return m.matches();
@@ -189,7 +189,7 @@ public class UriRegexpUtils {
      * @return 是否为链接
      */
     public static boolean isImgUrlFtp(String str) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         Pattern r = Pattern.compile(RegexpEnum.REGEX_IMG_URL_FTP.regex());
         Matcher m = r.matcher(str);
         return m.matches();

@@ -11,9 +11,9 @@
 
 package com.ms.tools.core.base.info;
 
-import com.ms.core.base.basic.StringUtils;
-import com.ms.core.base.info.enums.PasswordRandomEnum;
-import com.ms.core.base.info.enums.PasswordRulesEnum;
+import com.ms.tools.core.base.basic.Strings;
+import com.ms.tools.core.enums.baseinfo.PasswordRandomEnum;
+import com.ms.tools.core.enums.baseinfo.PasswordRulesEnum;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +33,7 @@ public class PasswordUtils {
      * @return 是否符合规则
      */
     public static boolean allowPasswordRule(String str, PasswordRulesEnum rules) {
-        str = StringUtils.replaceBlank(str);
+        str = Strings.replaceBlank(str);
         Pattern r = Pattern.compile(rules.getRegex());
         Matcher m = r.matcher(str);
         return m.matches();
