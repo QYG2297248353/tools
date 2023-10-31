@@ -47,6 +47,7 @@ public class CalculatorUtils {
      * 列表求和
      *
      * @param numbers 数字
+     * @return 求和结果
      */
     public static BigDecimal sum(double... numbers) {
         CalculatorBuilds calculatorBuilds = builderExpression();
@@ -60,6 +61,7 @@ public class CalculatorUtils {
      * 列表求和
      *
      * @param numbers 数字
+     * @return 求和结果
      */
     public static BigDecimal sum(String... numbers) {
         CalculatorBuilds calculatorBuilds = builderExpression();
@@ -73,6 +75,7 @@ public class CalculatorUtils {
      * 列表求和
      *
      * @param numbers 数字
+     * @return 求和结果
      */
     public static BigDecimal sum(BigDecimal... numbers) {
         CalculatorBuilds calculatorBuilds = builderExpression();

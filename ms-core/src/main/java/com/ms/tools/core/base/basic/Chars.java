@@ -54,6 +54,9 @@ public interface Chars {
 
     /**
      * 是否为数字
+     *
+     * @param c 字符
+     * @return 是否为数字
      */
     static boolean isNumber(char c) {
         return c >= '0' && c <= '9';
@@ -89,6 +92,9 @@ public interface Chars {
 
     /**
      * 是否为字符或数字
+     *
+     * @param c 字符
+     * @return 是否为字符或数字
      */
     static boolean isLetterOrNumber(char c) {
         return isLetter(c) || isNumber(c);
@@ -96,6 +102,9 @@ public interface Chars {
 
     /**
      * 是否为字符或数字或下划线
+     *
+     * @param c 字符
+     * @return 是否为字符或数字或下划线
      */
     static boolean isLetterOrNumberOrUnderline(char c) {
         return isLetterOrNumber(c) || c == UNDERLINE;
@@ -105,6 +114,9 @@ public interface Chars {
      * 是否为空白符<br>
      * 空白符包括空格、制表符、全角空格和不间断空格<br>
      * see: https://unicode-table.com/cn/#control-character
+     *
+     * @param c 字符
+     * @return 是否为空白符
      */
     static boolean isBlankChar(char c) {
         return Character.isWhitespace(c)
@@ -116,6 +128,9 @@ public interface Chars {
     /**
      * 是否为emoji表情符<br>
      * see: https://unicode-table.com/cn/blocks/miscellaneous-symbols-and-pictographs/
+     *
+     * @param c 字符
+     *          @return 是否为emoji表情符
      */
     static boolean isEmoji(char c) {
         return (c == 0x0 || c == 0x9 || c == 0xA || c == 0xD
@@ -127,6 +142,9 @@ public interface Chars {
     /**
      * 是否为Windows或者Linux（Unix）文件分隔符<br>
      * Windows平台下分隔符为\，Linux（Unix）为/
+     *
+     * @param c 字符
+     * @return 是否为Windows或者Linux（Unix）文件分隔符
      */
     static boolean isFileSeparator(char c) {
         return SLASH == c || BACKSLASH == c;
@@ -171,6 +189,8 @@ public interface Chars {
 
     /**
      * 获取当前系统换行符
+     *
+     * @return 换行符
      */
     static String lineSeparator() {
         return System.lineSeparator();

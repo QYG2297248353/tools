@@ -50,6 +50,9 @@ public class SnowFlakeCore {
 
     /**
      * 获取单例对象
+     * 双重检查锁
+     *
+     * @return 单例对象
      */
     public static SnowFlakeCore getInstance() {
         if (snowFlakeCore == null) {

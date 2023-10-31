@@ -24,6 +24,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>javax.interceptor-api</module>
         <module>javax-mail</module>
         <module>javax-servlet-api</module>
     </modules>

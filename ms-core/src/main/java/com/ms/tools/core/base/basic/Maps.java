@@ -26,6 +26,10 @@ public interface Maps {
 
     /**
      * 空map
+     *
+     * @param <K> key
+     * @param <V> value
+     * @return map
      */
     static <K, V> Map<K, V> emptyMap() {
         return new HashMap<>();
@@ -33,6 +37,10 @@ public interface Maps {
 
     /**
      * 空map
+     *
+     * @param <K> key
+     * @param <V> value
+     * @return map
      */
     static <K, V> Map<K, V> of() {
         return new HashMap<>();

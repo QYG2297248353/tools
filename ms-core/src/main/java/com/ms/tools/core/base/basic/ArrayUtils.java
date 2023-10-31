@@ -36,6 +36,9 @@ public interface ArrayUtils {
 
     /**
      * 判断数组是否为空
+     *
+     * @param array 数组
+     * @return 是否为空
      */
     static boolean isEmpty(Object[] array) {
         return array == null || array.length == 0;
@@ -43,6 +46,9 @@ public interface ArrayUtils {
 
     /**
      * 判断数组是否不为空
+     *
+     * @param array 数组
+     * @return 是否不为空
      */
     static boolean isNotEmpty(Object[] array) {
         return !isEmpty(array);
@@ -69,6 +75,7 @@ public interface ArrayUtils {
      *
      * @param array 数组
      * @param index 索引
+     * @param <T>   数组类型
      * @return 删除后的数组
      */
     static <T> T[] remove(T[] array, int index) {
@@ -86,6 +93,7 @@ public interface ArrayUtils {
      *
      * @param array    原始数组
      * @param delArray 要删除的数组对象
+     * @param <T>      数组类型
      * @return 处理后的数组
      */
     static <T> T[] remove(T[] array, T... delArray) {

@@ -638,6 +638,7 @@ public class DesensitizationUtils {
      * 含国家代码 086 138 8888 8888
      *
      * @param phone 手机号
+     * @return 脱敏后的手机号
      */
     public static String phoneDesensitization(String phone) {
         if (phone == null || phone.length() < 11) {
@@ -660,6 +661,7 @@ public class DesensitizationUtils {
      * 脱敏规则：@前面的第一个字符明文，@后面的第一个字符明文，其他脱敏
      *
      * @param email 邮箱
+     * @return 脱敏后的邮箱
      */
     public static String emailDesensitization(String email) {
         if (Strings.isBlank(email)) {
@@ -684,6 +686,7 @@ public class DesensitizationUtils {
      *
      * @param email        邮箱
      * @param prefixLength 保留明文长度
+     * @return 脱敏后的邮箱
      */
     public static String emailDesensitization(String email, int prefixLength) {
         if (Strings.isBlank(email)) {
@@ -708,6 +711,7 @@ public class DesensitizationUtils {
      * 脱敏规则：前四位明文，后四位明文，其他脱敏
      *
      * @param idCard 身份证号
+     * @return 脱敏后的身份证号
      */
     public static String idCardDesensitization(String idCard) {
         if (idCard == null || idCard.length() < 8) {
@@ -722,6 +726,7 @@ public class DesensitizationUtils {
      * 脱敏规则：前四位明文，后四位明文，其他脱敏
      *
      * @param bankCard 银行卡号
+     * @return 脱敏后的银行卡号
      */
     public static String bankCardDesensitization(String bankCard) {
         if (bankCard == null || bankCard.length() < 8) {
@@ -734,14 +739,15 @@ public class DesensitizationUtils {
      * 姓名脱敏(中文)
      * <p>
      * 脱敏规则：
-     * 2个字的 李四 -> 李*
-     * 3个字及以上的的 李大四 -> 李*四  李静安寺四 -> 李*四
+     * 2个字的 李四 to 李*
+     * 3个字及以上的的 李大四 to 李*四  李静安寺四 to 李*四
      * <p>
      * 特殊情况：·
-     * 例如：李·四 -> 李*
-     * 李阿松大·大阿松大·啊实打实四 -> 李·**四
+     * 例如：李·四 to 李*
+     * 李阿松大·大阿松大·啊实打实四 to 李·**四
      *
      * @param name 脱敏姓名
+     * @return 脱敏后的姓名
      */
     public static String nameDesensitization(String name) {
         if (name == null || name.length() < 2) {
@@ -795,6 +801,7 @@ public class DesensitizationUtils {
      * 脱敏规则：前两位明文，后两位明文，其他脱敏
      *
      * @param carNo 车牌号
+     * @return 脱敏后的车牌号
      */
     public static String carNoDesensitization(String carNo) {
         if (carNo == null || carNo.length() < 4) {
@@ -809,6 +816,7 @@ public class DesensitizationUtils {
      * 脱敏规则：前四位明文，后四位明文，其他脱敏
      *
      * @param carFrameNo 车架号
+     * @return 脱敏后的车架号
      */
     public static String carFrameNoDesensitization(String carFrameNo) {
         if (carFrameNo == null || carFrameNo.length() < 8) {
@@ -823,6 +831,7 @@ public class DesensitizationUtils {
      * 脱敏规则：前四位明文，后四位明文，其他脱敏
      *
      * @param carEngineNo 发动机号
+     * @return 脱敏后的发动机号
      */
     public static String carEngineNoDesensitization(String carEngineNo) {
         if (carEngineNo == null || carEngineNo.length() < 8) {

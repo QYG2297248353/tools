@@ -88,6 +88,8 @@
         <org.yaml.snakeyaml.version>2.0</org.yaml.snakeyaml.version>
         <!-- 邮件服务 -->
         <com.sun.mail.javax.mail.version>1.6.2</com.sun.mail.javax.mail.version>
+        <!-- 注解类扩展插件 -->
+        <javax.interceptor.api.version>1.2</javax.interceptor.api.version>
         <!-- 压缩文件 -->
         <net.lingala.zip4j.vesion>2.11.5</net.lingala.zip4j.vesion>
         <!-- 对象关系映射 -->

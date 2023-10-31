@@ -214,6 +214,12 @@
 
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
+                <artifactId>javax.interceptor-api</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
                 <artifactId>javax-mail</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
@@ -437,6 +443,15 @@
                     <verbose>${maven.deploy.verbose}</verbose>
                     <!-- 跳过测试编译 -->
                     <skip>${maven.deploy.skip}</skip>
+
+                    <!-- 解决程序包找不到 -->
+                    <compilerArguments>
+                        <!-- 解决maven命令编译报错，因为rt.jar 和jce.jar 和jsse.jar在jre的lib下面，不在jdk的lib下面，
+                        导致maven找不到（java7以后会出现这个问题）-->
+                        <bootclasspath>
+                            ${java.home}\lib\rt.jar;${java.home}\lib\jce.jar;${java.home}\lib\jsse.jar
+                        </bootclasspath>
+                    </compilerArguments>
                 </configuration>
             </plugin>
 
