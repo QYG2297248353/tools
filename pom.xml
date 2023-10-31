@@ -16,9 +16,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- 基本信息 -->
-    <groupId>io.github.qyg2297248353</groupId>
+    <groupId>io.sourceforge.gitee</groupId>
     <artifactId>tools</artifactId>
-    <version>2.0.0</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>Java tools 工具箱</name>
     <description>萌森工作室-统一工具箱</description>
@@ -33,7 +33,7 @@
     <!-- 统一配置 -->
     <properties>
         <!-- 项目配置 -->
-        <ms.tools.version>2.0.0</ms.tools.version>
+        <ms.tools.version>1.0.0</ms.tools.version>
         <lombok.version>1.18.14</lombok.version>
 
         <!-- 基础配置 -->
@@ -109,31 +109,31 @@
             <!-- 组件依赖规范 -->
             <!-- Cloud组件规范 -->
             <dependency>
-                <groupId>com.ms.tools.components.cloud</groupId>
+                <groupId>io.sourceforge.gitee.components.cloud</groupId>
                 <artifactId>alibaba-nacos</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components.cloud</groupId>
+                <groupId>io.sourceforge.gitee.components.cloud</groupId>
                 <artifactId>alibaba-sentinel</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components.cloud</groupId>
+                <groupId>io.sourceforge.gitee.components.cloud</groupId>
                 <artifactId>qiniu-cloud</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components.cloud</groupId>
+                <groupId>io.sourceforge.gitee.components.cloud</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components.cloud</groupId>
+                <groupId>io.sourceforge.gitee.components.cloud</groupId>
                 <artifactId>spring-openfeign</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
@@ -147,201 +147,201 @@
 
             <!-- 组件规范 -->
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>dysmsapi20170525</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>easyexcel</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>commons-compress</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>dnsjava</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>guava</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>zxing-javase</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>javax.interceptor-api</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>javax-mail</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>javax-servlet-api</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>jsonwebtoken-jjwt</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>lingala-zip4j</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>opencsv</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <!-- Spring 组件版本规范 -->
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-annotation</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-beans</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-data-commons</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-expression</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-jdbc</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-data-redis</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-web</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <!-- 组合式组件 -->
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>spring-boot</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>squareup-okhttp3</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
+                <groupId>io.sourceforge.gitee.components</groupId>
                 <artifactId>yaml-snakeyaml</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
@@ -384,8 +384,8 @@
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.components</groupId>
-                <artifactId>spring-annotation</artifactId>
+                <groupId>com.ms.tools.annotation</groupId>
+                <artifactId>ms-annotation</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 

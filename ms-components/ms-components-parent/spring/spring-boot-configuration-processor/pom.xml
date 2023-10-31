@@ -15,9 +15,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.ms.tools.components</groupId>
+        <groupId>io.sourceforge.gitee.components</groupId>
         <artifactId>spring</artifactId>
-        <version>2.0.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>spring-boot-configuration-processor</artifactId>

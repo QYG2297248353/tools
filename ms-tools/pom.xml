@@ -17,9 +17,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.github.qyg2297248353</groupId>
+        <groupId>io.sourceforge.gitee</groupId>
         <artifactId>tools</artifactId>
-        <version>2.0.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>ms-tools</artifactId>
@@ -27,9 +27,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.github.qyg2297248353</groupId>
+                <groupId>io.sourceforge.gitee</groupId>
                 <artifactId>tools</artifactId>
-                <version>2.0.0</version>
+                <version>1.0.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -69,8 +69,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.ms.tools.components</groupId>
-            <artifactId>spring-annotation</artifactId>
+            <groupId>com.ms.tools.annotation</groupId>
+            <artifactId>ms-annotation</artifactId>
         </dependency>
 
         <dependency>
