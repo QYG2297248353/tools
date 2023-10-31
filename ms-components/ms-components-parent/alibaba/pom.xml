@@ -24,6 +24,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>dysmsapi20170525</module>
         <module>fastjson</module>
         <module>easyexcel</module>
     </modules>

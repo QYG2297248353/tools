@@ -113,4 +113,14 @@ public interface Lists {
         }
         return randomList;
     }
+
+    /**
+     * 是否为空
+     *
+     * @param list 列表
+     * @return 是否为空
+     */
+    static boolean isEmpty(List<?> list) {
+        return list == null || list.isEmpty();
+    }
 }

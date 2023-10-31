@@ -25,6 +25,8 @@
     <modules>
         <!-- 二维码绘制 -->
         <module>zxing-javase</module>
+        <!-- 集成插件 -->
+        <module>guava</module>
     </modules>
 
 

@@ -18,7 +18,7 @@
     <!-- 基本信息 -->
     <groupId>io.github.qyg2297248353</groupId>
     <artifactId>tools</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>${ms.tools.version}</version>
     <packaging>pom</packaging>
     <name>Java tools 工具箱</name>
     <description>萌森工作室-统一工具箱</description>
@@ -57,6 +57,9 @@
         <maven.assembly.plugin.version>2.4.1</maven.assembly.plugin.version>
         <nexus.staging.maven.plugin.version>1.6.7</nexus.staging.maven.plugin.version>
         <maven.gpg.plugin.version>1.5</maven.gpg.plugin.version>
+
+        <!-- 覆盖组件 -->
+        <okhttp.version>4.10.0-RC1</okhttp.version>
     </properties>
 
     <!-- 中央仓库仓库 -->
@@ -135,10 +138,23 @@
                 <version>${ms.tools.version}</version>
             </dependency>
 
+            <!-- 覆盖组件 -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
             <!-- 组件规范 -->
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
                 <artifactId>lombok</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>dysmsapi20170525</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
@@ -180,7 +196,25 @@
 
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
+                <artifactId>dnsjava</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>guava</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
                 <artifactId>zxing-javase</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>javax-mail</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
@@ -277,7 +311,7 @@
 
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
-                <artifactId>spring-redis</artifactId>
+                <artifactId>spring-data-redis</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
@@ -291,6 +325,12 @@
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
                 <artifactId>spring-boot</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>squareup-okhttp3</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
@@ -318,6 +358,48 @@
                 <artifactId>ms-resources</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.security</groupId>
+                <artifactId>ms-security</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.spring</groupId>
+                <artifactId>ms-spring</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.redis</groupId>
+                <artifactId>ms-redis</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-annotation</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.network</groupId>
+                <artifactId>ms-network</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.push</groupId>
+                <artifactId>ms-push</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.api</groupId>
+                <artifactId>ms-api</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -328,12 +410,15 @@
         <module>ms-core</module>
         <module>ms-canvas</module>
         <module>ms-resources</module>
-
-
-        <!-- 集合工具 -->
-        <module>ms-tools</module>
         <module>ms-security</module>
         <module>ms-spring</module>
+        <module>ms-redis</module>
+        <module>ms-annotation</module>
+        <module>ms-network</module>
+        <module>ms-push</module>
+        <module>ms-api</module>
+        <!-- 集合工具 -->
+        <module>ms-tools</module>
     </modules>
 
     <!-- 构建插件 -->

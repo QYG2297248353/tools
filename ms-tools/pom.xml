@@ -52,6 +52,41 @@
             <groupId>com.ms.tools.resources</groupId>
             <artifactId>ms-resources</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.security</groupId>
+            <artifactId>ms-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.spring</groupId>
+            <artifactId>ms-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.redis</groupId>
+            <artifactId>ms-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.components</groupId>
+            <artifactId>spring-annotation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.network</groupId>
+            <artifactId>ms-network</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.push</groupId>
+            <artifactId>ms-push</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.api</groupId>
+            <artifactId>ms-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -26,14 +26,16 @@
     <modules>
         <module>alibaba</module>
         <module>apache</module>
+        <module>dnsjava</module>
         <module>google</module>
         <module>javax</module>
         <module>jsonwebtoken-jjwt</module>
         <module>lingala-zip4j</module>
         <module>lombok</module>
-        <module>spring</module>
-        <module>yaml-snakeyaml</module>
         <module>opencsv</module>
+        <module>spring</module>
+        <module>squareup-okhttp3</module>
+        <module>yaml-snakeyaml</module>
     </modules>
 
     <repositories>
