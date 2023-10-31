@@ -85,7 +85,7 @@ public class ObjectCopyUtils {
      * @param <S>    目标对象类型
      */
     public static <T, S> void copyProperties(T source, S target) {
-        copyProperties(source, target, new String[0]);
+        copyProperties(source, target.getClass());
     }
 
     /**

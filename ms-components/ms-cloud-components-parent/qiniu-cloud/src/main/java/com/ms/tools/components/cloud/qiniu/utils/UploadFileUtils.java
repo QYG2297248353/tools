@@ -1,6 +1,6 @@
 package com.ms.tools.components.cloud.qiniu.utils;
 
-import org.apache.commons.codec.binary.Hex;
+import com.qiniu.util.Hex;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedInputStream;

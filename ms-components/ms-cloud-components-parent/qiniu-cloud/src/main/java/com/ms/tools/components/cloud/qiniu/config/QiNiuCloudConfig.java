@@ -15,17 +15,17 @@ public class QiNiuCloudConfig {
     /**
      * 七牛云的accessKey
      */
-    private String accessKey = "8XgTFhsdOiXQRHSTzx_R8baS28mwUgYbSCuESKf7";
+    private String accessKey;
 
     /**
      * 七牛云的secretKey
      */
-    private String secretKey = "vlyL-qL-iNDE6STDeURNsYFTIoQlWntV620zIDdL";
+    private String secretKey;
 
     /**
      * 七牛云的域名
      */
-    private String domain = "http://qiniu.qyg2297248353.top/";
+    private String domain;
 
 
     public String getAccessKey() {

@@ -103,13 +103,171 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- 统一依赖规范 -->
+            <!-- 组件依赖规范 -->
+            <!-- Cloud组件规范 -->
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>alibaba-nacos</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>alibaba-sentinel</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>qiniu-cloud</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components.cloud</groupId>
+                <artifactId>spring-openfeign</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <!-- 组件规范 -->
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
-                <artifactId>ms-components</artifactId>
+                <artifactId>lombok</artifactId>
                 <version>${ms.tools.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>codec</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>io</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>javax-servlet-api</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <!-- Spring 组件版本规范 -->
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-annotation</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-data-commons</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-redis</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <!-- 组合式组件 -->
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>spring-boot</artifactId>
+                <version>${ms.tools.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

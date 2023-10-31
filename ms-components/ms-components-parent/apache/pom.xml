@@ -25,7 +25,8 @@
 
     <modules>
         <module>codec</module>
-        <module>io</module>
         <module>commons-compress</module>
+        <module>commons-lang3</module>
+        <module>io</module>
     </modules>
 </project>
