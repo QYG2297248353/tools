@@ -156,7 +156,7 @@
 
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
-                <artifactId>codec</artifactId>
+                <artifactId>commons-codec</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
@@ -174,13 +174,37 @@
 
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
-                <artifactId>io</artifactId>
+                <artifactId>commons-io</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>zxing-javase</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.ms.tools.components</groupId>
                 <artifactId>javax-servlet-api</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>jsonwebtoken-jjwt</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>lingala-zip4j</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>opencsv</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
@@ -269,14 +293,47 @@
                 <artifactId>spring-boot</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.components</groupId>
+                <artifactId>yaml-snakeyaml</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <!-- 开发组件 -->
+            <dependency>
+                <groupId>com.ms.tools.core</groupId>
+                <artifactId>ms-core</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.canvas</groupId>
+                <artifactId>ms-canvas</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ms.tools.resources</groupId>
+                <artifactId>ms-resources</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
+        <!-- 公共组件 -->
         <module>ms-components</module>
+        <!-- 核心组件 -->
         <module>ms-core</module>
+        <module>ms-canvas</module>
+        <module>ms-resources</module>
 
+
+        <!-- 集合工具 -->
         <module>ms-tools</module>
+        <module>ms-security</module>
+        <module>ms-spring</module>
     </modules>
 
     <!-- 构建插件 -->

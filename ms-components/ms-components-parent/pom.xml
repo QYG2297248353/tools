@@ -26,9 +26,14 @@
     <modules>
         <module>alibaba</module>
         <module>apache</module>
+        <module>google</module>
         <module>javax</module>
-        <module>spring</module>
+        <module>jsonwebtoken-jjwt</module>
+        <module>lingala-zip4j</module>
         <module>lombok</module>
+        <module>spring</module>
+        <module>yaml-snakeyaml</module>
+        <module>opencsv</module>
     </modules>
 
     <repositories>

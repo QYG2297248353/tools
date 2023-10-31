@@ -42,6 +42,16 @@
             <groupId>com.ms.tools.components</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.canvas</groupId>
+            <artifactId>ms-canvas</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ms.tools.resources</groupId>
+            <artifactId>ms-resources</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
