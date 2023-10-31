@@ -25,6 +25,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.ms.tools.core</groupId>
+            <artifactId>ms-core</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.ms.tools.components</groupId>
             <artifactId>spring-annotation</artifactId>
             <scope>compile</scope>

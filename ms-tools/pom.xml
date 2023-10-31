@@ -24,7 +24,6 @@
 
     <artifactId>ms-tools</artifactId>
 
-    <!-- 版本规范 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -38,9 +37,10 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- 开发组件 -->
         <dependency>
-            <groupId>com.ms.tools.components</groupId>
-            <artifactId>spring-core</artifactId>
+            <groupId>com.ms.tools.core</groupId>
+            <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
