@@ -28,6 +28,7 @@
 
     <modules>
         <module>spring-boot-starter</module>
+        <module>spring-gateway</module>
         <module>spring-openfeign</module>
     </modules>
 </project>

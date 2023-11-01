@@ -15,27 +15,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.sourceforge.gitee.components</groupId>
-        <artifactId>spring</artifactId>
+        <groupId>io.sourceforge.gitee.components.cloud</groupId>
+        <artifactId>spring-boot-cloud</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>spring-data-jpa</artifactId>
+
+    <artifactId>spring-gateway</artifactId>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+    <url>https://spring.io/projects/spring-boot</url>
 
     <dependencies>
+        <!-- Spring Cloud 网关 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
+        <!-- Spring Cloud 负载均衡 -->
         <dependency>
-            <groupId>io.sourceforge.gitee.components</groupId>
-            <artifactId>javax.interceptor-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.sourceforge.gitee.core</groupId>
-            <artifactId>ms-core</artifactId>
-            <version>${ms.tools.version}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
     </dependencies>
+
 </project>

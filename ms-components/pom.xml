@@ -27,40 +27,7 @@
     <description>萌森工作室-统一依赖规范</description>
     <url>https://github.com/QYG2297248353/tools.git</url>
 
-    <!-- 统一配置 -->
     <properties>
-        <!-- 基础配置 -->
-        <java.version>8</java.version>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!-- 插件版本信息 -->
-        <lombok.version>1.18.14</lombok.version>
-
-        <!-- maven-compiler-plugin 构建插件 -->
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <maven.deploy.skip>true</maven.deploy.skip>
-        <maven.deploy.verbose>true</maven.deploy.verbose>
-
-        <!-- 构建插件 -->
-        <maven.surefire.plugin.version>2.16</maven.surefire.plugin.version>
-        <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
-        <maven.javadoc.plugin.version>2.9.1</maven.javadoc.plugin.version>
-        <maven.assembly.plugin.version>2.4.1</maven.assembly.plugin.version>
-        <nexus.staging.maven.plugin.version>1.6.7</nexus.staging.maven.plugin.version>
-        <maven.gpg.plugin.version>1.5</maven.gpg.plugin.version>
-
-        <!-- SpringBoot 版本信息 -->
-        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
-        <spring-cloud.version>2021.0.7-SNAPSHOT</spring-cloud.version>
-        <spring-boot.version>2.7.12-SNAPSHOT</spring-boot.version>
-        <!-- Spring 组件 -->
-        <spring-data-commons.version>2.7.12</spring-data-commons.version>
-
         <!-- Apache Commons 组件 -->
         <apache.commons.codec.version>1.15</apache.commons.codec.version>
         <apache.commons.io.version>2.11.0</apache.commons.io.version>

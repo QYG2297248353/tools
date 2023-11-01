@@ -31,19 +31,19 @@
             <scope>provided</scope>
             <excludes>
                 <!--排除assembly模块的jar包-->
-                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+                <exclude>io.sourceforge.gitee:ms-tools</exclude>
             </excludes>
         </dependencySet>
         <dependencySet>
             <scope>system</scope>
             <excludes>
-                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+                <exclude>io.sourceforge.gitee:ms-tools</exclude>
             </excludes>
         </dependencySet>
         <dependencySet>
             <scope>runtime</scope>
             <excludes>
-                <exclude>io.github.qyg2297248353:ms-tools</exclude>
+                <exclude>io.sourceforge.gitee:ms-tools</exclude>
             </excludes>
         </dependencySet>
     </dependencySets>
@@ -72,6 +72,78 @@
                 <include>*.bat</include>
             </includes>
         </fileSet>
+
+        <!-- 子模块 -->
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-core/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-canvas/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-resources/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-security/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-spring/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-redis/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-annotation/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-network/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-push/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ms-api/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
     </fileSets>
 
     <moduleSets>
@@ -79,7 +151,17 @@
             <useAllReactorProjects>true</useAllReactorProjects>
             <includes>
                 <!--配置子模块，按groupId:artifactId配置，然后根据各子模块依赖的顺序排列-->
-                <include>io.github.qyg2297248353:ms-core</include>
+                <include>io.sourceforge.gitee:ms-core</include>
+                <include>io.sourceforge.gitee:ms-canvas</include>
+                <include>io.sourceforge.gitee:ms-resources</include>
+                <include>io.sourceforge.gitee:ms-security</include>
+                <include>io.sourceforge.gitee:ms-spring</include>
+                <include>io.sourceforge.gitee:ms-redis</include>
+                <include>io.sourceforge.gitee:ms-annotation</include>
+                <include>io.sourceforge.gitee:ms-network</include>
+                <include>io.sourceforge.gitee:ms-push</include>
+                <include>io.sourceforge.gitee:ms-api</include>
+                <include>io.sourceforge.gitee:ms-tools</include>
             </includes>
             <binaries>
                 <outputDirectory>lib</outputDirectory>

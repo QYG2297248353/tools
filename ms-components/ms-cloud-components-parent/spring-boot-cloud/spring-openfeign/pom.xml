@@ -26,10 +26,12 @@
     <url>https://spring.io/projects/spring-boot</url>
 
     <dependencies>
+        <!-- openfeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!-- 扩展 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

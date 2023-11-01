@@ -20,12 +20,12 @@
         <version>1.0.0</version>
     </parent>
 
-    <groupId>com.ms.tools.annotation</groupId>
+    <groupId>io.sourceforge.gitee.annotation</groupId>
     <artifactId>ms-annotation</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.ms.tools.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
@@ -41,7 +41,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.ms.tools.spring</groupId>
+            <groupId>io.sourceforge.gitee.spring</groupId>
             <artifactId>ms-spring</artifactId>
         </dependency>
 

@@ -20,12 +20,12 @@
         <version>1.0.0</version>
     </parent>
 
-    <groupId>com.ms.tools.resources</groupId>
+    <groupId>io.sourceforge.gitee.resources</groupId>
     <artifactId>ms-resources</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.ms.tools.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 

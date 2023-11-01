@@ -20,17 +20,17 @@
         <version>1.0.0</version>
     </parent>
 
-    <groupId>com.ms.tools.api</groupId>
+    <groupId>io.sourceforge.gitee.api</groupId>
     <artifactId>ms-api</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.ms.tools.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.ms.tools.network</groupId>
+            <groupId>io.sourceforge.gitee.network</groupId>
             <artifactId>ms-network</artifactId>
         </dependency>
 

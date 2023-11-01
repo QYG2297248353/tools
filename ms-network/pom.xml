@@ -20,17 +20,17 @@
         <version>1.0.0</version>
     </parent>
 
-    <groupId>com.ms.tools.network</groupId>
+    <groupId>io.sourceforge.gitee.network</groupId>
     <artifactId>ms-network</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.ms.tools.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.ms.tools.resources</groupId>
+            <groupId>io.sourceforge.gitee.resources</groupId>
             <artifactId>ms-resources</artifactId>
         </dependency>
 
@@ -45,7 +45,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.ms.tools.spring</groupId>
+            <groupId>io.sourceforge.gitee.spring</groupId>
             <artifactId>ms-spring</artifactId>
         </dependency>
 

@@ -43,6 +43,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- SpringBoot 版本信息 -->
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
+        <spring-cloud.version>2021.0.7-SNAPSHOT</spring-cloud.version>
+        <spring-boot.version>2.7.12-SNAPSHOT</spring-boot.version>
+
         <!-- maven-compiler-plugin 构建插件 -->
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
@@ -129,6 +134,12 @@
             <dependency>
                 <groupId>io.sourceforge.gitee.components.cloud</groupId>
                 <artifactId>spring-boot-starter</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.sourceforge.gitee.components.cloud</groupId>
+                <artifactId>spring-gateway</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
@@ -348,61 +359,61 @@
 
             <!-- 开发组件 -->
             <dependency>
-                <groupId>com.ms.tools.core</groupId>
+                <groupId>io.sourceforge.gitee.core</groupId>
                 <artifactId>ms-core</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.canvas</groupId>
+                <groupId>io.sourceforge.gitee.canvas</groupId>
                 <artifactId>ms-canvas</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.resources</groupId>
+                <groupId>io.sourceforge.gitee.resources</groupId>
                 <artifactId>ms-resources</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.security</groupId>
+                <groupId>io.sourceforge.gitee.security</groupId>
                 <artifactId>ms-security</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.spring</groupId>
+                <groupId>io.sourceforge.gitee.spring</groupId>
                 <artifactId>ms-spring</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.redis</groupId>
+                <groupId>io.sourceforge.gitee.redis</groupId>
                 <artifactId>ms-redis</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.annotation</groupId>
+                <groupId>io.sourceforge.gitee.annotation</groupId>
                 <artifactId>ms-annotation</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.network</groupId>
+                <groupId>io.sourceforge.gitee.network</groupId>
                 <artifactId>ms-network</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.push</groupId>
+                <groupId>io.sourceforge.gitee.push</groupId>
                 <artifactId>ms-push</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ms.tools.api</groupId>
+                <groupId>io.sourceforge.gitee.api</groupId>
                 <artifactId>ms-api</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
@@ -430,6 +441,24 @@
     <!-- 构建插件 -->
     <build>
         <plugins>
+            <!--提供source 源码文件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.plugin.version}</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- 打包版本配置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -443,7 +472,22 @@
                     <verbose>${maven.deploy.verbose}</verbose>
                     <!-- 跳过测试编译 -->
                     <skip>${maven.deploy.skip}</skip>
-
+                    <compilerArgs>
+                        <!-- 过期方法警告 -->
+                        <arg>-Xlint:deprecation</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                            <version>${spring-boot.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                     <!-- 解决程序包找不到 -->
                     <compilerArguments>
                         <!-- 解决maven命令编译报错，因为rt.jar 和jce.jar 和jsse.jar在jre的lib下面，不在jdk的lib下面，
