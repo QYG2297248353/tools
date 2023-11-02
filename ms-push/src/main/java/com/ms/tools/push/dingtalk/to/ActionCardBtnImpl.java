@@ -26,9 +26,9 @@ import java.util.List;
  */
 public abstract class ActionCardBtnImpl extends AbstractConfig {
     @JSONField(serialize = false)
-    private BtnOrientationEnum btnOrientationEnum;
-    @JSONField(serialize = false)
     private final List<Btn> btnList;
+    @JSONField(serialize = false)
+    private BtnOrientationEnum btnOrientationEnum;
 
     protected ActionCardBtnImpl() {
         btnOrientationEnum = BtnOrientationEnum.EMPTY;

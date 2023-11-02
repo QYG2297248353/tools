@@ -52,10 +52,17 @@ public class EmailMimeMessageBuilders {
 
 
         /**
+         * 附件
+         */
+        private final Map<String, File> attachments;
+        /**
+         * 头部字段
+         */
+        private final Map<String, String> headers;
+        /**
          * 发件人
          */
         private Address from;
-
         /**
          * 收件人列表
          */
@@ -68,32 +75,26 @@ public class EmailMimeMessageBuilders {
          * 密送人列表
          */
         private List<Address> bcc;
-
         /**
          * 是否为回复邮件
          */
         private Boolean reply;
-
         /**
          * 主题
          */
         private String subject;
-
         /**
          * 描述
          */
         private String description;
-
         /**
          * 文字内容编码
          */
         private String charset;
-
         /**
          * 自定义内容
          */
         private Multipart content;
-
         /**
          * 纯文本内容
          */
@@ -108,24 +109,11 @@ public class EmailMimeMessageBuilders {
          * MIME类型
          */
         private String textType;
-
         private String subtype;
-
-
-        /**
-         * 附件
-         */
-        private final Map<String, File> attachments;
-
         /**
          * 发送日期
          */
         private Date sentDate;
-
-        /**
-         * 头部字段
-         */
-        private final Map<String, String> headers;
 
         private EmailMimeMessageBuilder() {
             to = Lists.empty();

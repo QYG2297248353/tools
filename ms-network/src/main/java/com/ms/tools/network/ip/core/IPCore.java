@@ -16,8 +16,8 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 public class IPCore {
-    static Logger log = Logger.getLogger(IPCore.class.getName());
     private static final StringBuilder sb = new StringBuilder();
+    static Logger log = Logger.getLogger(IPCore.class.getName());
 
     /**
      * 从ip的字符串形式得到字节数组形式

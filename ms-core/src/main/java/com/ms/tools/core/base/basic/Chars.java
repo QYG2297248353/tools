@@ -130,7 +130,7 @@ public interface Chars {
      * see: https://unicode-table.com/cn/blocks/miscellaneous-symbols-and-pictographs/
      *
      * @param c 字符
-     *          @return 是否为emoji表情符
+     * @return 是否为emoji表情符
      */
     static boolean isEmoji(char c) {
         return (c == 0x0 || c == 0x9 || c == 0xA || c == 0xD
