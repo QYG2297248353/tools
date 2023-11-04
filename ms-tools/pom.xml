@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.sourceforge.gitee</groupId>
+        <groupId>io.sourceforge.github</groupId>
         <artifactId>tools</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -27,7 +27,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.sourceforge.gitee</groupId>
+                <groupId>io.sourceforge.github</groupId>
                 <artifactId>tools</artifactId>
                 <version>1.0.0</version>
                 <type>pom</type>
@@ -39,52 +39,52 @@
     <dependencies>
         <!-- 开发组件 -->
         <dependency>
-            <groupId>io.sourceforge.gitee.core</groupId>
+            <groupId>io.sourceforge.github.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.canvas</groupId>
+            <groupId>io.sourceforge.github.canvas</groupId>
             <artifactId>ms-canvas</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.resources</groupId>
+            <groupId>io.sourceforge.github.resources</groupId>
             <artifactId>ms-resources</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.security</groupId>
+            <groupId>io.sourceforge.github.security</groupId>
             <artifactId>ms-security</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.spring</groupId>
+            <groupId>io.sourceforge.github.spring</groupId>
             <artifactId>ms-spring</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.redis</groupId>
+            <groupId>io.sourceforge.github.redis</groupId>
             <artifactId>ms-redis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.annotation</groupId>
+            <groupId>io.sourceforge.github.annotation</groupId>
             <artifactId>ms-annotation</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.network</groupId>
+            <groupId>io.sourceforge.github.network</groupId>
             <artifactId>ms-network</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.push</groupId>
+            <groupId>io.sourceforge.github.push</groupId>
             <artifactId>ms-push</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.api</groupId>
+            <groupId>io.sourceforge.github.api</groupId>
             <artifactId>ms-api</artifactId>
         </dependency>
     </dependencies>

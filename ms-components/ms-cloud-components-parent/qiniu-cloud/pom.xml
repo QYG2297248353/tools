@@ -15,7 +15,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.sourceforge.gitee.components.cloud</groupId>
+        <groupId>io.sourceforge.github.components.cloud</groupId>
         <artifactId>ms-cloud-components-parent</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -33,12 +33,12 @@
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.components</groupId>
+            <groupId>io.sourceforge.github.components</groupId>
             <artifactId>spring-boot</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.components</groupId>
+            <groupId>io.sourceforge.github.components</groupId>
             <artifactId>javax-servlet-api</artifactId>
         </dependency>
     </dependencies>

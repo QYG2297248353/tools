@@ -15,28 +15,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.sourceforge.gitee</groupId>
+        <groupId>io.sourceforge.github</groupId>
         <artifactId>tools</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <groupId>io.sourceforge.gitee.redis</groupId>
+    <groupId>io.sourceforge.github.redis</groupId>
     <artifactId>ms-redis</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.sourceforge.gitee.core</groupId>
+            <groupId>io.sourceforge.github.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.components</groupId>
+            <groupId>io.sourceforge.github.components</groupId>
             <artifactId>spring-data-redis</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.gitee.spring</groupId>
+            <groupId>io.sourceforge.github.spring</groupId>
             <artifactId>ms-spring</artifactId>
         </dependency>
 
