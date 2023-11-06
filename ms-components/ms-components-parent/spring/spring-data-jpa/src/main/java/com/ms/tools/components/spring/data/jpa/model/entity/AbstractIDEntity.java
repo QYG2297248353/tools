@@ -30,7 +30,7 @@ public abstract class AbstractIDEntity implements IBaseEntity {
     private static final long serialVersionUID = -8184484342689305155L;
 
     @Id
-    @GenericGenerator(name = "snowFlakeIdGenerator", strategy = "com.ms.jpa.config.IDGenerator", parameters = {@Parameter(name = "snowFlakeIdGenerator", value = "com.ms.jpa.config.IDGenerator")})
+    @GenericGenerator(name = "snowFlakeIdGenerator", strategy = "com.ms.tools.components.spring.data.jpa.config.IDGenerator", parameters = {@Parameter(name = "snowFlakeIdGenerator", value = "com.ms.tools.components.spring.data.jpa.config.IDGenerator")})
     @GeneratedValue(generator = "snowFlakeIdGenerator")
     @Column(name = "id")
     private String id;
