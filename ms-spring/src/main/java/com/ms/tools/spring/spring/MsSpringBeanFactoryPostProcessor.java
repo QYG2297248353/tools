@@ -28,7 +28,7 @@ import java.util.Set;
 
 public class MsSpringBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
-    protected static final String BASE_PACKAGE = "com.ms.spring";
+    protected static final String BASE_PACKAGE = "com.ms.tools.spring";
 
     protected static final Class[] ANNOTATIONS = new Class[]{Service.class, Controller.class, Configuration.class, Bean.class, Component.class};
 

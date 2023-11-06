@@ -28,7 +28,7 @@ import java.util.Set;
 
 public class MsPushBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
-    protected static final String BASE_PACKAGE = "com.ms.push";
+    protected static final String BASE_PACKAGE = "com.ms.tools.push";
 
     protected static final Class[] ANNOTATIONS = new Class[]{Service.class, Controller.class, Configuration.class, Bean.class, Component.class};
 

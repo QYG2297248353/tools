@@ -28,7 +28,7 @@ import java.util.Set;
 
 public class MsAnnotationBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
-    protected static final String BASE_PACKAGE = "com.ms.annotation";
+    protected static final String BASE_PACKAGE = "com.ms.tools.annotation";
 
     protected static final Class[] ANNOTATIONS = new Class[]{Service.class, Controller.class, Configuration.class, Bean.class, Component.class};
 
