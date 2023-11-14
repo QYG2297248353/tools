@@ -36,14 +36,16 @@
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
-            <artifactId>spring-data-redis</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>io.sourceforge.github.spring</groupId>
             <artifactId>ms-spring</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.sourceforge.github.components</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>io.sourceforge.github.components</groupId>
