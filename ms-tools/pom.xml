@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.sourceforge.github</groupId>
+        <groupId>io.sourceforge.gitee</groupId>
         <artifactId>tools</artifactId>
         <version>1.1.1</version>
     </parent>
@@ -27,7 +27,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.sourceforge.github</groupId>
+                <groupId>io.sourceforge.gitee</groupId>
                 <artifactId>tools</artifactId>
                 <version>1.1.1</version>
                 <type>pom</type>
