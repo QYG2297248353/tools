@@ -15,7 +15,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.sourceforge.github.components</groupId>
+        <groupId>io.sourceforge.aliyun.components</groupId>
         <artifactId>spring</artifactId>
         <version>1.1.1</version>
     </parent>
@@ -24,42 +24,42 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.aliyun.components</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.aliyun.components</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.aliyun.components</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.aliyun.components</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.aliyun.components</groupId>
             <artifactId>spring-expression</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.aliyun.components</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.aliyun.components</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.aliyun.components</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
     </dependencies>

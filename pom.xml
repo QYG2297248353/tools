@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- 基本信息 -->
-    <groupId>io.sourceforge.github</groupId>
+    <groupId>io.sourceforge.aliyun</groupId>
     <artifactId>tools</artifactId>
     <version>1.1.1</version>
     <packaging>pom</packaging>
@@ -114,37 +114,37 @@
             <!-- 组件依赖规范 -->
             <!-- Cloud组件规范 -->
             <dependency>
-                <groupId>io.sourceforge.github.components.cloud</groupId>
+                <groupId>io.sourceforge.aliyun.components.cloud</groupId>
                 <artifactId>alibaba-nacos</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components.cloud</groupId>
+                <groupId>io.sourceforge.aliyun.components.cloud</groupId>
                 <artifactId>alibaba-sentinel</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components.cloud</groupId>
+                <groupId>io.sourceforge.aliyun.components.cloud</groupId>
                 <artifactId>qiniu-cloud</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components.cloud</groupId>
+                <groupId>io.sourceforge.aliyun.components.cloud</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components.cloud</groupId>
+                <groupId>io.sourceforge.aliyun.components.cloud</groupId>
                 <artifactId>spring-gateway</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components.cloud</groupId>
+                <groupId>io.sourceforge.aliyun.components.cloud</groupId>
                 <artifactId>spring-openfeign</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
@@ -158,262 +158,262 @@
 
             <!-- 组件规范 -->
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>dysmsapi20170525</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>easyexcel</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>commons-compress</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>dnsjava</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>guava</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>zxing-javase</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>javax.interceptor-api</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>javax-mail</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>javax-servlet-api</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>jsonwebtoken-jjwt</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>lingala-zip4j</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>opencsv</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <!-- Spring 组件版本规范 -->
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-annotation</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-beans</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-data-commons</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-expression</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-jdbc</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-data-redis</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-web</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <!-- 组合式组件 -->
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>spring-boot</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>squareup-okhttp3</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.components</groupId>
+                <groupId>io.sourceforge.aliyun.components</groupId>
                 <artifactId>yaml-snakeyaml</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <!-- 开发组件 -->
             <dependency>
-                <groupId>io.sourceforge.github.core</groupId>
+                <groupId>io.sourceforge.aliyun.core</groupId>
                 <artifactId>ms-core</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.canvas</groupId>
+                <groupId>io.sourceforge.aliyun.canvas</groupId>
                 <artifactId>ms-canvas</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.resources</groupId>
+                <groupId>io.sourceforge.aliyun.resources</groupId>
                 <artifactId>ms-resources</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.security</groupId>
+                <groupId>io.sourceforge.aliyun.security</groupId>
                 <artifactId>ms-security</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.spring</groupId>
+                <groupId>io.sourceforge.aliyun.spring</groupId>
                 <artifactId>ms-spring</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.redis</groupId>
+                <groupId>io.sourceforge.aliyun.redis</groupId>
                 <artifactId>ms-redis</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.annotation</groupId>
+                <groupId>io.sourceforge.aliyun.annotation</groupId>
                 <artifactId>ms-annotation</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.network</groupId>
+                <groupId>io.sourceforge.aliyun.network</groupId>
                 <artifactId>ms-network</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.push</groupId>
+                <groupId>io.sourceforge.aliyun.push</groupId>
                 <artifactId>ms-push</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.sourceforge.github.api</groupId>
+                <groupId>io.sourceforge.aliyun.api</groupId>
                 <artifactId>ms-api</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>

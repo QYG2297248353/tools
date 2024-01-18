@@ -31,19 +31,19 @@
             <scope>provided</scope>
             <excludes>
                 <!--排除assembly模块的jar包-->
-                <exclude>io.sourceforge.github:ms-tools</exclude>
+                <exclude>io.sourceforge.aliyun:ms-tools</exclude>
             </excludes>
         </dependencySet>
         <dependencySet>
             <scope>system</scope>
             <excludes>
-                <exclude>io.sourceforge.github:ms-tools</exclude>
+                <exclude>io.sourceforge.aliyun:ms-tools</exclude>
             </excludes>
         </dependencySet>
         <dependencySet>
             <scope>runtime</scope>
             <excludes>
-                <exclude>io.sourceforge.github:ms-tools</exclude>
+                <exclude>io.sourceforge.aliyun:ms-tools</exclude>
             </excludes>
         </dependencySet>
     </dependencySets>
@@ -151,17 +151,17 @@
             <useAllReactorProjects>true</useAllReactorProjects>
             <includes>
                 <!--配置子模块，按groupId:artifactId配置，然后根据各子模块依赖的顺序排列-->
-                <include>io.sourceforge.github.core:ms-core</include>
-                <include>io.sourceforge.github.canvas:ms-canvas</include>
-                <include>io.sourceforge.github.resources:ms-resources</include>
-                <include>io.sourceforge.github.security:ms-security</include>
-                <include>io.sourceforge.github.spring:ms-spring</include>
-                <include>io.sourceforge.github.redis:ms-redis</include>
-                <include>io.sourceforge.github.annotation:ms-annotation</include>
-                <include>io.sourceforge.github.network:ms-network</include>
-                <include>io.sourceforge.github.push:ms-push</include>
-                <include>io.sourceforge.github.api:ms-api</include>
-                <include>io.sourceforge.github:ms-tools</include>
+                <include>io.sourceforge.aliyun.core:ms-core</include>
+                <include>io.sourceforge.aliyun.canvas:ms-canvas</include>
+                <include>io.sourceforge.aliyun.resources:ms-resources</include>
+                <include>io.sourceforge.aliyun.security:ms-security</include>
+                <include>io.sourceforge.aliyun.spring:ms-spring</include>
+                <include>io.sourceforge.aliyun.redis:ms-redis</include>
+                <include>io.sourceforge.aliyun.annotation:ms-annotation</include>
+                <include>io.sourceforge.aliyun.network:ms-network</include>
+                <include>io.sourceforge.aliyun.push:ms-push</include>
+                <include>io.sourceforge.aliyun.api:ms-api</include>
+                <include>io.sourceforge.aliyun:ms-tools</include>
             </includes>
             <binaries>
                 <outputDirectory>lib</outputDirectory>
