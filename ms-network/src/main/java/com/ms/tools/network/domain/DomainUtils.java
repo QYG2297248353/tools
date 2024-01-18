@@ -164,7 +164,6 @@ public class DomainUtils {
         return ascii;
     }
 
-
     /**
      * 中文ASCII转换中文域名
      */
@@ -317,7 +316,6 @@ public class DomainUtils {
         return hostUrl;
     }
 
-
     /**
      * 获取域名
      * <p>
@@ -417,7 +415,6 @@ public class DomainUtils {
         return "";
     }
 
-
     /**
      * 是否为链接
      * 仅限 http(s):// 开头
@@ -430,5 +427,90 @@ public class DomainUtils {
             return false;
         }
         return uri.matches(URL_REGULAR);
+    }
+
+    /**
+     * 格式化域名
+     *
+     * @param domain 域名
+     * @return 格式化后的域名
+     */
+    public static String formatDomain(String domain) {
+        // 匹配协议、域名、端口和路径的正则表达式
+        final String regex = "^(https?://)?(www\\.)?([a-zA-Z0-9.-]+)(:[0-9]+)?(/.*)?$";
+
+        // 编译正则表达式
+        Pattern pattern = Pattern.compile(regex);
+
+        // 匹配结果
+        Matcher matcher = pattern.matcher(domain);
+
+        if (matcher.matches()) {
+            String protocol = matcher.group(1) != null ? matcher.group(1) : "http://";
+            String wwwPrefix = matcher.group(2) != null ? matcher.group(2) : "";
+            String domainName = matcher.group(3);
+            String port = matcher.group(4) != null ? matcher.group(4) : "";
+            String path = matcher.group(5) != null ? matcher.group(5) : "/";
+
+            // 如果是80端口，则协议为http
+            if (":80".equals(port)) {
+                protocol = "http://";
+            }
+            // 如果是443端口，则协议为https
+            if (":443".equals(port)) {
+                protocol = "https://";
+            }
+
+            // 如果端口是80或443，则不显示
+            if (":80".equals(port) || ":443".equals(port)) {
+                port = "";
+            }
+
+            // 确保路径以斜杠结尾
+            path = path.replaceAll("/$", "") + "/";
+
+            return protocol + wwwPrefix + domainName + port + path;
+        } else {
+            return domain;
+        }
+    }
+
+    /**
+     * 提取顶级主域名
+     *
+     * @param formattedDomain 格式化后的域名
+     * @return 顶级主域名
+     */
+    public static String topHostDomain(String formattedDomain) {
+        // 使用java.net.URL解析域名
+        java.net.URL url;
+        try {
+            url = new java.net.URL(formattedDomain);
+        } catch (java.net.MalformedURLException e) {
+            return formattedDomain;
+        }
+
+        // 提取主域名
+        String hostDomain = url.getHost();
+
+        // 如果最后两级在 chineseDomain 中，则提取最后三级
+        String[] domainParts = hostDomain.split("\\.");
+        String lastTwoLevels = "." + domainParts[domainParts.length - 2] + "." + domainParts[domainParts.length - 1];
+        if (contains(lastTwoLevels)) {
+            hostDomain = domainParts[domainParts.length - 3] + "." + domainParts[domainParts.length - 2] + "." + domainParts[domainParts.length - 1];
+        } else {
+            hostDomain = domainParts[domainParts.length - 2] + "." + domainParts[domainParts.length - 1];
+        }
+
+        return hostDomain;
+    }
+
+    private static boolean contains(String target) {
+        for (String item : DomainUtils.CHINA_TOP_LEVEL_DOMAIN) {
+            if (item.equals(target)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
