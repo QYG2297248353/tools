@@ -39,52 +39,52 @@
     <dependencies>
         <!-- 开发组件 -->
         <dependency>
-            <groupId>io.sourceforge.github.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.canvas</groupId>
+            <groupId>io.sourceforge.gitee.canvas</groupId>
             <artifactId>ms-canvas</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.resources</groupId>
+            <groupId>io.sourceforge.gitee.resources</groupId>
             <artifactId>ms-resources</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.security</groupId>
+            <groupId>io.sourceforge.gitee.security</groupId>
             <artifactId>ms-security</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.spring</groupId>
+            <groupId>io.sourceforge.gitee.spring</groupId>
             <artifactId>ms-spring</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.redis</groupId>
+            <groupId>io.sourceforge.gitee.redis</groupId>
             <artifactId>ms-redis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.annotation</groupId>
+            <groupId>io.sourceforge.gitee.annotation</groupId>
             <artifactId>ms-annotation</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.network</groupId>
+            <groupId>io.sourceforge.gitee.network</groupId>
             <artifactId>ms-network</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.push</groupId>
+            <groupId>io.sourceforge.gitee.push</groupId>
             <artifactId>ms-push</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.api</groupId>
+            <groupId>io.sourceforge.gitee.api</groupId>
             <artifactId>ms-api</artifactId>
         </dependency>
     </dependencies>

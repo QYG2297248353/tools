@@ -20,37 +20,37 @@
         <version>1.1.1</version>
     </parent>
 
-    <groupId>io.sourceforge.github.network</groupId>
+    <groupId>io.sourceforge.gitee.network</groupId>
     <artifactId>ms-network</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.sourceforge.github.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.resources</groupId>
+            <groupId>io.sourceforge.gitee.resources</groupId>
             <artifactId>ms-resources</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>squareup-okhttp3</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>javax-servlet-api</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.spring</groupId>
+            <groupId>io.sourceforge.gitee.spring</groupId>
             <artifactId>ms-spring</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>dnsjava</artifactId>
         </dependency>
     </dependencies>

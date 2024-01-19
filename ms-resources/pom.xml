@@ -20,42 +20,42 @@
         <version>1.1.1</version>
     </parent>
 
-    <groupId>io.sourceforge.github.resources</groupId>
+    <groupId>io.sourceforge.gitee.resources</groupId>
     <artifactId>ms-resources</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.sourceforge.github.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>commons-compress</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>yaml-snakeyaml</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>lingala-zip4j</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>opencsv</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>easyexcel</artifactId>
         </dependency>
     </dependencies>

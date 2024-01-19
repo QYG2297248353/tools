@@ -20,22 +20,22 @@
         <version>1.1.1</version>
     </parent>
 
-    <groupId>io.sourceforge.github.security</groupId>
+    <groupId>io.sourceforge.gitee.security</groupId>
     <artifactId>ms-security</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.sourceforge.github.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>jsonwebtoken-jjwt</artifactId>
         </dependency>
     </dependencies>

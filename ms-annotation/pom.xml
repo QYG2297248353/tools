@@ -20,35 +20,35 @@
         <version>1.1.1</version>
     </parent>
 
-    <groupId>io.sourceforge.github.annotation</groupId>
+    <groupId>io.sourceforge.gitee.annotation</groupId>
     <artifactId>ms-annotation</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.sourceforge.github.core</groupId>
+            <groupId>io.sourceforge.gitee.core</groupId>
             <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>spring-annotation</artifactId>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.spring</groupId>
+            <groupId>io.sourceforge.gitee.spring</groupId>
             <artifactId>ms-spring</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>spring-data-redis</artifactId>
             <scope>provided</scope>
         </dependency>
 
 
         <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
+            <groupId>io.sourceforge.gitee.components</groupId>
             <artifactId>guava</artifactId>
             <scope>provided</scope>
         </dependency>
