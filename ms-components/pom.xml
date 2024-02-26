@@ -70,6 +70,8 @@
         <com.baomidou.mybatis.plus.generator.version>3.5.2</com.baomidou.mybatis.plus.generator.version>
         <!-- DNS 解析 -->
         <dns.java.version>3.5.2</dns.java.version>
+        <!-- Minio 存储库 -->
+        <io.minio.version>8.5.8</io.minio.version>
     </properties>
 
     <modules>

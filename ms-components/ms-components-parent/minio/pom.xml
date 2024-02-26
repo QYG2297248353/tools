@@ -16,27 +16,18 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.sourceforge.github.components</groupId>
-        <artifactId>spring</artifactId>
+        <artifactId>ms-components-parent</artifactId>
         <version>1.1.1</version>
     </parent>
-    <artifactId>spring-data-jpa</artifactId>
-    <packaging>jar</packaging>
+
+    <artifactId>minio</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.sourceforge.github.components</groupId>
-            <artifactId>javax.interceptor-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.sourceforge.github.core</groupId>
-            <artifactId>ms-core</artifactId>
-            <version>${ms.tools.version}</version>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${io.minio.version}</version>
         </dependency>
     </dependencies>
+
 </project>

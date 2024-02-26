@@ -357,6 +357,12 @@
                 <version>${ms.tools.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.sourceforge.github.components</groupId>
+                <artifactId>minio</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
             <!-- 开发组件 -->
             <dependency>
                 <groupId>io.sourceforge.github.core</groupId>
@@ -401,6 +407,12 @@
             </dependency>
 
             <dependency>
+                <groupId>io.sourceforge.github.minio</groupId>
+                <artifactId>ms-minio</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>io.sourceforge.github.network</groupId>
                 <artifactId>ms-network</artifactId>
                 <version>${ms.tools.version}</version>
@@ -431,6 +443,7 @@
         <module>ms-spring</module>
         <module>ms-redis</module>
         <module>ms-annotation</module>
+        <module>ms-minio</module>
         <module>ms-network</module>
         <module>ms-push</module>
         <module>ms-api</module>

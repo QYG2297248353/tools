@@ -15,28 +15,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.sourceforge.github.components</groupId>
-        <artifactId>spring</artifactId>
+        <groupId>io.sourceforge.github</groupId>
+        <artifactId>tools</artifactId>
         <version>1.1.1</version>
     </parent>
-    <artifactId>spring-data-jpa</artifactId>
-    <packaging>jar</packaging>
+
+    <groupId>io.sourceforge.github.minio</groupId>
+    <artifactId>ms-minio</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>io.sourceforge.github.core</groupId>
+            <artifactId>ms-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.sourceforge.github.components</groupId>
-            <artifactId>javax.interceptor-api</artifactId>
+            <artifactId>minio</artifactId>
+            <!-- <scope>provided</scope> -->
         </dependency>
 
         <dependency>
-            <groupId>io.sourceforge.github.core</groupId>
-            <artifactId>ms-core</artifactId>
-            <version>${ms.tools.version}</version>
+            <groupId>io.sourceforge.github.spring</groupId>
+            <artifactId>ms-spring</artifactId>
         </dependency>
     </dependencies>
 </project>
