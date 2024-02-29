@@ -16,6 +16,7 @@ import io.minio.errors.*;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -118,4 +119,18 @@ public class MsMinioException extends Exception {
             log.severe("[Minio未知异常] Unknown error: " + cause);
         }
     }
+
+    public MsMinioException(Throwable... cause) throws MsMinioException {
+        for (Throwable throwable : cause) {
+            throw new MsMinioException(throwable);
+        }
+    }
+
+    public MsMinioException(List<Throwable> cause) throws MsMinioException {
+        for (Throwable throwable : cause) {
+            throw new MsMinioException(throwable);
+        }
+    }
+
+
 }

@@ -11,16 +11,19 @@
 
 package com.ms.tools.minio;
 
+import com.alibaba.fastjson2.JSON;
 import com.ms.tools.minio.exception.MsMinioException;
 import com.ms.tools.minio.properties.MsMinioProperties;
 import io.minio.*;
 import io.minio.messages.Bucket;
+import io.minio.messages.Item;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Minio bucket service
@@ -30,6 +33,8 @@ import java.util.Map;
  */
 @Component
 public class MinioBucketService {
+
+    private static final Logger log = Logger.getLogger(MinioBucketService.class.getName());
 
     private final MinioClient minioClient;
     @Resource
@@ -44,6 +49,7 @@ public class MinioBucketService {
      * 桶列表
      *
      * @return bucket list
+     * @throws MsMinioException MsMinioException
      */
     public List<Bucket> listBuckets() throws MsMinioException {
         try {
@@ -58,6 +64,7 @@ public class MinioBucketService {
      * 桶列表
      *
      * @return bucket list
+     * @throws MsMinioException MsMinioException
      */
     public Iterator<Bucket> listBucketsIterator() throws MsMinioException {
         try {
@@ -73,6 +80,7 @@ public class MinioBucketService {
      *
      * @param bucketName bucket name
      * @return boolean
+     * @throws MsMinioException MsMinioException
      */
     public boolean bucketExists(String bucketName) throws MsMinioException {
         try {
@@ -89,6 +97,7 @@ public class MinioBucketService {
      * 创建桶
      *
      * @param bucketName bucket name
+     * @throws MsMinioException MsMinioException
      */
     public void createBucket(String bucketName) throws MsMinioException {
         if (!bucketExists(bucketName)) {
@@ -108,6 +117,7 @@ public class MinioBucketService {
      * 删除空桶
      *
      * @param bucketName bucket name
+     * @throws MsMinioException MsMinioException
      */
     public void removeEmptyBucket(String bucketName) throws MsMinioException {
         try {
@@ -120,11 +130,59 @@ public class MinioBucketService {
     }
 
     /**
+     * Remove bucket
+     * 删除桶 递归删除桶内所有文件
+     *
+     * @param bucketName bucket name
+     * @throws MsMinioException MsMinioException
+     */
+    public void removeBucket(String bucketName) throws MsMinioException {
+        try {
+            Iterable<Result<Item>> results = minioClient.listObjects(ListObjectsArgs.builder()
+                    .bucket(bucketName)
+                    .recursive(true)
+                    .build());
+            for (Result<Item> result : results) {
+                Item item = result.get();
+                minioClient.removeObject(RemoveObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(item.objectName())
+                        .build());
+            }
+            removeEmptyBucket(bucketName);
+        } catch (Exception e) {
+            throw new MsMinioException(e);
+        }
+    }
+
+    /**
+     * Remove All bucket
+     * 删除所有桶
+     * 递归删除所有桶内所有文件
+     * 递归删除所有桶
+     *
+     * @throws MsMinioException MsMinioException
+     */
+    public void removeAllBucket() throws MsMinioException {
+        try {
+            Iterator<Bucket> bucketIterator = listBucketsIterator();
+            while (bucketIterator.hasNext()) {
+                Bucket bucket = bucketIterator.next();
+                log.warning("remove bucket: " + bucket.name());
+                removeBucket(bucket.name());
+            }
+        } catch (Exception e) {
+            throw new MsMinioException(e);
+        }
+    }
+
+    /**
      * Set bucket tags
      * 设置桶标签
      *
      * @param bucketName bucket name
      * @param tags       tags
+     * @throws MsMinioException MsMinioException
      */
     public void setBucketTags(String bucketName, Map<String, String> tags) throws MsMinioException {
         try {
@@ -142,6 +200,7 @@ public class MinioBucketService {
      * 删除桶标签
      *
      * @param bucketName bucket name
+     * @throws MsMinioException MsMinioException
      */
     public void deleteBucketTags(String bucketName) throws MsMinioException {
         try {
@@ -159,6 +218,7 @@ public class MinioBucketService {
      *
      * @param bucketName bucket name
      * @return tags
+     * @throws MsMinioException MsMinioException
      */
     public Map<String, String> getBucketTags(String bucketName) throws MsMinioException {
         try {
@@ -170,5 +230,60 @@ public class MinioBucketService {
         }
     }
 
+    /**
+     * Remove bucket policy
+     * 删除桶策略
+     *
+     * @param bucketName bucket name
+     * @throws MsMinioException MsMinioException
+     */
+    public void removeBucketPolicy(String bucketName) throws MsMinioException {
+        try {
+            minioClient.deleteBucketPolicy(DeleteBucketPolicyArgs.builder()
+                    .bucket(bucketName)
+                    .build());
+        } catch (Exception e) {
+            throw new MsMinioException(e);
+        }
+    }
+
+    /**
+     * Set bucket policy
+     * 设置桶策略
+     *
+     * @param bucketName bucket name
+     * @param policy     policy
+     * @throws MsMinioException MsMinioException
+     */
+    public void setBucketPolicy(String bucketName, String policy) throws MsMinioException {
+        if (!JSON.isValid(policy)) {
+            throw new MsMinioException("policy is not valid json");
+        }
+        try {
+            minioClient.setBucketPolicy(SetBucketPolicyArgs.builder()
+                    .bucket(bucketName)
+                    .config(policy)
+                    .build());
+        } catch (Exception e) {
+            throw new MsMinioException(e);
+        }
+    }
+
+    /**
+     * Get bucket policy
+     *
+     * @param bucketName bucket name
+     * @return policy
+     * @throws MsMinioException MsMinioException
+     */
+    public String getBucketPolicy(String bucketName) throws MsMinioException {
+        try {
+            return minioClient.getBucketPolicy(GetBucketPolicyArgs.builder()
+                    .bucket(bucketName)
+                    .build());
+        } catch (Exception e) {
+            throw new MsMinioException(e);
+        }
+    }
 
 }
