@@ -317,6 +317,36 @@ public class FilesUtils {
         FileFactory.writeToFile(file, content);
     }
 
+    /**
+     * 转换为字节
+     *
+     * @param file 文件
+     * @return 字节
+     */
+    public static byte[] toByteArray(File file) {
+        return FileFactory.toByteArray(file);
+    }
+
+    /**
+     * 转换为字节
+     *
+     * @param inputStream 文件流
+     * @return 字节
+     */
+    public static byte[] toByteArray(InputStream inputStream) {
+        return FileFactory.toByteArray(inputStream);
+    }
+
+    /**
+     * 转换为字节
+     *
+     * @param file 文件
+     * @return 字节
+     */
+    public static byte[] toByteArray(String file) throws MsToolsException {
+        return FileFactory.toByteArray(file);
+    }
+
 
     /**
      * 删除文件

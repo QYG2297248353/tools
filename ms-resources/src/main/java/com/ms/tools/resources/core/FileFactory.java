@@ -427,4 +427,30 @@ public class FileFactory {
             return false;
         }
     }
+
+    public static byte[] toByteArray(File file) {
+        try {
+            return Files.readAllBytes(file.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static byte[] toByteArray(InputStream inputStream) {
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, len);
+            }
+            return outputStream.toByteArray();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static byte[] toByteArray(String file) throws MsToolsException {
+        return toByteArray(getFile(file));
+    }
 }
