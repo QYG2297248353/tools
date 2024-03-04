@@ -76,7 +76,7 @@ public class MinioUpDownService {
      * @param bucketName 桶名称
      * @param objectName 对象名称 (文件存储名称)
      * @param filePath   文件路径 (文件本地路径)
-     * @param partSize   分片大小
+     * @param partSize   分片大小 (字节 10485760 = 10MB)
      * @throws MsMinioException Minio异常
      */
     public void uploadFileByPart(String bucketName, String objectName, String filePath, long partSize) throws MsMinioException {
@@ -101,7 +101,7 @@ public class MinioUpDownService {
      * @param size        文件大小
      * @param contentType 文件类型
      */
-    public void uploadFile(String bucketName, String objectName, InputStream inputStream, long size, String contentType) throws MsMinioException {
+    public void uploadFileStream(String bucketName, String objectName, InputStream inputStream, long size, String contentType) throws MsMinioException {
         try {
             minioClient.putObject(
                     PutObjectArgs.builder().bucket(bucketName).object(objectName).stream(
@@ -114,6 +114,18 @@ public class MinioUpDownService {
     }
 
     /**
+     * 上传文件（未知大小/类型）
+     *
+     * @param bucketName  桶名称
+     * @param objectName  对象名称 (文件存储名称)
+     * @param inputStream 文件流
+     */
+    public void uploadFileStream(String bucketName, String objectName, InputStream inputStream) throws MsMinioException {
+        uploadFileStream(bucketName, objectName, inputStream, "application/octet-stream");
+    }
+
+
+    /**
      * 上传文件（未知大小）
      *
      * @param bucketName  桶名称
@@ -121,7 +133,7 @@ public class MinioUpDownService {
      * @param inputStream 文件流
      * @param contentType 文件类型
      */
-    public void uploadFile(String bucketName, String objectName, InputStream inputStream, String contentType) throws MsMinioException {
+    public void uploadFileStream(String bucketName, String objectName, InputStream inputStream, String contentType) throws MsMinioException {
         try {
             minioClient.putObject(
                     PutObjectArgs.builder().bucket(bucketName).object(objectName).stream(
@@ -133,6 +145,7 @@ public class MinioUpDownService {
         }
     }
 
+
     /**
      * 上传文件
      *
@@ -141,16 +154,8 @@ public class MinioUpDownService {
      * @param multipartFile 文件
      * @throws MsMinioException Minio异常
      */
-    public void uploadFile(String bucketName, String objectName, MultipartFile multipartFile) throws MsMinioException {
-        try {
-            minioClient.putObject(
-                    PutObjectArgs.builder().bucket(bucketName).object(objectName).stream(
-                                    multipartFile.getInputStream(), multipartFile.getSize(), -1)
-                            .contentType(multipartFile.getContentType())
-                            .build());
-        } catch (Exception e) {
-            throw new MsMinioException(e);
-        }
+    public void uploadFileStream(String bucketName, String objectName, MultipartFile multipartFile) throws MsMinioException {
+        uploadFileStream(bucketName, objectName, null, multipartFile);
     }
 
     /**
@@ -162,7 +167,7 @@ public class MinioUpDownService {
      * @param multipartFile 文件
      * @throws MsMinioException Minio异常
      */
-    public void uploadFile(String bucketName, String objectName, String objectPath, MultipartFile multipartFile) throws MsMinioException {
+    public void uploadFileStream(String bucketName, String objectName, String objectPath, MultipartFile multipartFile) throws MsMinioException {
         try {
             String objectNamePath = getObjectNamePath(objectPath, objectName);
             minioClient.putObject(
@@ -175,7 +180,15 @@ public class MinioUpDownService {
         }
     }
 
-    private String getObjectNamePath(String objectPath, String objectName) {
+
+    /**
+     * 获取对象名称路径
+     *
+     * @param objectPath 对象路径
+     * @param objectName 对象名称
+     * @return 对象名称路径
+     */
+    public String getObjectNamePath(String objectPath, String objectName) {
         if (Strings.isBlank(objectPath)) {
             return objectName;
         }
@@ -198,7 +211,7 @@ public class MinioUpDownService {
         List<Throwable> exceptions = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             try {
-                uploadFile(bucketName, multipartFile.getOriginalFilename(), multipartFile);
+                uploadFileStream(bucketName, multipartFile.getOriginalFilename(), multipartFile);
             } catch (MsMinioException e) {
                 log.warning("上传文件失败：" + multipartFile.getOriginalFilename());
                 exceptions.add(e);
@@ -221,7 +234,7 @@ public class MinioUpDownService {
         List<Throwable> exceptions = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             try {
-                uploadFile(bucketName, multipartFile.getOriginalFilename(), objectPath, multipartFile);
+                uploadFileStream(bucketName, multipartFile.getOriginalFilename(), objectPath, multipartFile);
             } catch (MsMinioException e) {
                 log.warning("上传文件失败：" + multipartFile.getOriginalFilename());
                 exceptions.add(e);
@@ -245,7 +258,7 @@ public class MinioUpDownService {
         List<Throwable> exceptions = new ArrayList<>();
         for (Map.Entry<String, MultipartFile> entry : multipartFiles.entrySet()) {
             try {
-                uploadFile(bucketName, entry.getKey(), objectPath, entry.getValue());
+                uploadFileStream(bucketName, entry.getKey(), objectPath, entry.getValue());
             } catch (MsMinioException e) {
                 log.warning("上传文件失败：" + entry.getKey());
                 exceptions.add(e);
@@ -265,24 +278,8 @@ public class MinioUpDownService {
      * @param file       文件
      * @throws MsMinioException Minio异常
      */
-    public void uploadFile(String bucketName, String objectName, File file) throws MsMinioException {
-        try {
-            if (file.isFile()) {
-                try (FileInputStream fileInputStream = new FileInputStream(file)) {
-                    minioClient.putObject(
-                            PutObjectArgs.builder().bucket(bucketName).object(objectName).stream(
-                                            fileInputStream, file.length(), -1)
-                                    .contentType("application/octet-stream")
-                                    .build());
-                } catch (Exception e) {
-                    throw new MsMinioException(e);
-                }
-            } else {
-                throw new MsMinioException("文件不存在");
-            }
-        } catch (Exception e) {
-            throw new MsMinioException(e);
-        }
+    public void uploadFileStream(String bucketName, String objectName, File file) throws MsMinioException {
+        uploadFileStream(bucketName, objectName, null, file);
     }
 
     /**
@@ -294,7 +291,20 @@ public class MinioUpDownService {
      * @param file       文件
      * @throws MsMinioException Minio异常
      */
-    public void uploadFile(String bucketName, String objectName, String objectPath, File file) throws MsMinioException {
+    public void uploadFileStream(String bucketName, String objectName, String objectPath, File file) throws MsMinioException {
+        uploadFile(bucketName, objectName, objectPath, file, "application/octet-stream");
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param bucketName 桶名称
+     * @param objectName 对象名称 (文件存储名称)
+     * @param objectPath 对象路径 (文件存储路径)
+     * @param file       文件
+     * @throws MsMinioException Minio异常
+     */
+    public void uploadFile(String bucketName, String objectName, String objectPath, File file, String contentType) throws MsMinioException {
         try {
             if (file.isFile()) {
                 try (FileInputStream fileInputStream = new FileInputStream(file)) {
@@ -302,7 +312,7 @@ public class MinioUpDownService {
                     minioClient.putObject(
                             PutObjectArgs.builder().bucket(bucketName).object(objectNamePath).stream(
                                             fileInputStream, file.length(), -1)
-                                    .contentType("application/octet-stream")
+                                    .contentType(contentType)
                                     .build());
                 } catch (Exception e) {
                     throw new MsMinioException(e);
@@ -322,8 +332,8 @@ public class MinioUpDownService {
      * @param file       文件
      * @throws MsMinioException Minio异常
      */
-    public void uploadFile(String bucketName, File file) throws MsMinioException {
-        uploadFile(bucketName, file.getName(), file);
+    public void uploadFileStream(String bucketName, File file) throws MsMinioException {
+        uploadFileStream(bucketName, file.getName(), file);
     }
 
     /**
@@ -334,8 +344,8 @@ public class MinioUpDownService {
      * @param objectPath 对象路径 (文件存储路径)
      * @throws MsMinioException Minio异常
      */
-    public void uploadFile(String bucketName, File file, String objectPath) throws MsMinioException {
-        uploadFile(bucketName, file.getName(), objectPath, file);
+    public void uploadFileStream(String bucketName, File file, String objectPath) throws MsMinioException {
+        uploadFileStream(bucketName, file.getName(), objectPath, file);
     }
 
     /**
@@ -345,13 +355,13 @@ public class MinioUpDownService {
      * @param folderPath 文件夹路径
      * @throws MsMinioException Minio异常
      */
-    public void uploadFolder(String bucketName, String folderPath) throws MsMinioException {
+    public void uploadFolderStream(String bucketName, String folderPath) throws MsMinioException {
         File folder = new File(folderPath);
         if (folder.isDirectory()) {
             File[] files = folder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    uploadFile(bucketName, file);
+                    uploadFileStream(bucketName, file);
                 }
             }
         } else {
@@ -367,13 +377,13 @@ public class MinioUpDownService {
      * @param objectPath 对象路径 (文件存储路径)
      * @throws MsMinioException Minio异常
      */
-    public void uploadFolder(String bucketName, String folderPath, String objectPath) throws MsMinioException {
+    public void uploadFolderStream(String bucketName, String folderPath, String objectPath) throws MsMinioException {
         File folder = new File(folderPath);
         if (folder.isDirectory()) {
             File[] files = folder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    uploadFile(bucketName, file, objectPath);
+                    uploadFileStream(bucketName, file, objectPath);
                 }
             }
         } else {
