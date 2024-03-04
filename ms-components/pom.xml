@@ -33,6 +33,7 @@
         <apache.commons.io.version>2.11.0</apache.commons.io.version>
         <apache.commons.commons-compress.version>1.22</apache.commons.commons-compress.version>
         <apache.commons.commons-lang3.version>3.12.0</apache.commons.commons-lang3.version>
+        <apache.tika.tika-core.version>2.9.1</apache.tika.tika-core.version>
         <apache.commons.pool2.version>2.6.1</apache.commons.pool2.version>
         <org.apache.velocity.velocity.engine.core.version>2.0</org.apache.velocity.velocity.engine.core.version>
 

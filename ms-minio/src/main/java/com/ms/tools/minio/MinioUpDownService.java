@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import static com.ms.tools.resources.file.FileTypeUtils.getFileType;
+
 /**
  * Minio bucket service
  * Minio 桶服务
@@ -80,9 +82,10 @@ public class MinioUpDownService {
                     .bucket(bucketName)
                     .object(objectName)
                     .filename(filePath);
-            if (Strings.isNotBlank(contentType)) {
-                builder.contentType(contentType);
+            if (Strings.isBlank(contentType)) {
+                contentType = getFileType(new File(filePath));
             }
+            builder.contentType(contentType);
             minioClient.uploadObject(builder.build());
         } catch (Exception e) {
             throw new MsMinioException(e);
@@ -117,9 +120,10 @@ public class MinioUpDownService {
                     .bucket(bucketName)
                     .object(objectName)
                     .filename(filePath, partSize);
-            if (Strings.isNotBlank(contentType)) {
-                builder.contentType(contentType);
+            if (Strings.isBlank(contentType)) {
+                contentType = getFileType(new File(filePath));
             }
+            builder.contentType(contentType);
             minioClient.uploadObject(builder.build());
         } catch (Exception e) {
             throw new MsMinioException(e);
@@ -304,7 +308,7 @@ public class MinioUpDownService {
      * @throws MsMinioException Minio异常
      */
     public void uploadFileStream(String bucketName, String objectName, String objectPath, File file) throws MsMinioException {
-        uploadFile(bucketName, objectName, objectPath, file, "application/octet-stream");
+        uploadFile(bucketName, objectName, objectPath, file, null);
     }
 
     /**
@@ -319,6 +323,9 @@ public class MinioUpDownService {
     public void uploadFile(String bucketName, String objectName, String objectPath, File file, String contentType) throws MsMinioException {
         try {
             if (file.isFile()) {
+                if (Strings.isBlank(contentType)) {
+                    contentType = getFileType(file);
+                }
                 try (FileInputStream fileInputStream = new FileInputStream(file)) {
                     String objectNamePath = getObjectNamePath(objectPath, objectName);
                     minioClient.putObject(

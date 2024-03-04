@@ -58,6 +58,13 @@
             <groupId>io.sourceforge.github.components</groupId>
             <artifactId>easyexcel</artifactId>
         </dependency>
+
+
+        <dependency>
+            <groupId>io.sourceforge.github.components</groupId>
+            <artifactId>tika-core</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

@@ -195,13 +195,19 @@
 
             <dependency>
                 <groupId>io.sourceforge.github.components</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${ms.tools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.sourceforge.github.components</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.sourceforge.github.components</groupId>
-                <artifactId>commons-io</artifactId>
+                <artifactId>tika-core</artifactId>
                 <version>${ms.tools.version}</version>
             </dependency>
 

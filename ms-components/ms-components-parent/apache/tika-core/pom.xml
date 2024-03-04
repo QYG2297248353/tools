@@ -13,21 +13,21 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.sourceforge.github.components</groupId>
-        <artifactId>ms-components-parent</artifactId>
+        <artifactId>apache</artifactId>
         <version>1.2.1</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>apache</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>tika-core</artifactId>
 
-    <modules>
-        <module>commons-codec</module>
-        <module>commons-compress</module>
-        <module>commons-lang3</module>
-        <module>commons-io</module>
-        <module>tika-core</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>${apache.tika.tika-core.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>
