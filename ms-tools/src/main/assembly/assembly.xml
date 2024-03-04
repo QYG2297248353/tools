@@ -131,6 +131,13 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>${project.parent.basedir}/ms-minio/target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>${project.parent.basedir}/ms-push/target</directory>
             <outputDirectory>lib</outputDirectory>
             <includes>
@@ -158,6 +165,7 @@
                 <include>io.sourceforge.github.spring:ms-spring</include>
                 <include>io.sourceforge.github.redis:ms-redis</include>
                 <include>io.sourceforge.github.annotation:ms-annotation</include>
+                <include>io.sourceforge.github.network:ms-minio</include>
                 <include>io.sourceforge.github.network:ms-network</include>
                 <include>io.sourceforge.github.push:ms-push</include>
                 <include>io.sourceforge.github.api:ms-api</include>

@@ -28,6 +28,8 @@ public class FastGlobalConfiguration {
 
     /**
      * 获取AutoType
+     *
+     * @param prefix 前缀
      */
     public static void addAutoType(String prefix) {
         ParserConfig.global.addAccept(prefix);
