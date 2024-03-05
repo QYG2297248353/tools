@@ -14,10 +14,8 @@ package com.ms.tools.minio;
 import com.ms.tools.minio.exception.MsMinioException;
 import com.ms.tools.minio.model.MinioListObject;
 import com.ms.tools.minio.properties.MsMinioProperties;
-import io.minio.ListObjectsArgs;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
-import io.minio.Result;
+import io.minio.*;
+import io.minio.errors.ErrorResponseException;
 import io.minio.messages.Item;
 import org.springframework.stereotype.Component;
 
@@ -132,6 +130,31 @@ public class MinioObjectService {
                     .prefix(prefix)
                     .recursive(recursive)
                     .build());
+        } catch (Exception e) {
+            throw new MsMinioException(e);
+        }
+    }
+
+    /**
+     * 判断对象是否存在
+     *
+     * @param bucketName 桶名称
+     * @param objectName 对象名称
+     * @return 是否存在
+     * @throws MsMinioException Minio异常
+     */
+    public boolean objectExists(String bucketName, String objectName) throws MsMinioException {
+        try {
+            minioClient.statObject(StatObjectArgs.builder()
+                    .bucket(bucketName)
+                    .object(objectName)
+                    .build());
+            return true;
+        } catch (ErrorResponseException e) {
+            if ("NoSuchKey".equals(e.errorResponse().code())) {
+                return false;
+            }
+            throw new MsMinioException(e);
         } catch (Exception e) {
             throw new MsMinioException(e);
         }
